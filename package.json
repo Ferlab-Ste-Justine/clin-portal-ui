@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@apollo/client": "^3.4.17",
+    "@apollo/client": "^3.5.10",
     "@ferlab/style": "^1.19.1",
     "@ferlab/ui": "^3.8.1",
     "@loadable/component": "^5.15.2",
