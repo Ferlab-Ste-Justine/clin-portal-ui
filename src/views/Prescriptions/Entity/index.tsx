@@ -64,7 +64,7 @@ const PrescriptionEntity = ({ prescriptionId }: OwnProps) => {
             </Card>
           </Col>
           <Col span={24}>
-            <ClinicalInformation prescription={prescription} loading={loading} />
+            <ClinicalInformation loading={loading} />
           </Col>
         </Row>
       </ScrollContentWithFooter>

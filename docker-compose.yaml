@@ -1,7 +1,7 @@
 version: "3"
 services:
   frontend:
-    image: node:16.13.0
+    image: node:18.1
     working_dir: /code
     ports:
       - "2005:2005"
