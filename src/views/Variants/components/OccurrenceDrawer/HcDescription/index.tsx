@@ -14,7 +14,7 @@ import { VARIANT_PATIENT_QB_ID } from 'views/Variants/utils/constant';
 import style from './index.module.scss';
 
 type Props = {
-  hcComplements?: HcComplementHits | PossiblyHcComplementHits;
+  hcComplements: HcComplementHits | PossiblyHcComplementHits | undefined;
   defaultText: string;
   wrap?: boolean;
   size?: number;

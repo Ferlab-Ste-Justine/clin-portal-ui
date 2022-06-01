@@ -1,34 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { TReportState } from 'store/reports/types';
+import { createSlice, Draft } from '@reduxjs/toolkit';
+
 import { fetchNanuqSequencingReport, fetchTranscriptsReport } from 'store/reports/thunks';
+import { TReportState } from 'store/reports/types';
 
 export const ReportState: TReportState = {
-  isLoadingPatientTranscripts: false,
-  isLoadingNanuqSequencing: false,
+  loadingIds: [],
 };
+
+const removeId = (state: Draft<TReportState>, id: string) =>
+  state.loadingIds.filter((x) => x !== id);
 
 const reportSlice = createSlice({
   name: 'report',
   initialState: ReportState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchTranscriptsReport.pending, (state) => {
-      state.isLoadingPatientTranscripts = true;
+    builder.addCase(fetchTranscriptsReport.pending, (state, action) => {
+      state.loadingIds.push(action.meta.arg.variantId);
     });
-    builder.addCase(fetchTranscriptsReport.rejected, (state) => {
-      state.isLoadingPatientTranscripts = false;
+    builder.addCase(fetchTranscriptsReport.rejected, (state, action) => {
+      state.loadingIds = removeId(state, action.meta.arg.variantId);
     });
-    builder.addCase(fetchTranscriptsReport.fulfilled, (state) => {
-      state.isLoadingPatientTranscripts = false;
+    builder.addCase(fetchTranscriptsReport.fulfilled, (state, action) => {
+      state.loadingIds = removeId(state, action.meta.arg.variantId);
     });
-    builder.addCase(fetchNanuqSequencingReport.pending, (state) => {
-      state.isLoadingNanuqSequencing = true;
+    builder.addCase(fetchNanuqSequencingReport.pending, (state, action) => {
+      state.loadingIds.push(action.meta.arg.srIds.join('-'));
     });
-    builder.addCase(fetchNanuqSequencingReport.rejected, (state) => {
-      state.isLoadingNanuqSequencing = false;
+    builder.addCase(fetchNanuqSequencingReport.rejected, (state, action) => {
+      state.loadingIds = removeId(state, action.meta.arg.srIds.join('-'));
     });
-    builder.addCase(fetchNanuqSequencingReport.fulfilled, (state) => {
-      state.isLoadingNanuqSequencing = false;
+    builder.addCase(fetchNanuqSequencingReport.fulfilled, (state, action) => {
+      state.loadingIds = removeId(state, action.meta.arg.srIds.join('-'));
     });
   },
 });

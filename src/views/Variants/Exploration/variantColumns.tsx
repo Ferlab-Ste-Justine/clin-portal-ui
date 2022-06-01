@@ -1,9 +1,11 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
+import { DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
-import { Space, Tooltip } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import cx from 'classnames';
 import { ArrangerEdge, ArrangerResultsTree } from 'graphql/models';
 import {
@@ -17,21 +19,21 @@ import {
   Varsome,
   VarsomeClassifications,
 } from 'graphql/variants/models';
+import { findDonorById } from 'graphql/variants/selector';
 import { capitalize } from 'lodash';
 import ConsequencesCell from 'views/Variants/components/ConsequencesCell';
 
+import LineStyleIcon from 'components/icons/LineStyleIcon';
 import UserAffectedIcon from 'components/icons/UserAffectedIcon';
+import { ReportNames } from 'store/reports/types';
 import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 
-import { getDonor } from '../components/OccurrenceDrawer';
 import { HcComplementDescription } from '../components/OccurrenceDrawer/HcDescription';
+import ReportButton from '../components/Report/DownloadButton';
 
 import AcmgVerdict from './components/AcmgVerdict';
 
 import style from './variantColumns.module.scss';
-
-const findDonorById = (donors: ArrangerResultsTree<DonorsEntity>, patientId: string) =>
-  donors.hits?.edges.find((donor) => donor.node.patient_id === patientId);
 
 const formatCalls = (calls: number[]) => (calls ? calls.join('/') : TABLE_EMPTY_PLACE_HOLDER);
 
@@ -52,6 +54,7 @@ const getAcmgRuleContent = (varsome: Varsome) =>
 export const getVariantColumns = (
   patientId?: string,
   drawerCb?: (record: VariantEntity) => void,
+  igvModalCb?: (record: VariantEntity) => void,
 ): ProColumnType<ITableVariantEntity>[] => {
   const columns: ProColumnType<ITableVariantEntity>[] = [
     {
@@ -139,7 +142,7 @@ export const getVariantColumns = (
     {
       key: 'external_frequencies',
       title: (
-        <Tooltip title="Gnomad Exomes">{intl.get('screen.variantsearch.table.gnomAd')}</Tooltip>
+        <Tooltip title="Gnomad exomes">{intl.get('screen.variantsearch.table.gnomAd')}</Tooltip>
       ),
       displayTitle: intl.get('screen.variantsearch.table.gnomAd'),
       dataIndex: 'external_frequencies',
@@ -150,7 +153,11 @@ export const getVariantColumns = (
     },
     {
       key: 'rqdm',
-      title: intl.get('screen.patientvariant.results.table.rqdm'),
+      title: (
+        <Tooltip title={intl.get('screen.patientvariant.results.table.rqdm.title.tooltip')}>
+          {intl.get('screen.patientvariant.results.table.rqdm')}
+        </Tooltip>
+      ),
       className: style.rqdmCell,
       render: (record: VariantEntity) => formatRqdm(record.frequency_RQDM),
     },
@@ -175,7 +182,7 @@ export const getVariantColumns = (
         dataIndex: 'donors',
         render: (record: ArrangerResultsTree<DonorsEntity>) => {
           const donor = findDonorById(record, patientId);
-          return donor ? donor.node?.zygosity : TABLE_EMPTY_PLACE_HOLDER;
+          return donor ? donor?.zygosity : TABLE_EMPTY_PLACE_HOLDER;
         },
       },
       {
@@ -184,13 +191,32 @@ export const getVariantColumns = (
         title: intl.get('screen.patientvariant.results.table.actions'),
         displayTitle: 'Information',
         render: (record: VariantEntity) => (
-          <Space>
-            <UserAffectedIcon
-              onClick={() => drawerCb && drawerCb(record)}
-              width="16"
-              height="16"
-              className={style.affectedIcon}
+          <Space align={'center'}>
+            <Tooltip title={intl.get('occurrence.patient')}>
+              <Button
+                type={'text'}
+                onClick={() => drawerCb && drawerCb(record)}
+                icon={<UserAffectedIcon width={'18px'} height={'18px'} />}
+                size={'small'}
+              />
+            </Tooltip>
+            <ReportButton
+              patientId={patientId}
+              variantId={record.hgvsg}
+              name={ReportNames.transcript}
+              iconOnly
+              icon={<DownloadOutlined />}
+              tooltipTitle={intl.get('download.report')}
+              size={'small'}
             />
+            <Tooltip title={intl.get('open.in.igv')}>
+              <Button
+                onClick={() => igvModalCb && igvModalCb(record)}
+                icon={<LineStyleIcon width={'18px'} height={'18px'} />}
+                type={'text'}
+                size={'small'}
+              />
+            </Tooltip>
           </Space>
         ),
         align: 'center',
@@ -210,19 +236,19 @@ export const getVariantColumns = (
         defaultHidden: true,
         render: (record: ArrangerResultsTree<DonorsEntity>) => {
           const donor = findDonorById(record, patientId);
-          const motherCalls = formatCalls(donor?.node.mother_calls!);
-          const fatherCalls = formatCalls(donor?.node.father_calls!);
+          const motherCalls = formatCalls(donor?.mother_calls!);
+          const fatherCalls = formatCalls(donor?.father_calls!);
 
           return `${motherCalls} : ${fatherCalls}`;
         },
       },
       {
-        key: 'hc',
-        title: intl.get('screen.patientvariant.results.table.hc'),
+        key: 'ch',
+        title: intl.get('screen.patientvariant.results.table.ch'),
         defaultHidden: true,
         render: (record: VariantEntity) => (
           <HcComplementDescription
-            hcComplements={getDonor(patientId, record)?.hc_complement}
+            hcComplements={findDonorById(record.donors, patientId)?.hc_complement}
             defaultText={TABLE_EMPTY_PLACE_HOLDER}
             wrap={false}
             size={0}
@@ -230,12 +256,12 @@ export const getVariantColumns = (
         ),
       },
       {
-        key: 'hcp',
-        title: intl.get('screen.patientvariant.results.table.hcp'),
+        key: 'pch',
+        title: intl.get('screen.patientvariant.results.table.pch'),
         defaultHidden: true,
         render: (record: VariantEntity) => (
           <HcComplementDescription
-            hcComplements={getDonor(patientId, record)?.possibly_hc_complement}
+            hcComplements={findDonorById(record.donors, patientId)?.possibly_hc_complement}
             defaultText={TABLE_EMPTY_PLACE_HOLDER}
             wrap={false}
             size={0}
@@ -248,7 +274,7 @@ export const getVariantColumns = (
         defaultHidden: true,
         render: (record: VariantEntity) =>
           removeUnderscoreAndCapitalize(
-            getDonor(patientId, record)?.transmission! || '',
+            findDonorById(record.donors, patientId)?.transmission! || '',
           ).defaultMessage(TABLE_EMPTY_PLACE_HOLDER),
       },
       {
@@ -256,7 +282,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientvariant.results.table.parentalOrigin'),
         defaultHidden: true,
         render: (record: VariantEntity) => {
-          const donor = getDonor(patientId, record);
+          const donor = findDonorById(record.donors, patientId);
           return donor?.parental_origin
             ? capitalize(intl.get(donor?.parental_origin))
             : TABLE_EMPTY_PLACE_HOLDER;
@@ -267,35 +293,36 @@ export const getVariantColumns = (
         title: intl.get('screen.patientvariant.results.table.altprof'),
         defaultHidden: true,
         render: (record: VariantEntity) =>
-          getDonor(patientId, record)?.ad_alt ?? TABLE_EMPTY_PLACE_HOLDER,
+          findDonorById(record.donors, patientId)?.ad_alt ?? TABLE_EMPTY_PLACE_HOLDER,
       },
       {
         key: 'alttotal',
         title: intl.get('screen.patientvariant.results.table.alttotal'),
         defaultHidden: true,
         render: (record: VariantEntity) =>
-          getDonor(patientId, record)?.ad_total ?? TABLE_EMPTY_PLACE_HOLDER,
+          findDonorById(record.donors, patientId)?.ad_total ?? TABLE_EMPTY_PLACE_HOLDER,
       },
       {
         key: 'altratio',
         title: intl.get('screen.patientvariant.results.table.altratio'),
         defaultHidden: true,
         render: (record: VariantEntity) =>
-          (getDonor(patientId, record)?.ad_ratio ?? 0).toFixed(2) ?? TABLE_EMPTY_PLACE_HOLDER,
+          (findDonorById(record.donors, patientId)?.ad_ratio ?? 0).toFixed(2) ??
+          TABLE_EMPTY_PLACE_HOLDER,
       },
       {
         key: 'gq',
         title: intl.get('screen.patientvariant.results.table.gq'),
         defaultHidden: true,
         render: (record: VariantEntity) =>
-          getDonor(patientId, record)?.gq ?? TABLE_EMPTY_PLACE_HOLDER,
+          findDonorById(record.donors, patientId)?.gq ?? TABLE_EMPTY_PLACE_HOLDER,
       },
       {
         key: 'filter',
         title: intl.get('screen.patientvariant.results.table.filter'),
         defaultHidden: true,
         render: (record: VariantEntity) =>
-          getDonor(patientId, record)?.filters ?? TABLE_EMPTY_PLACE_HOLDER,
+          findDonorById(record.donors, patientId)?.filters ?? TABLE_EMPTY_PLACE_HOLDER,
       },
     );
   }

@@ -6,7 +6,7 @@ import cx from 'classnames';
 import { usePatientFilesData } from 'graphql/patients/actions';
 import { FhirDoc, PatientFileResults } from 'graphql/patients/models/Patient';
 import { DonorsEntity, VariantEntity } from 'graphql/variants/models';
-import { GraphqlBackend } from 'providers/';
+import { GraphqlBackend } from 'providers';
 import ApolloProvider from 'providers/ApolloProvider';
 
 import Igv from 'components/Igv';
@@ -17,7 +17,6 @@ import {
   appendBearerIfToken,
   formatLocus,
   getPatientPosition,
-  getTopBodyElement,
 } from 'utils/helper';
 
 import style from './index.module.scss';
@@ -140,7 +139,6 @@ const IGVModal = ({ donor, variantEntity, isOpen = false, toggleModal, rpt }: Ow
       footer={false}
       title={intl.get('screen.patientvariant.drawer.igv.title')}
       onCancel={() => toggleModal(false)}
-      getContainer={() => getTopBodyElement()}
       className={cx(style.igvModal, 'igvModal')}
       wrapClassName={cx(style.igvModalWrapper, 'igvModalWrapper')}
     >

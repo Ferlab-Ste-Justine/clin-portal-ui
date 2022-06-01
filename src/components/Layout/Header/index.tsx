@@ -71,7 +71,7 @@ const Header = () => {
             trigger={['click']}
             overlay={
               <Menu>
-                <Menu.Item key="logout" onClick={() => keycloak.logout()}>
+                <Menu.Item key="logout" onClick={async () => await keycloak.logout()}>
                   {intl.get('logout')}
                 </Menu.Item>
               </Menu>

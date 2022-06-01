@@ -1,4 +1,8 @@
 export type TReportState = {
-    isLoadingPatientTranscripts: boolean;
-    isLoadingNanuqSequencing: boolean;
+  loadingIds: string[];
 };
+
+export enum ReportNames {
+  transcript = 'transcript',
+  nanuq = 'nanuq',
+}
