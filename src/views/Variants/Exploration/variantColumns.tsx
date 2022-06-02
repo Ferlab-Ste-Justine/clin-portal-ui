@@ -142,7 +142,7 @@ export const getVariantColumns = (
     {
       key: 'external_frequencies',
       title: (
-        <Tooltip title="Gnomad exomes">{intl.get('screen.variantsearch.table.gnomAd')}</Tooltip>
+        <Tooltip title="Gnomad Exomes">{intl.get('screen.variantsearch.table.gnomAd')}</Tooltip>
       ),
       displayTitle: intl.get('screen.variantsearch.table.gnomAd'),
       dataIndex: 'external_frequencies',
@@ -153,6 +153,7 @@ export const getVariantColumns = (
     },
     {
       key: 'rqdm',
+      displayTitle: intl.get('screen.patientvariant.results.table.rqdm'),
       title: (
         <Tooltip title={intl.get('screen.patientvariant.results.table.rqdm.title.tooltip')}>
           {intl.get('screen.patientvariant.results.table.rqdm')}
@@ -244,7 +245,12 @@ export const getVariantColumns = (
       },
       {
         key: 'ch',
-        title: intl.get('screen.patientvariant.results.table.ch'),
+        displayTitle: intl.get('screen.patientvariant.results.table.ch'),
+        title: (
+          <Tooltip title={intl.get('ch.tooltip')}>
+            {intl.get('screen.patientvariant.results.table.ch')}
+          </Tooltip>
+        ),
         defaultHidden: true,
         render: (record: VariantEntity) => (
           <HcComplementDescription
@@ -257,7 +263,12 @@ export const getVariantColumns = (
       },
       {
         key: 'pch',
-        title: intl.get('screen.patientvariant.results.table.pch'),
+        displayTitle: intl.get('screen.patientvariant.results.table.pch'),
+        title: (
+          <Tooltip title={intl.get('pch.tooltip')}>
+            {intl.get('screen.patientvariant.results.table.pch')}
+          </Tooltip>
+        ),
         defaultHidden: true,
         render: (record: VariantEntity) => (
           <HcComplementDescription
@@ -278,8 +289,19 @@ export const getVariantColumns = (
           ).defaultMessage(TABLE_EMPTY_PLACE_HOLDER),
       },
       {
-        key: 'op',
-        title: intl.get('screen.patientvariant.results.table.parentalOrigin'),
+        key: 'qd',
+        displayTitle: intl.get('qd'),
+        title: <Tooltip title={intl.get('qd.tooltip')}>{intl.get('qd')}</Tooltip>,
+        defaultHidden: true,
+        render: (record: VariantEntity) => {
+          const donor = findDonorById(record.donors, patientId);
+          return donor?.qd ? donor.qd : TABLE_EMPTY_PLACE_HOLDER;
+        },
+      },
+      {
+        key: 'po',
+        displayTitle: intl.get('po'),
+        title: <Tooltip title={intl.get('parental.origin')}>{intl.get('po')}</Tooltip>,
         defaultHidden: true,
         render: (record: VariantEntity) => {
           const donor = findDonorById(record.donors, patientId);
@@ -290,21 +312,36 @@ export const getVariantColumns = (
       },
       {
         key: 'alt',
-        title: intl.get('screen.patientvariant.results.table.altprof'),
+        displayTitle: intl.get('screen.patientvariant.results.table.altprof'),
+        title: (
+          <Tooltip title={intl.get('filters.group.donors.ad_alt')}>
+            {intl.get('screen.patientvariant.results.table.altprof')}
+          </Tooltip>
+        ),
         defaultHidden: true,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)?.ad_alt ?? TABLE_EMPTY_PLACE_HOLDER,
       },
       {
         key: 'alttotal',
-        title: intl.get('screen.patientvariant.results.table.alttotal'),
+        displayTitle: intl.get('screen.patientvariant.results.table.alttotal'),
+        title: (
+          <Tooltip title={intl.get('total.depth')}>
+            {intl.get('screen.patientvariant.results.table.alttotal')}
+          </Tooltip>
+        ),
         defaultHidden: true,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)?.ad_total ?? TABLE_EMPTY_PLACE_HOLDER,
       },
       {
         key: 'altratio',
-        title: intl.get('screen.patientvariant.results.table.altratio'),
+        displayTitle: intl.get('screen.patientvariant.results.table.altratio'),
+        title: (
+          <Tooltip title={intl.get('allelic.ratio')}>
+            {intl.get('screen.patientvariant.results.table.altratio')}
+          </Tooltip>
+        ),
         defaultHidden: true,
         render: (record: VariantEntity) =>
           (findDonorById(record.donors, patientId)?.ad_ratio ?? 0).toFixed(2) ??
@@ -312,14 +349,24 @@ export const getVariantColumns = (
       },
       {
         key: 'gq',
-        title: intl.get('screen.patientvariant.results.table.gq'),
+        displayTitle: intl.get('screen.patientvariant.results.table.gq'),
+        title: (
+          <Tooltip title={intl.get('gq.tooltip')}>
+            {intl.get('screen.patientvariant.results.table.gq')}
+          </Tooltip>
+        ),
         defaultHidden: true,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)?.gq ?? TABLE_EMPTY_PLACE_HOLDER,
       },
       {
         key: 'filter',
-        title: intl.get('screen.patientvariant.results.table.filter'),
+        displayTitle: intl.get('screen.patientvariant.results.table.filter'),
+        title: (
+          <Tooltip title={intl.get('screen.variantDetails.patientsTab.filter.tooltip')}>
+            {intl.get('screen.patientvariant.results.table.filter')}
+          </Tooltip>
+        ),
         defaultHidden: true,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)?.filters ?? TABLE_EMPTY_PLACE_HOLDER,
