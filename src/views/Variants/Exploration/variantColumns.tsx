@@ -51,6 +51,15 @@ const getAcmgRuleContent = (varsome: Varsome) =>
         .reduce((prev, curr) => `${prev}, ${curr}`)
     : TABLE_EMPTY_PLACE_HOLDER;
 
+const getAcmgCriteriaCol = () => ({
+  key: 'acmgcriteria',
+  title: intl.get('acmg.criteria'),
+  dataIndex: 'varsome',
+  className: cx(style.variantTableCell, style.variantTableCellElipsis),
+  defaultHidden: true,
+  render: (varsome: Varsome) => getAcmgRuleContent(varsome),
+});
+
 export const getVariantColumns = (
   patientId?: string,
   drawerCb?: (record: VariantEntity) => void,
@@ -165,14 +174,7 @@ export const getVariantColumns = (
   ];
 
   if (!patientId) {
-    columns.push({
-      key: 'acmgrules',
-      title: intl.get('screen.patientvariant.results.table.acmgRules'),
-      dataIndex: 'varsome',
-      defaultHidden: true,
-      className: cx(style.variantTableCell, style.variantTableCellElipsis),
-      render: (varsome: Varsome) => getAcmgRuleContent(varsome),
-    });
+    columns.push(getAcmgCriteriaCol());
   }
 
   if (patientId) {
@@ -223,12 +225,7 @@ export const getVariantColumns = (
         align: 'center',
       },
       {
-        key: 'acmgrules',
-        title: intl.get('screen.patientvariant.results.table.acmgRules'),
-        dataIndex: 'varsome',
-        className: cx(style.variantTableCell, style.variantTableCellElipsis),
-        defaultHidden: true,
-        render: (varsome: Varsome) => getAcmgRuleContent(varsome),
+        ...getAcmgCriteriaCol(),
       },
       {
         key: 'donors_genotype',
