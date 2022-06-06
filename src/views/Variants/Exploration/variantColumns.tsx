@@ -151,7 +151,9 @@ export const getVariantColumns = (
     {
       key: 'external_frequencies',
       title: (
-        <Tooltip title="Gnomad Exomes">{intl.get('screen.variantsearch.table.gnomAd')}</Tooltip>
+        <Tooltip title={`${intl.get('screen.variantsearch.table.gnomAd')} Exomes`}>
+          {intl.get('screen.variantsearch.table.gnomAd')}
+        </Tooltip>
       ),
       displayTitle: intl.get('screen.variantsearch.table.gnomAd'),
       dataIndex: 'external_frequencies',
