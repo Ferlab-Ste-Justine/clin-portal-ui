@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
+import { DefaultRawDatum } from '@nivo/pie';
 import { Col, Row, Space } from 'antd';
 import cx from 'classnames';
 import { ArrangerEdge, ArrangerHits, ArrangerResultsTree } from 'graphql/models';
 import { DonorsEntity, TTableDonorEntity } from 'graphql/variants/models';
 import { useTabPatientData } from 'graphql/variants/tabActions';
 import { isEmpty } from 'lodash';
-import _ from 'lodash';
 
 import ServerError from 'components/Results/ServerError';
 import PieChart from 'components/uiKit/charts/Pie';
@@ -53,6 +53,12 @@ interface DataSourceState {
   hits: ArrangerHits<any>;
 }
 
+type PieSlices = {
+  gender: DefaultRawDatum[];
+  filter: DefaultRawDatum[];
+  code: DefaultRawDatum[];
+};
+
 const graphSetting: any = {
   height: 150,
   margin: {
@@ -63,13 +69,32 @@ const graphSetting: any = {
   },
 };
 
-const getCount = (type: string, results: DataSourceState) => {
-  const data = results?.hits?.edges || [];
-  return _(data)
-    .countBy(type)
-    .map((doc_count, dataKey) => ({ id: dataKey, label: dataKey, value: doc_count }))
-    .value();
-};
+const updateSlices = (id: string, slices: DefaultRawDatum[]) =>
+  id
+    ? [
+        ...slices.filter((s) => s.id !== id),
+        {
+          id,
+          label: id,
+          value: (slices.find((s) => s.id === id)?.value ?? 0) + 1,
+        },
+      ]
+    : [...slices];
+
+const computePieSlices = (data: DataSourceState) =>
+  (data?.hits?.edges || []).reduce(
+    (xs: PieSlices, x) => {
+      const gender = x.node?.gender;
+      const code = x.node?.analysis_code;
+      const filter = x.node?.filters?.[0];
+      return {
+        gender: updateSlices(gender, xs.gender),
+        code: updateSlices(code, xs.code),
+        filter: updateSlices(filter, xs.filter),
+      };
+    },
+    { gender: [], code: [], filter: [] },
+  );
 
 const PatientPanel = ({ locus, className = '' }: OwnProps) => {
   const { getAnalysisNameByCode } = useGlobals();
@@ -95,9 +120,7 @@ const PatientPanel = ({ locus, className = '' }: OwnProps) => {
     return <ServerError />;
   }
 
-  const sexData = dataSource ? getCount('node.gender', dataSource) : [];
-  const analyseData = dataSource ? getCount('node.analysis_code', dataSource) : [];
-  const dragenData = dataSource ? getCount('node.filters[0]', dataSource) : [];
+  const { gender: sexData, filter: dragenData, code: analyseData } = computePieSlices(dataSource);
 
   return (
     <div className={cx(styles.patientPanel, className)}>
