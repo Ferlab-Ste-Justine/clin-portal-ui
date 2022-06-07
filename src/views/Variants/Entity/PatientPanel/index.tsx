@@ -79,7 +79,7 @@ const updateSlices = (id: string, slices: DefaultRawDatum[]) =>
           value: (slices.find((s) => s.id === id)?.value ?? 0) + 1,
         },
       ]
-    : [...slices];
+    : slices;
 
 const computePieSlices = (data: DataSourceState) =>
   (data?.hits?.edges || []).reduce(
