@@ -8,7 +8,7 @@ REACT_APP_NAMESPACE=qa
 REACT_APP_KEYCLOAK_CONFIG={"realm": "clin", "url": "https://auth.qa.cqgc.hsj.rtss.qc.ca/auth/", "clientId": "clin-client", "authClientId": "clin-acl"}
 # API
 REACT_APP_ARRANGER_API=https://data-api.qa.cqgc.hsj.rtss.qc.ca
-REACT_APP_ARRANGER_PROJECT_ID=clin_test_nanuq_v1
+REACT_APP_ARRANGER_PROJECT_ID=clin_qa
 REACT_APP_FHIR_SERVICE_URL=https://fhir.qa.cqgc.hsj.rtss.qc.ca/fhir
 REACT_APP_ZEPLIN_URL=https://notebook.qa.cqgc.hsj.rtss.qc.ca
 REACT_APP_FHIR_CONSOLE_URL=https://fhir-console.qa.cqgc.hsj.rtss.qc.ca/home
