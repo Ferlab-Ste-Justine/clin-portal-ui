@@ -136,17 +136,11 @@ export const getVariantColumns = (
           {intl.get('screen.patientvariant.results.table.acmgVerdict')}
         </Tooltip>
       ),
-      dataIndex: 'rsnumber',
+      dataIndex: 'locus',
       className: cx(style.variantTableCell, style.variantTableCellElipsis),
-      render: (rsnumber: string, entity: VariantEntity) => {
-        const varsome: Varsome | undefined = entity.varsome;
-        return (
-          <AcmgVerdict
-            verdict={varsome?.acmg.verdict.verdict}
-            externalId={varsome ? varsome.variant_id : rsnumber}
-          />
-        );
-      },
+      render: (locus: string, entity: VariantEntity) => (
+        <AcmgVerdict verdict={entity.varsome?.acmg?.verdict?.verdict} locus={locus} />
+      ),
     },
     {
       key: 'external_frequencies',
