@@ -1,4 +1,3 @@
-import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { Space } from 'antd';
 
@@ -14,7 +13,7 @@ const AcmgVerdict = ({ verdict, locus }: OwnProps) => (
   <Space>
     {verdict ? <AcmgVerdictCheck /> : <AcmgNoVerdictCheck />}
     <ExternalLink href={`https://varsome.com/variant/${encodeURIComponent(locus)}`}>
-      {verdict || intl.get('screen.patientvariant.results.table.noVerdict')}
+      {verdict || 'No Verdict'}
     </ExternalLink>
   </Space>
 );
