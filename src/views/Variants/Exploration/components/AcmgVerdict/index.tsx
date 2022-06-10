@@ -12,7 +12,7 @@ interface OwnProps {
 const AcmgVerdict = ({ verdict, locus }: OwnProps) => (
   <Space>
     {verdict ? <AcmgVerdictCheck /> : <AcmgNoVerdictCheck />}
-    <ExternalLink href={`https://varsome.com/variant/${encodeURIComponent(locus)}`}>
+    <ExternalLink href={`https://varsome.com/variant/hg38/${encodeURIComponent(locus)}`}>
       {verdict || 'No Verdict'}
     </ExternalLink>
   </Space>
