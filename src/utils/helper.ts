@@ -10,12 +10,11 @@ export const toExponentialNotation = (numberCandidate: number, fractionDigits = 
 // STRING
 export const appendBearerIfToken = (token?: string) => (token ? `Bearer ${token}` : '');
 
-export const toKebabCase = (str: string) =>
-  str &&
-  str
-    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)!
-    .map((x: string) => x.toLowerCase())
-    .join('-');
+const KEBAB_REGEX = /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g;
+export const toKebabCase = (str: string) => {
+  const match: string[] = (str && str.match(KEBAB_REGEX)) || [];
+  return match.map((x: string) => x.toLowerCase()).join('-');
+};
 
 // DATE
 

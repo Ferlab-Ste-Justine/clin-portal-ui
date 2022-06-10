@@ -54,11 +54,11 @@ describe('Utils: Helper', () => {
       expect(toKebabCase('TEST')).toEqual('test');
     });
 
-    test('Should return a dash combinasion of digits and characters', () => {
+    test('Should return a dash combination of digits and characters', () => {
       expect(toKebabCase('0123-TEST')).toEqual('0123-test');
     });
 
-    test('Should return a multiple dash combinasions of digits and characters', () => {
+    test('Should return a multiple dash combinations of digits and characters', () => {
       expect(toKebabCase('TEST-0123-456-TEST')).toEqual('test-0123-456-test');
     });
 
@@ -69,8 +69,8 @@ describe('Utils: Helper', () => {
     test('Should ignore special characters', () => {
       expect(toKebabCase('TEST-*&?%$!()')).toEqual('test');
     });
-    //Ce test est en échec
-    test.skip('Should return empty string for only dash input', () => {
+
+    test('Should return empty string for only dash input', () => {
       expect(toKebabCase('-')).toEqual('');
     });
   });
