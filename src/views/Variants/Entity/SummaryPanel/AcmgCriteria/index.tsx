@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { Space, Table, Tag, Typography } from 'antd';
@@ -28,6 +28,9 @@ const getCriteriaTagColor = (criteria: string) => {
   }
 };
 
+const REGEX_PUBMED = /(%%PUBMED:\d+%%)/g;
+const REGEX_EXTRACT_PUBMED_ID = /^\D+|%/g;
+
 const columns = [
   {
     title: () => intl.get('screen.variantDetails.summaryTab.acmgCriteriaTable.criteriaColumn'),
@@ -40,25 +43,41 @@ const columns = [
     dataIndex: 'user_explain',
     render: (userExplain: string[]) => (
       <Space direction="vertical" size={4}>
-        {userExplain}
+        {userExplain.map((explanationText, indexOfExplanation) => {
+          const textChunks = explanationText.split(REGEX_PUBMED);
+          return (
+            <span key={indexOfExplanation}>
+              {textChunks.map((e, indexOfCutText) => {
+                const pubmedId = e.startsWith('%%PUBMED:')
+                  ? e.replace(REGEX_EXTRACT_PUBMED_ID, '')
+                  : '';
+                return (
+                  <Fragment key={indexOfCutText}>
+                    {pubmedId ? (
+                      <ExternalLink href={`https://pubmed.ncbi.nlm.nih.gov/${pubmedId}/`}>
+                        PUBMED: {pubmedId}
+                      </ExternalLink>
+                    ) : (
+                      e
+                    )}
+                  </Fragment>
+                );
+              })}
+            </span>
+          );
+        })}
       </Space>
     ),
   },
 ];
 
-const formatData = (data: VariantEntity | null) => {
-  if (!data) return [];
-
-  return data.varsome?.acmg?.classifications?.hits.edges.map((c) => {
-    const node = c.node;
-    return {
-      key: node.name,
-      name: node.name,
-      criteria: node.met_criteria,
-      user_explain: node.user_explain,
-    };
-  });
-};
+const formatData = (data: VariantEntity | null) =>
+  (data?.varsome?.acmg?.classifications?.hits?.edges || []).map((c) => ({
+    key: c.node.name,
+    name: c.node.name,
+    criteria: c.node.met_criteria,
+    user_explain: c.node.user_explain,
+  }));
 
 type Props = {
   data: {
@@ -68,7 +87,7 @@ type Props = {
 };
 
 const ACMGCriteria = ({ data }: Props) => {
-  const formattedDate = formatData(data.variantData) || [];
+  const formattedData = formatData(data.variantData) || [];
   const varsome = data.variantData?.varsome;
   const verdict = varsome?.acmg.verdict;
 
@@ -96,10 +115,10 @@ const ACMGCriteria = ({ data }: Props) => {
       }
       loading={data.loading}
     >
-      {formattedDate.length > 0 ? (
+      {formattedData.length > 0 ? (
         <Table
           bordered={true}
-          dataSource={formattedDate}
+          dataSource={formattedData}
           columns={columns}
           pagination={false}
           size="small"

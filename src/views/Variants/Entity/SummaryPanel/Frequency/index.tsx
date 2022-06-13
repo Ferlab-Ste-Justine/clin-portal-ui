@@ -226,6 +226,7 @@ const FrequencyCard = ({ locus }: OwnProps) => {
   const { getAnalysisNameByCode } = useGlobals();
   const frequencies_by_analysis = makeRows(data.frequencies_by_analysis);
   frequencies_by_analysis.push({
+    key: 'RQDM',
     analysis_code: 'RQDM',
     ...data.frequency_RQDM,
   });
