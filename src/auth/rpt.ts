@@ -33,10 +33,10 @@ const fetchRptToken = async (): Promise<IRptPayload> => {
   };
 };
 
-const isTokenExpired = (iat: number, expires_in: number) => {
+const isTokenUnexpired = (iat: number, expires_in: number) => {
   const currentTime = Math.floor(Date.now() / 1000);
   const expirationTime = iat + expires_in;
-  return currentTime <= expirationTime;
+  return currentTime < expirationTime;
 };
 
 export class RptManager {
@@ -55,7 +55,7 @@ export class RptManager {
 
   public static async readRpt(): Promise<IRptPayload> {
     const rpt = await this.readRptFromStorage();
-    if (isTokenExpired(rpt.decoded.iat, rpt.expires_in)) {
+    if (isTokenUnexpired(rpt.decoded.iat, rpt.expires_in)) {
       return rpt;
     }
     return this.requestNewRpt();
