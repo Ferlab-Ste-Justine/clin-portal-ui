@@ -1,8 +1,11 @@
 import React from 'react';
 import { Route, RouteProps } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
-import ConditionalWrapper from 'components/utils/ConditionalWrapper';
+
 import Spinner from 'components/uiKit/Spinner';
+import ConditionalWrapper from 'components/utils/ConditionalWrapper';
+
+import LoginWrapper from './components/LoginWrapper';
 
 type OwnProps = Omit<RouteProps, 'component' | 'render' | 'children'> & {
   layout?: (children: any) => React.ReactElement;
@@ -15,17 +18,21 @@ const ProtectedRoute = ({ children, layout, ...routeProps }: OwnProps) => {
   const keycloakIsReady = keycloak && initialized;
   const showLogin = keycloakIsReady && !keycloak.authenticated;
 
-  if (showLogin) {
-    keycloak.login();
+  if (!keycloakIsReady) {
     return <Spinner size={'large'} />;
+  }
+
+  if (showLogin) {
+    return <LoginWrapper Component={<Spinner size={'large'} />} />;
   }
 
   return (
     <ConditionalWrapper
-      condition={RouteLayout !== undefined}
-      children={<Route {...routeProps}>{children}</Route>}
+      condition={!!RouteLayout}
       wrapper={(children) => <RouteLayout>{children}</RouteLayout>}
-    />
+    >
+      <Route {...routeProps}>{children}</Route>
+    </ConditionalWrapper>
   );
 };
 
