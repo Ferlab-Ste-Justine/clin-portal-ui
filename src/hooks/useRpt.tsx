@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { decodeRptAccess, fetchRptToken } from 'auth/rpt';
+import { RptManager } from 'auth/rpt';
 import { DecodedRpt } from 'auth/types';
 
 export const useRpt = () => {
@@ -10,9 +10,9 @@ export const useRpt = () => {
 
   const fetchRpt = useCallback(async () => {
     try {
-      const response = await fetchRptToken();
-      setRpt(response.access_token);
-      setDecodedRpt(decodeRptAccess(response));
+      const rpt = await RptManager.readRpt();
+      setRpt(rpt.access_token);
+      setDecodedRpt(rpt.decoded);
     } catch (e) {
       setError(e);
     } finally {
