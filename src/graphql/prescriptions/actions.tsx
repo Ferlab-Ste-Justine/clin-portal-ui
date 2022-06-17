@@ -64,6 +64,7 @@ export const useTaskEntity = (
 
 export const usePrescriptionMapping = (): ExtendedMappingResults => {
   const { loading, result } = useLazyResultQuery<any>(INDEX_EXTENDED_MAPPING('Analyses'), {
+    fetchPolicy: 'no-cache',
     variables: [],
   });
 

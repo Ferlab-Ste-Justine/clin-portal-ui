@@ -1,11 +1,5 @@
 import { ReactElement } from 'react';
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-  NormalizedCacheObject,
-} from '@apollo/client';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { GraphqlBackend, GraphqlProvider } from 'providers';
 
@@ -39,17 +33,27 @@ const getAuthLink = (token: string) =>
 const backendUrl = (backend: GraphqlBackend) =>
   backend === GraphqlBackend.FHIR ? fhirLink : arrangerLink;
 
+const mClients = new Map();
+
 const Provider = ({ children, backend = GraphqlBackend.FHIR }: GraphqlProvider): ReactElement => {
   const { loading, rpt } = useRpt();
   if (loading) {
     return <></>;
   }
+
   const header = getAuthLink(rpt);
 
-  const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-    cache: new InMemoryCache({ addTypename: false }),
-    link: header.concat(backendUrl(backend)),
-  });
+  const hasClientAlready = mClients.has(backend);
+  const client = hasClientAlready
+    ? mClients.get(backend)
+    : new ApolloClient({
+        cache: new InMemoryCache({ addTypename: backend !== GraphqlBackend.FHIR }),
+        link: header.concat(backendUrl(backend)),
+      });
+
+  if (!hasClientAlready) {
+    mClients.set(backend, client);
+  }
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 

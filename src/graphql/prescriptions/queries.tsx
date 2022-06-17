@@ -35,31 +35,6 @@ export const PRESCRIPTIONS_QUERY = gql`
   }
 `;
 
-export const PRESCRIPTIONS_ENTITY_QUERY = gql`
-  query PrescriptionsEntity($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
-    Analyses {
-      hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
-        edges {
-          node {
-            id
-            patient_id
-            patient_mrn
-            prescription_id
-            ep
-            created_on
-            timestamp
-            requester
-            ldm
-            analysis_code
-            status
-          }
-        }
-        total
-      }
-    }
-  }
-`;
-
 export const PRESCRIPTIONS_SEARCH_QUERY = gql`
   query AnalysisSearch($sqon: JSON, $first: Int, $offset: Int) {
     Analyses {

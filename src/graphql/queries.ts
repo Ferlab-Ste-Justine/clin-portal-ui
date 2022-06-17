@@ -20,7 +20,7 @@ export type QueryVariable = {
 };
 
 export const INDEX_EXTENDED_MAPPING = (index: string) => gql`
-query ExtendedMapping {
+query ExtendedMapping${index} {
   ${index} {
     extended
   }
