@@ -12,4 +12,5 @@ export enum DYNAMIC_ROUTES {
   PRESCRIPTION_ENTITY = '/prescription/entity/:id',
   BIOINFO_ANALYSIS = '/bioinformatics-analysis/:id',
   VARIANT_EXPLORATION_PATIENT = '/variant-exploration/patient/:patientid?/:prescriptionid?',
+  CNV_EXPLORATION_PATIENT = '/cnv-exploration/patient/:patientid?/:prescriptionid?',
 }

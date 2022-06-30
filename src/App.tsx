@@ -18,6 +18,7 @@ import frFR from 'antd/lib/locale/fr_FR';
 import ProtectedRoute from 'ProtectedRoute';
 import ContextProvider from 'providers/ContextProvider';
 import ErrorPage from 'views/Error';
+import CnvExplorationPatient from 'views/Variants/Exploration/Cnv';
 
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLayout from 'components/Layout';
@@ -101,6 +102,13 @@ const App = () => {
                 layout={PageLayout}
               >
                 <VariantExplorationRqdm />
+              </ProtectedRoute>
+              <ProtectedRoute
+                exact
+                path={DYNAMIC_ROUTES.CNV_EXPLORATION_PATIENT}
+                layout={PageLayout}
+              >
+                <CnvExplorationPatient />
               </ProtectedRoute>
               <ProtectedRoute exact path={DYNAMIC_ROUTES.VARIANT_ENTITY} layout={PageLayout}>
                 <VariantEntity />

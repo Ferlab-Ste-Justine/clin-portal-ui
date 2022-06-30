@@ -1,13 +1,12 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { MedicineBoxOutlined } from '@ant-design/icons';
-import { Button, Col, Row } from 'antd';
+import { Col, Dropdown, Menu, Row } from 'antd';
 import { extractPatientId } from 'api/fhir/helper';
 import { useServiceRequestEntity } from 'graphql/prescriptions/actions';
 import { GraphqlBackend } from 'providers';
 import ApolloProvider from 'providers/ApolloProvider';
 
-import LineStyleIcon from 'components/icons/LineStyleIcon';
 import ContentWithHeader from 'components/Layout/ContentWithHeader';
 import ScrollContentWithFooter from 'components/Layout/ScrollContentWithFooter';
 import NotFound from 'components/Results/NotFound';
@@ -29,6 +28,38 @@ const PrescriptionEntity = ({ prescriptionId }: OwnProps) => {
   if (!loading && !prescription) {
     return <NotFound />;
   }
+  const variantMenu = (
+    <Menu
+      items={[
+        {
+          label: (
+            <Link
+              key="snv"
+              to={`/variant-exploration/patient/${extractPatientId(
+                prescription?.subject?.resource?.id!,
+              )}/${prescriptionId}`}
+            >
+              snv
+            </Link>
+          ),
+          key: 'snv',
+        },
+        {
+          label: (
+            <Link
+              key="cnv"
+              to={`/cnv-exploration/patient/${extractPatientId(
+                prescription?.subject?.resource?.id!,
+              )}/${prescriptionId}`}
+            >
+              cnv
+            </Link>
+          ),
+          key: 'cnv',
+        },
+      ]}
+    />
+  );
 
   return (
     <ContentWithHeader
@@ -36,16 +67,9 @@ const PrescriptionEntity = ({ prescriptionId }: OwnProps) => {
         icon: <MedicineBoxOutlined />,
         title: intl.get('screen.prescription.entity.title', { id: prescriptionId }),
         actions: [
-          <Link
-            key="variants"
-            to={`/variant-exploration/patient/${extractPatientId(
-              prescription?.subject?.resource?.id!,
-            )}/${prescriptionId}`}
-          >
-            <Button type="primary" icon={<LineStyleIcon height="14" width="14" />}>
-              {intl.get('screen.prescription.entity.see.variant')}
-            </Button>
-          </Link>,
+          <Dropdown.Button trigger={['click']} key="cnv" type="primary" overlay={variantMenu}>
+            {intl.get('screen.prescription.entity.see.variant')}
+          </Dropdown.Button>,
         ],
       }}
     >
