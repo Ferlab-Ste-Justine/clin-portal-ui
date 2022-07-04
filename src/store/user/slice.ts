@@ -2,11 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { TUserState } from 'store/user/types';
 
-import { fetchPractitionerRole } from './thunks';
+import { fetchConfig, fetchPractitionerRole, updateConfig } from './thunks';
 
 export const UserState: TUserState = {
   isLoading: false,
   user: {
+    config: {},
     practitionerRoles: [],
   },
 };
@@ -16,6 +17,7 @@ const userSlice = createSlice({
   initialState: UserState,
   reducers: {},
   extraReducers: (builder) => {
+    // fetchPractitionerRole
     builder.addCase(fetchPractitionerRole.pending, (state) => {
       state.isLoading = true;
     });
@@ -27,6 +29,34 @@ const userSlice = createSlice({
       };
     });
     builder.addCase(fetchPractitionerRole.rejected, (state) => {
+      state.isLoading = false;
+    });
+    // fetchConfig
+    builder.addCase(fetchConfig.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchConfig.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = {
+        ...state.user,
+        config: action.payload,
+      };
+    });
+    builder.addCase(fetchConfig.rejected, (state) => {
+      state.isLoading = false;
+    });
+    // updateConfig
+    builder.addCase(updateConfig.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateConfig.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = {
+        ...state.user,
+        config: action.payload,
+      };
+    });
+    builder.addCase(updateConfig.rejected, (state) => {
       state.isLoading = false;
     });
   },
