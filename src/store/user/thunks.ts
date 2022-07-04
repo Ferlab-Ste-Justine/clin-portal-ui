@@ -5,8 +5,7 @@ import { UsersApi } from 'api/user';
 import { TUserConfig } from 'api/user/models';
 import keycloak from 'auth/keycloak';
 import { DecodedIdToken } from 'auth/types';
-
-import { clone, mergeDeep } from 'utils/object';
+import { cloneDeep, merge } from 'lodash';
 
 const fetchPractitionerRole = createAsyncThunk<PractitionerRole[]>(
   'user/searchPractitionerRole',
@@ -39,7 +38,7 @@ const updateConfig = createAsyncThunk<TUserConfig, TUserConfig>(
   'user/updateConfig',
   async (config, thunkAPI) => {
     const state: any = thunkAPI.getState();
-    const mergedConfig = mergeDeep<TUserConfig>(clone(state.user.user.config), clone(config));
+    const mergedConfig = merge(cloneDeep(state.user.user.config), cloneDeep(config));
     await UsersApi.update({ config: mergedConfig });
 
     return mergedConfig;
