@@ -14,6 +14,7 @@ REACT_APP_ZEPLIN_URL=https://notebook.qa.cqgc.hsj.rtss.qc.ca
 REACT_APP_FHIR_CONSOLE_URL=https://fhir-console.qa.cqgc.hsj.rtss.qc.ca/home
 REACT_APP_HPO_URL=https://hpo.qa.cqgc.hsj.rtss.qc.ca/hpo
 REACT_APP_WEB_ROOT=https://portail.qa.cqgc.hsj.rtss.qc.ca
+REACT_APP_USERS_API_URL=https://users.qa.cqgc.hsj.rtss.qc.ca
 
 # Style
 SASS_PATH=/code/src/style/themes/clin
