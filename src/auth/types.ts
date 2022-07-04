@@ -21,3 +21,11 @@ export interface IRptPayload {
   expires_in: number;
   refresh_expires_in: number;
 }
+
+export interface DecodedIdToken {
+  sub: string;
+  email: string;
+  name: string;
+  given_name: string;
+  family_name: string;
+}
