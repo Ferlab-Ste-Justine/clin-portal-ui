@@ -25,7 +25,7 @@ import Spinner from 'components/uiKit/Spinner';
 import NotificationContextHolder from 'components/utils/NotificationContextHolder';
 import { useLang } from 'store/global';
 import { fetchFhirServiceRequestCodes } from 'store/global/thunks';
-import { fetchPractitionerRole } from 'store/user/thunks';
+import { fetchConfig, fetchPractitionerRole } from 'store/user/thunks';
 import { LANG } from 'utils/constants';
 import { DYNAMIC_ROUTES, STATIC_ROUTES } from 'utils/routes';
 
@@ -55,6 +55,7 @@ const App = () => {
     if (keycloakIsReady && keycloak.authenticated) {
       dispatch(fetchPractitionerRole());
       dispatch(fetchFhirServiceRequestCodes());
+      dispatch(fetchConfig());
     }
     // eslint-disable-next-line
   }, [keycloakIsReady, keycloak]);
