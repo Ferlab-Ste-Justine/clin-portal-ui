@@ -18,7 +18,6 @@ const fetchPractitionerRole = createAsyncThunk<PractitionerRole[]>(
 );
 
 const fetchConfig = createAsyncThunk<TUserConfig>('user/fetchConfig', async () => {
-  let config: TUserConfig = {};
   const fetch = await UsersApi.fetch();
   if (fetch.response.status === 404) {
     const decodedIdToken = keycloak.idTokenParsed as DecodedIdToken;
@@ -30,12 +29,10 @@ const fetchConfig = createAsyncThunk<TUserConfig>('user/fetchConfig', async () =
       completed_registration: true,
       config: {},
     });
-    config = create.data?.config || {};
+    return create.data?.config || {};
   } else {
-    config = fetch.data?.config || {};
+    return fetch.data?.config || {};
   }
-
-  return config;
 });
 
 const updateConfig = createAsyncThunk<TUserConfig, TUserConfig>(
