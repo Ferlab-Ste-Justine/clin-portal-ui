@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
+import { useDispatch } from 'react-redux';
 import { FileTextOutlined } from '@ant-design/icons';
 import Empty from '@ferlab/ui/core/components/Empty';
 import ProTable from '@ferlab/ui/core/components/ProTable';
@@ -14,6 +15,8 @@ import { getAchivesTableColumns } from 'views/Archives/columns';
 import ContentWithHeader from 'components/Layout/ContentWithHeader';
 import ScrollContentWithFooter from 'components/Layout/ScrollContentWithFooter';
 import useQueryParams from 'hooks/useQueryParams';
+import { useUser } from 'store/user';
+import { updateConfig } from 'store/user/thunks';
 import { formatDate } from 'utils/date';
 import { formatFileSize } from 'utils/formatFileSize';
 import { getProTableDictionary } from 'utils/translation';
@@ -79,6 +82,8 @@ const extracDocsFromTask = (tasks: PatientTaskResults) => {
 
 const Archives = () => {
   const query = useQueryParams();
+  const dispatch = useDispatch();
+  const { user } = useUser();
   const [currentPageSize, setcurrentPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE);
   const [searchValue, setSearchValue] = useState('');
@@ -172,6 +177,17 @@ const Archives = () => {
                         total: docs.length,
                       },
                       enableColumnSort: true,
+                      onColumnSortChange: (columns) => {
+                        dispatch(
+                          updateConfig({
+                            data_exploration: {
+                              tables: {
+                                archives: { columns },
+                              },
+                            },
+                          }),
+                        );
+                      },
                     }}
                     pagination={{
                       current: currentPage,
@@ -182,6 +198,7 @@ const Archives = () => {
                       hideOnSinglePage: true,
                     }}
                     columns={getAchivesTableColumns()}
+                    initialColumnState={user.config.data_exploration?.tables?.archives?.columns}
                     dataSource={docs}
                   />
                 )}

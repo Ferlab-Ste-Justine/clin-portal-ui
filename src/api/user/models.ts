@@ -19,6 +19,8 @@ export type TUserTableConfig = {
 export type TUserConfig = {
   data_exploration?: {
     tables?: {
+      archives?: TUserTableConfig;
+      patientVariants?: TUserTableConfig;
       prescriptions?: TUserTableConfig;
       requests?: TUserTableConfig;
       variants?: TUserTableConfig;

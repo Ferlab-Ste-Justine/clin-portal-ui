@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { IQueryResults } from 'graphql/models';
 import { ITableVariantEntity, VariantEntity } from 'graphql/variants/models';
@@ -9,6 +10,8 @@ import { getVariantColumns } from 'views/Variants/Exploration/variantColumns';
 import { DEFAULT_PAGE_SIZE } from 'views/Variants/utils/constant';
 
 import { useRpt } from 'hooks/useRpt';
+import { useUser } from 'store/user';
+import { updateConfig } from 'store/user/thunks';
 import { formatQuerySortList } from 'utils/helper';
 import { IQueryConfig, TQueryConfigCb } from 'utils/searchPageTypes';
 import { getProTableDictionary } from 'utils/translation';
@@ -23,10 +26,12 @@ type OwnProps = {
 };
 
 const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnProps) => {
+  const dispatch = useDispatch();
+  const { user } = useUser();
+  const { loading: loadingRpt, rpt } = useRpt();
   const [drawerOpened, toggleDrawer] = useState(false);
   const [modalOpened, toggleModal] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<VariantEntity | undefined>(undefined);
-  const { loading: loadingRpt, rpt } = useRpt();
 
   const openDrawer = (record: VariantEntity) => {
     setSelectedVariant(record);
@@ -56,6 +61,7 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
         className={style.variantSearchTable}
         wrapperClassName={style.variantTabWrapper}
         columns={getVariantColumns(patientId, openDrawer, openIgvModal)}
+        initialColumnState={user.config.data_exploration?.tables?.patientVariants?.columns}
         dataSource={results.data.map((i, index) => ({ ...i, key: `${index}` }))}
         loading={results.loading}
         dictionary={getProTableDictionary()}
@@ -74,6 +80,17 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
             total: results.total || 0,
           },
           enableColumnSort: true,
+          onColumnSortChange: (columns) => {
+            dispatch(
+              updateConfig({
+                data_exploration: {
+                  tables: {
+                    patientVariants: { columns },
+                  },
+                },
+              }),
+            );
+          },
         }}
         size="small"
         pagination={{
