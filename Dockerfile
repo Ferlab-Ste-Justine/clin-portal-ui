@@ -11,7 +11,7 @@ COPY .env tsconfig.json tsconfig.paths.json craco.config.js /code/
 
 RUN npm run build
 
-FROM nginx:1 as server
+FROM nginx:stable as server
 
 COPY --from=builder /code/build /usr/share/nginx/html/
 
