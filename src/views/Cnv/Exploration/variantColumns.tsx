@@ -15,7 +15,6 @@ export const getVariantColumns = (
 ): ProColumnType<ITableVariantEntity>[] => {
   const columns: ProColumnType<ITableVariantEntity>[] = [
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.variant'),
       title: intl.get('screen.patientcnv.results.table.variant'),
       key: 'name',
       dataIndex: 'name',
@@ -31,19 +30,14 @@ export const getVariantColumns = (
       },
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.chromosome'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.chromosome.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.chromosome')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.chromosome'),
+      tooltip: intl.get('screen.patientcnv.results.table.chromosome.tooltip'),
       key: 'chromosome',
       dataIndex: 'sort_chromosome',
       sorter: { multiple: 1 },
       render: (sort_chromosome: number, variant: VariantEntity) => variant.chromosome,
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.start'),
       title: intl.get('screen.patientcnv.results.table.start'),
       key: 'start',
       dataIndex: 'start',
@@ -51,49 +45,35 @@ export const getVariantColumns = (
       render: (start: number) => (start ? formatNumber(start) : TABLE_EMPTY_PLACE_HOLDER),
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.end'),
       title: intl.get('screen.patientcnv.results.table.end'),
       key: 'end',
       dataIndex: 'end',
       render: (end: number) => (end ? formatNumber(end) : TABLE_EMPTY_PLACE_HOLDER),
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.type'),
       title: intl.get('screen.patientcnv.results.table.type'),
       key: 'type',
       dataIndex: 'type',
       render: (type: string) => type,
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.length'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.length.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.length')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.length'),
+      tooltip: intl.get('screen.patientcnv.results.table.length.tooltip'),
       key: 'length',
       dataIndex: 'reflen',
       render: (length: number) => formatDnaLength(length),
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.copy_number'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.copy_number.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.copy_number')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.copy_number'),
+      tooltip: intl.get('screen.patientcnv.results.table.copy_number.tooltip'),
       key: 'cn',
       dataIndex: 'cn',
       sorter: { multiple: 1 },
       render: (cn: number) => cn,
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.number_genes'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.number_genes.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.number_genes')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.number_genes'),
+      tooltip: intl.get('screen.patientcnv.results.table.number_genes.tooltip'),
       key: 'number_genes',
       dataIndex: 'number_genes',
       render: (number_genes: number, variant: VariantEntity) =>
@@ -115,36 +95,24 @@ export const getVariantColumns = (
         ),
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.genotype'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.genotype.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.genotype')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.genotype'),
+      tooltip: intl.get('screen.patientcnv.results.table.genotype.tooltip'),
       key: 'calls',
       dataIndex: 'calls',
       defaultHidden: true,
       render: (calls: number[]) => formatGenotype(calls),
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.dragen_filter'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.dragen_filter.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.dragen_filter')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.dragen_filter'),
+      tooltip: intl.get('screen.patientcnv.results.table.dragen_filter.tooltip'),
       key: 'filter',
       dataIndex: 'filters',
       defaultHidden: true,
       render: (filters: string[]) => filters.join(', '),
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.quality'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.quality.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.quality')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.quality'),
+      tooltip: intl.get('screen.patientcnv.results.table.quality.tooltip'),
       key: 'qual',
       dataIndex: 'qual',
       sorter: { multiple: 1 },
@@ -152,12 +120,8 @@ export const getVariantColumns = (
       render: (qual: number) => qual,
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.segment_mean'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.segment_mean.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.segment_mean')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.segment_mean'),
+      tooltip: intl.get('screen.patientcnv.results.table.segment_mean.tooltip'),
       key: 'sm',
       dataIndex: 'sm',
       sorter: { multiple: 1 },
@@ -165,24 +129,16 @@ export const getVariantColumns = (
       render: (sm: string) => sm,
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.bins_count'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.bins_count.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.bins_count')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.bins_count'),
+      tooltip: intl.get('screen.patientcnv.results.table.bins_count'),
       key: 'bc',
       dataIndex: 'bc',
       defaultHidden: true,
       render: (bc: string) => bc,
     },
     {
-      displayTitle: intl.get('screen.patientcnv.results.table.paired_end'),
-      title: (
-        <Tooltip title={intl.get('screen.patientcnv.results.table.paired_end.tooltip')}>
-          {intl.get('screen.patientcnv.results.table.paired_end')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientcnv.results.table.paired_end'),
+      tooltip: intl.get('screen.patientcnv.results.table.paired_end.tooltip'),
       key: 'pe',
       dataIndex: 'pe',
       defaultHidden: true,

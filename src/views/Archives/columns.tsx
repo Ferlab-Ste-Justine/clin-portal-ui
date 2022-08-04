@@ -85,12 +85,8 @@ export const getAchivesTableColumns = (): ProColumnType<DocsWithTaskInfo>[] => [
   },
   {
     key: 'downloadActions',
-    title: (
-      <Space size={3}>
-        <DownloadOutlined /> {intl.get('screen.archives.table.column.download')}
-      </Space>
-    ),
-    displayTitle: intl.get('screen.archives.table.column.download'),
+    icon: <DownloadOutlined />,
+    title: intl.get('screen.archives.table.column.download'),
     render: (doc: DocsWithTaskInfo) => (
       <Space size={12}>
         <DownloadFileButton fileUrl={doc.action.urls.file} displayName="Fichier" />

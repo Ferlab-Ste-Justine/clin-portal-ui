@@ -1,7 +1,6 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
-import { Tooltip } from 'antd';
 import { extractOrganizationId } from 'api/fhir/helper';
 import { ITableAnalysisResult } from 'graphql/prescriptions/models/Prescription';
 import StatusTag from 'views/Prescriptions/components/StatusTag';
@@ -37,94 +36,46 @@ export const prescriptionsColumns = (): ProColumnType<ITableAnalysisResult>[] =>
       name: 'created_on',
       render: (date: string) => formatDate(date),
       summary: false,
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.createdOn.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.createdOn')}
-        </Tooltip>
-      ),
-      displayTitle: intl.get('screen.patientsearch.table.createdOn'),
+      title: intl.get('screen.patientsearch.table.createdOn'),
+      tooltip: intl.get('screen.patientsearch.table.createdOn.tooltip'),
       sorter: { multiple: 1 },
     },
     {
       name: 'timestamp',
       render: (date: string) => formatDate(date),
       summary: false,
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.updatedOn.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.updatedOn')}
-        </Tooltip>
-      ),
-      displayTitle: intl.get('screen.patientsearch.table.updatedOn'),
+      title: intl.get('screen.patientsearch.table.updatedOn'),
+      tooltip: intl.get('screen.patientsearch.table.updatedOn.tooltip'),
       sorter: { multiple: 1 },
       defaultHidden: true,
     },
     {
       name: ['analysis_code'],
       summary: true,
-      displayTitle: intl.get('screen.patientsearch.table.test'),
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.test.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.test')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientsearch.table.test'),
+      tooltip: intl.get('screen.patientsearch.table.test.tooltip'),
       sorter: { multiple: 1 },
     },
     {
       name: ['ldm'],
       summary: false,
       render: (labo: string) => extractOrganizationId(labo),
-      displayTitle: intl.get('screen.patientsearch.table.ldm'),
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.ldm.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.ldm')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientsearch.table.ldm'),
+      tooltip: intl.get('screen.patientsearch.table.ldm.tooltip'),
       sorter: { multiple: 1 },
     },
     {
       name: ['ep'],
       summary: true,
-      displayTitle: intl.get('screen.patientsearch.table.ep'),
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.ep.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.ep')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientsearch.table.ep'),
+      tooltip: intl.get('screen.patientsearch.table.ep.tooltip'),
       sorter: { multiple: 1 },
     },
     {
       name: ['requester'],
       summary: true,
-      displayTitle: intl.get('screen.patientsearch.table.requester'),
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.requester.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.requester')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientsearch.table.requester'),
+      tooltip: intl.get('screen.patientsearch.table.requester.tooltip'),
       render: (requester: string) => requester ?? TABLE_EMPTY_PLACE_HOLDER,
       sorter: { multiple: 1 },
       defaultHidden: true,
@@ -132,16 +83,8 @@ export const prescriptionsColumns = (): ProColumnType<ITableAnalysisResult>[] =>
     {
       name: ['prenatal'],
       summary: true,
-      displayTitle: intl.get('screen.patientsearch.table.prenatal'),
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.prenatal.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.prenatal')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientsearch.table.prenatal'),
+      tooltip: intl.get('screen.patientsearch.table.prenatal.tooltip'),
       sorter: { multiple: 1 },
       render: (prenatal: boolean) => intl.get(prenatal ? 'yes' : 'no'),
       defaultHidden: true,
@@ -149,16 +92,8 @@ export const prescriptionsColumns = (): ProColumnType<ITableAnalysisResult>[] =>
     {
       name: 'patient_mrn',
       summary: true,
-      displayTitle: intl.get('screen.patientsearch.table.mrn'),
-      title: (
-        <Tooltip
-          placement="topLeft"
-          title={intl.get('screen.patientsearch.table.mrn.tooltip')}
-          arrowPointAtCenter
-        >
-          {intl.get('screen.patientsearch.table.mrn')}
-        </Tooltip>
-      ),
+      title: intl.get('screen.patientsearch.table.mrn'),
+      tooltip: intl.get('screen.patientsearch.table.mrn.tooltip'),
       defaultHidden: true,
     },
   ].map((c) => ({

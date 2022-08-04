@@ -113,96 +113,48 @@ export const getPatientPanelColumns = (
   {
     key: 'filters',
     dataIndex: 'filters',
-    displayTitle: intl.get('screen.variantDetails.patientsTab.filter'),
-    title: (
-      <Tooltip
-        arrowPointAtCenter
-        placement="topLeft"
-        title={intl.get('screen.variantDetails.patientsTab.filter.tooltip')}
-      >
-        {intl.get('screen.variantDetails.patientsTab.filter')}
-      </Tooltip>
-    ),
+    title: intl.get('screen.variantDetails.patientsTab.filter'),
+    tooltip: intl.get('screen.variantDetails.patientsTab.filter.tooltip'),
     render: (filters) => (filters ? filters[0] : TABLE_EMPTY_PLACE_HOLDER),
     filters: createFiltersItems(donorsHits?.edges || []),
   },
   {
     key: 'qd',
     dataIndex: 'qd',
-    displayTitle: intl.get('screen.variantDetails.patientsTab.qd'),
-    title: (
-      <Tooltip
-        arrowPointAtCenter
-        placement="topLeft"
-        title={intl.get('screen.variantDetails.patientsTab.qd.tooltip')}
-      >
-        {intl.get('screen.variantDetails.patientsTab.qd')}
-      </Tooltip>
-    ),
+    title: intl.get('screen.variantDetails.patientsTab.qd'),
+    tooltip: intl.get('screen.variantDetails.patientsTab.qd.tooltip'),
     sorter: (a, b) => a.qd - b.qd,
     render: (qd) => (qd ? qd : TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     key: 'ad_alt',
     dataIndex: 'ad_alt',
-    displayTitle: intl.get('screen.variantDetails.patientsTab.adAlt'),
-    title: (
-      <Tooltip
-        arrowPointAtCenter
-        placement="topLeft"
-        title={intl.get('screen.variantDetails.patientsTab.adAlt.tooltip')}
-      >
-        {intl.get('screen.variantDetails.patientsTab.adAlt')}
-      </Tooltip>
-    ),
+    title: intl.get('screen.variantDetails.patientsTab.adAlt'),
+    tooltip: intl.get('screen.variantDetails.patientsTab.adAlt.tooltip'),
     sorter: (a, b) => a.ad_alt - b.ad_alt,
     render: (ad_alt) => (ad_alt ? formatNumber(ad_alt) : TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     key: 'ad_total',
     dataIndex: 'ad_total',
-    displayTitle: intl.get('screen.variantDetails.patientsTab.adTotal'),
-    title: (
-      <Tooltip
-        arrowPointAtCenter
-        placement="topLeft"
-        title={intl.get('screen.variantDetails.patientsTab.adTotal.tooltip')}
-      >
-        {intl.get('screen.variantDetails.patientsTab.adTotal')}
-      </Tooltip>
-    ),
+    title: intl.get('screen.variantDetails.patientsTab.adTotal'),
+    tooltip: intl.get('screen.variantDetails.patientsTab.adTotal.tooltip'),
     sorter: (a, b) => a.ad_total - b.ad_total,
     render: (ad_total) => (ad_total ? formatNumber(ad_total) : TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     key: 'ad_ratio',
     dataIndex: 'ad_ratio',
-    displayTitle: intl.get('screen.variantDetails.patientsTab.adFreq'),
-    title: (
-      <Tooltip
-        arrowPointAtCenter
-        placement="topLeft"
-        title={intl.get('screen.variantDetails.patientsTab.adFreq.tooltip')}
-      >
-        {intl.get('screen.variantDetails.patientsTab.adFreq')}
-      </Tooltip>
-    ),
+    title: intl.get('screen.variantDetails.patientsTab.adFreq'),
+    tooltip: intl.get('screen.variantDetails.patientsTab.adFreq.tooltip'),
     render: (ratio: number) => ratio.toFixed(2),
     sorter: (a, b) => a.ad_ratio - b.ad_ratio,
   },
   {
     key: 'gq',
     dataIndex: 'gq',
-    displayTitle: intl.get('screen.variantDetails.patientsTab.genotypeQuality'),
-    title: (
-      <Tooltip
-        arrowPointAtCenter
-        placement="topLeft"
-        title={intl.get('screen.variantDetails.patientsTab.genotypeQuality.tooltip')}
-      >
-        {intl.get('screen.variantDetails.patientsTab.genotypeQuality')}
-      </Tooltip>
-    ),
+    title: intl.get('screen.variantDetails.patientsTab.genotypeQuality'),
+    tooltip: intl.get('screen.variantDetails.patientsTab.genotypeQuality.tooltip'),
     sorter: (a, b) => a.gq - b.gq,
     render: (gq) => (gq ? formatNumber(gq) : TABLE_EMPTY_PLACE_HOLDER),
   },
