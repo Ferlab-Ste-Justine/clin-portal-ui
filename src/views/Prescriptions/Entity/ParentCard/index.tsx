@@ -25,7 +25,7 @@ const ParentCard = ({ extension, loading }: OwnProps) => (
       <CollapsePanel
         header={
           <Title level={4}>
-            {intl.get(get(extension?.extension[0].valueCoding, 'coding[0].code', ''))}
+            {intl.get(get(extension?.extension[0].valueCoding, 'coding[0].code', '') as string)}
           </Title>
         }
       >

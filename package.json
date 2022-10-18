@@ -47,7 +47,10 @@
     "eject": "react-scripts eject",
     "add-translation": "node scripts/add-translation.js",
     "prepare": "husky install",
-    "update:config": "npx @ferbab/config"
+    "update:config": "npx @ferbab/config",
+    "cypress:open": "cypress open",
+    "cypress:run:chrome": "cypress run -b chrome",
+    "cypress:run:cli": "cypress run"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -78,6 +81,7 @@
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
     "@craco/craco": "^7.0.0-alpha.6",
+    "@testing-library/cypress": "^8.0.3",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -93,6 +97,7 @@
     "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
+    "cypress": "^10.11.0",
     "eslint": "^8.15.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
