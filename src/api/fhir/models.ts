@@ -290,6 +290,9 @@ export interface ServiceRequestEntity {
     text: string;
   };
   requester: RequesterType;
+  orderDetail: {
+    text: string;
+  };
   observation: {
     id: string;
     investigation: {
@@ -400,6 +403,7 @@ export type ParaclinicEntity = {
       code: string;
     };
   };
+  category: string;
   valueString: string;
   valueCodeableConcept: {
     coding: {

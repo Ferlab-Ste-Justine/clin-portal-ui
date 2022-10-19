@@ -207,6 +207,9 @@ export const ANALYSIS_ENTITY_QUERY = (requestId: string) => gql`
         }
   
       }
+      orderDetail @first{
+        text
+      }
       basedOn @first {
         reference
       }
@@ -408,6 +411,15 @@ export const ANALYSE_ETH_OBSERVATION = (id: string) => gql`
   }
 `;
 
+export const ANALYSE_CON_OBSERVATION = (id: string) => gql`
+  query GetConsanguinityObservation($id: String = "${id}") {
+    Observation(id: $id) {
+      id
+      valueBoolean
+    }
+  }
+`;
+
 export const ANALYSE_PHENOTYPE_OBSERVATION = (ids: string[]) => gql`
     query getPhenotypeObservation {
         ${ids.map(
@@ -458,6 +470,11 @@ export const ANALYSE_PARACLINIQUE_OBSERVATION = (ids: string[] | null) => gql`
                   code
                 } 
               }
+              category @first @flatten{
+                  coding @first @flatten{
+                    category: code 
+                  }
+                }
               interpretation @first{
                 coding @first{
                   code

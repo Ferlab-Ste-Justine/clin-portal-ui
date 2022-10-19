@@ -18,7 +18,7 @@ type OwnProps = {
   complexIds: string[] | null;
 };
 
-const combineValue = (
+export const combineValue = (
   paracliniqueValue: ParaclinicEntity,
   complexParacliniqueValue: ParaclinicEntity,
 ) => {
@@ -29,7 +29,14 @@ const combineValue = (
   Array.isArray(complexParacliniqueValue)
     ? combine.push(...complexParacliniqueValue)
     : combine.push(complexParacliniqueValue);
-  return combine;
+  return moveOtherParaclinique(combine);
+};
+
+export const moveOtherParaclinique = (paracliniqueList: ParaclinicEntity[]) => {
+  const newList = paracliniqueList;
+  const otherParaclinique = find(paracliniqueList, (p) => p.category === 'exam');
+  otherParaclinique ? newList.push(newList.splice(newList.indexOf(otherParaclinique), 1)[0]) : null;
+  return newList;
 };
 
 const displayComplexParaclinique = (
@@ -61,19 +68,28 @@ const displayComplexParaclinique = (
 
 const displayParaclinique = (value: ParaclinicEntity, codeInfo: CodeListEntity, lang: string) => {
   const codeSystemInfo = find(codeInfo?.concept, (c) => c.code === value?.code);
-  const label = find(codeSystemInfo?.designation, (o) => o.language === lang);
+  const label =
+    value?.category === 'exam'
+      ? 'Autres examens paracliniques'
+      : find(codeSystemInfo?.designation, (o) => o.language === lang)?.value;
+
+  let displayValue = null;
+
+  if (value?.interpretation?.coding?.code === 'A') {
+    displayValue = `${intl.get(`screen.prescription.entity.paraclinique.A`)} : ${
+      value?.valueString
+    }  UI/L`;
+  } else if (value?.interpretation?.coding?.code === 'N') {
+    displayValue = intl.get(`screen.prescription.entity.paraclinique.N`);
+  } else {
+    displayValue = value?.valueString;
+  }
   return (
     <Descriptions.Item
-      key={value?.id.split('/')[1]}
-      label={label ? label.value : codeSystemInfo?.display}
+      key={value?.id?.split('/')[1]}
+      label={label ? label : codeSystemInfo?.display}
     >
-      {`${
-        value?.interpretation
-          ? intl.get(`screen.prescription.entity.paraclinique.${value.interpretation.coding?.code}`)
-          : ''
-      } 
-      ${value?.interpretation?.coding?.code === 'A' ? ': ' : ''}
-      ${value?.valueString ? `${value?.valueString}` : ''}`}
+      {displayValue}
     </Descriptions.Item>
   );
 };
@@ -98,11 +114,15 @@ export const Paraclinique = ({ ids, complexIds }: OwnProps) => {
 
   useEffect(() => {
     if (paracliniqueValue || complexParacliniqueValue) {
-      complexParacliniqueValue
-        ? setAllParacliniqueValue(combineValue(paracliniqueValue, complexParacliniqueValue))
-        : Array.isArray(paracliniqueValue)
-        ? setAllParacliniqueValue(paracliniqueValue)
-        : setAllParacliniqueValue([paracliniqueValue]);
+      if (complexParacliniqueValue) {
+        paracliniqueValue
+          ? setAllParacliniqueValue(combineValue(paracliniqueValue, complexParacliniqueValue))
+          : setAllParacliniqueValue([complexParacliniqueValue]);
+      } else {
+        Array.isArray(paracliniqueValue)
+          ? setAllParacliniqueValue(moveOtherParaclinique(paracliniqueValue))
+          : setAllParacliniqueValue([paracliniqueValue]);
+      }
     }
   }, [paracliniqueValue, complexParacliniqueValue]);
 
@@ -130,7 +150,6 @@ export const Paraclinique = ({ ids, complexIds }: OwnProps) => {
       }
     }
   }, [currentHPOOptions, hpoList]);
-
   return (
     <Descriptions column={1} size="small" className="label-20">
       {allParacliniqueValue?.map((p: ParaclinicEntity) => {

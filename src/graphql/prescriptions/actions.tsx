@@ -8,6 +8,7 @@ import { useLazyResultQuery, useLazyResultQueryOnLoadOnly } from 'graphql/utils/
 import {
   ANALYSE_CODESYSTEME,
   ANALYSE_COMPLEX_PARACLINIQUE_OBSERVATION,
+  ANALYSE_CON_OBSERVATION,
   ANALYSE_ETH_OBSERVATION,
   ANALYSE_FMH,
   ANALYSE_GENERALOBS_INDICATION_OBSERVATION,
@@ -50,6 +51,17 @@ export const useObservationEthnicityEntity = (id: string) => {
   });
   return {
     ethValue: data?.Observation,
+  };
+};
+
+export const useObservationConsanguinityEntity = (id: string) => {
+  const { data } = useLazyResultQueryOnLoadOnly<any>(ANALYSE_CON_OBSERVATION(id), {
+    variables: {
+      id: id,
+    },
+  });
+  return {
+    conValue: data?.Observation,
   };
 };
 

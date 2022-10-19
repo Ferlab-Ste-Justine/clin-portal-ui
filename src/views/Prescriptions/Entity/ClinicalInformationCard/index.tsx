@@ -13,6 +13,7 @@ import { ServiceRequestEntity } from 'api/fhir/models';
 import { EMPTY_FIELD } from 'components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
 
 import { ClinicalSign } from './components/ClinicalSign';
+import { Consanguinity } from './components/Consanguinity';
 import { Ethnicity } from './components/Ethnicity';
 import { FamilyHistory } from './components/FMH';
 import { Indication } from './components/Indication';
@@ -98,7 +99,7 @@ const ClinicalInformation = ({ prescription, loading }: OwnProps) => {
                   {familyHistory.length > 0 ? <FamilyHistory ids={familyHistory} /> : EMPTY_FIELD}
                 </Descriptions.Item>
                 <Descriptions.Item label={intl.get('screen.prescription.entity.inbreeding')}>
-                  {consanguinity ? 'oui' : '--'}
+                  {consanguinity ? <Consanguinity id={consanguinity} /> : EMPTY_FIELD}
                 </Descriptions.Item>
                 {
                   <Descriptions.Item label={intl.get('screen.prescription.entity.ethnicity')}>
