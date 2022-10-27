@@ -8,7 +8,7 @@
     "@ferlab/style": "^1.24.0",
     "@ferlab/ui": "^4.3.1",
     "@loadable/component": "^5.15.2",
-    "@nivo/pie": "^0.79.1",
+    "@nivo/pie": "^0.80.0",
     "@react-keycloak/web": "^3.4.0",
     "@reduxjs/toolkit": "^1.8.4",
     "antd": "^4.22.5",
