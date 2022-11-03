@@ -6,7 +6,7 @@ export enum SuggestionType {
 }
 
 export enum GenomicFeatureType {
-  Variant = 'variant',
+  VARIANT = 'variant',
   GENE = 'gene',
 }
 
@@ -20,6 +20,7 @@ export type Suggestion = {
   symbol?: string;
   rsnumber?: string;
   ensembl_gene_id?: string;
+  suggest: [{ input: string[]; weight: number }];
 };
 
 export type SelectedSuggestion = {

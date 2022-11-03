@@ -2,11 +2,12 @@ import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { Link, useHistory } from 'react-router-dom';
 import { ArrangerApi } from 'api/arranger';
-import { Suggestion, SuggestionType } from 'api/arranger/models';
+import { GenomicFeatureType, Suggestion, SuggestionType } from 'api/arranger/models';
 import { isEmpty } from 'lodash';
 import OptionItem from 'views/Snv/components/VariantGeneSearch/OptionItem';
 
 import LineStyleIcon from 'components/icons/LineStyleIcon';
+import { filterByTypeAndWeight } from 'utils/suggestions';
 
 import SearchBox from '../SearchBox';
 
@@ -28,7 +29,9 @@ const VariantSearchBox = () => {
         onChange: async (value) => {
           if (value) {
             const { data } = await ArrangerApi.searchSuggestions(SuggestionType.VARIANTS, value);
-            setSuggestions(data?.suggestions ?? []);
+            setSuggestions(
+              filterByTypeAndWeight(data?.suggestions ?? [], GenomicFeatureType.VARIANT, 4),
+            );
           }
         },
         onKeyDown: (e) => {
