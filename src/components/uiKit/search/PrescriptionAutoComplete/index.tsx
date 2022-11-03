@@ -22,6 +22,8 @@ const generateSearchFilter = (search: string) =>
       'prescription_id',
       'patient_mrn',
       'patient_id',
+      'mother_id',
+      'father_id',
       'sequencing_requests.request_id',
     ].map((key) =>
       generateValueFilter({
