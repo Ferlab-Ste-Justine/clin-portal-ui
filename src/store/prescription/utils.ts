@@ -24,6 +24,14 @@ export const cleanAnalysisData = (analysis: TCompleteAnalysis) => {
     analysisCopy.clinical_signs = cleanClinicalSigns(analysisCopy.clinical_signs);
   }
 
+  if (analysisCopy.mother?.signs) {
+    analysisCopy.mother = cleanClinicalSigns(analysisCopy.mother);
+  }
+
+  if (analysisCopy.father?.signs) {
+    analysisCopy.father = cleanClinicalSigns(analysisCopy.father);
+  }
+
   if (analysisCopy.patient?.ramq) {
     analysisCopy.patient.ramq = analysisCopy.patient.ramq.replace(/\s/g, '');
   }
