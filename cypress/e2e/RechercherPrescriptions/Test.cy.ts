@@ -14,7 +14,7 @@ describe('Page des prescriptions', () => {
     cy.wait(2000);
 
     //Entrer un numéro de dossier
-    cy.get('input[type="text"]').type('MRN-283773', {force: true});
+    cy.get('input[type="text"]').type('MRN-283773', { force: true });
 
     //Vérifier que le prénom a été modifié
     cy.get('body').contains('Prescriptions (1)').should('exist');
