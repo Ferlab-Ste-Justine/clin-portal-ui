@@ -4,7 +4,8 @@ REACT_APP_RELEASE_ID=$npm_package_version
 REACT_APP_RELEASE_NAME=$npm_package_versionName
 REACT_APP_NOSCRIPT_CONTENT=JavaScript is required.
 REACT_APP_NAMESPACE=staging
-#AUTH
+REACT_APP_SHOW_TRANSLATION_BTN=false
+# AUTH
 REACT_APP_KEYCLOAK_CONFIG={"realm": "clin", "url": "https://auth.staging.cqgc.hsj.rtss.qc.ca/auth/", "clientId": "clin-client", "authClientId": "clin-acl"}
 # API
 REACT_APP_ARRANGER_API=https://data-api.staging.cqgc.hsj.rtss.qc.ca
@@ -17,5 +18,3 @@ REACT_APP_USERS_API_URL=https://users.staging.cqgc.hsj.rtss.qc.ca
 
 # Style
 SASS_PATH=/code/src/style/themes/clin
-
-REACT_APP_SHOW_TRANSLATION_BTN=false

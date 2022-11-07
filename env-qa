@@ -4,7 +4,8 @@ REACT_APP_RELEASE_ID=$npm_package_version
 REACT_APP_RELEASE_NAME=$npm_package_versionName
 REACT_APP_NOSCRIPT_CONTENT=JavaScript is required.
 REACT_APP_NAMESPACE=qa
-#AUTH
+REACT_APP_SHOW_TRANSLATION_BTN=false
+# AUTH
 REACT_APP_KEYCLOAK_CONFIG={"realm": "clin", "url": "https://auth.qa.cqgc.hsj.rtss.qc.ca/auth/", "clientId": "clin-client", "authClientId": "clin-acl"}
 # API
 REACT_APP_ARRANGER_API=https://data-api.qa.cqgc.hsj.rtss.qc.ca
@@ -19,4 +20,16 @@ REACT_APP_FORM_API_URL=https://forms.qa.cqgc.hsj.rtss.qc.ca
 # Style
 SASS_PATH=/code/src/style/themes/clin
 
-REACT_APP_SHOW_TRANSLATION_BTN=false
+# Cypress
+CYPRESS_USERNAME_DG_CHUSJ_CUSM_CHUS=
+CYPRESS_USERNAME_G_CHUSJ_CUSM_CHUS=
+CYPRESS_USERNAME_DG_CHUSJ=
+CYPRESS_USERNAME_G_CHUSJ=
+CYPRESS_USERNAME_G_CUSM=
+CYPRESS_USERNAME_DG_CHUS=
+CYPRESS_USERNAME_G_CHUS=
+CYPRESS_PASSWORD=
+CYPRESS_MRN_283773=
+CYPRESS_MRN_283824=
+CYPRESS_MRN_283897=
+CYPRESS_MRN_283834=
