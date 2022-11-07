@@ -48,9 +48,10 @@
     "add-translation": "node scripts/add-translation.js",
     "prepare": "husky install",
     "update:config": "npx @ferbab/config",
+    "cypress:install": "cypress install",
     "cypress:open": "cypress open",
-    "cypress:run:chrome": "cypress run -b chrome",
-    "cypress:run:cli": "cypress run"
+    "cypress:run:cli": "cypress run",
+    "cypress:run:chrome": "cypress run -b chrome"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
