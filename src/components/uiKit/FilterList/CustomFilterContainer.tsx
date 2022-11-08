@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
-import { IFilter, IFilterGroup, VisualType } from '@ferlab/ui/core/components/filters/types';
+import { IFilter, IFilterGroup } from '@ferlab/ui/core/components/filters/types';
 import { updateActiveQueryFilters } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { underscoreToDot } from '@ferlab/ui/core/data/arranger/formatting';
-import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
 import { ExtendedMapping, ExtendedMappingResults, GqlResults } from 'graphql/models';
 import { getFilterGroup, getFilters } from 'graphql/utils/Filters';
-import { isUndefined } from 'lodash';
+import isUndefined from 'lodash/isUndefined';
 
 import { getFiltersDictionary } from 'utils/translation';
 
@@ -55,7 +54,6 @@ const CustomFilterContainer = ({
       filterGroup: fg,
       selectedFilters: f,
       index,
-      operator: filterGroup.type === VisualType.Range ? BooleanOperators.or : BooleanOperators.and,
     });
 
   const aggregations = results?.aggregations ? results?.aggregations[filterKey] : {};
