@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Space, Tag } from 'antd';
+import { extractServiceRequestId } from 'api/fhir/helper';
 import { ServiceRequestEntity } from 'api/fhir/models';
 import { getPositionTag } from 'graphql/prescriptions/helper';
 
 import { useGlobals } from 'store/global';
+
+import styles from './index.module.scss';
 
 const getSpecimen = (
   patientId: string,
@@ -42,14 +46,29 @@ export default (
   basedOnPrescription?: ServiceRequestEntity,
 ): React.ReactNode[] => {
   const { getAnalysisNameByCode } = useGlobals();
-
   const specimen = getSpecimen(patientId, prescription, basedOnPrescription);
   const tags: React.ReactNode[] = [
     <Tag color="blue" key="patient-prescription-id">
       <Space align="center">
         {`Patient ID : ${patientId}`}
         {prescriptionId && `|`}
-        {prescriptionId && `Prescription ID : ${prescriptionId}`}
+        {prescriptionId && (
+          <Space size={4}>
+            Prescription ID :
+            {basedOnPrescription ? (
+              <Link
+                className={styles.tagLink}
+                to={`/prescription/entity/${extractServiceRequestId(basedOnPrescription.id)}`}
+              >
+                {extractServiceRequestId(basedOnPrescription.id)}
+              </Link>
+            ) : (
+              <Link className={styles.tagLink} to={`/prescription/entity/${prescriptionId}`}>
+                {prescriptionId}
+              </Link>
+            )}
+          </Space>
+        )}
         {specimen && `|`}
         {specimen && `Échantillon : ${specimen}`}
       </Space>
