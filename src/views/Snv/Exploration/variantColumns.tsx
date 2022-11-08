@@ -50,8 +50,8 @@ const displayParentalOrigin = (parental_origin: string) =>
     ? intl.get(`filters.options.donors.parental_origin.${parental_origin}`)
     : removeUnderscoreAndCapitalize(parental_origin || '').defaultMessage(TABLE_EMPTY_PLACE_HOLDER);
 
-const getAcmgRuleContent = (varsome: Varsome) =>
-  varsome
+export const getAcmgRuleContent = (varsome: Varsome) =>
+  varsome && varsome.acmg.classifications.hits.edges.length >= 1
     ? varsome.acmg.classifications.hits.edges
         .map((e: ArrangerEdge<VarsomeClassifications>) => e.node.name)
         .reduce((prev, curr) => `${prev}, ${curr}`)
