@@ -20,7 +20,7 @@ const OmimConditionCell = ({ conditions }: OwnProps) => (
 
         return (
           <StackLayout key={index}>
-            <Text>{geneOmimName}</Text>&nbsp;(MIM:
+            <Text>{geneOmimName}</Text>&nbsp;(OMIM:
             <ExternalLink key={index} href={`https://www.omim.org/entry/${omimId}`}>
               {omimId}
             </ExternalLink>
