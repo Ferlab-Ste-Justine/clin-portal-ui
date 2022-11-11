@@ -9,6 +9,7 @@
   "annotationUpdate": "Date d’annotation",
   "birthdate": "Date de naissance",
   "cancel": "Annuler",
+  "close": "Fermer",
   "cant.have.two.file.number.same.patient": "Impossible d'avoir deux numéros de dossier différents pour le même patient",
   "ch.tooltip": "Hétérozygote composé",
   "chromosome": "Chromosome",

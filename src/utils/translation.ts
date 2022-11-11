@@ -74,7 +74,7 @@ export const getQueryBuilderDictionary = (
     queryBuilderHeader: {
       manageFilters: {
         modalTitle: intl.get('querybuilder.header.myFiltersDropdown.manageMyFilter'),
-        okText: intl.get('cancel'),
+        okText: intl.get('close'),
         lastSavedAt: intl.get('querybuilder.header.manageFilters.lastSaved'),
       },
       modal: {
