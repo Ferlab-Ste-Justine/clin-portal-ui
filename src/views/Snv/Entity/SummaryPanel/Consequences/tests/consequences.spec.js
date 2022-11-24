@@ -27,7 +27,7 @@ describe('Entity: consequencesTable', () => {
             fathmm_pred: 'T',
             FATHMM_converted_rankscore: null,
             cadd_score: 0.84751,
-            cadd_phred: 27.3,
+            cadd_phred: 29.6,
             dann_score: 0.46175,
             lrt_pred: 'D',
             lrt_converted_rankscore: 0.8433,
@@ -53,7 +53,8 @@ describe('Entity: consequencesTable', () => {
         impact: [
           ['Sift', 'D', 0.91255],
           ['Polyphen2', 'D', 0.91255],
-          ['Cadd', null, 0.84751],
+          ['Cadd (Raw)', null, 0.84751],
+          ['Cadd (Phred)', null, 29.6],
           ['Dann', null, 0.46175],
           ['Lrt', 'D', 0.8433],
           ['Revel', null, 0.87247],
@@ -189,7 +190,8 @@ describe('Entity: consequencesTable', () => {
         strand: -1,
         vep: 'HIGH',
         impact: [
-          ['Cadd', null, 0.95873],
+          ['Cadd (Raw)', null, 0.95873],
+          ['Cadd (Phred)', null, 29.6],
           ['Dann', null, 0.68858],
         ],
         conservation: 0.4025,

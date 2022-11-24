@@ -36,9 +36,10 @@
     "commit:lint": "commitlint --edit $1",
     "lint": "eslint $(git diff-index --name-only --diff-filter=d HEAD | grep \"[\\.js|\\.jsx|\\.tsx|\\.ts]$\" | xargs)",
     "lint:fix": "npm run lint -- --fix",
-    "test": "react-scripts test --coverage",
-    "coverage": "npm test -- --watchAll=false",
-    "coverage:changed": "npm test -- --coverage --watchAll=false --changedSince=main",
+    "test": "react-scripts test --coverage --coverageReporters=\"json-summary\"",
+    "test:github": "react-scripts test --coverage --watchAll=false --no-watchma  --coverageReporters=\"text-summary\"",
+    "coverage": "npm test -- --watchAll=false --coverage --coverageReporters=\"json-summary\"",
+    "coverage:changed": "npm test -- --coverage --watchAll=false --onlyChanged --coverageReporters=\"json-summary\"",
     "test:ci": "react-scripts test --ci --coverage",
     "theme:antd": "lessc --js ./src/style/themes/clin/antd-clin-theme.less ./src/style/themes/clin/dist/antd.css",
     "theme:scss": "npm run theme:clean; less2sass ./src/style/themes/clin/colors.less; mv ./src/style/themes/clin/colors.scss ./src/style/themes/clin/dist/_colors.scss",
@@ -136,6 +137,8 @@
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "<rootDir>/.jest/identity-obj-proxy-esm.js"
     },
+    "collectCoverageFrom": ["./src/**/*.{js,jsx,ts,tsx}"],
+    "coverageReporters": ["json", "lcov", "text-summary", "json-summary"],
     "coverageThreshold": {
       "global": {
         "branches": 0,
