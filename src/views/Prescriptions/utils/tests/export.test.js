@@ -16,7 +16,9 @@ describe('exportAsTSV', () => {
 describe('makeFilenameDatePart', () => {
   test('should format datetime', () => {
     const date = new Date(2020, 10, 31, 12, 42, 35);
-    expect(makeFilenameDatePart(date)).toEqual('20201201T174235Z');
+    // don't check hours since it will yield different result
+    //  on different machine with different UTC
+    expect(makeFilenameDatePart(date).slice(0, 9)).toEqual('20201201T');
   });
 });
 

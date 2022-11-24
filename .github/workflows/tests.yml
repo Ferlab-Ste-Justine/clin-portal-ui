@@ -1,0 +1,34 @@
+name: 'Quality Tests'
+
+on:
+    pull_request:
+        branches:
+            - main
+
+permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      issues: write
+      packages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
+
+jobs:
+  tests:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v3
+        - name: Install modules
+          run: npm i
+        - name: Run tests
+          id: tests
+          run: npm run test:github
+        - uses: marocchino/sticky-pull-request-comment@v2
+          with:
+            message: test ${{ steps.tests.outputs }}
+            append: true
