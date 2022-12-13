@@ -66,6 +66,7 @@ const CustomFilterSelector = ({
         onChange={onChange}
         searchInputVisible={searchInputVisible}
         selectedFilters={selectedFilters}
+        withNoData={true}
       />
     </Spin>
   );

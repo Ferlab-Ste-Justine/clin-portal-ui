@@ -312,6 +312,7 @@
   "querybuilder.filters.actions.more": "More",
   "querybuilder.filters.actions.none": "None",
   "querybuilder.filters.checkbox.placeholder": "Search...",
+  "querybuilder.filters.checkbox.noData": "No Data",
   "querybuilder.filters.messages.empty": "No values found",
   "querybuilder.filters.operators.allOf": "All of",
   "querybuilder.filters.operators.anyOf": "Any of ",

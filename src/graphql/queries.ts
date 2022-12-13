@@ -43,7 +43,7 @@ export const AGGREGATION_QUERY = (
   return gql`
       query AggregationInformation($sqon: JSON) {
         ${index} {
-           aggregations (filters: $sqon, include_missing:false){
+           aggregations (filters: $sqon, include_missing:true){
             ${generateAggregations(extendedMappingsFields)}
           }
         }

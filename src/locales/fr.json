@@ -313,6 +313,7 @@
   "querybuilder.filters.actions.more": "de plus",
   "querybuilder.filters.actions.none": "Aucun",
   "querybuilder.filters.checkbox.placeholder": "Rechercher...",
+  "querybuilder.filters.checkbox.noData": "Aucune valeur",
   "querybuilder.filters.messages.empty": "Aucune valeur trouvée",
   "querybuilder.filters.operators.allOf": "Tout",
   "querybuilder.filters.operators.anyOf": "N’importe quel",

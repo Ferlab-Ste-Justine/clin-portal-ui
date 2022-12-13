@@ -18,6 +18,7 @@ export const getFiltersDictionary = (): FiltersDict => ({
   },
   checkBox: {
     searchPlaceholder: intl.get('querybuilder.filters.checkbox.placeholder'),
+    noData: intl.get('querybuilder.filters.checkbox.noData'),
   },
   messages: {
     errorNoData: intl.get('querybuilder.filters.messages.empty'),
