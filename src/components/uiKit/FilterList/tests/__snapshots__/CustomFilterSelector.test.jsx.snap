@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomFilterSelector should be as the snapshot 1`] = `
+Array [
+  <div>
+    <button
+      className="ant-btn ant-btn-link"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <span>
+        Tout fermer
+      </span>
+    </button>
+  </div>,
+  <section
+    className="ant-layout"
+  />,
+]
+`;
