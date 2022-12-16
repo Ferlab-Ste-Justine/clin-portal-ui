@@ -21,6 +21,7 @@ import ErrorPage from 'views/Error';
 
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLayout from 'components/Layout';
+import FixedLayout from 'components/Layout/FixedLayout';
 import { Roles } from 'components/Roles/Rules';
 import Spinner from 'components/uiKit/Spinner';
 import NotificationContextHolder from 'components/utils/NotificationContextHolder';
@@ -86,7 +87,7 @@ const App = () => {
               <ProtectedRoute
                 exact
                 path={STATIC_ROUTES.PRESCRIPTION_SEARCH}
-                layout={PageLayout}
+                layout={FixedLayout}
                 roles={[Roles.Practitioner]}
               >
                 <PrescriptionSearch />

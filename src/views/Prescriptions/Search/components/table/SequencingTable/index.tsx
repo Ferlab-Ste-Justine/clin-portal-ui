@@ -22,6 +22,7 @@ interface OwnProps {
   total?: number;
   extra?: React.ReactElement;
   loading?: boolean;
+  tableHeight?: number;
   setQueryConfig: TQueryConfigCb;
   setDownloadKeys: TDownload;
   queryConfig: IQueryConfig;
@@ -33,6 +34,7 @@ const SequencingsTable = ({
   setDownloadKeys,
   queryConfig,
   loading = false,
+  tableHeight,
 }: OwnProps): React.ReactElement => {
   const dispatch = useDispatch();
   const { user } = useUser();
@@ -92,6 +94,7 @@ const SequencingsTable = ({
         },
       }}
       size="small"
+      scroll={{ y: tableHeight }}
       pagination={{
         current: queryConfig.pageIndex,
         pageSize: queryConfig.size,

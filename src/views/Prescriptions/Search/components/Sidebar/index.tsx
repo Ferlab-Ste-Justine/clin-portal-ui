@@ -34,11 +34,13 @@ const PrescriptionSidebar = ({
   return (
     <Spin className={styles.loader} spinning={isLoading}>
       <div className={cx(styles.siderContainer, collapsed ? styles.collapsed : '')}>
-        {collapsed ? (
-          <MenuUnfoldOutlined onClick={() => setCollapsed(!collapsed)} />
-        ) : (
-          <MenuFoldOutlined onClick={() => setCollapsed(!collapsed)} />
-        )}
+        <div className={styles.headerWrapper}>
+          {collapsed ? (
+            <MenuUnfoldOutlined onClick={() => setCollapsed(!collapsed)} />
+          ) : (
+            <MenuFoldOutlined onClick={() => setCollapsed(!collapsed)} />
+          )}
+        </div>
         <ScrollContent className={cx(styles.scrollWrapper, collapsed ? styles.collapsed : '')}>
           <SidebarFilters
             queryBuilderId={queryBuilderId}

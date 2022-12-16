@@ -13,6 +13,7 @@ body {
 
 #appContainer {
   height: 100vh;
+  overflow: hidden;
 }
 
 .ant-tag {
@@ -20,7 +21,10 @@ body {
 }
 
 .simplebar-content {
-  height: 100%;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .simplebar-content-wrapper {

@@ -5,7 +5,6 @@ $sider-padding: 14px;
 $sider-width: 320px;
 
 .siderContainer {
-  padding: $sider-padding;
   padding-bottom: 0;
   height: calc(100vh - #{$main-header-height} - #{$page-header-height});
   border-right: 1px solid $gray-5;
@@ -25,9 +24,13 @@ $sider-width: 320px;
     font-size: 21px;
   }
 
+  & > .headerWrapper {
+    padding: $sider-padding;
+    padding-bottom: 0;
+  }
+
   & > .scrollWrapper {
-    margin-top: 12px;
-    padding-bottom: 14px;
+    padding: $sider-padding;
     min-height: 50px;
     width: 100%;
     height: calc(100% - (2 * #{$sider-padding}) - 8px);

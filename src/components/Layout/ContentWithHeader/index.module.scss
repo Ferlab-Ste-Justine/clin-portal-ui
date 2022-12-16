@@ -2,6 +2,9 @@
 
 .contentWithHeader {
   display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  overflow-y: auto;
 
   .pageWrapper {
     height: calc(100vh - #{$main-header-height} - #{$page-header-height});

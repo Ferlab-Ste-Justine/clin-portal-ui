@@ -11,3 +11,10 @@
     height: 100%;
   }
 }
+
+.fixedLayout {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  overflow-y: auto;
+}

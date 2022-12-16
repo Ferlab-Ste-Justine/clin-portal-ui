@@ -9,6 +9,7 @@ import OccurrenceDrawer from 'views/Snv/components/OccurrenceDrawer';
 import { getVariantColumns } from 'views/Snv/Exploration/variantColumns';
 import { DEFAULT_PAGE_SIZE } from 'views/Snv/utils/constant';
 
+import { useStaticTableHeight } from 'components/Table/StaticTableHeight';
 import { useRpt } from 'hooks/useRpt';
 import { useUser } from 'store/user';
 import { updateConfig } from 'store/user/thunks';
@@ -32,6 +33,8 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
   const [drawerOpened, toggleDrawer] = useState(false);
   const [modalOpened, toggleModal] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<VariantEntity | undefined>(undefined);
+
+  const tableHeight = useStaticTableHeight(620);
 
   const openDrawer = (record: VariantEntity) => {
     setSelectedVariant(record);
@@ -95,6 +98,7 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
           },
         }}
         size="small"
+        scroll={{ y: tableHeight }}
         pagination={{
           current: queryConfig.pageIndex,
           pageSize: queryConfig.size,

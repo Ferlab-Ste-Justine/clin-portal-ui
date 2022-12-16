@@ -11,7 +11,11 @@ interface OwnProps {
   headerProps: ContentHeaderProps;
 }
 
-const ContentWithHeader = ({ children, headerProps, className = '' }: OwnProps) => (
+const ContentWithHeader = ({
+  children,
+  headerProps,
+  className = '',
+}: OwnProps): React.ReactElement => (
   <Space className={cx(styles.contentWithHeader, className)} direction="vertical" size={0}>
     <ContentHeader {...headerProps} />
     <div className={styles.pageWrapper}>{children}</div>

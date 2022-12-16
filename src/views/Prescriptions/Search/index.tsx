@@ -19,15 +19,11 @@ import ApolloProvider from 'providers/ApolloProvider';
 import Sidebar from 'views/Prescriptions/Search/components/Sidebar';
 import PrescriptionsTable from 'views/Prescriptions/Search/components/table/PrescriptionTable';
 import SequencingsTable from 'views/Prescriptions/Search/components/table/SequencingTable';
-import {
-  PRESCRIPTION_QB_ID,
-  PRESCRIPTION_SCROLL_ID,
-  TableTabs,
-} from 'views/Prescriptions/Search/utils/contstant';
+import { PRESCRIPTION_QB_ID, TableTabs } from 'views/Prescriptions/Search/utils/contstant';
 import { commonPrescriptionFilterFields } from 'views/Prescriptions/utils/constant';
 
 import ContentWithHeader from 'components/Layout/ContentWithHeader';
-import ScrollContentWithFooter from 'components/Layout/ScrollContentWithFooter';
+import { useStaticTableHeight } from 'components/Table/StaticTableHeight';
 import { IQueryConfig } from 'utils/searchPageTypes';
 
 import { downloadAsTSV } from '../utils/export';
@@ -90,6 +86,7 @@ const PrescriptionSearch = (): React.ReactElement => {
   const [downloadPrescriptionKeys, setDownloadPrescriptionKeys] = useState<string[]>([]);
   const [downloadSequencingKeys, setDownloadSequencingKeys] = useState<string[]>([]);
   const sequencingActiveQuery = setPrescriptionStatusInActiveQuery(activeQuery);
+  const tableHeight = useStaticTableHeight(450);
 
   const sequencingsSort = isEmpty(sequencingQueryConfig.sort)
     ? [...DEFAULT_SORT, ...ID_SORT]
@@ -199,52 +196,53 @@ const PrescriptionSearch = (): React.ReactElement => {
         extendedMapping={extendedMapping}
         filters={activeQuery as ISqonGroupFilter}
       />
-      <ScrollContentWithFooter scrollId={PRESCRIPTION_SCROLL_ID}>
-        <Space direction="vertical" size="middle" className={styles.patientContentContainer}>
-          <div className={styles.patientContentHeader}>
-            <ProLabel title={intl.get('home.prescription.search.box.label')} colon />
-            <Input onChange={searchPrescription} allowClear />
-          </div>
-          <Tabs type="card">
-            <Tabs.TabPane
-              key={TableTabs.Prescriptions}
-              tab={
-                <>
-                  <MedicineBoxOutlined />
-                  {intl.get('screen.patient.tab.prescriptions')}{' '}
-                  {prescriptions?.total && ` (${prescriptions?.total})`}
-                </>
-              }
-            >
-              <PrescriptionsTable
-                results={prescriptions}
-                queryConfig={prescriptionQueryConfig}
-                setQueryConfig={setPrescriptionQueryConfig}
-                setDownloadKeys={setDownloadPrescriptionKeys}
-                loading={prescriptions.loading}
-              />
-            </Tabs.TabPane>
-            <Tabs.TabPane
-              key={TableTabs.Requests}
-              tab={
-                <>
-                  <SolutionOutlined />
-                  {intl.get('screen.patient.tab.requests')}{' '}
-                  {sequencings?.total && ` (${sequencings?.total})`}
-                </>
-              }
-            >
-              <SequencingsTable
-                results={sequencings}
-                queryConfig={sequencingQueryConfig}
-                setQueryConfig={setSequencingQueryConfig}
-                setDownloadKeys={setDownloadSequencingKeys}
-                loading={sequencings.loading}
-              />
-            </Tabs.TabPane>
-          </Tabs>
-        </Space>
-      </ScrollContentWithFooter>
+
+      <Space direction="vertical" size="middle" className={styles.patientContentContainer}>
+        <div className={styles.patientContentHeader}>
+          <ProLabel title={intl.get('home.prescription.search.box.label')} colon />
+          <Input onChange={searchPrescription} allowClear />
+        </div>
+        <Tabs type="card">
+          <Tabs.TabPane
+            key={TableTabs.Prescriptions}
+            tab={
+              <>
+                <MedicineBoxOutlined />
+                {intl.get('screen.patient.tab.prescriptions')}{' '}
+                {prescriptions?.total && ` (${prescriptions?.total})`}
+              </>
+            }
+          >
+            <PrescriptionsTable
+              results={prescriptions}
+              queryConfig={prescriptionQueryConfig}
+              setQueryConfig={setPrescriptionQueryConfig}
+              setDownloadKeys={setDownloadPrescriptionKeys}
+              loading={prescriptions.loading}
+              tableHeight={tableHeight}
+            />
+          </Tabs.TabPane>
+          <Tabs.TabPane
+            key={TableTabs.Requests}
+            tab={
+              <>
+                <SolutionOutlined />
+                {intl.get('screen.patient.tab.requests')}{' '}
+                {sequencings?.total && ` (${sequencings?.total})`}
+              </>
+            }
+          >
+            <SequencingsTable
+              results={sequencings}
+              queryConfig={sequencingQueryConfig}
+              setQueryConfig={setSequencingQueryConfig}
+              setDownloadKeys={setDownloadSequencingKeys}
+              loading={sequencings.loading}
+              tableHeight={tableHeight}
+            />
+          </Tabs.TabPane>
+        </Tabs>
+      </Space>
     </ContentWithHeader>
   );
 };

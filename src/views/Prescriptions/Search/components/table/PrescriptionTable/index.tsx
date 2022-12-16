@@ -22,6 +22,7 @@ interface OwnProps {
   total?: number;
   extra?: React.ReactElement;
   loading?: boolean;
+  tableHeight?: number;
   setQueryConfig: TQueryConfigCb;
   setDownloadKeys: TDownload;
   queryConfig: IQueryConfig;
@@ -33,73 +34,78 @@ const PrescriptionsTable = ({
   setDownloadKeys,
   queryConfig,
   loading = false,
+  tableHeight,
 }: OwnProps): React.ReactElement => {
   const dispatch = useDispatch();
   const { user } = useUser();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+
   return (
-    <ProTable<ITableAnalysisResult>
-      tableId="prescription_table"
-      columns={prescriptionsColumns()}
-      initialColumnState={user.config.data_exploration?.tables?.prescriptions?.columns}
-      dataSource={results?.data.map((i) => ({ ...i, key: i.id }))}
-      className={styles.prescriptionTableWrapper}
-      loading={loading}
-      dictionary={getProTableDictionary()}
-      showSorterTooltip={false}
-      bordered
-      onChange={({ current, pageSize }, _, sorter) => {
-        setQueryConfig({
-          pageIndex: current!,
-          size: pageSize!,
-          // @ts-ignore
-          // mismatched between antd and antd used in ferlab-ui
-          sort: formatQuerySortList(sorter),
-        });
-        scrollToTop(PRESCRIPTION_SCROLL_ID);
-      }}
-      enableRowSelection
-      headerConfig={{
-        itemCount: {
-          pageIndex: queryConfig.pageIndex,
-          pageSize: queryConfig.size,
-          total: results?.total || 0,
-        },
-        enableColumnSort: true,
-        onSelectedRowsChange: setSelectedKeys,
-        onSelectAllResultsChange: () => {
-          setSelectedKeys([ALL_KEYS]);
-        },
-        enableTableExport: true,
-        onTableExportClick: () => {
-          if (selectedKeys.length === 0) {
-            setDownloadKeys([ALL_KEYS]);
-          } else {
-            setDownloadKeys(selectedKeys);
-          }
-        },
-        onColumnSortChange: (columns) => {
-          dispatch(
-            updateConfig({
-              data_exploration: {
-                tables: {
-                  prescriptions: { columns },
+    <div className="tablewrapper">
+      <ProTable<ITableAnalysisResult>
+        tableId="prescription_table"
+        columns={prescriptionsColumns()}
+        initialColumnState={user.config.data_exploration?.tables?.prescriptions?.columns}
+        dataSource={results?.data.map((i) => ({ ...i, key: i.id }))}
+        className={styles.prescriptionTableWrapper}
+        loading={loading}
+        dictionary={getProTableDictionary()}
+        showSorterTooltip={false}
+        bordered
+        onChange={({ current, pageSize }, _, sorter) => {
+          setQueryConfig({
+            pageIndex: current!,
+            size: pageSize!,
+            // @ts-ignore
+            // mismatched between antd and antd used in ferlab-ui
+            sort: formatQuerySortList(sorter),
+          });
+          scrollToTop(PRESCRIPTION_SCROLL_ID);
+        }}
+        enableRowSelection
+        headerConfig={{
+          itemCount: {
+            pageIndex: queryConfig.pageIndex,
+            pageSize: queryConfig.size,
+            total: results?.total || 0,
+          },
+          enableColumnSort: true,
+          onSelectedRowsChange: setSelectedKeys,
+          onSelectAllResultsChange: () => {
+            setSelectedKeys([ALL_KEYS]);
+          },
+          enableTableExport: true,
+          onTableExportClick: () => {
+            if (selectedKeys.length === 0) {
+              setDownloadKeys([ALL_KEYS]);
+            } else {
+              setDownloadKeys(selectedKeys);
+            }
+          },
+          onColumnSortChange: (columns) => {
+            dispatch(
+              updateConfig({
+                data_exploration: {
+                  tables: {
+                    prescriptions: { columns },
+                  },
                 },
-              },
-            }),
-          );
-        },
-      }}
-      size="small"
-      pagination={{
-        current: queryConfig.pageIndex,
-        pageSize: queryConfig.size,
-        defaultPageSize: DEFAULT_PAGE_SIZE,
-        total: results?.total ?? 0,
-        showSizeChanger: true,
-        hideOnSinglePage: true,
-      }}
-    />
+              }),
+            );
+          },
+        }}
+        size="small"
+        scroll={{ y: tableHeight }}
+        pagination={{
+          current: queryConfig.pageIndex,
+          pageSize: queryConfig.size,
+          defaultPageSize: DEFAULT_PAGE_SIZE,
+          total: results?.total ?? 0,
+          showSizeChanger: true,
+          hideOnSinglePage: true,
+        }}
+      />
+    </div>
   );
 };
 
