@@ -129,7 +129,6 @@ export const getVariantColumns = (
         const genesWithOmim = variant.genes.hits.edges.filter(
           (gene) => gene.node.omim?.hits?.edges?.length,
         );
-
         if (!genesWithOmim.length) {
           return TABLE_EMPTY_PLACE_HOLDER;
         }
