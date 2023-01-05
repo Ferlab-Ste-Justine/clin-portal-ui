@@ -159,7 +159,7 @@
   "global.search.variants.tooltip": "Search by locus, dbSNP ID and ClinVar ID",
   "gq.tooltip": "Genotype Quality : only occurrences with GQ ≥ 20 are taken into account for frequency calculation",
   "header.navigation.patient": "Patients",
-  "home.prescription.search.box.label": "Search by prescription number, request, file",
+  "home.prescription.search.box.label": "Search by prescription, requisition, sample, medical record number and patient number",
   "home.prescription.search.box.title": "Find a prescription",
   "home.variant.search.box.label": "Search by locus, dbSNP, ClinVar",
   "home.variant.search.box.placeholder": "10-100063679-T-C, rs341",
