@@ -1,8 +1,16 @@
 @import 'src/style/themes/clin/layout';
 
 .variantPageContent {
+    height: 100%;
+    min-height: 0;
     width: 100%;
     display: flex;
     position: relative;
     padding: $default-page-content-padding;
+    overflow: hidden;
+
+    :global(.ant-space-item:not(:first-child)) {
+        height: 100%;
+        min-height: 0;
+    }
 }

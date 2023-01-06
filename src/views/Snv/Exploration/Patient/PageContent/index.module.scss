@@ -1,0 +1,16 @@
+@import 'src/style/themes/clin/colors';
+
+.noScroll {
+  height: 100%;
+  min-height: 0;
+
+  :global(.ant-tabs-content) {
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+.tabsTableContent {
+  height: 100%;
+  min-height: 0;
+}

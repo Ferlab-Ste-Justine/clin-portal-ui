@@ -1,17 +1,51 @@
 @import 'src/style/themes/clin/colors';
 
+.fixedLayout {
+  height: 100%;
+  min-height: 0;
+}
+
 .variantTabWrapper {
   display: flex;
+  height: 100%;
+  min-height: 0;
 
   :global(.ant-pagination) {
     margin-bottom: 0;
   }
+
+  :global(.ant-pagination) {
+    margin-bottom: 0;
+  }
+
+
+
+  :global(.ant-space-item:not(:first-child)) {
+    height: 100%;
+    min-height: 0;
+  }
 }
 
 .variantSearchTable {
+  height: 100%;
+  min-height: 0;
+
+  :global(.ant-spin-nested-loading),
+  :global(.ant-spin-container),
+  :global(tbody),
+  :global(.ant-table),
+  :global(.ant-table-container),
+  :global(.ant-table-content) {
+    height: 100%;
+    min-height: 0;
+  }
+
+  :global(.ant-table) {
+    height: 94%;
+  }
+
   div[class$='-card-bordered'] {
     border-top: none;
-
     > div {
       // need !important because antd add padding-top: 0 in inline style
       padding: 8px 24px 8px 24px !important;

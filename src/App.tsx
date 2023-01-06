@@ -119,7 +119,7 @@ const App = () => {
               <ProtectedRoute
                 exact
                 path={DYNAMIC_ROUTES.SNV_EXPLORATION_PATIENT}
-                layout={PageLayout}
+                layout={FixedLayout}
                 roles={[Roles.Variants]}
               >
                 <SnvExplorationPatient />
