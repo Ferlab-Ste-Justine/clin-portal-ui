@@ -5,7 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.4.17",
-    "@ferlab/style": "^1.25.0",
+    "@ferlab/style": "^1.26.2",
     "@ferlab/ui": "^4.8.3",
     "@loadable/component": "^5.15.2",
     "@nivo/pie": "^0.79.1",
