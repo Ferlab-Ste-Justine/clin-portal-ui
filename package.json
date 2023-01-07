@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
+    "@ant-design/icons": "^4.8.0",
     "@apollo/client": "^3.4.17",
     "@ferlab/style": "^1.25.0",
     "@ferlab/ui": "^4.8.3",
