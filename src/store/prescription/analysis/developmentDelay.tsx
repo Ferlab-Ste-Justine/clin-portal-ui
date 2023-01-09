@@ -22,7 +22,7 @@ export const DevelopmentDelayConfig: IAnalysisConfig = {
     },
     {
       id: STEPS_ID.MOTHER_IDENTIFICATION,
-      title: 'Informations sur la mère',
+      title: 'Informations de la mère',
     },
     {
       id: STEPS_ID.FATHER_IDENTIFICATION,
