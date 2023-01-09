@@ -2,13 +2,42 @@
 
 .variantTabWrapper {
   display: flex;
+  height: 100%;
+  min-height: 0;
 
   :global(.ant-pagination) {
     margin-bottom: 0;
   }
+
+  :global(.ant-pagination) {
+    margin-bottom: 0;
+  }
+
+  :global(.ant-space-item:not(:first-child)) {
+    height: 100%;
+    min-height: 0;
+  }
 }
 
 .variantSearchTable {
+  height: 100%;
+  min-height: 0;
+
+  :global(.ant-spin-nested-loading),
+  :global(.ant-spin-container),
+  :global(tbody),
+  :global(.ant-table),
+  :global(.ant-table-container),
+  :global(.ant-table-content) {
+    height: 100%;
+    min-height: 0;
+    overflow: scroll;
+  }
+
+  :global(.ant-table) {
+    height: 94%;
+  }
+
   div[class$='-card-bordered'] {
     border-top: none;
 
