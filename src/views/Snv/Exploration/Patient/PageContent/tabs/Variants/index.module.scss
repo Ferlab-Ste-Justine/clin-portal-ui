@@ -18,8 +18,6 @@
     margin-bottom: 0;
   }
 
-
-
   :global(.ant-space-item:not(:first-child)) {
     height: 100%;
     min-height: 0;
@@ -38,6 +36,7 @@
   :global(.ant-table-content) {
     height: 100%;
     min-height: 0;
+    overflow: scroll;
   }
 
   :global(.ant-table) {
