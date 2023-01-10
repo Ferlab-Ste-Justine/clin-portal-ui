@@ -153,11 +153,13 @@ export const getVariantColumns = (
                     {item.node.symbol}
                   </ExternalLink>
                   <Space size={4}>
-                    {inheritance.map((code) => (
-                      <Tag key={code} color="processing">
-                        {code}
-                      </Tag>
-                    ))}
+                    {inheritance.length
+                      ? inheritance.map((code) => (
+                          <Tooltip key={code} title={intl.get(`inheritant.code.${code}`)}>
+                            <Tag color="processing">{code}</Tag>
+                          </Tooltip>
+                        ))
+                      : TABLE_EMPTY_PLACE_HOLDER}
                   </Space>
                 </Space>
               );

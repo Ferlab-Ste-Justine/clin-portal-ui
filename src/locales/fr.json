@@ -720,5 +720,19 @@
   "api.savedFilter.error.messageUpdate": "Impossible de mettre à jour le filtre",
   "api.savedFilter.error.messageDelete": "Impossible de supprimer le filtre",
   "api.savedFilter.success.messageSaved": "Filtre sauvegardé",
-  "api.savedFilter.success.messageDeleted": "Filtre supprimé"
+  "api.savedFilter.success.messageDeleted": "Filtre supprimé",
+  "inheritant.code.IC": "Isolated cases",
+  "inheritant.code.XL": "X-linked",
+  "inheritant.code.DR": "Digenic recessive",
+  "inheritant.code.AD": "Autosomal dominant",
+  "inheritant.code.Smu": "Somatic mutation",
+  "inheritant.code.DD": "Digenic dominant",
+  "inheritant.code.Mu": "Multifactorial",
+  "inheritant.code.SMo": "Somatic mosaicism",
+  "inheritant.code.XLR": "X-linked recessive",
+  "inheritant.code.?AD": "?Autosomal dominant",
+  "inheritant.code.XLD": "X-linked dominant",
+  "inheritant.code.YL": "Y-linked",
+  "inheritant.code.AR": "Autosomal recessive",
+  "inheritant.code.Mi": "Mitochondrial"
 }
