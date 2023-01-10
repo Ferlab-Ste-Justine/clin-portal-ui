@@ -6,9 +6,11 @@ import './commands';
 Cypress.on('uncaught:exception', () => false);
 
 before(() => {
-  cy.exec('npm cache clear --force')
+  cy.exec('npm cache clear --force');
+  cy.wait(1000);
 });
 
 after(() => {
-  cy.exec('npm cache clear --force')
+  cy.exec('npm cache clear --force');
+  cy.wait(1000);
 });

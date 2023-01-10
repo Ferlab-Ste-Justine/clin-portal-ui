@@ -193,16 +193,11 @@ const columns = [
       if (consequences.length === 0) {
         return <></>;
       }
-      return (
-        <ExpandableCell
-          dataSource={consequences}
-          renderItem={(item: any, id): React.ReactNode => (
-            <StackLayout key={id} horizontal className={styles.cellList}>
-              <Text>{item}</Text>
-            </StackLayout>
-          )}
-        />
-      );
+      return consequences?.map((item) => (
+        <StackLayout key={item} horizontal className={styles.cellList}>
+          <Text>{item}</Text>
+        </StackLayout>
+      ));
     },
     width: '15%',
   },
@@ -287,17 +282,30 @@ const columns = [
   {
     title: () => intl.get('refSeq'),
     dataIndex: 'transcript',
-    render: (transcript: { ids: string[] }) =>
-      transcript?.ids?.map((id) => (
-        <div key={id} className={styles.transcriptId}>
-          <ExternalLink
-            href={`https://www.ncbi.nlm.nih.gov/nuccore/${id}?report=graph`}
-            className={styles.transcriptLink}
-          >
-            {id}
-          </ExternalLink>
-        </div>
-      )) || TABLE_EMPTY_PLACE_HOLDER,
+    render: (transcript: { ids: string[] }) => {
+      if (!transcript.ids) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
+      return (
+        <ExpandableCell
+          dictionnary={{
+            'see.less': intl.get('see.less'),
+            'see.more': intl.get('see.more'),
+          }}
+          dataSource={transcript.ids}
+          renderItem={(item: any, id): React.ReactNode => (
+            <StackLayout key={id} horizontal className={styles.cellList}>
+              <ExternalLink
+                href={`https://www.ncbi.nlm.nih.gov/nuccore/${item}?report=graph`}
+                className={styles.transcriptLink}
+              >
+                {item}
+              </ExternalLink>
+            </StackLayout>
+          )}
+        />
+      );
+    },
     width: '15%',
   },
 ];

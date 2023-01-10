@@ -6,10 +6,10 @@ import '@testing-library/cypress/add-commands';
 Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp) => {
     cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
       .find('button').then(($button) => {
-    if ($button.hasClass('ant-btn-link')) {
+        if ($button.hasClass('ant-btn-link')) {
             cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
               .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
-        }
+        };
     });
 
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
@@ -38,8 +38,18 @@ Cypress.Commands.add('clickApplyFacet', () => {
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 });
 
+Cypress.Commands.add('closePopup', () => {
+    cy.get('body')
+      .find('button').then(($button) => {
+        if ($button.hasClass('close')) {
+            cy.get('body').find('button[class="close"]').click({force: true});
+        };
+    });
+});
+
 Cypress.Commands.add('login', (user: string, password: string) => {
-    cy.exec('npm cache clear --force')
+    cy.exec('npm cache clear --force');
+    cy.wait(1000);
 
     cy.visit('/');
     cy.get('input[type="email"]').should('exist', {timeout: 20*1000});
@@ -53,7 +63,23 @@ Cypress.Commands.add('login', (user: string, password: string) => {
 });
 
 Cypress.Commands.add('logout', () => {
-    cy.exec('npm cache clear --force')
+    cy.get('div').then(($div) => {
+        if ($div.hasClass('App')) {
+            cy.get('span[class="ant-page-header-heading-extra"]')
+              .find('span[class*="anticon-down"]').click({force: true});
+            cy.get('span[class="ant-dropdown-menu-title-content"]').click({force: true});
+        };
+    });
+
+    cy.exec('npm cache clear --force');
+    cy.wait(1000);
+});
+
+Cypress.Commands.add('resetColumns', (eq: number) => {
+    cy.get('svg[data-icon="setting"]').eq(eq).click({force: true});
+    cy.get('button[class*="ProTablePopoverColumnResetBtn"]').eq(eq).click({force: true});
+
+    cy.get('button[class*="ProTablePopoverColumnResetBtn"]').should('be.disabled', {timeout: 20*1000});
 });
 
 Cypress.Commands.add('visitArchivesPatientPage', (patientId: string) => {
@@ -62,6 +88,8 @@ Cypress.Commands.add('visitArchivesPatientPage', (patientId: string) => {
     cy.visit('/archive/exploration?search='+patientId);
 
     cy.wait('@getPOSTgraphql', {timeout: 5000});
+    
+    cy.resetColumns(0);
 });
 
 Cypress.Commands.add('visitCNVsPatientPage', (patientId: string, prescriptionId: string, nbGraphqlCalls: number) => {
@@ -72,6 +100,8 @@ Cypress.Commands.add('visitCNVsPatientPage', (patientId: string, prescriptionId:
     for (let i = 0; i < nbGraphqlCalls; i++) {
         cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     }
+
+    cy.resetColumns(0);
 });
 
 Cypress.Commands.add('visitPrescriptionEntityPage', (prescriptionId: string) => {
@@ -92,6 +122,17 @@ Cypress.Commands.add('visitPrescriptionsPage', () => {
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+
+    cy.resetColumns(0);
+});
+
+Cypress.Commands.add('visitVariantEntityPage', (locusId: string) => {
+    cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    
+    cy.visit('/variant/entity/'+locusId+'/summary');
+
+    cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+    cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 });
 
 Cypress.Commands.add('visitVariantsPage', () => {
@@ -102,6 +143,8 @@ Cypress.Commands.add('visitVariantsPage', () => {
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+
+    cy.resetColumns(0);
 });
 
 Cypress.Commands.add('visitVariantsPatientPage', (patientId: string, prescriptionId: string, nbGraphqlCalls: number) => {
@@ -112,4 +155,6 @@ Cypress.Commands.add('visitVariantsPatientPage', (patientId: string, prescriptio
     for (let i = 0; i < nbGraphqlCalls; i++) {
         cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     }
+
+    cy.resetColumns(0);
 });

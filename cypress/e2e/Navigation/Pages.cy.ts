@@ -9,13 +9,17 @@ describe('Affichage de toutes les pages et modals', () => {
     cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
   });
 
+  afterEach(() => {
+    cy.logout();
+  });
+
   it('Accueil', () => {
     cy.contains('Rechercher une prescription').should('exist', {timeout: 20*1000});
     cy.contains('Rechercher par numéro de prescription, requête, dossier, échantillon:').should('exist', {timeout: 20*1000});
     cy.contains('Rechercher un variant').should('exist', {timeout: 20*1000});
     cy.contains('Rechercher par locus, dbSNP, ClinVar:').should('exist', {timeout: 20*1000});
-    cy.contains('Zeppelin').should('exist', {timeout: 20*1000});
-    cy.contains('Fhir').should('exist', {timeout: 20*1000});
+    cy.get('footer[id="footer"]').find('a[href="'+Cypress.env('zeppelin_URL')+'"]').should('exist', {timeout: 20*1000});
+    cy.get('footer[id="footer"]').find('a[href="'+Cypress.env('fhir_URL')+'"]').should('exist', {timeout: 20*1000});
 
     cy.log('Page Prescriptions - Onglet Prescriptions');
     cy.get('body').find('a[href="/prescription/search"]').click();
@@ -126,8 +130,6 @@ describe('Affichage de toutes les pages et modals', () => {
  
   it('Variants d\'un patient', () => {
     cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
-    cy.get('svg[data-icon="setting"]').click({force: true});
-    cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
 
     cy.contains('Variants').should('exist', {timeout: 20*1000});
     cy.contains('SNV').should('exist', {timeout: 20*1000});
@@ -173,7 +175,7 @@ describe('Affichage de toutes les pages et modals', () => {
     cy.contains('Hét. composé potentiel').should('exist', {timeout: 20*1000});
     cy.contains('Famille').should('exist', {timeout: 20*1000});
     cy.contains('Génotype Mère ('+epCHUSJ_ldmCHUSJ.patientMthId+')').should('exist', {timeout: 20*1000});
-    cy.contains('Génotype Père').should('exist', {timeout: 20*1000});
+    cy.contains('Génotype Père ('+epCHUSJ_ldmCHUSJ.patientFthId+')').should('exist', {timeout: 20*1000});
     cy.contains('(détails)').should('exist', {timeout: 20*1000});
     cy.contains('Transmission').should('exist', {timeout: 20*1000});
     cy.contains('Origine parentale').should('exist', {timeout: 20*1000});
@@ -211,9 +213,7 @@ describe('Affichage de toutes les pages et modals', () => {
   });
  
   it('CNVs d\'un patient', () => {
-    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 11);
-    cy.get('svg[data-icon="setting"]').click({force: true});
-    cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
 
     cy.contains('Variants').should('exist', {timeout: 20*1000});
     cy.contains('SNV').should('exist', {timeout: 20*1000});
@@ -222,11 +222,10 @@ describe('Affichage de toutes les pages et modals', () => {
     cy.contains('Prescription ID :').should('exist', {timeout: 20*1000});
     cy.contains('Échantillon :').should('exist', {timeout: 20*1000});
     cy.contains('Cas-index').should('exist', {timeout: 20*1000});
-    cy.contains('Panels RQDM').should('exist', {timeout: 20*1000});
-    cy.contains('Type').should('exist', {timeout: 20*1000});
-    cy.contains('Filtre').should('exist', {timeout: 20*1000});
-    cy.contains('CnvQual').should('exist', {timeout: 20*1000});
-    cy.contains('Qualité').should('exist', {timeout: 20*1000});
+    cy.contains('Panel RQDM').should('exist', {timeout: 20*1000});
+    cy.contains('Variant').should('exist', {timeout: 20*1000});
+    cy.contains('Gène').should('exist', {timeout: 20*1000});
+    cy.contains('Occurrence').should('exist', {timeout: 20*1000});
     cy.contains('Filtre sans titre').should('exist', {timeout: 20*1000});
     cy.contains('Mes filtres').should('exist', {timeout: 20*1000});
     cy.contains('Utiliser les filtres pour créer une requête').should('exist', {timeout: 20*1000});
@@ -235,8 +234,9 @@ describe('Affichage de toutes les pages et modals', () => {
     cy.get('body').find('div[class="ant-table-wrapper"]').find('tr[data-row-key="0"]').contains('CLSTN1').click({force: true});
     cy.contains('Liste des gènes chevauchants le CNV').should('exist', {timeout: 20*1000});
     cy.contains('Gène').should('exist', {timeout: 20*1000});
-    cy.contains('Panels').should('exist', {timeout: 20*1000});
-    cy.contains('Longueur').should('exist', {timeout: 20*1000});
+    cy.contains('Panel').should('exist', {timeout: 20*1000});
+    cy.contains('Longueur du gène').should('exist', {timeout: 20*1000});
+    cy.contains('Chevauchement avec le CNV').should('exist', {timeout: 20*1000});
     cy.contains('# Bases').should('exist', {timeout: 20*1000});
     cy.contains('# Exons').should('exist', {timeout: 20*1000});
     cy.contains('% Gène').should('exist', {timeout: 20*1000});

@@ -1,0 +1,20 @@
+@import 'src/style/themes/clin/layout';
+
+.contentWithFooter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: scroll;
+
+  .containerWrapper {
+    flex-grow: 1;
+    align-items: start;
+    padding: $default-page-content-padding;
+
+    .container {
+      height: 100%;
+    }
+  }
+}

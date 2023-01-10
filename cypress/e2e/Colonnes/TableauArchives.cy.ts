@@ -5,18 +5,17 @@ const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
 
 beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
-})
+});
+
+afterEach(() => {
+  cy.logout();
+});
 
 describe('Tableau des archives', () => {
   describe('Personnaliser les colonnes', () => {
 
     beforeEach(() => {
       cy.visitArchivesPatientPage(epCHUSJ_ldmCHUSJ.patientProbId);
-
-      cy.intercept('**/user').as('getUser');
-      cy.get('svg[data-icon="setting"]').click({force: true});
-      cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
-      cy.wait('@getUser', {timeout: 20*1000});
     });
 
     it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes', () => {

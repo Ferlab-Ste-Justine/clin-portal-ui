@@ -3,7 +3,11 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
-})
+});
+
+afterEach(() => {
+  cy.logout();
+});
 
 describe('Tableau des requêtes', () => {
   describe('Personnaliser les colonnes', () => {
@@ -12,10 +16,7 @@ describe('Tableau des requêtes', () => {
       cy.visitPrescriptionsPage();
       cy.get('div[id*="tab-requests"]').click({force: true});
 
-      cy.intercept('**/user').as('getUser');
-      cy.get('svg[data-icon="setting"]').eq(1).click({force: true});
-      cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
-      cy.wait('@getUser', {timeout: 20*1000});
+      cy.resetColumns(1);
     });
 
     it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes', () => {
@@ -47,7 +48,7 @@ describe('Tableau des requêtes', () => {
 
       cy.get('thead[class="ant-table-thead"]').eq(1)
         .contains('Modifiée le').should('not.exist');
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('div[class="ant-space-item"]').eq(6)
         .contains('Modifiée le').should('exist');
 
@@ -77,25 +78,25 @@ describe('Tableau des requêtes', () => {
 
       cy.get('thead[class="ant-table-thead"]').eq(1)
         .contains('Requérant').should('not.exist');
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('div[class="ant-space-item"]').eq(12)
         .contains('Requérant').should('exist');
 
       cy.get('thead[class="ant-table-thead"]').eq(1)
         .contains('Prénatal').should('not.exist');
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('div[class="ant-space-item"]').eq(13)
         .contains('Prénatal').should('exist');
 
       cy.get('thead[class="ant-table-thead"]').eq(1)
         .contains('Dossier').should('not.exist');
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('div[class="ant-space-item"]').eq(14)
         .contains('Dossier').should('exist');
 /* CLIN-1551
       cy.get('thead[class="ant-table-thead"]').eq(1)
         .contains('Run').should('not.exist');
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('div[class="ant-space-item"]').eq(15)
         .contains('Run').should('exist');*/
     });
@@ -104,7 +105,7 @@ describe('Tableau des requêtes', () => {
       cy.get('thead[class="ant-table-thead"]').eq(1)
         .contains('Requête').should('exist');
 
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('div[class="ant-space-item"]').contains('Requête')
         .find('[type="checkbox"]').uncheck({force: true});
 
@@ -116,7 +117,7 @@ describe('Tableau des requêtes', () => {
       cy.get('thead[class="ant-table-thead"]').eq(1)
         .contains('Modifiée le').should('not.exist');
 
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('div[class="ant-space-item"]').contains('Modifiée le')
         .find('[type="checkbox"]').check({force: true});
 
@@ -130,7 +131,7 @@ describe('Tableau des requêtes', () => {
         .contains('Échantillon').should('exist');
 
       // Le drag and drop ne fonctionne pas
-      cy.get('div[class="ant-popover-inner"]')
+      cy.get('div[class="ant-popover-inner"]').eq(1)
         .find('span[aria-roledescription="sortable"]').eq(1).focus()
         .trigger('mousedown', {which: 1, eventConstructor: 'MouseEvent', force: true});
 

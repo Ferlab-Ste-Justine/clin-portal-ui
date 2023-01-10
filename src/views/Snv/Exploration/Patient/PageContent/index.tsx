@@ -20,6 +20,8 @@ import VariantContentLayout from '../../components/VariantContentLayout';
 
 import VariantsTab from './tabs/Variants';
 
+import styles from './index.module.scss';
+
 type OwnProps = {
   variantMapping: ExtendedMappingResults;
   patientId?: string;
@@ -64,10 +66,11 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
       variantResults={variantResults}
       getVariantResolvedSqon={getVariantResolvedSqon}
     >
-      <Tabs type="card" activeKey={'variants'}>
+      <Tabs type="card" activeKey={'variants'} className={styles.noScroll}>
         <Tabs.TabPane
           tab={intl.get('screen.patientsnv.results.table.variants') || 'Variants'}
           key="variants"
+          className={styles.tabsTableContent}
         >
           <VariantsTab
             results={variantResults}

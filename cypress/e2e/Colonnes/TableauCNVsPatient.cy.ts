@@ -5,18 +5,17 @@ const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
 
 beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
-})
+});
+
+afterEach(() => {
+  cy.logout();
+});
 
 describe('Tableau des CNVs d\'un patient', () => {
   describe('Personnaliser les colonnes', () => {
 
     beforeEach(() => {
-      cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 11);
-
-      cy.intercept('**/user').as('getUser');
-      cy.get('svg[data-icon="setting"]').click({force: true});
-      cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
-      cy.wait('@getUser', {timeout: 20*1000});
+      cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
     });
 
     it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes', () => {
@@ -58,7 +57,7 @@ describe('Tableau des CNVs d\'un patient', () => {
       cy.get('thead[class="ant-table-thead"]')
         .find('th[class*="ant-table-cell"]').eq(8)
         .contains('Gènes').should('exist');
-/* CLIN-1260
+/* CLIN-1621
       cy.get('thead[class="ant-table-thead"]')
         .find('th[class*="ant-table-cell"]').eq(9)
         .contains('IGV').should('exist');*/

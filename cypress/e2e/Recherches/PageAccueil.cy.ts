@@ -7,6 +7,10 @@ beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
 });
 
+afterEach(() => {
+  cy.logout();
+});
+
 describe('Page d\'accueil', () => {
   describe('Rechercher des prescriptions', () => {
     it('Par numéro de prescription', () => {
@@ -50,7 +54,7 @@ describe('Page d\'accueil', () => {
     });
 
     it('Par numéro d\'échantillon du cas-index', () => {
-      cy.get('input').first().type(epCHUSJ_ldmCHUSJ.sampleProbId, {force: true});
+      cy.get('input').first().type('SP_'+epCHUSJ_ldmCHUSJ.sampleProbId, {force: true});
 
       cy.intercept('POST', '**/$graphql').as('getPOSTgraphql');
       cy.get('a[href*="/prescription/entity/'+epCHUSJ_ldmCHUSJ.prescriptionId+'"]').click({force: true});
@@ -90,7 +94,47 @@ describe('Page d\'accueil', () => {
     });
 
     it('Par numéro d\'échantillon de la mère', () => {
-      cy.get('input').first().type(epCHUSJ_ldmCHUSJ.sampleMthId, {force: true});
+      cy.get('input').first().type('SP_'+epCHUSJ_ldmCHUSJ.sampleMthId, {force: true});
+
+      cy.intercept('POST', '**/$graphql').as('getPOSTgraphql');
+      cy.get('a[href*="/prescription/entity/'+epCHUSJ_ldmCHUSJ.prescriptionId+'"]').click({force: true});
+      cy.wait('@getPOSTgraphql', {timeout: 5000});
+
+      cy.get('body').contains(epCHUSJ_ldmCHUSJ.lastNameProb+' '+epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
+    });
+
+    it('Par numéro de requête du père', () => {
+      cy.get('input').first().type(epCHUSJ_ldmCHUSJ.requestFthId, {force: true});
+
+      cy.intercept('POST', '**/$graphql').as('getPOSTgraphql');
+      cy.get('a[href*="/prescription/entity/'+epCHUSJ_ldmCHUSJ.prescriptionId+'"]').click({force: true});
+      cy.wait('@getPOSTgraphql', {timeout: 5000});
+
+      cy.get('body').contains(epCHUSJ_ldmCHUSJ.lastNameProb+' '+epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
+    });
+
+    it('Par numéro de dossier du père', () => {
+      cy.get('input').first().type(epCHUSJ_ldmCHUSJ.mrnFth, {force: true});
+
+      cy.intercept('POST', '**/$graphql').as('getPOSTgraphql');
+      cy.get('a[href*="/prescription/entity/'+epCHUSJ_ldmCHUSJ.prescriptionId+'"]').click({force: true});
+      cy.wait('@getPOSTgraphql', {timeout: 5000});
+
+      cy.get('body').contains(epCHUSJ_ldmCHUSJ.lastNameProb+' '+epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
+    });
+
+    it('Par numéro de patient du père', () => {
+      cy.get('input').first().type(epCHUSJ_ldmCHUSJ.patientFthId, {force: true});
+
+      cy.intercept('POST', '**/$graphql').as('getPOSTgraphql');
+      cy.get('a[href*="/prescription/entity/'+epCHUSJ_ldmCHUSJ.prescriptionId+'"]').click({force: true});
+      cy.wait('@getPOSTgraphql', {timeout: 5000});
+
+      cy.get('body').contains(epCHUSJ_ldmCHUSJ.lastNameProb+' '+epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
+    });
+
+    it('Par numéro d\'échantillon du père', () => {
+      cy.get('input').first().type('SP_'+epCHUSJ_ldmCHUSJ.sampleFthId, {force: true});
 
       cy.intercept('POST', '**/$graphql').as('getPOSTgraphql');
       cy.get('a[href*="/prescription/entity/'+epCHUSJ_ldmCHUSJ.prescriptionId+'"]').click({force: true});

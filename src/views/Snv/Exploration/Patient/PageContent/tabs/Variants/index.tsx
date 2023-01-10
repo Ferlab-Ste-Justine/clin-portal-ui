@@ -9,7 +9,6 @@ import OccurrenceDrawer from 'views/Snv/components/OccurrenceDrawer';
 import { getVariantColumns } from 'views/Snv/Exploration/variantColumns';
 import { DEFAULT_PAGE_SIZE } from 'views/Snv/utils/constant';
 
-import { useStaticTableHeight } from 'components/Table/StaticTableHeight';
 import { useRpt } from 'hooks/useRpt';
 import { useUser } from 'store/user';
 import { updateConfig } from 'store/user/thunks';
@@ -34,8 +33,6 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
   const [modalOpened, toggleModal] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<VariantEntity | undefined>(undefined);
 
-  const tableHeight = useStaticTableHeight(620);
-
   const openDrawer = (record: VariantEntity) => {
     setSelectedVariant(record);
     toggleDrawer(true);
@@ -49,7 +46,7 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
   const donor = findDonorById(selectedVariant?.donors, patientId);
 
   return (
-    <>
+    <div className={style.fixedLayout}>
       {donor && selectedVariant && (
         <IGVModal
           rpt={rpt}
@@ -98,7 +95,6 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
           },
         }}
         size="small"
-        scroll={{ y: tableHeight }}
         pagination={{
           current: queryConfig.pageIndex,
           pageSize: queryConfig.size,
@@ -120,7 +116,7 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig, patientId }: OwnPro
           variantId={selectedVariant?.hgvsg}
         />
       )}
-    </>
+    </div>
   );
 };
 

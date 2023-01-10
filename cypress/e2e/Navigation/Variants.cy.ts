@@ -8,6 +8,10 @@ describe('Affichage de tous les variants [!! Très long à exécuter !!]', () =>
     cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
   });
 
+  afterEach(() => {
+    cy.logout();
+  });
+
   Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
   });

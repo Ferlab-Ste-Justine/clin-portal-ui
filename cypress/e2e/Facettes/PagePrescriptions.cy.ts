@@ -7,6 +7,10 @@ beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
 });
 
+afterEach(() => {
+  cy.logout();
+});
+
 describe('Page des prescriptions et des requêtes', () => {
   describe('Filtrer avec les facettes', () => {
 
@@ -23,15 +27,6 @@ describe('Page des prescriptions et des requêtes', () => {
         cy.get('body').contains('Prescriptions (1)').should('exist');
         cy.get('body').contains('Requêtes (3)').should('exist');
       });
-
-      it.skip('Soumise', () => {
-        cy.checkValueFacet(0, 'Soumise');
-
-        cy.get('input[class="ant-input"]').first().type(epCHUSJ_ldmCHUSJ.prescriptionId, {force: true});
-
-        cy.get('body').contains('Prescriptions 0').should('exist');
-        cy.get('body').contains('Requêtes 0').should('exist');
-      });
     });
       
     describe('Statut des requêtes', () => {
@@ -42,15 +37,6 @@ describe('Page des prescriptions et des requêtes', () => {
 
         cy.get('body').contains('Prescriptions (1)').should('exist');
         cy.get('body').contains('Requêtes (3)').should('exist');
-      });
-
-      it.skip('On-hold', () => {
-        cy.checkValueFacet(1, 'On-hold');
-
-        cy.get('input[class="ant-input"]').first().type(epCHUSJ_ldmCHUSJ.prescriptionId, {force: true});
-
-        cy.get('body').contains('Prescriptions 0').should('exist');
-        cy.get('body').contains('Requêtes 0').should('exist');
       });
     });
       
@@ -80,24 +66,6 @@ describe('Page des prescriptions et des requêtes', () => {
 
         cy.get('body').contains('Prescriptions (1)').should('exist');
         cy.get('body').contains('Requêtes (3)').should('exist');
-      });
-
-      it.skip('Global Muscular diseases (Global Panel) (MMG)', () => {
-        cy.checkValueFacet(2, 'MMG');
-
-        cy.get('input[class="ant-input"]').first().type(epCHUSJ_ldmCHUSJ.prescriptionId, {force: true});
-
-        cy.get('body').contains('Prescriptions 0').should('exist');
-        cy.get('body').contains('Requêtes 0').should('exist');
-      });
-
-      it.skip('Muscular Dystrophies (DYSM)', () => {
-        cy.checkValueFacet(2, 'DYSM');
-
-        cy.get('input[class="ant-input"]').first().type(epCHUSJ_ldmCHUSJ.prescriptionId, {force: true});
-
-        cy.get('body').contains('Prescriptions 0').should('exist');
-        cy.get('body').contains('Requêtes 0').should('exist');
       });
     });
       
