@@ -36,6 +36,9 @@
   :global(.ant-table-content) {
     height: 100%;
     min-height: 0;
+  }
+
+  :global(.ant-table-content) {
     overflow: scroll;
   }
 
