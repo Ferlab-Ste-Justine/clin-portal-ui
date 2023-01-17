@@ -25,6 +25,13 @@
     }
   }
 
+  &-thead > tr > th,
+  &-tbody > tr > td,
+  tfoot > tr > th,
+  tfoot > tr > td {
+    overflow-wrap: normal;
+  }
+
   td {
     &.@{table-prefix-cls}-cell {
       vertical-align: baseline;
@@ -37,8 +44,11 @@
 
   &-thead {
     th {
+      overflow-wrap: normal;
+
       &.@{table-prefix-cls}-column-sort {
         background: @blue-1 !important;
+
       }
     }
   }
@@ -65,9 +75,9 @@
       td{
         &:not(.@{table-prefix-cls}-column-sort){
           background-color: @gray-2;
-        }  
+        }
       }
-  
+
     }
   }
 

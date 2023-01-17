@@ -1,19 +1,12 @@
-@import 'src/style/themes/clin/layout';
 
-.variantPageContent {
-    flex-grow: 1;
-    width: 100%;
-    display: flex;
+.fixedSizeTable {
+    min-height: 100%;
     max-height: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: $default-page-content-padding;
 
     & > :global(.ant-space-item):not(:first-child) {
         display: flex;
         flex: 1 1 auto;
         flex-direction: column;
-        overflow: hidden;
     }
 
     :global(.ant-tabs-content-holder) {
@@ -28,9 +21,5 @@
         flex-grow: 1;
         flex-shrink: 1;
         overflow: hidden;
-    }
-
-    & >  :global(.ant-table-cell) {
-        text-overflow: ellipsis;
     }
 }

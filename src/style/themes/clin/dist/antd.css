@@ -26135,11 +26135,20 @@ div.ant-typography-edit-content.ant-typography-rtl {
 .ant-table-cell a:hover {
   text-decoration: none;
 }
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td,
+.ant-table tfoot > tr > th,
+.ant-table tfoot > tr > td {
+  overflow-wrap: normal;
+}
 .ant-table td.ant-table-cell {
   vertical-align: baseline;
 }
 .ant-table-content {
   overflow: auto;
+}
+.ant-table-thead th {
+  overflow-wrap: normal;
 }
 .ant-table-thead th.ant-table-column-sort {
   background: #eaf3fa !important;
