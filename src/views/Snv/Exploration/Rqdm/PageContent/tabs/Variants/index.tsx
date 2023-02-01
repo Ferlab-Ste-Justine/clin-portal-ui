@@ -82,7 +82,7 @@ const VariantsTab = ({
             },
           }}
           size="small"
-          scroll={{ x: dimension.x, y: dimension.y }}
+          scroll={{ x: 'max-content', y: dimension.y }}
           pagination={{
             current: pageIndex,
             queryConfig,

@@ -64,6 +64,7 @@ const getAcmgCriteriaCol = () => ({
   dataIndex: 'varsome',
   className: cx(style.variantTableCell, style.variantTableCellElipsis),
   defaultHidden: true,
+  width: 120,
   render: (varsome: Varsome) => getAcmgRuleContent(varsome),
 });
 
@@ -94,6 +95,7 @@ export const getVariantColumns = (
         ) : (
           TABLE_EMPTY_PLACE_HOLDER
         ),
+      width: 300,
     },
     {
       key: 'variant_class',
@@ -102,6 +104,7 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
+      width: 90,
       render: (variant: string) =>
         variant ? intl.get(variant).defaultMessage(capitalize(variant)) : TABLE_EMPTY_PLACE_HOLDER,
     },
@@ -113,6 +116,7 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
+      width: 160,
       render: (rsNumber: string) =>
         rsNumber ? (
           <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${rsNumber}`}>
@@ -135,6 +139,7 @@ export const getVariantColumns = (
       key: 'omim',
       title: intl.get('screen.patientsnv.results.table.omim'),
       tooltip: intl.get('screen.patientsnv.results.table.omim.tooltip'),
+      width: 180,
       render: (variant: { genes: { hits: { edges: Gene[] } } }) => {
         const genesWithOmim = variant.genes.hits.edges.filter(
           (gene) => gene.node.omim?.hits?.edges?.length,
@@ -189,6 +194,7 @@ export const getVariantColumns = (
       title: intl.get('screen.patientsnv.results.table.clinvar'),
       dataIndex: 'clinvar',
       className: cx(style.variantTableCell, style.variantTableCellElipsis),
+      width: 130,
       render: (clinVar: ClinVar) =>
         clinVar?.clin_sig && clinVar.clinvar_id ? (
           <ExternalLink
@@ -206,6 +212,7 @@ export const getVariantColumns = (
       tooltip: intl.get('screen.patientsnv.results.table.acmgVerdict.tooltip'),
       dataIndex: 'locus',
       className: cx(style.variantTableCell, style.variantTableCellElipsis),
+      width: 170,
       render: (locus: string, entity: VariantEntity) => (
         <AcmgVerdict varsome={entity.varsome} locus={locus} />
       ),
@@ -218,6 +225,7 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
+      width: 150,
       render: (external_frequencies: ExternalFrequenciesEntity) =>
         external_frequencies.gnomad_genomes_2_1_1
           ? external_frequencies.gnomad_genomes_2_1_1.af.toExponential(3)
@@ -231,6 +239,7 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
+      width: 180,
       render: (record: VariantEntity) => formatRqdm(record.frequency_RQDM),
     },
   ];
@@ -245,6 +254,7 @@ export const getVariantColumns = (
         key: 'donors.gq',
         title: intl.get('screen.patientsnv.results.table.gq'),
         tooltip: intl.get('gq.tooltip'),
+        width: 110,
         render: (record: VariantEntity) => (
           <GqLine value={findDonorById(record.donors, patientId)?.gq} />
         ),
@@ -253,6 +263,7 @@ export const getVariantColumns = (
         key: 'donors.zygosity',
         title: intl.get('screen.patientsnv.results.table.zygosity'),
         dataIndex: 'donors',
+        width: 100,
         render: (record: ArrangerResultsTree<DonorsEntity>) => {
           const donor = findDonorById(record, patientId);
           return donor ? donor?.zygosity : TABLE_EMPTY_PLACE_HOLDER;
@@ -266,6 +277,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.genotype'),
         dataIndex: 'donors',
         defaultHidden: true,
+        width: 90,
         render: (record: ArrangerResultsTree<DonorsEntity>) => {
           const donor = findDonorById(record, patientId);
           const motherCalls = formatCalls(donor?.mother_calls!);
@@ -279,6 +291,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.ch'),
         tooltip: intl.get('ch.tooltip'),
         defaultHidden: true,
+        width: 300,
         render: (record: VariantEntity) => (
           <HcComplementDescription
             hcComplements={findDonorById(record.donors, patientId)?.hc_complement}
@@ -293,6 +306,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.pch'),
         tooltip: intl.get('pch.tooltip'),
         defaultHidden: true,
+        width: 300,
         render: (record: VariantEntity) => (
           <HcComplementDescription
             hcComplements={findDonorById(record.donors, patientId)?.possibly_hc_complement}
@@ -306,6 +320,7 @@ export const getVariantColumns = (
         key: 'transmission',
         title: intl.get('screen.patientsnv.results.table.transmission'),
         defaultHidden: true,
+        width: 200,
         render: (record: VariantEntity) =>
           removeUnderscoreAndCapitalize(
             findDonorById(record.donors, patientId)?.transmission! || '',
@@ -316,6 +331,7 @@ export const getVariantColumns = (
         title: intl.get('qd'),
         tooltip: intl.get('qd.tooltip'),
         defaultHidden: true,
+        width: 180,
         render: (record: VariantEntity) => {
           const donor = findDonorById(record.donors, patientId);
           return donor?.qd ? donor.qd : TABLE_EMPTY_PLACE_HOLDER;
@@ -326,6 +342,7 @@ export const getVariantColumns = (
         title: intl.get('po'),
         tooltip: intl.get('parental.origin'),
         defaultHidden: true,
+        width: 180,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)
             ? displayParentalOrigin(findDonorById(record.donors, patientId)?.parental_origin!)
@@ -336,6 +353,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.altprof'),
         tooltip: intl.get('filters.group.donors.ad_alt'),
         defaultHidden: true,
+        width: 120,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)?.ad_alt ?? TABLE_EMPTY_PLACE_HOLDER,
       },
@@ -344,6 +362,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.alttotal'),
         tooltip: intl.get('total.depth'),
         defaultHidden: true,
+        width: 120,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)?.ad_total ?? TABLE_EMPTY_PLACE_HOLDER,
       },
@@ -352,6 +371,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.altratio'),
         tooltip: intl.get('screen.patientsnv.results.table.altratio.tooltip'),
         defaultHidden: true,
+        width: 120,
         render: (record: VariantEntity) =>
           (findDonorById(record.donors, patientId)?.ad_ratio ?? 0).toFixed(2) ??
           TABLE_EMPTY_PLACE_HOLDER,
@@ -361,6 +381,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.filter'),
         tooltip: intl.get('screen.variantDetails.patientsTab.filter.tooltip'),
         defaultHidden: true,
+        width: 160,
         render: (record: VariantEntity) =>
           findDonorById(record.donors, patientId)?.filters ?? TABLE_EMPTY_PLACE_HOLDER,
       },
