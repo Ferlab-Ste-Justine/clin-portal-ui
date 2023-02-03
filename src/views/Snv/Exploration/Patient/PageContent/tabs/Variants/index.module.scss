@@ -12,10 +12,23 @@
     margin-bottom: 0;
   }
 
-  & > :global(.ant-space-item):not(:first-child) {
+  & > :global(.ant-space-item) {
     display: flex;
-    flex: 1 1 auto;
     flex-direction: column;
+  }
+
+  & > :global(.ant-space-item:first-child) {
+    flex: 0 0 auto;
+  }
+
+  & > :global(.ant-space-item):not(:first-child) {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  & > :global(.ant-space-item:last-child) {
+    flex: 0 0 auto;
   }
 
   :global(.ant-tabs-content-holder) {

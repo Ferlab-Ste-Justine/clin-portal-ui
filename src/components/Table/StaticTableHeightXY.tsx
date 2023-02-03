@@ -13,6 +13,7 @@ export const useStaticTableHeight = (
   columnState: any[],
 ): ITableDimension => {
   const [tableDimension, setTableDimension] = useState({ x: 0, y: 0 });
+
   useEffect(() => {
     const handleTableDimensionChange = () => {
       const width = divRef?.current?.clientWidth;
@@ -26,10 +27,11 @@ export const useStaticTableHeight = (
     };
 
     window.addEventListener('resize', handleTableDimensionChange);
+
     if (
       divRef.current &&
-      divRef.current.clientWidth + Xoffset !== tableDimension.x &&
-      divRef.current.clientHeight - YOffset !== tableDimension.y
+      (divRef.current.clientWidth + Xoffset !== tableDimension.x ||
+        divRef.current.clientHeight - YOffset !== tableDimension.y)
     ) {
       handleTableDimensionChange();
     }

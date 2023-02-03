@@ -9,6 +9,8 @@
 }
 
 .variantSearchTable {
+  min-height: 0;
+
   div[class$='-card-bordered'] {
     border-top: none;
 
