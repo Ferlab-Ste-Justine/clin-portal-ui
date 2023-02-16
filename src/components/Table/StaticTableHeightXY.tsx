@@ -17,7 +17,6 @@ export const useStaticTableHeight = (
 
   useEffect(() => {
     const elem = divRef.current;
-
     const handleTableDimensionChange = () => {
       const width = divRef?.current?.clientWidth;
       const height = divRef?.current?.clientHeight;
@@ -33,7 +32,7 @@ export const useStaticTableHeight = (
       debounce((entries) => {
         const rect = entries[0].contentRect;
 
-        if (rect.height !== tableDimension.y + YOffset) {
+        if (Math.round(rect.height) !== tableDimension.y + YOffset) {
           handleTableDimensionChange();
         }
       }, 40),

@@ -269,7 +269,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.genotype'),
         dataIndex: 'donors',
         defaultHidden: true,
-        width: 90,
+        width: 150,
         render: (record: ArrangerResultsTree<DonorsEntity>) =>
           renderDonorByKey('donors_genotype', findDonorById(record, patientId)),
       },
@@ -278,7 +278,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.ch'),
         tooltip: intl.get('ch.tooltip'),
         defaultHidden: true,
-        width: 300,
+        width: 200,
         render: (record: VariantEntity) =>
           renderDonorByKey('ch', findDonorById(record.donors, patientId)),
       },
@@ -287,7 +287,7 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.pch'),
         tooltip: intl.get('pch.tooltip'),
         defaultHidden: true,
-        width: 300,
+        width: 220,
         render: (record: VariantEntity) =>
           renderDonorByKey('pch', findDonorById(record.donors, patientId)),
       },
