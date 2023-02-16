@@ -62,6 +62,7 @@ const SequencingsTable = ({
         setQueryConfig({
           pageIndex: DEFAULT_PAGE_INDEX,
           size: queryConfig.size!,
+          // @ts-ignore
           sort: formatQuerySortList(sorter),
         });
         scrollToTop(SEQUENCING_SCROLL_ID);

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import debounce from 'lodash/debounce';
 
 export interface ITableDimension {
   x: number;
@@ -15,6 +16,8 @@ export const useStaticTableHeight = (
   const [tableDimension, setTableDimension] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    const elem = divRef.current;
+
     const handleTableDimensionChange = () => {
       const width = divRef?.current?.clientWidth;
       const height = divRef?.current?.clientHeight;
@@ -26,17 +29,33 @@ export const useStaticTableHeight = (
       });
     };
 
-    window.addEventListener('resize', handleTableDimensionChange);
+    const resize_ob = new ResizeObserver(
+      debounce((entries) => {
+        const rect = entries[0].contentRect;
+
+        if (rect.height !== tableDimension.y + YOffset) {
+          handleTableDimensionChange();
+        }
+      }, 40),
+    );
+
+    if (elem) {
+      resize_ob.observe(elem);
+    }
 
     if (
-      divRef.current &&
-      (divRef.current.clientWidth + Xoffset !== tableDimension.x ||
-        divRef.current.clientHeight - YOffset !== tableDimension.y)
+      elem &&
+      (elem.clientWidth + Xoffset !== tableDimension.x ||
+        elem.clientHeight - YOffset !== tableDimension.y)
     ) {
       handleTableDimensionChange();
     }
 
-    return () => window.removeEventListener('resize', handleTableDimensionChange);
+    return () => {
+      if (elem) {
+        resize_ob.unobserve(elem);
+      }
+    };
   }, [columnState, divRef, tableDimension]);
 
   return tableDimension;

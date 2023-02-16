@@ -71,6 +71,7 @@ const VariantsTable = ({ results, setQueryConfig, queryConfig, setDownloadKeys }
           setQueryConfig({
             pageIndex: current!,
             size: pageSize!,
+            // @ts-ignore
             sort: formatQuerySortList(sorter),
           })
         }

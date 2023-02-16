@@ -67,6 +67,8 @@ const VariantsTab = ({
 
   const donor = findDonorById(selectedVariant?.donors, patientId);
   const initialColumnState = user.config.data_exploration?.tables?.patientSnv?.columns;
+  const columns = getVariantColumns(patientId, openDrawer, openIgvModal);
+
   return (
     <>
       {donor && selectedVariant && (
@@ -85,7 +87,7 @@ const VariantsTab = ({
             tableId="variant_table"
             className={style.variantSearchTable}
             wrapperClassName={style.variantTabWrapper}
-            columns={getVariantColumns(patientId, openDrawer, openIgvModal)}
+            columns={columns}
             initialColumnState={initialColumnState}
             dataSource={results.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
             loading={results.loading}
@@ -96,6 +98,7 @@ const VariantsTab = ({
               setQueryConfig({
                 pageIndex: DEFAULT_PAGE_INDEX,
                 size: queryConfig.size!,
+                // @ts-ignore
                 sort: formatQuerySortList(sorter),
               });
             }}
@@ -133,7 +136,7 @@ const VariantsTab = ({
               },
             }}
             size="small"
-            scroll={{ x: 'max-content', y: dimension.y }}
+            scroll={{ x: dimension.x, y: dimension.y }}
             pagination={{
               current: pageIndex,
               queryConfig,

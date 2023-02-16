@@ -45,11 +45,13 @@ const PrescriptionsTable = ({
   const dispatch = useDispatch();
   const { user } = useUser();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const initialColumns = user.config.data_exploration?.tables?.prescriptions?.columns;
+
   return (
     <ProTable<ITableAnalysisResult>
       tableId="prescription_table"
       columns={prescriptionsColumns()}
-      initialColumnState={user.config.data_exploration?.tables?.prescriptions?.columns}
+      initialColumnState={initialColumns}
       dataSource={results?.data.map((i) => ({ ...i, key: i.id }))}
       className={styles.prescriptionTableWrapper}
       loading={loading}
@@ -62,6 +64,7 @@ const PrescriptionsTable = ({
         setQueryConfig({
           pageIndex: DEFAULT_PAGE_INDEX,
           size: queryConfig.size!,
+          // @ts-ignore
           sort: formatQuerySortList(sorter),
         });
         scrollToTop(PRESCRIPTION_SCROLL_ID);

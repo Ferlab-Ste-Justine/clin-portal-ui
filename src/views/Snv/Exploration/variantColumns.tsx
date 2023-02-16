@@ -74,7 +74,42 @@ export const getVariantColumns = (
   drawerCb?: (record: VariantEntity) => void,
   igvModalCb?: (record: VariantEntity) => void,
 ): ProColumnType<ITableVariantEntity>[] => {
-  const columns: ProColumnType<ITableVariantEntity>[] = [
+  let columns: ProColumnType<ITableVariantEntity>[] = [];
+
+  if (patientId) {
+    columns.push({
+      className: style.userAffectedBtnCell,
+      key: 'actions',
+      title: intl.get('screen.patientsnv.results.table.actions'),
+      fixed: 'left',
+      render: (record: VariantEntity) => (
+        <Space align={'center'}>
+          <Tooltip title={intl.get('occurrence.patient')}>
+            <Button
+              type={'link'}
+              onClick={() => drawerCb && drawerCb(record)}
+              icon={<UserAffectedIcon width={'100%'} height={'16px'} />}
+              size={'small'}
+            />
+          </Tooltip>
+          <Tooltip title={intl.get('open.in.igv')}>
+            <Button
+              onClick={() => igvModalCb && igvModalCb(record)}
+              icon={<LineStyleIcon width={'100%'} height={'16px'} />}
+              type={'link'}
+              size={'small'}
+            />
+          </Tooltip>
+          <OtherActions patientId={'test'} record={record} />
+        </Space>
+      ),
+      align: 'center',
+      width: 104,
+    });
+  }
+
+  columns = [
+    ...columns,
     {
       title: intl.get('screen.patientsnv.results.table.variant'),
       key: 'hgvsg',
@@ -96,7 +131,7 @@ export const getVariantColumns = (
         ) : (
           TABLE_EMPTY_PLACE_HOLDER
         ),
-      width: 300,
+      width: 210,
     },
     {
       key: 'variant_class',
@@ -105,7 +140,7 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
-      width: 90,
+      width: 96,
       render: (variant: string) =>
         variant ? intl.get(variant).defaultMessage(capitalize(variant)) : TABLE_EMPTY_PLACE_HOLDER,
     },
@@ -117,7 +152,7 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
-      width: 160,
+      width: 109,
       render: (rsNumber: string) =>
         rsNumber ? (
           <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${rsNumber}`}>
@@ -131,7 +166,7 @@ export const getVariantColumns = (
       key: 'consequences',
       title: intl.get('screen.patientsnv.results.table.consequence'),
       dataIndex: 'consequences',
-      width: 300,
+      width: 284,
       render: (consequences: { hits: { edges: Consequence[] } }) => (
         <ConsequencesCell consequences={consequences?.hits?.edges || []} />
       ),
@@ -140,7 +175,7 @@ export const getVariantColumns = (
       key: 'omim',
       title: intl.get('screen.patientsnv.results.table.omim'),
       tooltip: intl.get('screen.patientsnv.results.table.omim.tooltip'),
-      width: 180,
+      width: 175,
       render: (variant: { genes: { hits: { edges: Gene[] } } }) => renderOmim(variant),
     },
     {
@@ -148,7 +183,7 @@ export const getVariantColumns = (
       title: intl.get('screen.patientsnv.results.table.clinvar'),
       dataIndex: 'clinvar',
       className: cx(style.variantTableCell, style.variantTableCellElipsis),
-      width: 130,
+      width: 110,
       render: (clinVar: ClinVar) => {
         const clinVarSigFormatted: string[] = [];
         clinVar?.clin_sig &&
@@ -172,7 +207,7 @@ export const getVariantColumns = (
       tooltip: intl.get('screen.patientsnv.results.table.acmgVerdict.tooltip'),
       dataIndex: 'locus',
       className: cx(style.variantTableCell, style.variantTableCellElipsis),
-      width: 170,
+      width: 125,
       render: (locus: string, entity: VariantEntity) => (
         <AcmgVerdict varsome={entity.varsome} locus={locus} />
       ),
@@ -185,84 +220,12 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
-      width: 150,
+      width: 98,
       render: (external_frequencies: ExternalFrequenciesEntity) =>
         external_frequencies.gnomad_genomes_2_1_1
           ? external_frequencies.gnomad_genomes_2_1_1.af.toExponential(3)
           : TABLE_EMPTY_PLACE_HOLDER,
     },
-    /* {
-      key: 'gene.pli',
-      title: intl.get('screen.patientsnv.results.table.pli'),
-      tooltip: `${intl.get('screen.patientsnv.results.table.pli.tooltip')}`,
-      defaultHidden: true,
-      width: 150,
-      render: (variant: { genes: { hits: { edges: Gene[] } } }) => {
-        const genesWithPli = variant.genes.hits.edges.filter((gene: Gene) => gene.node.gnomad);
-        return genesWithPli.length ? (
-          <ExpandableCell<Gene>
-            dataSource={genesWithPli}
-            nOfElementsWhenCollapsed={2}
-            dictionnary={{
-              'see.less': intl.get('see.less'),
-              'see.more': intl.get('see.more'),
-            }}
-            renderItem={(item, id): React.ReactNode => (
-              <StackLayout horizontal>
-                <Space key={id} align="center" className={style.variantSnvOmimCellItem}>
-                  <>
-                    {genesWithPli.length > 1 && <div>{`${item.node.symbol} : `}</div>}
-                    <ExternalLink
-                      href={`https://gnomad.broadinstitute.org/gene/${item.node.ensembl_gene_id}?dataset=gnomad_r2_1`}
-                    >
-                      {item.node.gnomad.pli.toFixed(2)}
-                    </ExternalLink>
-                  </>
-                </Space>
-              </StackLayout>
-            )}
-          />
-        ) : (
-          'ND'
-        );
-      },
-    },
-    {
-      key: 'gene.loeuf',
-      title: intl.get('screen.patientsnv.results.table.loeuf'),
-      tooltip: `${intl.get('screen.patientsnv.results.table.loeuf.tooltip')}`,
-      defaultHidden: true,
-      width: 150,
-      render: (variant: { genes: { hits: { edges: Gene[] } } }) => {
-        const genesWithloeuf = variant.genes.hits.edges.filter((gene: Gene) => gene.node.gnomad);
-        return genesWithloeuf.length ? (
-          <ExpandableCell<Gene>
-            dataSource={genesWithloeuf}
-            nOfElementsWhenCollapsed={2}
-            dictionnary={{
-              'see.less': intl.get('see.less'),
-              'see.more': intl.get('see.more'),
-            }}
-            renderItem={(item, id): React.ReactNode => (
-              <StackLayout horizontal>
-                <Space key={id} align="center" className={style.variantSnvOmimCellItem}>
-                  <>
-                    {genesWithloeuf.length > 1 && <div>{`${item.node.symbol} : `}</div>}
-                    <ExternalLink
-                      href={`https://gnomad.broadinstitute.org/gene/${item.node.ensembl_gene_id}?dataset=gnomad_r2_1`}
-                    >
-                      {item.node.gnomad.loeuf.toFixed(2)}
-                    </ExternalLink>
-                  </>
-                </Space>
-              </StackLayout>
-            )}
-          />
-        ) : (
-          'ND'
-        );
-      },
-    }, */
     {
       key: 'frequency_RQDM.total.pf',
       title: intl.get('screen.patientsnv.results.table.rqdm'),
@@ -271,7 +234,7 @@ export const getVariantColumns = (
       sorter: {
         multiple: 1,
       },
-      width: 180,
+      width: 100,
       render: (record: VariantEntity) => formatRqdm(record.frequency_RQDM),
     },
   ];
@@ -286,7 +249,7 @@ export const getVariantColumns = (
         key: 'donors.gq',
         title: intl.get('screen.patientsnv.results.table.gq'),
         tooltip: intl.get('gq.tooltip'),
-        width: 110,
+        width: 59,
         render: (record: VariantEntity) =>
           renderDonorByKey('donors.gq', findDonorById(record.donors, patientId)),
       },
@@ -294,7 +257,7 @@ export const getVariantColumns = (
         key: 'donors.zygosity',
         title: intl.get('screen.patientsnv.results.table.zygosity'),
         dataIndex: 'donors',
-        width: 100,
+        width: 65,
         render: (record: ArrangerResultsTree<DonorsEntity>) =>
           renderDonorByKey('donors.zygosity', findDonorById(record, patientId)),
       },
@@ -390,35 +353,6 @@ export const getVariantColumns = (
         render: (record: VariantEntity) =>
           renderDonorByKey('filter', findDonorById(record.donors, patientId)),
       },
-      {
-        className: style.userAffectedBtnCell,
-        key: 'actions',
-        title: intl.get('screen.patientsnv.results.table.actions'),
-        fixed: 'right',
-        render: (record: VariantEntity) => (
-          <Space align={'center'}>
-            <Tooltip title={intl.get('occurrence.patient')}>
-              <Button
-                type={'link'}
-                onClick={() => drawerCb && drawerCb(record)}
-                icon={<UserAffectedIcon width={'100%'} height={'16px'} />}
-                size={'small'}
-              />
-            </Tooltip>
-            <Tooltip title={intl.get('open.in.igv')}>
-              <Button
-                onClick={() => igvModalCb && igvModalCb(record)}
-                icon={<LineStyleIcon width={'100%'} height={'16px'} />}
-                type={'link'}
-                size={'small'}
-              />
-            </Tooltip>
-            <OtherActions patientId={patientId} record={record} />
-          </Space>
-        ),
-        align: 'center',
-        width: 105,
-      },
     );
   }
 
@@ -511,7 +445,7 @@ const renderOmim = (variant: { genes: { hits: { edges: Gene[] } } }) => {
           .filter((item, pos, self) => self.indexOf(item) == pos);
 
         return (
-          <StackLayout horizontal>
+          <StackLayout horizontal key={id}>
             <Space key={id} align="center" className={style.variantSnvOmimCellItem}>
               <ExternalLink href={`https://www.omim.org/entry/${item.node.omim_gene_id}`}>
                 {item.node.symbol}
@@ -533,3 +467,76 @@ const renderOmim = (variant: { genes: { hits: { edges: Gene[] } } }) => {
     />
   );
 };
+
+/* {
+      key: 'gene.pli',
+      title: intl.get('screen.patientsnv.results.table.pli'),
+      tooltip: `${intl.get('screen.patientsnv.results.table.pli.tooltip')}`,
+      defaultHidden: true,
+      width: 150,
+      render: (variant: { genes: { hits: { edges: Gene[] } } }) => {
+        const genesWithPli = variant.genes.hits.edges.filter((gene: Gene) => gene.node.gnomad);
+        return genesWithPli.length ? (
+          <ExpandableCell<Gene>
+            dataSource={genesWithPli}
+            nOfElementsWhenCollapsed={2}
+            dictionnary={{
+              'see.less': intl.get('see.less'),
+              'see.more': intl.get('see.more'),
+            }}
+            renderItem={(item, id): React.ReactNode => (
+              <StackLayout horizontal>
+                <Space key={id} align="center" className={style.variantSnvOmimCellItem}>
+                  <>
+                    {genesWithPli.length > 1 && <div>{`${item.node.symbol} : `}</div>}
+                    <ExternalLink
+                      href={`https://gnomad.broadinstitute.org/gene/${item.node.ensembl_gene_id}?dataset=gnomad_r2_1`}
+                    >
+                      {item.node.gnomad.pli.toFixed(2)}
+                    </ExternalLink>
+                  </>
+                </Space>
+              </StackLayout>
+            )}
+          />
+        ) : (
+          'ND'
+        );
+      },
+    },
+    {
+      key: 'gene.loeuf',
+      title: intl.get('screen.patientsnv.results.table.loeuf'),
+      tooltip: `${intl.get('screen.patientsnv.results.table.loeuf.tooltip')}`,
+      defaultHidden: true,
+      width: 150,
+      render: (variant: { genes: { hits: { edges: Gene[] } } }) => {
+        const genesWithloeuf = variant.genes.hits.edges.filter((gene: Gene) => gene.node.gnomad);
+        return genesWithloeuf.length ? (
+          <ExpandableCell<Gene>
+            dataSource={genesWithloeuf}
+            nOfElementsWhenCollapsed={2}
+            dictionnary={{
+              'see.less': intl.get('see.less'),
+              'see.more': intl.get('see.more'),
+            }}
+            renderItem={(item, id): React.ReactNode => (
+              <StackLayout horizontal>
+                <Space key={id} align="center" className={style.variantSnvOmimCellItem}>
+                  <>
+                    {genesWithloeuf.length > 1 && <div>{`${item.node.symbol} : `}</div>}
+                    <ExternalLink
+                      href={`https://gnomad.broadinstitute.org/gene/${item.node.ensembl_gene_id}?dataset=gnomad_r2_1`}
+                    >
+                      {item.node.gnomad.loeuf.toFixed(2)}
+                    </ExternalLink>
+                  </>
+                </Space>
+              </StackLayout>
+            )}
+          />
+        ) : (
+          'ND'
+        );
+      },
+    }, */
