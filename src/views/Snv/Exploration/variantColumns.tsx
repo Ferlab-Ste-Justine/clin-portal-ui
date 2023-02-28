@@ -104,7 +104,7 @@ export const getVariantColumns = (
         </Space>
       ),
       align: 'center',
-      width: 104,
+      width: 102,
     });
   }
 
@@ -131,7 +131,7 @@ export const getVariantColumns = (
         ) : (
           TABLE_EMPTY_PLACE_HOLDER
         ),
-      width: 210,
+      width: 100,
     },
     {
       key: 'variant_class',
