@@ -1,11 +1,11 @@
 {
   "name": "clin-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.4.17",
-    "@ferlab/ui": "^5.0.1",
+    "@ferlab/ui": "^5.2.2",
     "@loadable/component": "^5.15.2",
     "@nivo/pie": "^0.79.1",
     "@react-keycloak/web": "^3.4.0",
