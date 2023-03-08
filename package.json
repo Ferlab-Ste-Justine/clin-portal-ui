@@ -5,7 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.4.17",
-    "@ferlab/ui": "^5.3.0",
+    "@ferlab/ui": "^5.2.3",
     "@loadable/component": "^5.15.2",
     "@nivo/pie": "^0.79.1",
     "@react-keycloak/web": "^3.4.0",
