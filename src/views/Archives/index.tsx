@@ -39,6 +39,7 @@ export type DocsWithTaskInfo = FhirDoc & {
   title: string;
   format: string;
   url: string;
+  taskRunAlias: string;
   action: {
     format: string;
     metadata: FhirDoc;
@@ -49,35 +50,46 @@ export type DocsWithTaskInfo = FhirDoc & {
   };
 };
 
+const INDEXES_FORMAT = ['CRAI', 'TBI'];
+
 const extracDocsFromTask = (tasks: PatientTaskResults) => {
   const docsList: DocsWithTaskInfo[] = [];
   tasks.forEach((task) => {
-    docsList.push(
-      ...task.docs.map((doc) => ({
-        ...doc,
-        key: doc.id,
-        url: doc.content[0].attachment.url,
-        taskRunAlias: task.runAlias,
-        taskAuthoredOn: formatDate(task.authoredOn),
-        taskOwner: task.owner,
-        taskId: task.id,
-        patientId: extractPatientId(doc.patientReference),
-        hash: doc.content[0].attachment.hash,
-        srRef: extractServiceRequestId(task.focus.request.id),
-        basedOnSrRef: extractServiceRequestId(task.focus.request.basedOn.reference),
-        size: formatFileSize(Number(doc.content[0].attachment.size)) as string,
-        title: doc.content[0].attachment.title,
-        format: doc.content[0].format,
-        action: {
-          format: doc.content[0].format,
-          metadata: doc,
-          urls: {
-            file: doc.content[0].attachment.url,
-            index: doc.content.length > 1 ? doc.content[1].attachment.url : '',
-          },
-        },
-      })),
-    );
+    task.docs.forEach((doc) => {
+      doc.content.forEach((content) => {
+        // ignore index files
+        if (!INDEXES_FORMAT.includes(content.format)) {
+          docsList.push({
+            ...doc,
+            key: doc.id,
+            url: content.attachment.url,
+            taskRunAlias: task.runAlias,
+            taskAuthoredOn: formatDate(task.authoredOn),
+            taskOwner: task.owner,
+            taskId: task.id,
+            patientId: extractPatientId(doc.patientReference),
+            hash: content.attachment.hash,
+            srRef: extractServiceRequestId(task.focus.request.id),
+            basedOnSrRef: extractServiceRequestId(task.focus.request.basedOn.reference),
+            size: formatFileSize(Number(content.attachment.size)) as string,
+            title: content.attachment.title,
+            format: content.format,
+            action: {
+              format: content.format,
+              metadata: doc,
+              urls: {
+                file: content.attachment.url,
+                // add index file if available
+                index:
+                  doc.content.length > 1 && INDEXES_FORMAT.includes(doc.content[1].format)
+                    ? doc.content[1].attachment.url
+                    : '',
+              },
+            },
+          });
+        }
+      });
+    });
   });
   return docsList;
 };
