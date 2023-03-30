@@ -4,7 +4,7 @@ import { isArray } from 'lodash';
 
 import { GENDER, PARENT_TYPE, PATIENT_POSITION, UNKNOWN_TAG } from 'utils/constants';
 
-export const toExponentialNotation = (numberCandidate: number, fractionDigits = 2) =>
+export const toExponentialNotation = (numberCandidate: number = 0, fractionDigits = 2) =>
   numberCandidate ? numberCandidate.toExponential(fractionDigits) : numberCandidate;
 
 // STRING

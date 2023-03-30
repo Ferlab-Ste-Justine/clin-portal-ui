@@ -151,7 +151,7 @@ const SummaryCard = ({ loading, variant, genes }: OwnProps) => {
               </Text>
               <Text className={styles.contentValue} data-cy="Summary_FreqRQDMTotalAf">
                 {variant?.frequency_RQDM
-                  ? variant?.frequency_RQDM.total?.af.toExponential(2)
+                  ? variant?.frequency_RQDM.total?.af?.toExponential(2)
                   : TABLE_EMPTY_PLACE_HOLDER}
               </Text>
             </Row>
