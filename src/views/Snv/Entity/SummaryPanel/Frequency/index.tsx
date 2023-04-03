@@ -32,10 +32,10 @@ type ExternalFreqRow = {
     cohortName: string;
     link?: string;
   };
-  alt: ExternalFreqDatum;
-  altRef: ExternalFreqDatum;
-  homozygotes: ExternalFreqDatum;
-  frequency: ExternalFreqDatum;
+  alt?: ExternalFreqDatum;
+  altRef?: ExternalFreqDatum;
+  homozygotes?: ExternalFreqDatum;
+  frequency?: ExternalFreqDatum;
   key: string;
 };
 
@@ -148,9 +148,6 @@ const externalFreqColumns = [
   },
 ];
 
-const defaultOrEmptyFrequencies = (frequencies?: BoundType): BoundType =>
-  frequencies ? frequencies : { ac: 0, af: 0, an: 0, hom: 0, pn: 0, pc: 0, pf: 0 };
-
 const createExternalFreqRow = (
   boundType: BoundType,
   key: string,
@@ -161,9 +158,9 @@ const createExternalFreqRow = (
     cohort: {
       cohortName: name ?? key,
     },
-    alt: boundType.ac ?? 0,
-    altRef: boundType.an ?? 0,
-    homozygotes: boundType.hom ?? 0,
+    alt: boundType.ac,
+    altRef: boundType.an,
+    homozygotes: boundType.hom,
     frequency: toExponentialNotation(boundType.af),
   };
 
@@ -182,11 +179,11 @@ const makeRowForExternalFreq = (
     return [];
   }
 
-  const topmed = defaultOrEmptyFrequencies(frequencies.topmed_bravo);
-  const gnomadGenomes3 = defaultOrEmptyFrequencies(frequencies.gnomad_genomes_3_0);
-  const gnomadGenomes2_1_1 = defaultOrEmptyFrequencies(frequencies.gnomad_genomes_2_1_1);
-  const gnomadExomes2_1_1 = defaultOrEmptyFrequencies(frequencies.gnomad_exomes_2_1_1);
-  const oneThousandsGenomes = defaultOrEmptyFrequencies(frequencies.thousand_genomes);
+  const topmed = frequencies.topmed_bravo || {};
+  const gnomadGenomes3 = frequencies.gnomad_genomes_3_0 || {};
+  const gnomadGenomes2_1_1 = frequencies.gnomad_genomes_2_1_1 || {};
+  const gnomadExomes2_1_1 = frequencies.gnomad_exomes_2_1_1 || {};
+  const oneThousandsGenomes = frequencies.thousand_genomes || {};
 
   return [
     createExternalFreqRow(topmed, 'TopMed', {
@@ -194,8 +191,11 @@ const makeRowForExternalFreq = (
     }),
     createExternalFreqRow(gnomadGenomes3, 'Gnomad Genomes (v3)', {
       link: `https://gnomad.broadinstitute.org/variant/${locus}?dataset=gnomad_r3`,
+      name: 'gnomAD Genome (v3)',
     }),
-    createExternalFreqRow(gnomadGenomes2_1_1, 'Gnomad Genomes (v2.1.1)', {}),
+    createExternalFreqRow(gnomadGenomes2_1_1, 'Gnomad Genomes (v2.1.1)', {
+      name: 'gnomAD Genome (v2.1.1)',
+    }),
     createExternalFreqRow(gnomadExomes2_1_1, 'Gnomad Exomes (v2.1.1)', {
       name: 'gnomAD Exome (v2.1.1)',
     }),
