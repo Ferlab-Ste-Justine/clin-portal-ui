@@ -267,10 +267,10 @@ export type ClinVar = {
 };
 
 export type BoundType = {
-  ac: number;
+  ac?: number;
   af?: number;
-  an: number;
-  hom: number;
+  an?: number;
+  hom?: number;
   pn: number;
   pc: number;
   pf: number;

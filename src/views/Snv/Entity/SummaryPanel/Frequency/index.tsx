@@ -148,6 +148,32 @@ const externalFreqColumns = [
   },
 ];
 
+const defaultOrEmptyFrequencies = (frequencies?: BoundType): BoundType =>
+  frequencies ? frequencies : { ac: 0, af: 0, an: 0, hom: 0, pn: 0, pc: 0, pf: 0 };
+
+const createExternalFreqRow = (
+  boundType: BoundType,
+  key: string,
+  { name, link }: { name?: string; link?: string },
+): ExternalFreqRow => {
+  const result: ExternalFreqRow = {
+    key: key,
+    cohort: {
+      cohortName: name ?? key,
+    },
+    alt: boundType.ac ?? 0,
+    altRef: boundType.an ?? 0,
+    homozygotes: boundType.hom ?? 0,
+    frequency: toExponentialNotation(boundType.af),
+  };
+
+  if (link) {
+    result.cohort.link = link;
+  }
+
+  return result;
+};
+
 const makeRowForExternalFreq = (
   frequencies: ExternalFrequenciesEntity,
   locus: string,
@@ -156,65 +182,24 @@ const makeRowForExternalFreq = (
     return [];
   }
 
-  const topmed = frequencies.topmed_bravo || {};
-  const gnomadGenomes3 = frequencies.gnomad_genomes_3_0 || {};
-  const gnomadGenomes2_1_1 = frequencies.gnomad_genomes_2_1_1 || {};
-  const gnomadExomes2_1_1 = frequencies.gnomad_exomes_2_1_1 || {};
-  const oneThousandsGenomes = frequencies.thousand_genomes || {};
+  const topmed = defaultOrEmptyFrequencies(frequencies.topmed_bravo);
+  const gnomadGenomes3 = defaultOrEmptyFrequencies(frequencies.gnomad_genomes_3_0);
+  const gnomadGenomes2_1_1 = defaultOrEmptyFrequencies(frequencies.gnomad_genomes_2_1_1);
+  const gnomadExomes2_1_1 = defaultOrEmptyFrequencies(frequencies.gnomad_exomes_2_1_1);
+  const oneThousandsGenomes = defaultOrEmptyFrequencies(frequencies.thousand_genomes);
 
   return [
-    {
-      key: 'TopMed',
-      cohort: {
-        cohortName: 'TopMed',
-        link: `https://bravo.sph.umich.edu/freeze8/hg38/variant/snv/${locus}`,
-      },
-      alt: topmed.ac,
-      altRef: topmed.an,
-      homozygotes: topmed.hom,
-      frequency: toExponentialNotation(topmed.af),
-    },
-    {
-      key: 'Gnomad Genomes (v3)',
-      cohort: {
-        cohortName: 'gnomAD Genome (v3)',
-        link: `https://gnomad.broadinstitute.org/variant/${locus}?dataset=gnomad_r3`,
-      },
-      alt: gnomadGenomes3.ac,
-      altRef: gnomadGenomes3.an,
-      homozygotes: gnomadGenomes3.hom,
-      frequency: toExponentialNotation(gnomadGenomes3.af),
-    },
-    {
-      key: 'Gnomad Genomes (v2.1.1)',
-      cohort: {
-        cohortName: 'gnomAD Genome (v2.1.1)',
-      },
-      alt: gnomadGenomes2_1_1.ac,
-      altRef: gnomadGenomes2_1_1.an,
-      homozygotes: gnomadGenomes2_1_1.hom,
-      frequency: toExponentialNotation(gnomadGenomes2_1_1.af),
-    },
-    {
-      key: 'Gnomad Exomes (v2.1.1)',
-      cohort: {
-        cohortName: 'gnomAD Exome (v2.1.1)',
-      },
-      alt: gnomadExomes2_1_1.ac,
-      altRef: gnomadExomes2_1_1.an,
-      homozygotes: gnomadExomes2_1_1.hom,
-      frequency: toExponentialNotation(gnomadExomes2_1_1.af),
-    },
-    {
-      key: '1000 Genomes',
-      cohort: {
-        cohortName: '1000 Genomes',
-      },
-      alt: oneThousandsGenomes.ac,
-      altRef: oneThousandsGenomes.an,
-      homozygotes: oneThousandsGenomes.hom,
-      frequency: toExponentialNotation(oneThousandsGenomes.af),
-    },
+    createExternalFreqRow(topmed, 'TopMed', {
+      link: `https://bravo.sph.umich.edu/freeze8/hg38/variant/snv/${locus}`,
+    }),
+    createExternalFreqRow(gnomadGenomes3, 'Gnomad Genomes (v3)', {
+      link: `https://gnomad.broadinstitute.org/variant/${locus}?dataset=gnomad_r3`,
+    }),
+    createExternalFreqRow(gnomadGenomes2_1_1, 'Gnomad Genomes (v2.1.1)', {}),
+    createExternalFreqRow(gnomadExomes2_1_1, 'Gnomad Exomes (v2.1.1)', {
+      name: 'gnomAD Exome (v2.1.1)',
+    }),
+    createExternalFreqRow(oneThousandsGenomes, '1000 Genomes', {}),
   ].map((row, index) => ({ ...row, key: `${index}` }));
 };
 
