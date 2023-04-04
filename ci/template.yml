@@ -1,0 +1,99 @@
+resource_types:
+# - name: pull-request
+#   type: docker-image
+#   source:
+#     repository: teliaoss/github-pr-resource
+
+resources:
+# - name: pull-request
+#   type: pull-request
+#   check_every: 1m
+#   webhook_token: ((webhook-token))
+#   source:
+#     base_branch: main
+#     repository: Ferlab-Ste-Justine/users-api-concourse
+#     access_token: ((git.access-token))
+#     states: ["OPEN"]
+- name: git-users-api
+  type: git
+  icon: github
+  check_every: 30s
+  webhook_token: ((webhook-token))
+  source:
+    uri: git@github.com:Ferlab-Ste-Justine/users-api-concourse.git
+    branch: ((branch))
+    private_key: ((git.private-repo-key))
+    ignore_paths: [ci/]
+
+- name: img-users-api
+  type: docker-image
+  icon: docker
+  source:
+    username: ((docker.username))
+    password: ((docker.password))
+    repository: ferlabcrsj/concourse-demo
+
+jobs:
+- name: build-and-publish
+  # serial_groups: [version]
+  plan:
+  - get: git-users-api
+    trigger: true
+  - task: prepare-image
+    # file: git-users-api/ci/tasks/prepare-image.yml
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: concourse/git-resource
+      inputs:
+        - name: git-users-api
+      outputs:
+        - name: output
+      params:
+        FEATURE_NAME: ((feature-name))
+      run:
+        path: bash
+        args:
+        - -c
+        - |
+          ROOT_FOLDER=$(pwd)
+
+          cp -R ${ROOT_FOLDER}/git-users-api/* ${ROOT_FOLDER}/output
+          rm -fr ${ROOT_FOLDER}/output/ci && rm -fr ${ROOT_FOLDER}/output/.git
+
+          pushd git-users-api
+              VERSION=`echo "feature-$FEATURE_NAME-$(git rev-parse --short HEAD)-$(date +'%s')"`
+          popd
+
+          echo "${VERSION}" > ${ROOT_FOLDER}/output/version
+  - put: img-users-api
+    params:
+      build: git-users-api
+      additional_tags: output/version
+
+
+# - name: test-my-branch
+#   plan:
+#   - in_parallel:
+#     # - get: pull-request
+#     #   trigger: true
+#     - get: git-users-api
+#   - task: test-echo
+#     config:
+#       platform: linux
+#       image_resource:
+#         type: docker-image
+#         source:
+#           repository: concourse/git-resource
+#       inputs:
+#         - name: git-users-api
+#       params:
+#         NAME: ((feature-name))
+#       run:
+#         path: sh
+#         args:
+#         - -c
+#         - |
+#           echo "I am here now what's up the feature name is $NAME" 
