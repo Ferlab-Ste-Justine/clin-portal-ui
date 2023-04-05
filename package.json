@@ -6,7 +6,7 @@
     "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.4.17",
     "@ferlab/ui": "^5.5.6",
-    "@loadable/component": "^5.15.2",
+    "@loadable/component": "^5.15.3",
     "@nivo/pie": "^0.79.1",
     "@react-keycloak/web": "^3.4.0",
     "@reduxjs/toolkit": "^1.8.4",
