@@ -1,0 +1,241 @@
+groups:
+  - name: ferlease
+    jobs:
+      - release-open-pr
+      - teardown-closed-merged-pr
+
+  - name: multi-feature-branch
+    jobs:
+      - set-feature-pipelines
+
+resource_types:
+- name: git-branches
+  type: registry-image
+  source:
+    repository: aoldershaw/git-branches-resource
+- name: pull-request
+  type: docker-image
+  source:
+    repository: teliaoss/github-pr-resource
+
+resources:
+- name: feature-branches
+  type: git-branches
+  source:
+    uri: git@github.com:Ferlab-Ste-Justine/clin-portal-ui.git
+    private_key: ((git.ssh-key))
+    # The "(?P<name>pattern)" syntax defines a named capture group.
+    # aoldershaw/git-branches-resource emits the value of each named capture
+    # group under the `groups` key.
+    #
+    # e.g. feature/some-feature ==> {"groups": {"feature": "some-feature"}}
+    branch_regex: 'feature/(?P<feature>.*)'
+    # branch_regex: release/(?P<version_minor>\d+\.\d+)\.x
+
+- name: git-portal-ui
+  type: git
+  icon: github
+  check_every: 30s
+  webhook_token: ((webhook-token))
+  source:
+    uri: git@github.com:Ferlab-Ste-Justine/clin-portal-ui.git
+    branch: {{branch}}
+    private_key: ((git.ssh-key))
+    # ignore_paths: [ci/]
+
+- name: open-pull-request
+  type: pull-request
+  check_every: 1m
+  webhook_token: ((webhook-token))
+  source:
+    base_branch: main
+    repository: Ferlab-Ste-Justine/clin-portal-ui
+    access_token: ((git.access-token))
+    states: ["OPEN"]
+    paths: ["feature-pull-request"]
+
+- name: closed-pull-request
+  type: pull-request
+  check_every: 1m
+  webhook_token: ((webhook-token))
+  source:
+    base_branch: main
+    repository: Ferlab-Ste-Justine/clin-portal-ui
+    access_token: ((git.access-token))
+    states: ["CLOSED", "MERGED"]
+    paths: ["feature-pull-request"]
+
+- name: ferlease
+  type: docker-image
+  icon: docker
+  source:
+    username: ((docker.username))
+    password: ((docker.password))
+    repository: ferlabcrsj/ferlease
+    tag: 0.2.2
+
+jobs:
+- name: set-feature-pipelines
+  plan:
+  - in_parallel:
+    - get: feature-branches
+      trigger: true
+    - get: git-portal-ui
+  - load_var: branches
+    file: feature-branches/branches.json
+  # Run a step multiple times with different combinations of variable values.
+  - across:
+    - var: branch
+      values: ((.:branches))
+    set_pipeline: portal-ui
+    file: git-portal-ui/ci/template.yml
+    instance_vars: {feature: ((.:branch.groups.feature))}
+    vars: {branch: ((.:branch.name)), feature-name: ((.:branch.groups.feature))}
+
+- name: release-open-pr
+  plan:
+  - get: open-pull-request
+    trigger: true
+    version: every
+  - get: ferlease
+  - task: generate-config-file
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: concourse/git-resource
+      inputs:
+      - name: open-pull-request
+      outputs:
+        - name: output
+      run:
+        path: bash
+        # dir: pull-request
+        args:
+        - -c
+        - |
+          #!/bin/bash
+          set -e
+          set +x
+          pushd open-pull-request
+            branchName=$(cat .git/resource/head_name)
+            releaseName=$(echo $branchName | cut -d "/" -f2)
+          popd
+          ls 
+          cat > ./output/config.yml <<EOL
+            service: portal-ui
+            release: $releaseName
+            environment: "qa"
+            repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
+            ref: main
+            git_auth:
+              ssh_key: "id_rsa"
+              known_key: "known_host"
+            author:
+              name: ferlab-automation
+              email: automation@ferlab.bio
+            template_directory: "{{.RepoDir}}/ferlease-templates/{{.Service}}"
+            commit_message: "{{ if eq .Operation \"release\" }}Adding{{ else }}Removing{{ end }} release {{.Release}} of service {{.Service}}"
+            push_retries: 60
+            push_retry_interval: "5s"
+          EOL
+  - task: ferlease
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: concourse/git-resource
+      inputs:
+      - name: output
+      - name: ferlease
+      params:
+        SSH_KEY: ((git.ssh-key))
+        KNOWN_HOST: ((git.known-host))
+      run:
+        path: bash
+        # dir: pull-request
+        args:
+        - -c
+        - |
+          #!/bin/bash
+          set -e
+          set +x
+          echo "$SSH_KEY" > id_rsa
+          echo "$KNOWN_HOST" > known_host
+          ./ferlease/rootfs/bin/ferlease release -c output/config.yml
+
+- name: teardown-closed-merged-pr
+  plan:
+  - get: closed-pull-request
+    trigger: true
+    version: every
+  - get: ferlease
+  - task: generate-config-file
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: concourse/git-resource
+      inputs:
+      - name: closed-pull-request
+      outputs:
+        - name: output
+      run:
+        path: bash
+        # dir: pull-request
+        args:
+        - -c
+        - |
+          #!/bin/bash
+          set -e
+          set +x
+          pushd closed-pull-request
+            branchName=$(cat .git/resource/head_name)
+            releaseName=$(echo $branchName | cut -d "/" -f2)
+          popd
+          ls 
+          cat > ./output/config.yml <<EOL
+            service: portal-ui
+            release: $releaseName
+            environment: "qa"
+            repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
+            ref: main
+            git_auth:
+              ssh_key: "id_rsa"
+              known_key: "known_host"
+            author:
+              name: ferlab-automation
+              email: automation@ferlab.bio
+            template_directory: "{{.RepoDir}}/ferlease-templates/{{.Service}}"
+            commit_message: "{{ if eq .Operation \"release\" }}Adding{{ else }}Removing{{ end }} release {{.Release}} of service {{.Service}}"
+            push_retries: 60
+            push_retry_interval: "5s"
+          EOL
+  - task: ferlease
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: concourse/git-resource
+      inputs:
+      - name: output
+      - name: ferlease
+      params:
+        SSH_KEY: ((git.ssh-key))
+        KNOWN_HOST: ((git.known-host))
+      run:
+        path: bash
+        # dir: pull-request
+        args:
+        - -c
+        - |
+          #!/bin/bash
+          set -e
+          set +x
+          echo "$SSH_KEY" > id_rsa
+          echo "$KNOWN_HOST" > known_host
+          ./ferlease/rootfs/bin/ferlease teardown -c output/config.yml

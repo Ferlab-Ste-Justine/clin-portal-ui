@@ -1,0 +1,80 @@
+resource_types:
+# - name: pull-request
+#   type: docker-image
+#   source:
+#     repository: teliaoss/github-pr-resource
+
+resources:
+# - name: pull-request
+#   type: pull-request
+#   check_every: 1m
+#   webhook_token: ((webhook-token))
+#   source:
+#     base_branch: main
+#     repository: Ferlab-Ste-Justine/users-api-concourse
+#     access_token: ((git.access-token))
+#     states: ["OPEN"]
+- name: git-portal-ui
+  type: git
+  icon: github
+  check_every: 30s
+  webhook_token: ((webhook-token))
+  source:
+    uri: git@github.com:Ferlab-Ste-Justine/clin-portal-ui.git
+    branch: ((branch))
+    private_key: ((git.ssh-key))
+    ignore_paths: [ci/]
+
+- name: img-portal-ui
+  type: docker-image
+  icon: docker
+  source:
+    username: ((docker.username))
+    password: ((docker.password))
+    repository: ferlabcrsj/clin-portal-ui
+
+jobs:
+- name: build-and-publish
+  # serial_groups: [version]
+  plan:
+  - get: git-portal-ui
+    trigger: true
+  - task: prepare-image
+    # file: git-portal-ui/ci/tasks/prepare-image.yml
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: concourse/git-resource
+      inputs:
+        - name: git-portal-ui
+      outputs:
+        - name: output
+        - name: git-portal-ui
+      params:
+        FEATURE_NAME: ((feature-name))
+      run:
+        path: bash
+        args:
+        - -c
+        - |
+          ROOT_FOLDER=$(pwd)
+
+          cp -R ${ROOT_FOLDER}/git-portal-ui/* ${ROOT_FOLDER}/output
+          rm -fr ${ROOT_FOLDER}/output/ci && rm -fr ${ROOT_FOLDER}/output/.git
+
+          pushd git-portal-ui
+              VERSION=`echo "feature-$FEATURE_NAME-$(git rev-parse --short HEAD)-$(date +'%s')"`
+              cp -p env-qa .env
+              echo "env copied"
+          popd
+
+          echo "${VERSION}" > ${ROOT_FOLDER}/output/version
+  - put: img-portal-ui
+    inputs: 
+      - git-portal-ui
+      - output
+    params:
+      build: git-portal-ui
+      additional_tags: output/version
