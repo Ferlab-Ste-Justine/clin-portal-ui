@@ -32,7 +32,7 @@ export const useStaticTableHeight = (
       debounce((entries) => {
         const rect = entries[0].contentRect;
 
-        if (Math.round(rect.height) !== tableDimension.y + YOffset) {
+        if (rect.height > 0 && Math.round(rect.height) !== tableDimension.y + YOffset) {
           handleTableDimensionChange();
         }
       }, 40),
@@ -44,6 +44,7 @@ export const useStaticTableHeight = (
 
     if (
       elem &&
+      tableDimension.y > 0 &&
       (elem.clientWidth + Xoffset !== tableDimension.x ||
         elem.clientHeight - YOffset !== tableDimension.y)
     ) {
