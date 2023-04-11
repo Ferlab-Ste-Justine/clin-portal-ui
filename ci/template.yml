@@ -51,6 +51,7 @@ jobs:
 
           pushd git-portal-ui
               VERSION=`echo "feature-$FEATURE_NAME-$(git rev-parse --short HEAD)-$(date +'%s')"`
+              sed -i '' 's/portail.qa.cqgc.hsj.rtss.qc.ca/portail-$FEATURE_NAME.qa.cqgc.hsj.rtss.qc.ca/g' env-qa
               cp -p env-qa .env
               echo "env copied"
           popd

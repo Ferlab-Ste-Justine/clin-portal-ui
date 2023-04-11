@@ -125,7 +125,7 @@ jobs:
           popd
           ls 
           cat > ./output/config.yml <<EOL
-            service: portal-ui
+            service: portail-ui
             release: $releaseName
             environment: "qa"
             repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
@@ -199,7 +199,7 @@ jobs:
           popd
           ls 
           cat > ./output/config.yml <<EOL
-            service: portal-ui
+            service: portail-ui
             release: $releaseName
             environment: "qa"
             repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
