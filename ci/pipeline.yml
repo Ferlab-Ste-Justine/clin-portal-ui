@@ -21,6 +21,7 @@ resource_types:
 resources:
 - name: feature-branches
   type: git-branches
+  check_every: 30s
   source:
     uri: git@github.com:Ferlab-Ste-Justine/clin-portal-ui.git
     private_key: ((git.ssh-key))
@@ -45,7 +46,7 @@ resources:
 
 - name: open-pull-request
   type: pull-request
-  check_every: 1m
+  check_every: 30s
   webhook_token: ((webhook-token))
   source:
     base_branch: main
@@ -56,7 +57,7 @@ resources:
 
 - name: closed-pull-request
   type: pull-request
-  check_every: 1m
+  check_every: 30s
   webhook_token: ((webhook-token))
   source:
     base_branch: main

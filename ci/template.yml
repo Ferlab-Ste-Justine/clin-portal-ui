@@ -1,19 +1,6 @@
 resource_types:
-# - name: pull-request
-#   type: docker-image
-#   source:
-#     repository: teliaoss/github-pr-resource
 
 resources:
-# - name: pull-request
-#   type: pull-request
-#   check_every: 1m
-#   webhook_token: ((webhook-token))
-#   source:
-#     base_branch: main
-#     repository: Ferlab-Ste-Justine/users-api-concourse
-#     access_token: ((git.access-token))
-#     states: ["OPEN"]
 - name: git-portal-ui
   type: git
   icon: github
@@ -39,8 +26,6 @@ jobs:
   plan:
   - get: git-portal-ui
     trigger: true
-  - task: prepare-image
-    # file: git-portal-ui/ci/tasks/prepare-image.yml
     config:
       platform: linux
       image_resource:
