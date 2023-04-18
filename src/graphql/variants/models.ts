@@ -211,6 +211,7 @@ export type ConsequenceEntity = {
   ensembl_gene_id: string;
   predictions: PredictionEntity;
   conservations: ConservationsEntity;
+  picked: null | boolean;
 };
 
 export type ConservationsEntity = {

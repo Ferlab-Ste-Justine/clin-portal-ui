@@ -1,0 +1,16 @@
+@import 'src/style/themes/clin/colors';
+
+.gnomadIndicator {
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+}
+
+.gnomadIndicatorRed {
+    background-color: $red-6;
+}
+
+.gnomadIndicatorDefault {
+    background-color: $gray-1;
+    border: 1px solid $gray-5;
+}

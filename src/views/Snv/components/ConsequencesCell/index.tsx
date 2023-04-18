@@ -27,6 +27,8 @@ const impactToColorClassName = Object.freeze({
 
 const pickImpacBadge = (impact: Impact) => impactToColorClassName[impact];
 
+const removeVariantString = (value: string) => value.toLowerCase().replaceAll('variant', '');
+
 const ConsequencesCell = ({ consequences }: OwnProps) => {
   const lines = generateConsequencesDataLines(consequences);
   return (
@@ -40,7 +42,7 @@ const ConsequencesCell = ({ consequences }: OwnProps) => {
             <StackLayout center key={index}>
               {pickImpacBadge(node.vep_impact)}
               <span key={index} className={style.detail}>
-                {removeUnderscoreAndCapitalize(node.consequences[0])}
+                {removeUnderscoreAndCapitalize(removeVariantString(node.consequences[0]))}
               </span>
               {node.symbol && (
                 <span key={toKebabCase(node.symbol)} className={style.symbol}>

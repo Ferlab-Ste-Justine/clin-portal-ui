@@ -30,6 +30,7 @@ type OwnProps = {
   pageIndex: number;
   setPageIndex: (value: number) => void;
   setDownloadKeys: TDownload;
+  queryBuilderId: string;
 };
 
 export const scrollToTop = (scrollContentId: string) =>
@@ -39,6 +40,7 @@ export const scrollToTop = (scrollContentId: string) =>
     ?.scrollTo(0, 0);
 
 const VariantsTab = ({
+  queryBuilderId,
   results,
   setQueryConfig,
   queryConfig,
@@ -67,7 +69,7 @@ const VariantsTab = ({
 
   const donor = findDonorById(selectedVariant?.donors, patientId);
   const initialColumnState = user.config.data_exploration?.tables?.patientSnv?.columns;
-  const columns = getVariantColumns(patientId, openDrawer, openIgvModal);
+  const columns = getVariantColumns(queryBuilderId, patientId, openDrawer, openIgvModal);
 
   return (
     <>

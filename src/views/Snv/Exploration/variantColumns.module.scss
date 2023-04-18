@@ -18,12 +18,25 @@
 }
 
 .dbSnpTableCell {
-  min-width: 140px;
-  width: 12%;
+  min-width: 60px;
+  text-align: center;
 }
 
 .variantSnvOmimCellItem {
   margin-bottom: 2px;
+}
+
+.addGene {
+  .addGeneButton {
+    padding: 0 4px;
+    border-radius: 2px;
+    color: $blue-8;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $gray-4;
+    }
+  }
 }
 
 .userAffectedBtnCell {

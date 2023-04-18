@@ -28,6 +28,7 @@ const VARIANT_QUERY_BASE_FIELDS = `
           impact_score
           hgvsc
           aa_change
+          picked
         }
       }
     }

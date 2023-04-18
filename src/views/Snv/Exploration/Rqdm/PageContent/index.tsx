@@ -95,6 +95,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
             key="variants"
           >
             <VariantsTab
+              queryBuilderId={VARIANT_RQDM_QB_ID}
               results={variantResults}
               setQueryConfig={setVariantQueryConfig}
               queryConfig={variantQueryConfig}
@@ -106,6 +107,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
         </Tabs>
       </VariantContentLayout>
       <Download
+        queryBuilderId={VARIANT_RQDM_QB_ID}
         downloadKeys={downloadKeys}
         setDownloadKeys={setDownloadKeys}
         queryVariables={queryVariables}

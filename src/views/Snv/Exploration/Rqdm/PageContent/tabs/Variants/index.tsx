@@ -24,6 +24,7 @@ type OwnProps = {
   pageIndex: number;
   setPageIndex: (value: number) => void;
   setDownloadKeys: TDownload;
+  queryBuilderId: string;
 };
 
 export const scrollToTop = (scrollContentId: string) =>
@@ -33,6 +34,7 @@ export const scrollToTop = (scrollContentId: string) =>
     ?.scrollTo(0, 0);
 
 const VariantsTab = ({
+  queryBuilderId,
   results,
   setQueryConfig,
   queryConfig,
@@ -53,7 +55,7 @@ const VariantsTab = ({
           tableId="varirant_table"
           className={style.variantSearchTable}
           wrapperClassName={style.variantTabWrapper}
-          columns={getVariantColumns()}
+          columns={getVariantColumns(queryBuilderId)}
           initialColumnState={initialColumnState}
           dataSource={results.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
           loading={results.loading}

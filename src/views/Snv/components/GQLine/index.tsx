@@ -1,7 +1,6 @@
 import { Space } from 'antd';
 
-import QgHighBadgeIcon from 'components/icons/QgBadgeIconHighIcon';
-import QgLowBadgeIcon from 'components/icons/QgBadgeIconLowIcon';
+import QgBadgeIcon from 'components/icons/QgBadgeIcon';
 import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 
 import style from './index.module.scss';
@@ -12,12 +11,8 @@ interface OwnProps {
 
 const GqLine = ({ value }: OwnProps) =>
   value || typeof value === 'number' ? (
-    <Space>
-      {value < 20 ? (
-        <QgLowBadgeIcon svgClass={style.low} />
-      ) : (
-        <QgHighBadgeIcon svgClass={style.high} />
-      )}
+    <Space align="center">
+      {value < 20 ? <QgBadgeIcon svgClass={style.low} /> : <QgBadgeIcon svgClass={style.high} />}
       {value}
     </Space>
   ) : (

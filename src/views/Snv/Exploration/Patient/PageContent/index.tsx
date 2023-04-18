@@ -102,6 +102,7 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
           key="variants"
         >
           <VariantsTab
+            queryBuilderId={SNV_VARIANT_PATIENT_QB_ID}
             results={variantResults}
             setQueryConfig={setVariantQueryConfig}
             queryConfig={variantQueryConfig}
@@ -111,6 +112,7 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
             setDownloadKeys={setDownloadKeys}
           />
           <Download
+            queryBuilderId={SNV_VARIANT_PATIENT_QB_ID}
             downloadKeys={downloadKeys}
             setDownloadKeys={setDownloadKeys}
             queryVariables={queryVariables}

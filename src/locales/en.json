@@ -611,6 +611,7 @@
   "screen.patientsnv.results.table.rqdm.title.tooltip": "Only occurrences with Filter = PASS and GQ ≥ 20 are taken into account for frequency calculation",
   "screen.patientsnv.results.table.transmission": "Transmission",
   "screen.patientsnv.results.table.type": "Type",
+  "screen.patientsnv.results.table.gene": "Gène",
   "screen.patientsnv.results.table.variant": "Variant",
   "screen.patientsnv.results.table.variants": "Variants",
   "screen.patientsnv.results.table.zygosity": "Zygosity",
@@ -789,5 +790,6 @@
   "inheritant.code.YL": "Y-linked",
   "inheritant.code.AR": "Autosomal recessive",
   "inheritant.code.Mi": "Mitochondrial",
-  "global.proTable.pagination.first": "First"
+  "global.proTable.pagination.first": "First",
+  "deletion.abrv": "Del"
 }

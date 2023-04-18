@@ -614,6 +614,7 @@
   "screen.patientsnv.results.table.spliceAI.title.tooltip": "Scores Delta SpliceAI pré-calculés",
   "screen.patientsnv.results.table.transmission": "Transmission",
   "screen.patientsnv.results.table.type": "Type",
+  "screen.patientsnv.results.table.gene": "Gene",
   "screen.patientsnv.results.table.variant": "Variant",
   "screen.patientsnv.results.table.variants": "Variants",
   "screen.patientsnv.results.table.zygosity": "Zygosité",
@@ -792,5 +793,7 @@
   "inheritant.code.YL": "Y-linked",
   "inheritant.code.AR": "Autosomal recessive",
   "inheritant.code.Mi": "Mitochondrial",
-  "global.proTable.pagination.first": "Début"
+  "global.proTable.pagination.first": "Début",
+  "deletion.abrv": "Del",
+  "insertion.abrv": "Ins"
 }
