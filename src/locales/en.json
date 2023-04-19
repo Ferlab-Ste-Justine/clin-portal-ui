@@ -776,6 +776,7 @@
   "api.savedFilter.error.messageDelete": "Unable to delete filter",
   "api.savedFilter.success.messageSaved": "Filter saved",
   "api.savedFilter.success.messageDeleted": "Filter deleted",
+  "inheritant.code.NRT": "No Reported Transmission",
   "inheritant.code.IC": "Isolated cases",
   "inheritant.code.XL": "X-linked",
   "inheritant.code.DR": "Digenic recessive",
@@ -791,5 +792,6 @@
   "inheritant.code.AR": "Autosomal recessive",
   "inheritant.code.Mi": "Mitochondrial",
   "global.proTable.pagination.first": "First",
-  "deletion.abrv": "Del"
+  "deletion.abrv": "Del.",
+  "insertion.abrv": "Ins."
 }
