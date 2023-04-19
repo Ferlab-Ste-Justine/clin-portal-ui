@@ -6,7 +6,6 @@ import { PlusOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
@@ -199,9 +198,9 @@ export const getVariantColumns = (
       width: 60,
       render: (rsNumber: string) =>
         rsNumber ? (
-          <a target="_blank" rel="noreferrer" href={`https://www.ncbi.nlm.nih.gov/snp/${rsNumber}`}>
+          <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${rsNumber}`}>
             <ExternalLinkIcon />
-          </a>
+          </ExternalLink>
         ) : (
           TABLE_EMPTY_PLACE_HOLDER
         ),
