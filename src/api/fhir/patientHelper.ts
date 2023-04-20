@@ -1,5 +1,7 @@
 import { capitalize, get } from 'lodash';
 
+import { EMPTY_FIELD } from '../../components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
+
 import { Name, Patient, ServiceRequestEntityExtension } from './models';
 
 export const RAMQ_NUMBER_LENGTH = 12;
@@ -30,7 +32,7 @@ export const formatRamq = (value: string) =>
           '',
         )
         .trimEnd()
-    : value;
+    : EMPTY_FIELD;
 
 export const getPatientAffectedStatus = (extension: ServiceRequestEntityExtension) => {
   const item = get(
