@@ -2,9 +2,11 @@ import intl from 'react-intl-universal';
 import { Descriptions } from 'antd';
 import { extractPatientId } from 'api/fhir/helper';
 import { PatientServiceRequestFragment } from 'api/fhir/models';
-import { formatName, formatRamq } from 'api/fhir/patientHelper';
+import { formatName } from 'api/fhir/patientHelper';
 
 import { formatDate } from 'utils/date';
+
+import { formatRamq } from '../../../../../components/Prescription/utils/ramq';
 
 interface OwnProps {
   patient: PatientServiceRequestFragment;
