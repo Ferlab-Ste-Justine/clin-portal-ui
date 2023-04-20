@@ -124,9 +124,8 @@ jobs:
             branchName=$(cat .git/resource/head_name)
             releaseName=$(echo $branchName | cut -d "/" -f2)
           popd
-          ls 
           cat > ./output/config.yml <<EOL
-            service: portail-ui
+            service: portal-ui
             release: $releaseName
             environment: "qa"
             repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
@@ -200,7 +199,7 @@ jobs:
           popd
           ls 
           cat > ./output/config.yml <<EOL
-            service: portail-ui
+            service: portal-ui
             release: $releaseName
             environment: "qa"
             repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
