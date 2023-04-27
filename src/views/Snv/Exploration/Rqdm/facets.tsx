@@ -78,7 +78,7 @@ const filterGroups: {
         ],
       },
       {
-        title: intl.get('screen.patientsnv.filter.grouptitle.genepanel'),
+        title: 'screen.patientsnv.filter.grouptitle.genepanel',
         facets: [
           'panels',
           'genes__hpo__hpo_term_label',

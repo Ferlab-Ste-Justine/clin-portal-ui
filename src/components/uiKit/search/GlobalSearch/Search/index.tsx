@@ -36,6 +36,8 @@ const Search = <T,>({
   setCurrentOptions,
   searchValueTransformer,
   customHandleSearch,
+  tooltipText,
+  title,
   ...props
 }: TGlobalSearch<T>) => {
   const [options, setOptions] = useState<OptionsType[]>([]);
@@ -87,6 +89,8 @@ const Search = <T,>({
       onSelect={onSelect}
       options={options}
       selectedItems={selectedItems}
+      title={title}
+      tooltipText={tooltipText}
       {...props}
     />
   );

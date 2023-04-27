@@ -30,7 +30,7 @@ const VariantGeneSearch = ({ queryBuilderId, index, type, fields }: OwnProps) =>
       placeholder={intl.get(`global.search.${type}.placeholder`)}
       emptyDescription={intl.get(`global.search.${type}.emptyText`)}
       searchFields={[]}
-      tooltipText={intl.get(`global.search.${type}.tooltip`)}
+      tooltipText={`global.search.${type}.tooltip`}
       query={VARIANT_SEARCH_QUERY}
       sqon={activeQuery as ISqonGroupFilter}
       handleSearch={async (searchText: string) => {
@@ -43,7 +43,7 @@ const VariantGeneSearch = ({ queryBuilderId, index, type, fields }: OwnProps) =>
           value: getValue(type, option),
         }))
       }
-      title={intl.get(`global.search.${type}.title`)}
+      title={`global.search.${type}.title`}
       limit={4}
     />
   );

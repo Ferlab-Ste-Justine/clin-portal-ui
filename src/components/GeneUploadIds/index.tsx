@@ -11,96 +11,101 @@ import { CHECK_GENE_MATCH_QUERY } from 'graphql/genes/queries';
 import { hydrateResults } from 'graphql/models';
 import { GeneEntity } from 'graphql/variants/models';
 
+import { useLang } from 'store/global';
+
 interface OwnProps {
   queryBuilderId: string;
   field: string;
 }
 
-const GenesUploadIds = ({ queryBuilderId, field }: OwnProps) => (
-  <UploadIds
-    dictionary={{
-      modalTitle: intl.get('upload.gene.ids.modal.title'),
-      submittedColTitle: intl.get('upload.gene.ids.modal.submittedColTitle'),
-      uploadBtnText: intl.get('upload.gene.ids.modal.uploadBtnText'),
-      modalUploadBtnText: intl.get('upload.gene.ids.modal.upload.file.btn'),
-      mappedTo: intl.get('upload.gene.ids.modal.mappedTo'),
-      clear: intl.get('upload.gene.ids.modal.clear.btn'),
-      emptyTableDescription: intl.get('upload.gene.ids.modal.empty.table'),
-      modalOkText: intl.get('upload.gene.ids.modal.upload.btn'),
-      modalCancelText: intl.get('upload.gene.ids.modal.cancel.btn'),
-      collapseTitle: (matchCount, unMatchCount) =>
-        intl.get('upload.gene.ids.modal.collapseTitle', {
-          matchCount,
-          unMatchCount,
-        }),
-      matchTabTitle: (matchCount) => intl.get('upload.gene.ids.modal.match', { count: matchCount }),
-      unmatchTabTitle: (unmatchcount) =>
-        intl.get('upload.gene.ids.modal.unmatch', { count: unmatchcount }),
-      tablesMessage: (submittedCount, mappedCount) =>
-        intl.get('upload.gene.ids.modal.table.message', {
-          submittedCount,
-          mappedCount,
-        }),
-      inputLabel: intl.get('upload.gene.ids.modal.input.label'),
-      inputLimitError: intl.get('upload.gene.ids.modal.input.limit'),
-      inputLimitErrorText: intl.get('upload.gene.ids.modal.input.limit.text'),
-      matchTable: {
-        idColTitle: intl.get('upload.gene.ids.modal.match.table.idcol.title'),
-        matchToFieldColTitle: intl.get('upload.gene.ids.modal.match.table.matchcol.title'),
-        mappedToFieldColTitle: intl.get('upload.gene.ids.modal.match.table.mappedcol.title'),
-      },
-    }}
-    limitItem={1500}
-    placeHolder="ex. ENSG00000157764, TP53"
-    fetchMatch={async (ids) => {
-      const response = await ArrangerApi.graphqlRequest({
-        query: CHECK_GENE_MATCH_QUERY.loc?.source.body,
-        variables: {
-          first: 1500,
-          offset: 0,
-          sqon: generateQuery({
-            operator: BooleanOperators.or,
-            newFilters: ['symbol', 'ensembl_gene_id'].map((field) =>
-              generateValueFilter({
-                field,
-                value: ids,
-                index: INDEXES.GENE,
-              }),
-            ),
+const GenesUploadIds = ({ queryBuilderId, field }: OwnProps) => {
+  useLang();
+  return (
+    <UploadIds
+      dictionary={{
+        modalTitle: intl.get('upload.gene.ids.modal.title'),
+        submittedColTitle: intl.get('upload.gene.ids.modal.submittedColTitle'),
+        uploadBtnText: intl.get('upload.gene.ids.modal.uploadBtnText'),
+        modalUploadBtnText: intl.get('upload.gene.ids.modal.upload.file.btn'),
+        mappedTo: intl.get('upload.gene.ids.modal.mappedTo'),
+        clear: intl.get('upload.gene.ids.modal.clear.btn'),
+        emptyTableDescription: intl.get('upload.gene.ids.modal.empty.table'),
+        modalOkText: intl.get('upload.gene.ids.modal.upload.btn'),
+        modalCancelText: intl.get('upload.gene.ids.modal.cancel.btn'),
+        collapseTitle: (matchCount, unMatchCount) =>
+          intl.get('upload.gene.ids.modal.collapseTitle', {
+            matchCount,
+            unMatchCount,
           }),
+        matchTabTitle: (matchCount) =>
+          intl.get('upload.gene.ids.modal.match', { count: matchCount }),
+        unmatchTabTitle: (unmatchcount) =>
+          intl.get('upload.gene.ids.modal.unmatch', { count: unmatchcount }),
+        tablesMessage: (submittedCount, mappedCount) =>
+          intl.get('upload.gene.ids.modal.table.message', {
+            submittedCount,
+            mappedCount,
+          }),
+        inputLabel: intl.get('upload.gene.ids.modal.input.label'),
+        inputLimitError: intl.get('upload.gene.ids.modal.input.limit'),
+        inputLimitErrorText: intl.get('upload.gene.ids.modal.input.limit.text'),
+        matchTable: {
+          idColTitle: intl.get('upload.gene.ids.modal.match.table.idcol.title'),
+          matchToFieldColTitle: intl.get('upload.gene.ids.modal.match.table.matchcol.title'),
+          mappedToFieldColTitle: intl.get('upload.gene.ids.modal.match.table.mappedcol.title'),
         },
-      });
+      }}
+      limitItem={1500}
+      placeHolder="ex. ENSG00000157764, TP53"
+      fetchMatch={async (ids) => {
+        const response = await ArrangerApi.graphqlRequest({
+          query: CHECK_GENE_MATCH_QUERY.loc?.source.body,
+          variables: {
+            first: 1500,
+            offset: 0,
+            sqon: generateQuery({
+              operator: BooleanOperators.or,
+              newFilters: ['symbol', 'ensembl_gene_id'].map((field) =>
+                generateValueFilter({
+                  field,
+                  value: ids,
+                  index: INDEXES.GENE,
+                }),
+              ),
+            }),
+          },
+        });
 
-      const genes: GeneEntity[] = hydrateResults(response.data?.data?.Genes?.hits?.edges || []);
+        const genes: GeneEntity[] = hydrateResults(response.data?.data?.Genes?.hits?.edges || []);
 
-      const matchResults = ids.map((id, index) => {
-        const upperCaseId = id.toUpperCase();
-        const gene = genes.find((gene) =>
-          [gene.symbol?.toUpperCase(), gene.ensembl_gene_id?.toUpperCase()].includes(upperCaseId),
-        );
-        return gene
-          ? {
-              key: index.toString(),
-              submittedId: id,
-              mappedTo: gene.symbol,
-              matchTo: gene.ensembl_gene_id,
-            }
-          : undefined;
-      });
+        const matchResults = ids.map((id, index) => {
+          const upperCaseId = id.toUpperCase();
+          const gene = genes.find((gene) =>
+            [gene.symbol?.toUpperCase(), gene.ensembl_gene_id?.toUpperCase()].includes(upperCaseId),
+          );
+          return gene
+            ? {
+                key: index.toString(),
+                submittedId: id,
+                mappedTo: gene.symbol,
+                matchTo: gene.ensembl_gene_id,
+              }
+            : undefined;
+        });
 
-      return matchResults.filter((x) => x !== undefined) as MatchTableItem[];
-    }}
-    onUpload={(match) =>
-      updateActiveQueryField({
-        queryBuilderId,
-        field,
-        value: match.map((value) => value.mappedTo),
-        index: INDEXES.VARIANT,
-        overrideValuesName: intl.get('upload.gene.ids.modal.pill.title'),
-        merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
-      })
-    }
-  />
-);
-
+        return matchResults.filter((x) => x !== undefined) as MatchTableItem[];
+      }}
+      onUpload={(match) =>
+        updateActiveQueryField({
+          queryBuilderId,
+          field,
+          value: match.map((value) => value.mappedTo),
+          index: INDEXES.VARIANT,
+          overrideValuesName: intl.get('upload.gene.ids.modal.pill.title'),
+          merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
+        })
+      }
+    />
+  );
+};
 export default GenesUploadIds;
