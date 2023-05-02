@@ -53,7 +53,8 @@ resources:
     repository: Ferlab-Ste-Justine/clin-portal-ui
     access_token: ((git.access-token))
     states: ["OPEN"]
-    paths: ["feature-pull-request"]
+    # paths: ["feature-pull-request"]
+    labels: [["enhancement"]]
 
 - name: closed-pull-request
   type: pull-request
