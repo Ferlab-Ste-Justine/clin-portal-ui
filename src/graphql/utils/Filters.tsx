@@ -104,8 +104,11 @@ const translateWhenNeeded = (group: string, key: string) =>
     .get(`filters.options.${underscoreToDot(group)}.${keyEnhance(key)}`)
     .defaultMessage(removeUnderscoreAndCapitalize(keyEnhanceBooleanOnlyExcept(group, key)));
 
-const keyEnhanceBooleanOnlyExcept = (field: string, fkey: string) =>
-  ['chromosome'].includes(field) ? fkey : keyEnhance(fkey);
+const keyEnhanceBooleanOnlyExcept = (field: string, fkey: string) => {
+  if (['1', 'true'].includes(fkey)) return 'True';
+  if (['0', 'false'].includes(fkey)) return 'False';
+  return ['chromosome'].includes(field) ? fkey : keyEnhance(fkey);
+};
 
 export const getFilters = (aggregations: Aggregations | null, key: string): IFilter[] => {
   if (!aggregations || !key) return [];
@@ -179,7 +182,16 @@ export const getFilterGroup = (
   ) {
     type = VisualType.Checkbox;
     if (!exceptions.includes(extendedMapping?.field)) {
-      extraFilterDictionary = ['0', '1'];
+      if (aggregation && aggregation.buckets) {
+        const { buckets } = aggregation;
+        const existingKey = buckets.map((bucket: any) => bucket.key_as_string);
+        if (existingKey.length < 2) {
+          // add opposite values
+          extraFilterDictionary = existingKey.map((key: any) => String(!++key));
+        }
+      } else {
+        extraFilterDictionary = ['true', 'false'];
+      }
     }
   }
   return {
