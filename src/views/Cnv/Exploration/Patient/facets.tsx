@@ -36,7 +36,7 @@ const filterGroups: {
     ],
   },
   [FilterTypes.Gene]: {
-    customSearches: [
+    customSearches: () => [
       <VariantGeneSearch
         key="genes"
         index={INDEXES.CNV}
