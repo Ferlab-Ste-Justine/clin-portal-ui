@@ -1,15 +1,15 @@
 import intl from 'react-intl-universal';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
 import FilterSelector from '@ferlab/ui/core/components/filters/FilterSelector';
-import { IFilter, IFilterGroup } from '@ferlab/ui/core/components/filters/types';
+import { IFilter, IFilterGroup, VisualType } from '@ferlab/ui/core/components/filters/types';
 import { updateActiveQueryFilters } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { keyEnhance, underscoreToDot } from '@ferlab/ui/core/data/arranger/formatting';
 import { getFilterType } from '@ferlab/ui/core/data/filters/utils';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
-import { Aggregations } from 'graphql/models';
-import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
+import { Aggregations, ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 
+import EnvironmentVariables from 'utils/EnvVariables';
 import { getFiltersDictionary } from 'utils/translation';
 
 import { dictionaries } from './dictionaries';
@@ -21,6 +21,7 @@ export interface RangeAggs {
     min: number;
   };
 }
+
 export interface TermAggs {
   buckets: TermAgg[];
 }
@@ -136,6 +137,9 @@ export const getFilters = (aggregations: Aggregations | null, key: string): IFil
   return [];
 };
 
+const exceptions: string = EnvironmentVariables.configFor(
+  'FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS',
+);
 export const getFilterGroup = (
   extendedMapping: ExtendedMapping | undefined,
   aggregation: any,
@@ -167,14 +171,25 @@ export const getFilterGroup = (
     };
   }
 
+  let extraFilterDictionary = extendedMapping?.field ? dictionaries[extendedMapping?.field] : null;
+  let type = getFilterType(extendedMapping?.type || '');
+  if (
+    EnvironmentVariables.configFor('FORCE_FILTER_BOOLEAN_TO_DICTIONARY') === 'true' &&
+    extendedMapping?.type === 'boolean'
+  ) {
+    type = VisualType.Checkbox;
+    if (!exceptions.includes(extendedMapping?.field)) {
+      extraFilterDictionary = ['0', '1'];
+    }
+  }
   return {
     field: extendedMapping?.field || '',
     title,
-    type: getFilterType(extendedMapping?.type || ''),
+    type,
     config: {
       nameMapping: [],
       withFooter: filterFooter,
-      extraFilterDictionary: extendedMapping?.field ? dictionaries[extendedMapping?.field] : null,
+      extraFilterDictionary,
       facetTranslate: (value: string) => {
         const name = translateWhenNeeded(extendedMapping?.field!, value);
         return transformNameIfNeeded(extendedMapping?.field?.replaceAll('.', '__')!, value, name);
