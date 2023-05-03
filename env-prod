@@ -19,3 +19,8 @@ REACT_APP_PANELS_FILE=https://s3.cqgc.hsj.rtss.qc.ca/cqgc-prod-app-public/panels
 
 # Style
 SASS_PATH=/code/src/style/themes/clin
+
+
+
+
+REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY=true

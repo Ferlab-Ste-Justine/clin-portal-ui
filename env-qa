@@ -38,3 +38,8 @@ CYPRESS_PRESC_EP_CUSM_LDM_CUSM   = {"prescriptionId": "TO_FILL", "patientProbId"
 CYPRESS_PRESC_EP_CHUS_LDM_CHUS   = {"prescriptionId": "TO_FILL", "patientProbId": "TO_FILL", "mrnProb": "MRN-283834", "firstNameProb": "Tristan"}
 CYPRESS_PRESCS_CUSM_RGDI = {"stampDate": "TO_FILL", "prescriptions": [{"prescriptionId": "TO_FILL", "requests": [{"mrn": "MRN-283891", "sampleId": "NA12878_A", "patientId": "TO_FILL", "requestId": "TO_FILL"}, {"mrn": "MRN-283892", "sampleId": "NA12892_A", "patientId": "TO_FILL", "requestId": "TO_FILL"}, {"mrn": "MRN-283893", "sampleId": "NA12891_A", "patientId": "TO_FILL", "requestId": "TO_FILL"}]}, {"prescriptionId": "TO_FILL", "requests": [{"mrn": "MRN-283894", "sampleId": "NA12878_B", "patientId": "TO_FILL", "requestId": "TO_FILL"}, {"mrn": "MRN-283895", "sampleId": "NA12892_B", "patientId": "TO_FILL", "requestId": "TO_FILL"}, {"mrn": "MRN-283896", "sampleId": "NA12891_B", "patientId": "TO_FILL", "requestId": "TO_FILL"}]}, {"prescriptionId": "TO_FILL", "requests": [{"mrn": "MRN-283897", "sampleId": "NA12878_C", "patientId": "TO_FILL", "requestId": "TO_FILL"}, {"mrn": "MRN-283898", "sampleId": "NA12892_C", "patientId": "TO_FILL", "requestId": "TO_FILL"}, {"mrn": "MRN-283899", "sampleId": "NA12891_C", "patientId": "TO_FILL", "requestId": "TO_FILL"}]}]}
 CYPRESS_SHAREDFILTERID = "0286826d-f20f-4a43-a17c-d196460bf834"
+
+
+
+
+REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY=true

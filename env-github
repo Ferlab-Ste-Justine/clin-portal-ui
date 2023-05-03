@@ -19,3 +19,8 @@ REACT_APP_FORM_API_URL=https://forms.qa.cqgc.hsj.rtss.qc.ca
 
 # Style
 SASS_PATH=${PWD}/src/style/themes/clin
+
+
+
+
+REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY=true

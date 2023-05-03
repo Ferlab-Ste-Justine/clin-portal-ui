@@ -12,6 +12,7 @@ export default class EnvironmentVariables {
     USERS_API_URL: process.env.REACT_APP_USERS_API_URL,
     FORM_API_URL: process.env.REACT_APP_FORM_API_URL,
     PANELS_FILE: process.env.REACT_APP_PANELS_FILE,
+    FORCE_FILTER_BOOLEAN_TO_DICTIONARY: process.env.REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY,
   };
 
   static configFor(key: string): string {
