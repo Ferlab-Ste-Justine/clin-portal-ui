@@ -5,6 +5,7 @@ REACT_APP_RELEASE_NAME=$npm_package_versionName
 REACT_APP_NOSCRIPT_CONTENT=JavaScript is required.
 REACT_APP_NAMESPACE=qa
 REACT_APP_SHOW_TRANSLATION_BTN=false
+REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY=true
 # AUTH
 REACT_APP_KEYCLOAK_CONFIG={"realm": "clin", "url": "https://auth.qa.cqgc.hsj.rtss.qc.ca/auth/", "clientId": "clin-client", "authClientId": "clin-acl"}
 # API
