@@ -36,7 +36,7 @@ const filterGroups: {
     ],
   },
   [FilterTypes.Variant]: {
-    customSearches: [
+    customSearches: () => [
       <VariantGeneSearch
         key="variants"
         index={INDEXES.VARIANT}
@@ -58,7 +58,7 @@ const filterGroups: {
     ],
   },
   [FilterTypes.Gene]: {
-    customSearches: [
+    customSearches: () => [
       <VariantGeneSearch
         key="genes"
         index={INDEXES.VARIANT}

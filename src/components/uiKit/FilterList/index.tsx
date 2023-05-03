@@ -4,7 +4,6 @@ import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Layout, Space, Typography } from 'antd';
 import cx from 'classnames';
 import { ExtendedMappingResults } from 'graphql/models';
-import { isEmpty } from 'lodash';
 
 import CustomFilterContainer from './CustomFilterContainer';
 import { FilterGroup, FilterInfo } from './types';
@@ -46,12 +45,13 @@ const FilterList = ({
   showExpandBtn = true,
 }: OwnProps) => {
   const [filtersOpen, setFiltersOpen] = useState<boolean | undefined>(isAllFacetOpen(filterInfo));
-
+  const customSearch =
+    (filterInfo && filterInfo?.customSearches && filterInfo?.customSearches()) || [];
   return (
     <>
-      {!isEmpty(filterInfo.customSearches) && (
+      {customSearch.length > 0 && (
         <Space direction="vertical" size={16} className={styles.customSearchesWrapper}>
-          {filterInfo.customSearches?.map((search, index) => (
+          {customSearch?.map((search, index) => (
             <div key={index}>{search}</div>
           ))}
         </Space>
