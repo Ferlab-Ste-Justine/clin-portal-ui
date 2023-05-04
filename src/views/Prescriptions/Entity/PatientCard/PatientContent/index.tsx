@@ -4,9 +4,8 @@ import { extractPatientId } from 'api/fhir/helper';
 import { PatientServiceRequestFragment } from 'api/fhir/models';
 import { formatName, formatRamq } from 'api/fhir/patientHelper';
 
+import { EMPTY_FIELD } from 'components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
 import { formatDate } from 'utils/date';
-
-import { EMPTY_FIELD } from '../../../../../components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
 
 interface OwnProps {
   patient: PatientServiceRequestFragment;
