@@ -21,5 +21,9 @@ export const transformNameIfNeeded = (field: string, fkey: string, name: string)
     return getAnalysisNameByCodeFromLocal(fkey, fkey, true);
   }
 
+  if (fkey.includes('_variant')) {
+    return name.replace('Variant', '');
+  }
+
   return name;
 };
