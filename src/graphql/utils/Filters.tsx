@@ -178,7 +178,7 @@ export const getFilterGroup = (
     extendedMapping?.type === 'boolean'
   ) {
     type = VisualType.Checkbox;
-    extraFilterDictionary = ['0', '1'];
+    extraFilterDictionary = ['true', 'false'];
   }
   return {
     field: extendedMapping?.field || '',
