@@ -5,6 +5,8 @@ import { IDictionary as QueryBuilderDict } from '@ferlab/ui/core/components/Quer
 
 import { GetAnalysisNameByCode } from 'store/global/types';
 
+import { dictionaries } from '../graphql/utils/dictionaries';
+
 import { formatNumber } from './formatNumber';
 
 export const getFiltersDictionary = (): FiltersDict => ({
@@ -72,6 +74,18 @@ export const getProTableDictionary = (): IProTableDictionary => ({
   },
 });
 
+const buildMap = (key: string): { string: string } =>
+  dictionaries[key].reduce(
+    (a: any, v: string) => ({
+      ...a,
+      [v]: v
+        .replace('_variant', '')
+        .replace('_', ' ')
+        .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
+        .trim(),
+    }),
+    {},
+  );
 export const getQueryBuilderDictionary = (
   facetResolver: (key: string) => React.ReactNode,
   getAnalysisNameByCode: GetAnalysisNameByCode,
@@ -187,6 +201,7 @@ export const getQueryBuilderDictionary = (
           possible_denovo: intl.get('filters.options.donors.parental_origin.possible_denovo'),
           denovo: intl.get('filters.options.donors.parental_origin.denovo'),
         },
+        'consequences.consequences': buildMap('consequences.consequences'),
       },
     },
     actions: {
