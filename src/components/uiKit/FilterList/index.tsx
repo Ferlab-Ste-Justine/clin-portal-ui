@@ -70,7 +70,7 @@ const FilterList = ({
           <div key={i} className={styles.filtersGroup}>
             {group.title ? (
               <Text type="secondary" className={styles.filterGroupTitle}>
-                {group.title}
+                {intl.get(group.title)}
               </Text>
             ) : null}
             {group.facets.map((facet, ii) =>

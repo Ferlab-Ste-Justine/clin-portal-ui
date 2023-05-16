@@ -82,7 +82,7 @@ const filterGroups: {
         ],
       },
       {
-        title: intl.get('screen.patientsnv.filter.grouptitle.genepanel'),
+        title: 'screen.patientsnv.filter.grouptitle.genepanel',
         facets: [
           'panels',
           'genes__hpo__hpo_term_label',
@@ -105,7 +105,7 @@ const filterGroups: {
         ],
       },
       {
-        title: intl.get('predictions'),
+        title: 'predictions',
         facets: [
           'consequences__predictions__cadd_phred',
           'consequences__predictions__cadd_score',
@@ -123,7 +123,7 @@ const filterGroups: {
   [FilterTypes.Frequency]: {
     groups: [
       {
-        title: intl.get('screen.patientsnv.filter.grouptitle.rqdmpatient'),
+        title: 'screen.patientsnv.filter.grouptitle.rqdmpatient',
         facets: [
           'frequency_RQDM__total__af',
           'frequency_RQDM__affected__af',
@@ -131,7 +131,7 @@ const filterGroups: {
         ],
       },
       {
-        title: intl.get('screen.patientsnv.filter.grouptitle.publiccohorts'),
+        title: 'screen.patientsnv.filter.grouptitle.publiccohorts',
         facets: [
           'external_frequencies__gnomad_genomes_2_1_1__af',
           'external_frequencies__gnomad_genomes_3_0__af',
@@ -149,7 +149,7 @@ const filterGroups: {
         facets: ['donors__zygosity'],
       },
       {
-        title: intl.get('screen.patientsnv.category_parental_analysis'),
+        title: 'screen.patientsnv.category_parental_analysis',
         facets: [
           'donors__mother_zygosity',
           'donors__father_zygosity',
@@ -160,7 +160,7 @@ const filterGroups: {
         ],
       },
       {
-        title: intl.get('screen.patientsnv.category_metric'),
+        title: 'screen.patientsnv.category_metric',
         facets: [
           'donors__filters',
           'donors__qd',

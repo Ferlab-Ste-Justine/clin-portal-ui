@@ -78,7 +78,7 @@ const filterGroups: {
         ],
       },
       {
-        title: intl.get('screen.patientsnv.filter.grouptitle.genepanel'),
+        title: 'screen.patientsnv.filter.grouptitle.genepanel',
         facets: [
           'panels',
           'genes__hpo__hpo_term_label',
@@ -119,7 +119,7 @@ const filterGroups: {
   [FilterTypes.Frequency]: {
     groups: [
       {
-        title: intl.get('screen.patientsnv.filter.grouptitle.rqdmpatient'),
+        title: 'screen.patientsnv.filter.grouptitle.rqdmpatient',
         facets: [
           'frequency_RQDM__total__af',
           'frequency_RQDM__affected__af',
@@ -127,7 +127,7 @@ const filterGroups: {
         ],
       },
       {
-        title: intl.get('screen.patientsnv.filter.grouptitle.publiccohorts'),
+        title: 'screen.patientsnv.filter.grouptitle.publiccohorts',
         facets: [
           'external_frequencies__gnomad_genomes_2_1_1__af',
           'external_frequencies__gnomad_genomes_3_0__af',
