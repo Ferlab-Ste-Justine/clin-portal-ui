@@ -732,10 +732,13 @@
   "screen.variantsearch.title": "Variants",
   "see.less": "See less",
   "see.more": "See more",
-  "sex": "Sex",
-  "sex.female": "Female",
-  "sex.male": "Male",
-  "sex.unknown": "Unknown",
+  "sex": {
+    "title": "Sex",
+    "female": "Female",
+    "male": "Male",
+    "unknown": "Unknown",
+    "other": "Other"
+  },
   "standard.format.date": "Format YYYY-MM-DD",
   "status": "Status",
   "submit": "Submit",
@@ -823,5 +826,12 @@
   "donors.zyg.abrv.HOM": "Homozygote",
   "donors.zyg.abrv.HEM": "Hemizygote",
   "donors.zyg.abrv.HET": "Heterozygote",
-  "donor.zygosity.tooltip": "Zygosity"
+  "donor.zygosity.tooltip": "Zygosity",
+  "donors" : {
+    "status": {
+      "unknown": "Unknown",
+      "affected": "Affected",
+      "not_affected": "Not Affected"
+    }
+  }
 }

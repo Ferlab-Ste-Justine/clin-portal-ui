@@ -202,6 +202,17 @@ export const getQueryBuilderDictionary = (
           denovo: intl.get('filters.options.donors.parental_origin.denovo'),
         },
         'consequences.consequences': buildMap('consequences.consequences'),
+        'donors.gender': {
+          Male: intl.get(`sex.male`),
+          Female: intl.get(`sex.female`),
+          unknown: intl.get(`sex.unknown`),
+          Other: intl.get(`sex.other`),
+        },
+        'donors.affected_status_code': {
+          affected: intl.get('donors.status.affected'),
+          not_affected: intl.get('donors.status.not_affected'),
+          unknown: intl.get('unknown'),
+        },
       },
     },
     actions: {
