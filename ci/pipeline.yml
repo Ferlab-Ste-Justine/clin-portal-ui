@@ -125,6 +125,7 @@ jobs:
   - get: open-pull-request
     trigger: true
     version: every
+  - get: git-portal-ui
   - get: ferlease
   - task: generate-config-file
     config:
@@ -135,6 +136,7 @@ jobs:
           repository: concourse/git-resource
       inputs:
       - name: open-pull-request
+      - name: git-portal-ui
       outputs:
         - name: output
       run:
@@ -149,6 +151,9 @@ jobs:
           pushd open-pull-request
             branchName=$(cat .git/resource/head_name)
             releaseName=$(echo $branchName | cut -d "/" -f2)
+          popd
+          pushd git-portal-ui
+            releaseTicket=$(cat release-ticket)
           popd
           if ! [[ "$branchName" =~ ^(feat|fix|refactor|perf)(\/)([a-z]{2,8}-[0-9]+[a-z0-9\-]*)$ ]]
           then
@@ -175,7 +180,7 @@ jobs:
           cat > ./output/attachments.json <<EOL
           [
             {
-              "title": "New Portal UI Release : portal-ui-release-$releaseName",
+              "title": "New Portal UI Release : Ticket: $releaseName:$releaseTicket",
               "text": " You can find the new release for portal UI at https://portal-ui-$releaseName.qa.cqgc.hsj.rtss.qc.ca",
               "color": "good"
             }
