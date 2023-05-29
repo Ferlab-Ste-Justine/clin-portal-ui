@@ -49,7 +49,7 @@ const FilterList = ({
     (filterInfo && filterInfo?.customSearches && filterInfo?.customSearches()) || [];
   return (
     <>
-      {customSearch.length > 0 && (
+      {customSearch?.length > 0 && (
         <Space direction="vertical" size={16} className={styles.customSearchesWrapper}>
           {customSearch?.map((search, index) => (
             <div key={index}>{search}</div>
