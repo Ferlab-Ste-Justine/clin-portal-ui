@@ -3,9 +3,9 @@ import { Card, Descriptions, Tag } from 'antd';
 import { extractOrganizationId, extractServiceRequestId } from 'api/fhir/helper';
 import { RequesterType, ServiceRequestEntity } from 'api/fhir/models';
 import StatusTag from 'views/Prescriptions/components/StatusTag';
+import { EMPTY_FIELD } from 'views/Prescriptions/Entity/constants';
 import { getPrescriptionStatusDictionnary } from 'views/Prescriptions/utils/constant';
 
-import { EMPTY_FIELD } from 'components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
 import ParagraphLoader from 'components/uiKit/ParagraphLoader';
 import { useGlobals } from 'store/global';
 import { formatDate } from 'utils/date';
@@ -16,7 +16,7 @@ interface OwnProps {
 }
 
 const getPractionnerName = (requester: RequesterType) => {
-  const practitionerName = `${requester.practitioner?.name.family.toLocaleUpperCase()} 
+  const practitionerName = `${requester.practitioner?.name.family.toLocaleUpperCase()}
   ${requester.practitioner?.name?.given?.join(' ')}`;
 
   const practitionerIdentifier = requester.practitioner?.identifier?.value;

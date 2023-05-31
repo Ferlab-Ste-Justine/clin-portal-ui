@@ -9,8 +9,7 @@ import RequestTable from '../RequestTable';
 const { Title } = Typography;
 
 import { ServiceRequestEntity } from 'api/fhir/models';
-
-import { EMPTY_FIELD } from 'components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
+import { EMPTY_FIELD } from 'views/Prescriptions/Entity/constants';
 
 import { ClinicalSign } from './components/ClinicalSign';
 import { Consanguinity } from './components/Consanguinity';

@@ -3,8 +3,8 @@ import Empty from '@ferlab/ui/core/components/Empty';
 import { Table, TableColumnType } from 'antd';
 import { extractServiceRequestId } from 'api/fhir/helper';
 import { PatientRequest } from 'api/fhir/models';
+import { EMPTY_FIELD } from 'views/Prescriptions/Entity/constants';
 
-import { EMPTY_FIELD } from 'components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
 import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 import { formatDate } from 'utils/date';
 
@@ -44,7 +44,7 @@ const getRequestColumns = (patientId: string): TableColumnType<Record<string, an
     title: intl.get('screen.prescription.entity.request.requester'),
     render: (requester) =>
       requester
-        ? `${requester.practitioner?.name.family.toLocaleUpperCase()} 
+        ? `${requester.practitioner?.name.family.toLocaleUpperCase()}
       ${requester.practitioner?.name?.given?.join(' ')}`
         : EMPTY_FIELD,
   },

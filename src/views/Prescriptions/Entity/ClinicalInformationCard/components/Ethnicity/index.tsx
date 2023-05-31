@@ -1,7 +1,7 @@
 import { useCodeSystem, useObservationEthnicityEntity } from 'graphql/prescriptions/actions';
-import { find } from 'lodash';
+import find from 'lodash/find';
+import { EMPTY_FIELD } from 'views/Prescriptions/Entity/constants';
 
-import { EMPTY_FIELD } from 'components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
 import { useLang } from 'store/global';
 
 type IDOwnProps = {

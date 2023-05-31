@@ -1,7 +1,6 @@
 import intl from 'react-intl-universal';
 import { useObservationConsanguinityEntity } from 'graphql/prescriptions/actions';
-
-import { EMPTY_FIELD } from 'components/Prescription/Analysis/AnalysisForm/ReusableSteps/constant';
+import { EMPTY_FIELD } from 'views/Prescriptions/Entity/constants';
 
 type IDOwnProps = {
   id: string;
