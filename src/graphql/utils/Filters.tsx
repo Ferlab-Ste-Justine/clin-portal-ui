@@ -164,6 +164,7 @@ export const getFilterGroup = (
       title,
       type: getFilterType(extendedMapping?.type || ''),
       config: {
+        noDataInputOption: !extendedMapping?.field.includes('donors'),
         min: aggregation.stats.min,
         max: aggregation.stats.max,
         rangeTypes: rangeTypes.map((r) => ({
