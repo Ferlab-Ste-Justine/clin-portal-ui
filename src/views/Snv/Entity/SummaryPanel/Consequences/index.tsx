@@ -171,7 +171,7 @@ export const makeRows = (consequences: ArrangerEdge<ConsequenceEntity>[]) =>
       [
         'Polyphen2',
         consequence.node.predictions?.polyphen2_hvar_pred,
-        consequence.node.predictions?.sift_score,
+        consequence.node.predictions?.polyphen2_hvar_score,
       ],
       [
         'Fathmm',
@@ -184,7 +184,10 @@ export const makeRows = (consequences: ArrangerEdge<ConsequenceEntity>[]) =>
       ['Lrt', consequence.node.predictions?.lrt_pred, consequence.node.predictions?.lrt_score],
       ['Revel', null, consequence.node.predictions?.revel_score],
     ].filter(([, , score]) => score),
-    conservation: consequence.node.conservations?.phylo_p17way_primate_score,
+    conservation: {
+      phylo_p17way_primate_score: consequence.node.conservations?.phylo_p17way_primate_score,
+      phyloP100way_vertebrate: consequence.node.predictions?.phyloP100way_vertebrate,
+    },
     transcript: {
       ids: consequence.node.refseq_mrna_id?.filter((i) => i?.length > 0),
       transcriptId: consequence.node.ensembl_transcript_id,
@@ -277,8 +280,24 @@ const columns = [
   {
     title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.ConservationColumn'),
     dataIndex: 'conservation',
-    render: (conservation: number) =>
-      conservation == null ? TABLE_EMPTY_PLACE_HOLDER : conservation,
+    render: ({ phylo_p17way_primate_score, phyloP100way_vertebrate }: any) => (
+      <div style={{ minWidth: 150 }}>
+        <StackLayout horizontal className={styles.cellList}>
+          <Text type={'secondary'}>PhyloP17Way:</Text>
+          <Text>
+            {phylo_p17way_primate_score == null
+              ? TABLE_EMPTY_PLACE_HOLDER
+              : phylo_p17way_primate_score}
+          </Text>
+        </StackLayout>
+        <StackLayout horizontal className={styles.cellList}>
+          <Text type={'secondary'}>PhyloP100Way:</Text>
+          <Text>
+            {phyloP100way_vertebrate == null ? TABLE_EMPTY_PLACE_HOLDER : phyloP100way_vertebrate}
+          </Text>
+        </StackLayout>
+      </div>
+    ),
   },
   {
     title: () => intl.get('ensemblID'),

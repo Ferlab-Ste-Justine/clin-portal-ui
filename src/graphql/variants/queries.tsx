@@ -412,6 +412,7 @@ export const TAB_SUMMARY_QUERY = gql`
                       sift_pred
                       polyphen2_hvar_score
                       polyphen2_hvar_pred
+                      phyloP100way_vertebrate
                     }
                     impact_score
                   }

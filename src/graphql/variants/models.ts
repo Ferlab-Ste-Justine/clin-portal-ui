@@ -238,6 +238,7 @@ export type PredictionEntity = {
   sift_pred: string;
   polyphen2_hvar_score: number;
   polyphen2_hvar_pred: string;
+  phyloP100way_vertebrate: number;
 };
 
 export type Consequence = {

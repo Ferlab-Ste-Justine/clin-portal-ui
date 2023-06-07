@@ -720,7 +720,7 @@
   "screen.variantDetails.summaryTab.consequencesTable.AAColumn": "AA",
   "screen.variantDetails.summaryTab.consequencesTable.CDNAChangeColumn": "ADN codant",
   "screen.variantDetails.summaryTab.consequencesTable.ConsequenceColumn": "Conséquence",
-  "screen.variantDetails.summaryTab.consequencesTable.ConservationColumn": "Conservation (PhyloP17Way) ",
+  "screen.variantDetails.summaryTab.consequencesTable.ConservationColumn": "Conservation",
   "screen.variantDetails.summaryTab.consequencesTable.VEP": "VEP",
   "screen.variantDetails.summaryTab.consequencesTitle": "Conséquences géniques",
   "screen.variantDetails.summaryTab.frequencyCardTitle": "Fréquences",
