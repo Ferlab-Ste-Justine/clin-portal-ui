@@ -67,6 +67,8 @@ resources:
     branch: {{branch}}
     private_key: ((git.ssh-key))
     # ignore_paths: [ci/]
+  params:
+    submodule_recursive: true
 
 - name: open-pull-request
   type: pull-request
