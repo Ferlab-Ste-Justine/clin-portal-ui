@@ -1,5 +1,20 @@
-.prescriptionEntityWrapper {
-  :global(.ant-card) {
-    height: 100%;
+@import 'src/style/themes/clin/colors';
+
+.prescriptionEntityContainer {
+  div[role=tablist] {
+    background: white;
+    padding: 0px 24px;
+    height: 48px;
+  }
+
+  .headerIcon {
+    color: $blue-9;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 32px;
+
+    > svg {
+      display: flex;
+    }
   }
 }
