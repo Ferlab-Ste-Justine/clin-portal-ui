@@ -102,7 +102,10 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
 Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: string, facetRank: number, dictionnary: string[]) => {
   cy.get('li[data-key="' + section + '"]').click({force: true});
 
-  cy.get('span[class*="FilterContainer_title"]').contains(facetTitle, {timeout: 5000}).click({force: true});
+  if (section !== 'rqdm') {
+    cy.get('span[class*="FilterContainer_title"]').contains(facetTitle, {timeout: 5000}).click({force: true});
+  }
+  
   cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
     .then(($facet) => {
       if ($facet.has('Dictionnaire')) {

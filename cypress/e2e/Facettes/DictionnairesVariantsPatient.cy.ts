@@ -343,7 +343,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_occurrence', 'Zygosité', 0, dictionnary);
   });
 
-  it('Occurrence - Zygosité maternelle [CLIN-1994]', () => {
+  it('Occurrence - Zygosité maternelle', () => {
     const dictionnary = ['HOM',
                           'HEM',
                           'HET',
@@ -353,7 +353,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_occurrence', 'Zygosité maternelle', 1, dictionnary);
   });
 
-  it('Occurrence - Zygosité paternelle [CLIN-1994]', () => {
+  it('Occurrence - Zygosité paternelle', () => {
     const dictionnary = ['HOM',
                           'HEM',
                           'HET',
@@ -378,7 +378,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_occurrence', 'Origine parentale', 3, dictionnary);
   });
 
-  it('Occurrence - Transmission', () => {
+  it('Occurrence - Transmission [CLIN-1969]', () => {
     const dictionnary = ['Autosomal Dominant De Novo',
                           'Autosomal Dominant',
                           'Autosomal Recessive',
