@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { ITableDimension } from 'components/Table/StaticTableHeightXY';
-
-import useElementSize from '../../../hooks/useElementSize';
-import useWindowSize from '../../../hooks/useWindowSize';
+import useElementSize from 'hooks/useElementSize';
+import useWindowSize from 'hooks/useWindowSize';
 
 import styles from './index.module.scss';
 
@@ -21,11 +20,12 @@ const FixedSizeTable = ({ fixedProTable }: OwnProps) => {
   useEffect(() => {
     const node = thisRef.current;
     if (node) {
-      const { top } = node.getBoundingClientRect();
+      const { y: top } = node.getBoundingClientRect();
       const y =
         queryBuilderDimensions.y > 100
-          ? windowSize.height - top - (queryBuilderDimensions.y - 60)
+          ? windowSize.height - top - queryBuilderDimensions.y - 60
           : windowSize.height - top - queryBuilderDimensions.y - 150;
+
       setDimension({ x: 'max-content', y });
     }
   }, [windowSize, thisRef, queryBuilderDimensions]);
