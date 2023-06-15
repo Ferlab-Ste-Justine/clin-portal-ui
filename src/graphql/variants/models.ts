@@ -108,6 +108,13 @@ export type DonorsEntity = {
   analysis_service_request_id: string;
   hc_complement?: HcComplementHits;
   is_hc?: boolean;
+  exomiser?: Exomiser;
+};
+
+export type Exomiser = {
+  gene_combined_score: number;
+  acmg_classification: string;
+  acmg_evidence: string;
 };
 
 export type ITableVariantEntity = VariantEntity & {

@@ -182,6 +182,11 @@ export const VARIANT_QUERY = gql`
                         }
                       }
                     }
+                    exomiser {
+                      gene_combined_score
+                      acmg_classification
+                      acmg_evidence
+                    }
                   }
                 }
               }

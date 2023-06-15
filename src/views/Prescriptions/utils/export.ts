@@ -137,6 +137,9 @@ export const customMapping = (prefix: string, key: string, row: any, patientId: 
       return convertToPlain(renderConsequencesToString(row));
     } else if (
       [
+        'donors.exomiser.gene_combined_score',
+        'donors.exomiser.acmg_classification',
+        'donors.exomiser.acmg_evidence',
         'donors.gq',
         'donors.zygosity',
         'donors_genotype',

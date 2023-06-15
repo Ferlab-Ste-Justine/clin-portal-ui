@@ -154,6 +154,31 @@ describe('customMapping SNV', () => {
     };
     expect(customMapping('SNV', 'consequence', row)).toEqual('Faa');
   });
+  test('should map donors.exomiser', () => {
+    const row = {
+      donors: {
+        hits: {
+          edges: [
+            {
+              node: {
+                patient_id: 'p1',
+                exomiser: {
+                  gene_combined_score: 0.42,
+                  acmg_classification: 'foo_bar',
+                  acmg_evidence: null,
+                },
+              },
+            },
+          ],
+        },
+      },
+    };
+    expect(customMapping('SNV', 'donors.exomiser.gene_combined_score', row, 'p1')).toEqual('0.42');
+    expect(customMapping('SNV', 'donors.exomiser.acmg_classification', row, 'p1')).toEqual(
+      'Foo Bar',
+    );
+    expect(customMapping('SNV', 'donors.exomiser.acmg_evidence', row, 'p1')).toEqual('-');
+  });
   test('should map donors.gq', () => {
     const row = {
       donors: {

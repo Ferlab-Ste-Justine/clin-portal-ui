@@ -99,10 +99,15 @@ const filterGroups: {
       {
         facets: [
           'clinvar__clin_sig',
-          'varsome__acmg__verdict__verdict',
-          'varsome__acmg__classifications__name',
           'consequences__vep_impact',
+          'donors__exomiser__gene_combined_score',
+          'donors__exomiser__acmg_classification',
+          'donors__exomiser__acmg_evidence',
         ],
+      },
+      {
+        title: intl.get('varsome'),
+        facets: ['varsome__acmg__verdict__verdict', 'varsome__acmg__classifications__name'],
       },
       {
         title: intl.get('predictions'),
