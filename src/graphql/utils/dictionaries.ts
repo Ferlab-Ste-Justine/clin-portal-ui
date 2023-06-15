@@ -259,6 +259,8 @@ export const dictionaries: Record<string, string[]> = {
     'non_carrier_proband',
     'unknown_parents_genotype',
     'unknown_proband_genotype',
+    'unknown_father_genotype',
+    'unknown_mother_genotype',
     ArrangerValues.missing,
   ],
   'donors.filters': [
