@@ -21,10 +21,8 @@ const FixedSizeTable = ({ fixedProTable }: OwnProps) => {
     const node = thisRef.current;
     if (node) {
       const { y: top } = node.getBoundingClientRect();
-      const y =
-        queryBuilderDimensions.y > 100
-          ? windowSize.height - top - queryBuilderDimensions.y - 60
-          : windowSize.height - top - queryBuilderDimensions.y - 150;
+
+      const y = windowSize.height - (top + 225);
 
       setDimension({ x: 'max-content', y });
     }
