@@ -329,9 +329,6 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.gene_combined_score'),
         tooltip: intl.get('screen.patientsnv.results.table.gene_combined_score.tooltip'),
         width: 59,
-        sorter: {
-          multiple: 1,
-        },
         render: (record: VariantEntity) =>
           renderDonorByKey(
             'donors.exomiser.gene_combined_score',
@@ -343,9 +340,6 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.acmg_classification'),
         tooltip: intl.get('screen.patientsnv.results.table.acmg_classification.tooltip'),
         width: 110,
-        sorter: {
-          multiple: 1,
-        },
         render: (record: VariantEntity) =>
           renderDonorByKey(
             'donors.exomiser.acmg_classification',

@@ -19,7 +19,7 @@ exports[`PrescriptionAutoComplete should be as the snapshot 1`] = `
     >
       <span
         className="ant-input-affix-wrapper ant-select-selection-search-input ant-input-affix-wrapper-lg"
-        onMouseDown={[Function]}
+        onClick={[Function]}
         style={
           Object {
             "opacity": null,

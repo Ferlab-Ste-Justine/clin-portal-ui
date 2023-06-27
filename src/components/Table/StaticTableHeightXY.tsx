@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
 
 export interface ITableDimension {
-  x: number;
-  y: number;
+  x: number | string;
+  y: number | string;
 }
 
 const YOffset = 124;

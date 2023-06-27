@@ -186,6 +186,9 @@ export const dictionaries: Record<string, string[]> = {
     'protective',
     'confers_sensitivity',
     'Uncertain_risk_allele',
+    'association_not_found',
+    'Likely_risk_allele',
+    'low_penetrance',
     ArrangerValues.missing,
   ],
   'varsome.acmg.verdict.verdict': [
