@@ -204,6 +204,9 @@ export const getVariantColumns = (
       key: 'gene',
       dataIndex: 'consequences',
       width: 100,
+      sorter: {
+        multiple: 1,
+      },
       render: (consequences: VariantEntity['consequences']) => {
         const pickedConsequence = consequences?.hits?.edges.find(({ node }) => !!node.picked);
         const geneSymbol = pickedConsequence?.node.symbol;
