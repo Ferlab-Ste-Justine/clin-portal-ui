@@ -329,6 +329,9 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.gene_combined_score'),
         tooltip: intl.get('screen.patientsnv.results.table.gene_combined_score.tooltip'),
         width: 59,
+        sorter: {
+          multiple: 1,
+        },
         render: (record: VariantEntity) =>
           renderDonorByKey(
             'donors.exomiser.gene_combined_score',
