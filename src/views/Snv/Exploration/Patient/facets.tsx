@@ -120,7 +120,7 @@ const filterGroups: {
           'consequences__predictions__polyphen2_hvar_pred',
           'consequences__predictions__sift_pred',
           'genes__spliceai__ds',
-          'consequences__predictions__revel_rankscore',
+          'consequences__predictions__revel_score',
         ],
       },
     ],

@@ -72,6 +72,7 @@ describe('Page des prescriptions et requêtes - Colonnes du tableau des requête
 
     cy.get('thead[class="ant-table-thead"]').eq(1)
       .find('th[class*="ant-table-cell"]').eq(10)
+      .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Liens').should('exist');
 
     cy.get('thead[class="ant-table-thead"]').eq(1)

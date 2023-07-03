@@ -149,7 +149,6 @@ exports[`RequestTable should be as the snapshot 1`] = `
                           >
                             <span
                               className="ant-typography"
-                              onClick={null}
                               style={
                                 Object {
                                   "WebkitLineClamp": undefined,

@@ -15,7 +15,7 @@ const strTime = joinWithPadding([
 export default defineConfig({
   projectId: 'e6jd58',
   chromeWebSecurity: false,
-  video: false,
+  video: true,
   videoUploadOnPasses: false,
   screenshotOnRunFailure: true,
   viewportWidth: 1920,

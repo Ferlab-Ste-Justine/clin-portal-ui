@@ -18,7 +18,6 @@ export const DEFAULT_PAGING_CONFIG = {
 };
 
 export const DEFAULT_SORT_QUERY = [
-  { field: 'donors.exomiser.gene_combined_score', order: SortDirection.Desc },
   { field: 'max_impact_score', order: SortDirection.Desc },
   { field: 'hgvsg', order: SortDirection.Asc },
 ] as ISort[];

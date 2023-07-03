@@ -395,20 +395,20 @@ export const TAB_SUMMARY_QUERY = gql`
                     mane_select
                     mane_plus
                     conservations {
-                      phylo_p17way_primate_rankscore
+                      phylo_p17way_primate_score
                     }
                     refseq_mrna_id
                     ensembl_transcript_id
                     predictions {
                       fathmm_pred
-                      FATHMM_converted_rankscore
+                      fathmm_score
                       cadd_score
                       cadd_phred
                       dann_score
                       lrt_pred
-                      lrt_converted_rankscore
-                      revel_rankscore
-                      sift_converted_rank_score
+                      lrt_score
+                      revel_score
+                      sift_score
                       sift_pred
                       polyphen2_hvar_score
                       polyphen2_hvar_pred

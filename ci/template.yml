@@ -31,6 +31,7 @@ jobs:
   plan:
   - get: git-portal-ui
     trigger: true
+    params: { submodule_recursive: true }
   - task: prepare-image
     config:
       platform: linux

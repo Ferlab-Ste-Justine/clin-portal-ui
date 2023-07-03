@@ -167,32 +167,24 @@ export const makeRows = (consequences: ArrangerEdge<ConsequenceEntity>[]) =>
     strand: consequence.node.strand,
     vep: consequence.node.vep_impact,
     impact: [
-      [
-        'Sift',
-        consequence.node.predictions?.sift_pred,
-        consequence.node.predictions?.sift_converted_rank_score,
-      ],
+      ['Sift', consequence.node.predictions?.sift_pred, consequence.node.predictions?.sift_score],
       [
         'Polyphen2',
         consequence.node.predictions?.polyphen2_hvar_pred,
-        consequence.node.predictions?.sift_converted_rank_score,
+        consequence.node.predictions?.sift_score,
       ],
       [
         'Fathmm',
         consequence.node.predictions?.fathmm_pred,
-        consequence.node.predictions?.FATHMM_converted_rankscore,
+        consequence.node.predictions?.fathmm_score,
       ],
       ['Cadd (Raw)', null, consequence.node.predictions?.cadd_score],
       ['Cadd (Phred)', null, consequence.node.predictions?.cadd_phred],
       ['Dann', null, consequence.node.predictions?.dann_score],
-      [
-        'Lrt',
-        consequence.node.predictions?.lrt_pred,
-        consequence.node.predictions?.lrt_converted_rankscore,
-      ],
-      ['Revel', null, consequence.node.predictions?.revel_rankscore],
+      ['Lrt', consequence.node.predictions?.lrt_pred, consequence.node.predictions?.lrt_score],
+      ['Revel', null, consequence.node.predictions?.revel_score],
     ].filter(([, , score]) => score),
-    conservation: consequence.node.conservations?.phylo_p17way_primate_rankscore,
+    conservation: consequence.node.conservations?.phylo_p17way_primate_score,
     transcript: {
       ids: consequence.node.refseq_mrna_id?.filter((i) => i?.length > 0),
       transcriptId: consequence.node.ensembl_transcript_id,

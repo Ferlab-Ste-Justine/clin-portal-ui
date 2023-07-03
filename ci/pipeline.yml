@@ -10,7 +10,7 @@ groups:
 
 resource_types:
 - name: git
-  type: docker-image
+  type: registry-image
   source:
     repository: concourse/git-resource
     username: ((docker.username))
@@ -67,8 +67,6 @@ resources:
     branch: {{branch}}
     private_key: ((git.ssh-key))
     # ignore_paths: [ci/]
-  params:
-    submodule_recursive: true
 
 - name: open-pull-request
   type: pull-request
@@ -247,7 +245,6 @@ jobs:
         - name: output
       run:
         path: bash
-        # dir: pull-request
         args:
         - -c
         - |
