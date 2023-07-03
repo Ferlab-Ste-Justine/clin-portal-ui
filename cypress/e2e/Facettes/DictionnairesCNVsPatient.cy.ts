@@ -39,32 +39,32 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Type de variant$/, 0, dictionnary);
   });
 
-  it('Variant - Chromosome', () => {
-    const dictionnary = ['1',
-                          '2',
-                          '3',
-                          '4',
-                          '5',
-                          '6',
-                          '7',
-                          '8',
-                          '9',
-                          '10',
-                          '11',
-                          '12',
-                          '13',
-                          '14',
-                          '15',
-                          '16',
-                          '17',
-                          '18',
-                          '19',
-                          '20',
-                          '21',
-                          '22',
-                          'X',
-                          'Y',
-                          'No Data'];
+  it('Variant - Chromosome [CLIN-2031]', () => {
+    const dictionnary = [/^1$/,
+                         /^2$/,
+                         '3',
+                         '4',
+                         '5',
+                         '6',
+                         '7',
+                         '8',
+                         '9',
+                         '10',
+                         '11',
+                         '12',
+                         '13',
+                         '14',
+                         '15',
+                         '16',
+                         '17',
+                         '18',
+                         '19',
+                         '20',
+                         '21',
+                         '22',
+                         'X',
+                         'Y',
+                         'No Data'];
 
     cy.validateDictionnary('category_variant', /^Chromosome$/, 2, dictionnary);
   });

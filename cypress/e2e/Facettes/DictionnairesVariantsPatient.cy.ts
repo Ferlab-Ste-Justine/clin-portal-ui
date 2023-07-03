@@ -94,32 +94,32 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Référence externe$/, 2, dictionnary);
   });
 
-  it('Variant - Chromosome', () => {
-    const dictionnary = ['1',
-                          '2',
-                          '3',
-                          '4',
-                          '5',
-                          '6',
-                          '7',
-                          '8',
-                          '9',
-                          '10',
-                          '11',
-                          '12',
-                          '13',
-                          '14',
-                          '15',
-                          '16',
-                          '17',
-                          '18',
-                          '19',
-                          '20',
-                          '21',
-                          '22',
-                          'X',
-                          'Y',
-                          'No Data'];
+  it('Variant - Chromosome [CLIN-2031]', () => {
+    const dictionnary = [/^1$/,
+                         /^2$/,
+                         '3',
+                         '4',
+                         '5',
+                         '6',
+                         '7',
+                         '8',
+                         '9',
+                         '10',
+                         '11',
+                         '12',
+                         '13',
+                         '14',
+                         '15',
+                         '16',
+                         '17',
+                         '18',
+                         '19',
+                         '20',
+                         '21',
+                         '22',
+                         'X',
+                         'Y',
+                         'No Data'];
 
     cy.validateDictionnary('category_variant', /^Chromosome$/, 3, dictionnary);
   });
@@ -227,21 +227,24 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
 
   it('Pathogénicité - ClinVar', () => {
     const dictionnary = ['Benign',
-                          'Likely Benign',
-                          'Uncertain Significance',
-                          'Conflicting Interpretations Of Pathogenicity',
-                          'Pathogenic',
-                          'Not Provided',
-                          'Drug Response',
-                          'Risk Factor',
-                          'Likely Pathogenic',
-                          'Association',
-                          'Other',
-                          'Affects',
-                          'Protective',
-                          'Confers Sensitivity',
-                          'Uncertain Risk Allele',
-                          'No Data'];
+                         'Likely Benign',
+                         'Uncertain Significance',
+                         'Conflicting Interpretations Of Pathogenicity',
+                         'Pathogenic',
+                         'Not Provided',
+                         'Drug Response',
+                         'Risk Factor',
+                         'Likely Pathogenic',
+                         'Association',
+                         'Other',
+                         'Affects',
+                         'Protective',
+                         'Confers Sensitivity',
+                         'Uncertain Risk Allele',
+                         'Association Not Found',
+                         'Likely Risk Allele',
+                         'Low Penetrance',
+                         'No Data'];
 
     cy.validateDictionnary('category_pathogenicity', /^ClinVar$/, 0, dictionnary);
   });
@@ -378,7 +381,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_occurrence', /^Origine parentale$/, 3, dictionnary);
   });
 
-  it('Occurrence - Transmission [CLIN-1969]', () => {
+  it('Occurrence - Transmission', () => {
     const dictionnary = ['Autosomal Dominant De Novo',
                           'Autosomal Dominant',
                           'Autosomal Recessive',

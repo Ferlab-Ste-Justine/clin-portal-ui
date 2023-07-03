@@ -22,10 +22,12 @@ describe('Page d\'archives - Colonnes du tableau', () => {
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(0)
+      .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Nom du fichier').should('exist');
     
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(1)
+      .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Type').should('exist');
   
     cy.get('thead[class="ant-table-thead"]')
@@ -55,6 +57,7 @@ describe('Page d\'archives - Colonnes du tableau', () => {
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(7)
+      .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Date').should('exist');
   
     cy.get('thead[class="ant-table-thead"]')
@@ -77,6 +80,7 @@ describe('Page d\'archives - Colonnes du tableau', () => {
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(8)
+      .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Actions').should('exist');
   });
 

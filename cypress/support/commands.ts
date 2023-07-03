@@ -99,7 +99,7 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
   };
 });
 
-Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp, facetRank: number, dictionnary: string[]) => {
+Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp, facetRank: number, dictionnary: (string|RegExp)[]) => {
   cy.get('li[data-key="' + section + '"]').click({force: true});
 
   if (section !== 'rqdm') {
@@ -118,7 +118,7 @@ Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp
   // Toutes les valeurs du dictionnaire sont présentes dans la facette
   for (let i = 0; i < dictionnary.length; i++) {
     cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
-      .find('div[class*="CheckboxFilter_checkboxFilterItem"]').contains(dictionnary[i])
+      .find('div[class*="CheckboxFilter_checkboxFilterItem"]').find('label').contains(dictionnary[i])
       .should('exist');
     }
     

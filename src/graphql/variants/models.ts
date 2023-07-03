@@ -222,19 +222,19 @@ export type ConsequenceEntity = {
 };
 
 export type ConservationsEntity = {
-  phylo_p17way_primate_rankscore: number;
+  phylo_p17way_primate_score: number;
 };
 
 export type PredictionEntity = {
   fathmm_pred: number;
-  FATHMM_converted_rankscore: number;
+  fathmm_score: number;
   cadd_score: number;
   cadd_phred: number;
   dann_score: number;
   lrt_pred: string;
-  lrt_converted_rankscore: number;
-  revel_rankscore: number;
-  sift_converted_rank_score: number;
+  lrt_score: number;
+  revel_score: number;
+  sift_score: number;
   sift_pred: string;
   polyphen2_hvar_score: number;
   polyphen2_hvar_pred: string;
