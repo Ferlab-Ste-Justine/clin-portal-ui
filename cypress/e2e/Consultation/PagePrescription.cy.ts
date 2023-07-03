@@ -33,7 +33,6 @@ describe('Page d\'une prescription - Vérifier les informations affichées', () 
     cy.get('[data-cy="ClinicalInformation_CollapsePanel"]').contains(epCHUSJ_ldmCHUSJ.stampDate).should('exist');
     cy.get('[data-cy="ClinicalInformation_CollapsePanel"]').contains(epCHUSJ_ldmCHUSJ.sampleProbId).should('exist');
     cy.get('[data-cy="ClinicalInformation_CollapsePanel"]').contains('Fichiers').should('exist');
-    cy.get('[data-cy="ClinicalInformation_CollapsePanel"]').contains('Variants').should('exist');
   });
   
   it('Panneau Mère', () => {
@@ -50,7 +49,6 @@ describe('Page d\'une prescription - Vérifier les informations affichées', () 
     cy.get('[data-cy="ParentCard_Mère_CollapsePanel"]').contains(epCHUSJ_ldmCHUSJ.stampDate).should('exist');
     cy.get('[data-cy="ParentCard_Mère_CollapsePanel"]').contains(epCHUSJ_ldmCHUSJ.sampleMthId, {matchCase: false}).should('exist');
     cy.get('[data-cy="ParentCard_Mère_CollapsePanel"]').contains('Fichiers').should('exist');
-    cy.get('[data-cy="ParentCard_Mère_CollapsePanel"]').contains('Variants').should('exist');
   });
   
   it('Panneau Père', () => {
@@ -67,16 +65,10 @@ describe('Page d\'une prescription - Vérifier les informations affichées', () 
     cy.get('[data-cy="ParentCard_Père_CollapsePanel"]').contains(epCHUSJ_ldmCHUSJ.stampDate).should('exist');
     cy.get('[data-cy="ParentCard_Père_CollapsePanel"]').contains(epCHUSJ_ldmCHUSJ.sampleFthId).should('exist');
     cy.get('[data-cy="ParentCard_Père_CollapsePanel"]').contains('Fichiers').should('exist');
-    cy.get('[data-cy="ParentCard_Père_CollapsePanel"]').contains('Variants').should('exist');
   });
 });
 
 describe('Page d\'une prescription - Valider les liens disponibles', () => {
-  it('Bouton Voir les variants', () => {
-    cy.clickAndIntercept('button[data-cy="SeeVariantsButton"]', 'POST', '**/graphql', 3);
-    cy.contains('Patient ID : '+epCHUSJ_ldmCHUSJ.patientProbId).should('exist', {timeout: 20*1000});
-  });
-
   it('Lien Fichiers (Cas-index)', () => {
     cy.clickAndIntercept('[data-cy="ArchiveLink_'+epCHUSJ_ldmCHUSJ.requestProbId+'"]', 'POST', '**/$graphql*', 1);
     cy.resetColumns(0);
@@ -93,21 +85,6 @@ describe('Page d\'une prescription - Valider les liens disponibles', () => {
     cy.clickAndIntercept('[data-cy="ArchiveLink_'+epCHUSJ_ldmCHUSJ.requestFthId+'"]', 'POST', '**/$graphql*', 1);
     cy.resetColumns(0);
     cy.contains(epCHUSJ_ldmCHUSJ.patientFthId).should('exist', {timeout: 20*1000});
-  });
-
-  it('Lien Variants (Cas-index)', () => {
-    cy.clickAndIntercept('[data-cy="VariantsLink_'+epCHUSJ_ldmCHUSJ.patientProbId+'_'+epCHUSJ_ldmCHUSJ.requestProbId+'"]', 'POST', '**/graphql', 3);
-    cy.contains('Patient ID : '+epCHUSJ_ldmCHUSJ.patientProbId).should('exist', {timeout: 20*1000});
-  });
-
-  it('Lien Variants (Mère)', () => {
-    cy.clickAndIntercept('[data-cy="VariantsLink_'+epCHUSJ_ldmCHUSJ.patientMthId+'_'+epCHUSJ_ldmCHUSJ.requestMthId+'"]', 'POST', '**/graphql', 3);
-    cy.contains('Patient ID : '+epCHUSJ_ldmCHUSJ.patientMthId).should('exist', {timeout: 20*1000});
-  });
-
-  it('Lien Variants (Père)', () => {
-    cy.clickAndIntercept('[data-cy="VariantsLink_'+epCHUSJ_ldmCHUSJ.patientFthId+'_'+epCHUSJ_ldmCHUSJ.requestFthId+'"]', 'POST', '**/graphql', 3);
-    cy.contains('Patient ID : '+epCHUSJ_ldmCHUSJ.patientFthId).should('exist', {timeout: 20*1000});
   });
 });
 

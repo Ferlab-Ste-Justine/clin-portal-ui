@@ -170,11 +170,11 @@ describe('Page des CNVs d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
-    cy.get('body').find('span[class*="ant-select-selection-item"]').click({force: true});
+    cy.get('body').find('span[class*="ant-select-selection-item"]').eq(1).click({force: true});
     cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
     cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 100 de 196').should('exist');
 
-    cy.get('body').find('span[class*="ant-select-selection-item"]').click({force: true});
+    cy.get('body').find('span[class*="ant-select-selection-item"]').eq(1).click({force: true});
     cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').click({force: true});
     cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 20 de 196').should('exist');
     cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');

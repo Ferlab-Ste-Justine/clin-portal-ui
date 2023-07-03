@@ -58,11 +58,6 @@ describe('Page des prescriptions et requêtes - Colonnes du tableau des prescrip
       .contains('EP').should('exist');
 
     cy.get('thead[class="ant-table-thead"]').eq(0)
-      .find('th[class*="ant-table-cell"]').eq(8)
-      .should('not.have.class', 'ant-table-column-has-sorters')
-      .contains('Liens').should('exist');
-
-    cy.get('thead[class="ant-table-thead"]').eq(0)
       .contains('Requérant').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
       .find('div[class="ant-space-item"]').eq(9)

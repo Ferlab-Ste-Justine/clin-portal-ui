@@ -71,32 +71,27 @@ describe('Page des prescriptions et requêtes - Colonnes du tableau des requête
       .contains('Prescription').should('exist');
 
     cy.get('thead[class="ant-table-thead"]').eq(1)
-      .find('th[class*="ant-table-cell"]').eq(10)
-      .should('not.have.class', 'ant-table-column-has-sorters')
-      .contains('Liens').should('exist');
-
-    cy.get('thead[class="ant-table-thead"]').eq(1)
       .contains('Requérant').should('not.exist');
     cy.get('div[class="ant-popover-inner"]').eq(1)
-      .find('div[class="ant-space-item"]').eq(12)
+      .find('div[class="ant-space-item"]').eq(11)
       .contains('Requérant').should('exist');
 
     cy.get('thead[class="ant-table-thead"]').eq(1)
       .contains('Prénatal').should('not.exist');
     cy.get('div[class="ant-popover-inner"]').eq(1)
-      .find('div[class="ant-space-item"]').eq(13)
+      .find('div[class="ant-space-item"]').eq(12)
       .contains('Prénatal').should('exist');
 
     cy.get('thead[class="ant-table-thead"]').eq(1)
       .contains('Dossier').should('not.exist');
     cy.get('div[class="ant-popover-inner"]').eq(1)
-      .find('div[class="ant-space-item"]').eq(14)
+      .find('div[class="ant-space-item"]').eq(13)
       .contains('Dossier').should('exist');
 /* CLIN-1551
     cy.get('thead[class="ant-table-thead"]').eq(1)
       .contains('Run').should('not.exist');
     cy.get('div[class="ant-popover-inner"]').eq(1)
-      .find('div[class="ant-space-item"]').eq(15)
+      .find('div[class="ant-space-item"]').eq(14)
       .contains('Run').should('exist');*/
   });
 
