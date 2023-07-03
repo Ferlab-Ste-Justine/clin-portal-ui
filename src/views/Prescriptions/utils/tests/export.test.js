@@ -152,7 +152,7 @@ describe('customMapping SNV', () => {
         },
       },
     };
-    expect(customMapping('SNV', 'consequence', row)).toEqual('Faa');
+    expect(customMapping('SNV', 'consequence', row)).toEqual('F aa');
   });
   test('should map donors.exomiser', () => {
     const row = {
