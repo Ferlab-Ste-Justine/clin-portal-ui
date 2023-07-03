@@ -343,6 +343,9 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.acmg_classification'),
         tooltip: intl.get('screen.patientsnv.results.table.acmg_classification.tooltip'),
         width: 110,
+        sorter: {
+          multiple: 1,
+        },
         render: (record: VariantEntity) =>
           renderDonorByKey(
             'donors.exomiser.acmg_classification',
