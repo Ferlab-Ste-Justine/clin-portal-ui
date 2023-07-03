@@ -99,7 +99,7 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
   };
 });
 
-Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp, facetRank: number, dictionnary: string[]) => {
+Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp, facetRank: number, dictionnary: (string|RegExp)[]) => {
   cy.get('li[data-key="' + section + '"]').click({force: true});
 
   if (section !== 'rqdm') {

@@ -59,6 +59,7 @@ describe('Page des prescriptions et requêtes - Colonnes du tableau des prescrip
 
     cy.get('thead[class="ant-table-thead"]').eq(0)
       .find('th[class*="ant-table-cell"]').eq(8)
+      .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Liens').should('exist');
 
     cy.get('thead[class="ant-table-thead"]').eq(0)
