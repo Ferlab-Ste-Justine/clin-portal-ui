@@ -1,0 +1,31 @@
+name: 'Ferlease'
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+      actions: write
+      checks: write
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      statuses: write
+      
+jobs:
+  ferlease-message:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update release-ticket 
+        id: release-ticket-message
+        run: |
+          git config --global user.name "${{ github.event.pull_request.user.login }}"
+          git config --global user.email "githubactions@users.noreply.github.com"
+          git log -1 --format=%s > release-ticket
+          echo "::debug:: " `cat release-ticket`
+          git add release-ticket
+          git commit --amend --no-edit
+          git push --force
+          
