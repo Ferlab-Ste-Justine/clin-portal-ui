@@ -173,16 +173,16 @@ export const makeRows = (consequences: ArrangerEdge<ConsequenceEntity>[]) =>
         consequence.node.predictions?.polyphen2_hvar_pred,
         consequence.node.predictions?.polyphen2_hvar_score,
       ],
-      [
-        'Fathmm',
-        consequence.node.predictions?.fathmm_pred,
-        consequence.node.predictions?.fathmm_score,
-      ],
       ['Cadd (Raw)', null, consequence.node.predictions?.cadd_score],
       ['Cadd (Phred)', null, consequence.node.predictions?.cadd_phred],
       ['Dann', null, consequence.node.predictions?.dann_score],
       ['Lrt', consequence.node.predictions?.lrt_pred, consequence.node.predictions?.lrt_score],
       ['Revel', null, consequence.node.predictions?.revel_score],
+      [
+        'Fathmm',
+        consequence.node.predictions?.fathmm_pred,
+        consequence.node.predictions?.fathmm_score,
+      ],
     ].filter(([, , score]) => score),
     conservation: {
       phylo_p17way_primate_score: consequence.node.conservations?.phylo_p17way_primate_score,
@@ -284,17 +284,11 @@ const columns = [
       <div style={{ minWidth: 150 }}>
         <StackLayout horizontal className={styles.cellList}>
           <Text type={'secondary'}>PhyloP17Way:</Text>
-          <Text>
-            {phylo_p17way_primate_score == null
-              ? TABLE_EMPTY_PLACE_HOLDER
-              : phylo_p17way_primate_score}
-          </Text>
+          <Text>{phylo_p17way_primate_score || TABLE_EMPTY_PLACE_HOLDER}</Text>
         </StackLayout>
         <StackLayout horizontal className={styles.cellList}>
           <Text type={'secondary'}>PhyloP100Way:</Text>
-          <Text>
-            {phyloP100way_vertebrate == null ? TABLE_EMPTY_PLACE_HOLDER : phyloP100way_vertebrate}
-          </Text>
+          <Text>{phyloP100way_vertebrate || TABLE_EMPTY_PLACE_HOLDER}</Text>
         </StackLayout>
       </div>
     ),
