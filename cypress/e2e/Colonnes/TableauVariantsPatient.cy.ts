@@ -36,7 +36,7 @@ describe('Page des variants d\'un patient - Colonnes du tableau', () => {
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(5)
-      .should('not.have.class', 'ant-table-column-has-sorters')
+      .should('have.class', 'ant-table-column-has-sorters')
       .contains('Gène').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
