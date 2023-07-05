@@ -1,0 +1,43 @@
+name: 'Ferlease'
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+      actions: write
+      checks: write
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      statuses: write
+      
+jobs:
+  ferlease-message:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Update release-ticket 
+        id: release-ticket-message
+        run: |
+          git log -1 --format=%s > release-ticket
+          echo "::debug:: " `cat release-ticket`
+        
+      - name: Modifiy the specific files using action
+        uses: action-owner/action-repo@ref
+        
+      - name: Update PR 
+        id: update-git
+        run: |
+          git config --global user.name "${{ github.event.pull_request.user.login }}"
+          git config --global user.email "githubactions@users.noreply.github.com"
+          # git remote set-url origin ${{ secrets.ssh }}
+          git status
+          
+          git add -A
+          git commit --amend --no-edit
+          git push
+          echo "Complete"
+          

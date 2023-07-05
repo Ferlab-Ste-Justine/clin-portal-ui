@@ -115,3 +115,13 @@ Supported types:
 - **refactor**: A code change that neither fixes a bug nor adds a feature
 - **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - **test**: Adding missing tests or correcting existing tests
+
+### Commit Lint Error
+
+to debug and error you can use the following command :
+
+`echo 'your commit mesage' | ./node_modules/.bin/commitlint`
+
+e.g.
+
+> echo 'fix: clin-2029 removed border in focused inputs' | ./node_modules/.bin/commitlint'
