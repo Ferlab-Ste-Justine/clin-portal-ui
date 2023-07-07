@@ -144,7 +144,7 @@ describe('customMapping SNV', () => {
                 symbol: 'symbol',
                 consequences: 'foo',
                 vep_impact: 'impact',
-                aa_change: 'aa',
+                aa_change: 'bb',
                 picked: true,
               },
             },
@@ -152,7 +152,7 @@ describe('customMapping SNV', () => {
         },
       },
     };
-    expect(customMapping('SNV', 'consequence', row)).toEqual('Faa');
+    expect(customMapping('SNV', 'consequence', row)).toEqual('F bb');
   });
   test('should map donors.exomiser', () => {
     const row = {
