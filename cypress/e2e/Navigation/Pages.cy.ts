@@ -262,7 +262,7 @@ describe('Affichage de toutes les pages et modals', () => {
     cy.contains('ADN codant').should('exist', {timeout: 20*1000});
     cy.contains('VEP').should('exist', {timeout: 20*1000});
     cy.contains('Prédiction').should('exist', {timeout: 20*1000});
-    cy.contains('Conservation (PhyloP17Way)').should('exist', {timeout: 20*1000});
+    cy.contains('Conservation').should('exist', {timeout: 20*1000});
     cy.contains('Ensembl ID').should('exist', {timeout: 20*1000});
     cy.contains('RefSeq ID').should('exist', {timeout: 20*1000});
     cy.contains('Critères ACMG').should('exist', {timeout: 20*1000});
