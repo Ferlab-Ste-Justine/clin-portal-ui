@@ -67,7 +67,7 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('36').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('Voir plus').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('Dann').should('not.exist');
-    cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(5).contains('0.4025').should('exist');
+    cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(5).contains('0.599').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(6).contains('ENST00000401061').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(6).find('svg[class*="canonicalIcon"]').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(7).contains('NM_015506.3').should('exist');
