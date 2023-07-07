@@ -111,7 +111,7 @@ describe('Page des variants - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Référence externe$/, 2, dictionnary);
   });
 
-  it('Variant - Chromosome', () => {
+  it('Variant - Chromosome [CLIN-2031]', () => {
     const dictionnary = [/^1$/,
                          /^2$/,
                          '3',
@@ -149,7 +149,7 @@ describe('Page des variants - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Zygosité$/, 5, dictionnary);
   });
 
-  it('Variant - Transmission [CLIN-1969]', () => {
+  it('Variant - Transmission', () => {
     const dictionnary = ['Autosomal Dominant De Novo',
                           'Autosomal Dominant',
                           'Autosomal Recessive',
@@ -277,21 +277,24 @@ describe('Page des variants - Dictionnaire', () => {
 
   it('Pathogénicité - ClinVar', () => {
     const dictionnary = ['Benign',
-                          'Likely Benign',
-                          'Uncertain Significance',
-                          'Conflicting Interpretations Of Pathogenicity',
-                          'Pathogenic',
-                          'Not Provided',
-                          'Drug Response',
-                          'Risk Factor',
-                          'Likely Pathogenic',
-                          'Association',
-                          'Other',
-                          'Affects',
-                          'Protective',
-                          'Confers Sensitivity',
-                          'Uncertain Risk Allele',
-                          'No Data'];
+                         'Likely Benign',
+                         'Uncertain Significance',
+                         'Conflicting Interpretations Of Pathogenicity',
+                         'Pathogenic',
+                         'Not Provided',
+                         'Drug Response',
+                         'Risk Factor',
+                         'Likely Pathogenic',
+                         'Association',
+                         'Other',
+                         'Affects',
+                         'Protective',
+                         'Confers Sensitivity',
+                         'Uncertain Risk Allele',
+                         'Association Not Found',
+                         'Likely Risk Allele',
+                         'Low Penetrance',
+                         'No Data'];
 
     cy.validateDictionnary('category_pathogenicity', /^ClinVar$/, 0, dictionnary);
   });

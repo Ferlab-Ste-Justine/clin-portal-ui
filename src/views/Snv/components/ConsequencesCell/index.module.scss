@@ -23,6 +23,10 @@
 
 .detail {
   padding-right: 4px;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .bullet {

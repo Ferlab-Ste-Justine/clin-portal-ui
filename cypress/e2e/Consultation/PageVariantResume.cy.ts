@@ -62,7 +62,7 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(2).contains('c.481C>T').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(3).contains('HIGH').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('Cadd (Raw):').should('exist');
-    cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('0.96997').should('exist');
+    cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('6.95').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('Cadd (Phred):').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('36').should('exist');
     cy.get('[data-row-key="Consequences_MMACHC_1"]').find('td[class*="ant-table-cell"]').eq(4).contains('Voir plus').should('exist');
@@ -140,12 +140,12 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
   it('Panneau ClinVar', () => {
     cy.get('[data-cy="ClinicalCard_ClinVar_95703_ExternalLink"]').contains('95703').should('exist');
     cy.get('[data-cy="ClinicalCard_ClinVar_95703_ExternalLink"]').find('svg[class*="anticon"]').should('exist');
-    cy.get('[data-row-key="ClinicalCard_ClinVar_0"]').find('td[class="ant-table-cell"]').eq(0).contains('Pathogenic').should('exist');
-    cy.get('[data-row-key="ClinicalCard_ClinVar_0"]').find('td[class="ant-table-cell"]').eq(1).contains('Cobalamin C disease').should('exist');
-    cy.get('[data-row-key="ClinicalCard_ClinVar_0"]').find('td[class="ant-table-cell"]').eq(2).contains('germline').should('exist');
     cy.get('[data-row-key="ClinicalCard_ClinVar_1"]').find('td[class="ant-table-cell"]').eq(0).contains('Pathogenic').should('exist');
-    cy.get('[data-row-key="ClinicalCard_ClinVar_1"]').find('td[class="ant-table-cell"]').eq(1).contains('Methylmalonic acidemia with homocystinuria cblC').should('exist');
+    cy.get('[data-row-key="ClinicalCard_ClinVar_1"]').find('td[class="ant-table-cell"]').eq(1).contains('Cobalamin C disease').should('exist');
     cy.get('[data-row-key="ClinicalCard_ClinVar_1"]').find('td[class="ant-table-cell"]').eq(2).contains('germline').should('exist');
+    cy.get('[data-row-key="ClinicalCard_ClinVar_0"]').find('td[class="ant-table-cell"]').eq(0).contains('Pathogenic').should('exist');
+    cy.get('[data-row-key="ClinicalCard_ClinVar_0"]').find('td[class="ant-table-cell"]').eq(1).contains('Methylmalonic acidemia with homocystinuria cblC').should('exist');
+    cy.get('[data-row-key="ClinicalCard_ClinVar_0"]').find('td[class="ant-table-cell"]').eq(2).contains('germline').should('exist');
     cy.get('[data-row-key="ClinicalCard_ClinVar_2"]').find('td[class="ant-table-cell"]').eq(0).contains('Pathogenic').should('exist');
     cy.get('[data-row-key="ClinicalCard_ClinVar_2"]').find('td[class="ant-table-cell"]').eq(1).contains('not provided').should('exist');
     cy.get('[data-row-key="ClinicalCard_ClinVar_2"]').find('td[class="ant-table-cell"]').eq(2).contains('germline').should('exist');
