@@ -33,7 +33,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   const [variantQueryConfig, setVariantQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
   const [pageIndex, setPageIndex] = useState(DEFAULT_PAGE_INDEX);
   const getVariantResolvedSqon = (query: ISyntheticSqon) =>
-    resolveSyntheticSqon(queryList, query, 'donors');
+    resolveSyntheticSqon(queryList, query, variantMapping);
   const [downloadKeys, setDownloadKeys] = useState<string[]>([]);
 
   const queryVariables = {

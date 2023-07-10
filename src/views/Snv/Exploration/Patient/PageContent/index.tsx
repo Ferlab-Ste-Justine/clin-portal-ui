@@ -43,7 +43,7 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
 
   const getVariantResolvedSqon = (query: ISyntheticSqon) =>
     wrapSqonWithDonorIdAndSrId(
-      cloneDeep(resolveSyntheticSqon(queryList, query, 'donors')),
+      cloneDeep(resolveSyntheticSqon(queryList, query, variantMapping)),
       patientId,
       /** prescriptionId Need to fix bug in ETL */
     );
