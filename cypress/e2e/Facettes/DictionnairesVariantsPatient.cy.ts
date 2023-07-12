@@ -94,7 +94,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Référence externe$/, 2, dictionnary);
   });
 
-  it('Variant - Chromosome [CLIN-2031]', () => {
+  it('Variant - Chromosome', () => {
     const dictionnary = [/^1$/,
                          /^2$/,
                          '3',
@@ -411,5 +411,18 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'True'];
 
     cy.validateDictionnary('category_occurrence', /^Hét. composé potentiel$/, 6, dictionnary);
+  });
+
+  it('Variant - Filtre (Dragen)', () => {
+    const dictionnary = ['PASS',
+                         'DRAGENSnpHardQUAL',
+                         'DRAGENIndelHardQUAL',
+                         'LowDepth',
+                         'PloidyConflict',
+                         'Base Quality',
+                         'Lod Fstar',
+                         'No Data'];
+
+    cy.validateDictionnary('category_occurrence', /^Filtre \(Dragen\)$/, 7, dictionnary);
   });
 });

@@ -8,7 +8,7 @@ describe('Affichage de la page Logout', () => {
     cy.visit('/');
   });
 
-  it('Vérifier le texte affiché', () => {
+  it('Vérifier le texte affiché [CLIN-2039]', () => {
     cy.logout();
 
     cy.contains('Créer un compte').should('exist', {timeout: 20*1000});
@@ -20,7 +20,7 @@ describe('Affichage de la page Logout', () => {
     cy.contains('Le Centre québécois de génomique clinique offre une plateforme clinique de séquençage à haut débit pour le diagnostic moléculaire des patients québécois en partenariat avec les huit laboratoires du Réseau de diagnostic moléculaire du Québec.').should('exist', {timeout: 20*1000});
   });
 
-  it('Vérifier les images des partenaires', () => {
+  it('Vérifier les images des partenaires [CLIN-2039]', () => {
     cy.logout();
     
     cy.get('img[alt*="Centre hospitalier universitaire mère-enfant CHU Sainte-Justine"]').should('exist', {timeout: 20*1000});

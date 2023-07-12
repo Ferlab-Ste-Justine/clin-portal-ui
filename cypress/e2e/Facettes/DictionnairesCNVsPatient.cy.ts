@@ -39,7 +39,7 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Type de variant$/, 0, dictionnary);
   });
 
-  it('Variant - Chromosome [CLIN-2031]', () => {
+  it('Variant - Chromosome', () => {
     const dictionnary = [/^1$/,
                          /^2$/,
                          '3',

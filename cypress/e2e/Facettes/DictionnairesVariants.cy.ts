@@ -13,7 +13,7 @@ describe('Page des variants - Dictionnaire', () => {
     cy.visitVariantsPage();
   });
 
-  it('Patient - Analyse', () => {
+  it('Patient - Analyse [CLIN-2088]', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM)',
                           'Congenital Myopathies (MYOC)',
                           'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
@@ -48,7 +48,7 @@ describe('Page des variants - Dictionnaire', () => {
     cy.validateDictionnary('patient', /^Sexe$/, 2, dictionnary);
   });
 
-  it('Variant - Type de variant', () => {
+  it('Variant - Type de variant [CLIN-2088]', () => {
     const dictionnary = ['Insertion',
                           'Délétion',
                           'SNV',
@@ -111,7 +111,7 @@ describe('Page des variants - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Référence externe$/, 2, dictionnary);
   });
 
-  it('Variant - Chromosome [CLIN-2031]', () => {
+  it('Variant - Chromosome', () => {
     const dictionnary = [/^1$/,
                          /^2$/,
                          '3',

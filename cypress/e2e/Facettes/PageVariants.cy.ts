@@ -21,8 +21,8 @@ describe('Page des variants - Filtrer avec les facettes', () => {
       .find('[type="checkbox"]').check({force: true});
     cy.clickApplyFacet();
 
-    cy.get('[class*="QueryPill_field"]').contains('Analyse').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('MYOC').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Analyse').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('MYOC').should('exist');
     cy.get('body').contains(/^870 60\d{1}$/).should('exist');
   });
 
@@ -34,8 +34,8 @@ describe('Page des variants - Filtrer avec les facettes', () => {
       .find('[type="checkbox"]').check({force: true});
     cy.clickApplyFacet();
 
-    cy.get('[class*="QueryPill_field"]').contains('Statut clinique').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('Non atteint').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Statut clinique').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Non atteint').should('exist');
     cy.get('body').contains(/^423 26\d{1}$/).should('exist');
   });
 
@@ -47,8 +47,8 @@ describe('Page des variants - Filtrer avec les facettes', () => {
       .find('[type="checkbox"]').check({force: true});
     cy.clickApplyFacet();
 
-    cy.get('[class*="QueryPill_field"]').contains('Sexe').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('Indéterminé').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sexe').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Indéterminé').should('exist');
     cy.get('body').contains(/^192 10\d{1}$/).should('exist');
   });
 });
