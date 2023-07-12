@@ -7,7 +7,8 @@ import {
   createSavedFilter,
   deleteSavedFilter,
   fetchSavedFilters,
-  fetchSharedSavedFilter, updateSavedFilter
+  fetchSharedSavedFilter,
+  updateSavedFilter,
 } from './thunks';
 
 export const SavedFilterState: initialState = {

@@ -37,6 +37,66 @@
   "compound.heterozygous": "{num, plural, =0 {hétérozygote composé} other {hétérozygotes composés}}",
   "compound.heterozygous.abbrev": "{num, plural, =0 {hét. composé} other {hét. composés}}",
   "condition": "Condition",
+  "customPill": {
+    "delete": {
+      "modal": {
+        "title": "Supprimer cette requête ?",
+        "okText": "Supprimer",
+        "cancelText": "Annuler",
+        "message": "Vous êtes sur le point de supprimer la requête personnalisée « {title} » , ce qui pourrait avoir un impact sur vos résultats.",
+        "existingFilters": "Filtres sauvegardés affectés :",
+        "errorMessage": "Nous ne sommes pas en mesure de récupérer votre liste de filtres pour le moment."
+      },
+      "notification": {
+        "error": {
+          "description": "Une erreur s'est produite et nous n'avons pas été en mesure de supprimer votre requête. Veuillez réessayer.",
+          "message": "La suppression de la requête a échoué"
+        },
+        "success": "Requête supprimée avec succès"
+      }
+    },
+    "duplicate": {
+      "duplicateTitleSuffix": "Copie",
+      "notification": {
+        "error": {
+          "description": "Une erreur s'est produite et nous n'avons pas été en mesure de dupliquer votre requête. Veuillez réessayer.",
+          "message": "La duplication de la requête a échoué"
+        }
+      }
+    },
+    "edit": {
+      "title": "Modifier une requête personnalisée",
+      "cancelText": "Annuler",
+      "saveText": "Sauvegarder",
+      "nameAlreadyExist": {
+        "message": "Nom déjà utilisé",
+        "description": "Une requête personnalisée du même nom existe déjà. Veuillez assigner un nom unique.",
+        "okText": "Fermer"
+      },
+      "notification": {
+        "error": {
+          "description": "Une erreur s'est produite et nous n'avons pas été en mesure de sauvegarder vos modifications. Veuillez réessayer.",
+          "message": "Modifications non sauvegardées"
+        },
+        "success": "Modifications sauvegardées avec succès"
+      },
+      "save": {
+        "confirmation": {
+          "title": "Modifier cette requête ?",
+          "message": "Vous êtes sur le point de modifier la requête personnalisée « {title} » , ce qui pourrait avoir un impact sur vos résultats.",
+          "existingFilters": "Filtres sauvegardés affectés :",
+          "existingFiltersError": "Nous ne sommes pas en mesure de récupérer votre liste de filtres pour le moment.",
+          "cancelText": "Annuler",
+          "okText": "Sauvegarder"
+        },
+        "emptyQuery": {
+          "title": "La requête ne peut pas être vide",
+          "message": "Votre requête personnalisée doit comporter au moins un critère.",
+          "closeText": "Fermer"
+        }
+      }
+    }
+  },
   "deletion": "Délétion",
   "download.report": "Télécharger le rapport",
   "view.ucsc": "Consulter UCSC",
@@ -391,6 +451,21 @@
   "querybuilder.actions.delete.title": "Supprimer cette requête?",
   "querybuilder.actions.labels": "Champs",
   "querybuilder.actions.new": "Nouvelle",
+  "querybuilder.actions.saveCustomPill.error.defaultMessage": "Une erreur est survenue",
+  "querybuilder.actions.saveCustomPill.error.nameAlreadyExist": "Une requête portant ce nom existe déjà",
+  "querybuilder.actions.saveCustomPill.form.error.required": "Ce champ est requis",
+  "querybuilder.actions.saveCustomPill.input.label": "Nom de la requête",
+  "querybuilder.actions.saveCustomPill.input.maximumLength": "caractères maximum",
+  "querybuilder.actions.saveCustomPill.input.placeholder": "Requête sans titre",
+  "querybuilder.actions.saveCustomPill.modal.cancel": "Annuler",
+  "querybuilder.actions.saveCustomPill.modal.errorNotification.description": "Une erreur s'est produite et nous n'avons pas été en mesure de créer votre requête. Veuillez réessayer.",
+  "querybuilder.actions.saveCustomPill.modal.errorNotification.message": "La création de la requête a échoué",
+  "querybuilder.actions.saveCustomPill.modal.message": "Vous trouverez vos requêtes enregistrées dans la barre latérale sous la rubrique « Requêtes ».",
+  "querybuilder.actions.saveCustomPill.modal.save": "Sauvegarder",
+  "querybuilder.actions.saveCustomPill.modal.successNotification": "Requête créée avec succès",
+  "querybuilder.actions.saveCustomPill.modal.title": "Sauvegarder cette requête",
+  "querybuilder.actions.saveCustomPill.tooltip.disabled": "Les requêtes personnalisées ne peuvent pas comprendre d'autres requêtes personnalisées.",
+  "querybuilder.actions.saveCustomPill.tooltip.enabled": "Créer une requête personnalisées.",
   "querybuilder.filters.actions.all": "Tout",
   "querybuilder.filters.actions.apply": "Appliquer",
   "querybuilder.filters.actions.clear": "Effacer",
@@ -631,6 +706,7 @@
   "screen.patientsnv.category_occurrence": "Occurrence",
   "screen.patientsnv.category_pathogenicity": "Pathogénicité",
   "screen.patientsnv.category_patient": "Patient",
+  "screen.patientsnv.category_queries": "Requêtes",
   "screen.patientsnv.category_rqdm": "Panel RQDM",
   "screen.patientsnv.category_variant": "Variant",
   "screen.patientsnv.drawer.affected": "Atteint",
@@ -711,6 +787,10 @@
   "screen.patientsnv.results.table.download.info.message": "Ce processus peut prendre plusieurs minutes.",
   "screen.patientsnv.results.table.download.error.title": "Une erreur est survenue",
   "screen.patientsnv.results.table.download.error.message": "Votre téléchargement n'a pas pu être effectué. Veuillez réessayer ou contacter l'assistance.",
+  "screen.patientsnv.queriesSidebar.emptyText": "Vous pouvez créer des requêtes personnalisées en ajoutant des critères à la barre de requêtes et en cliquant sur le bouton sauvegarder.",
+  "screen.patientsnv.queriesSidebar.errorText": "Nous n'avons pas pu afficher vos requêtes personnalisées. Veuillez rafraîchir l'application et réessayer.",
+  "screen.patientsnv.queriesSidebar.learnMore": "En savoir plus",
+  "screen.patientsnv.queriesSidebar.title": "Mes requêtes",
   "screen.prescription.entity.analyse.card.title": "Analyse",
   "screen.prescription.entity.analyse.card.title.foetus": "Analyse (prénatal)",
   "screen.prescription.entity.analysisCard.askedAnalysis": "Analyse demandée",

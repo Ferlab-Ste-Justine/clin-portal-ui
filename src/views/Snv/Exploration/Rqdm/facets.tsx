@@ -1,9 +1,21 @@
+// import { ReactElement } from 'react';
 import intl from 'react-intl-universal';
-import { UserOutlined } from '@ant-design/icons';
+import { FilterFilled, UserOutlined } from '@ant-design/icons';
+import QueriesSidebar from '@ferlab/ui/core/components/CustomPill/QueriesSidebar/index';
+import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
+import { IDictionary } from '@ferlab/ui/core/components/QueryBuilder/types';
+import { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import { SuggestionType } from 'api/arranger/models';
+import { fetchFiltersByCustomPill } from 'api/customPill/customPill.utils';
+import { TUserSavedFilter } from 'api/savedFilter/models';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
-import { FilterTypes, GeneSearchFieldsMapping, VARIANT_RQDM_QB_ID } from 'views/Snv/utils/constant';
+import {
+  FilterTypes,
+  GeneSearchFieldsMapping,
+  QUERY_EDITION_QB_ID,
+  VARIANT_RQDM_QB_ID,
+} from 'views/Snv/utils/constant';
 
 import GenesUploadIds from 'components/GeneUploadIds';
 import DiseaseIcon from 'components/icons/DiseaseIcon';
@@ -13,6 +25,7 @@ import LineStyleIcon from 'components/icons/LineStyleIcon';
 import { TCustomFilterMapper } from 'components/uiKit/FilterList';
 import { FilterInfo } from 'components/uiKit/FilterList/types';
 import VariantGeneSearch from 'components/VariantGeneSearch';
+import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 
 import { filtersContainer } from '../components/filtersContainer';
 
@@ -164,10 +177,35 @@ const filterGroups: {
   },
 };
 
-export const getMenuItems = (
-  variantMappingResults: ExtendedMappingResults,
-  filterMapper?: TCustomFilterMapper,
-) => [
+interface IGetMenuItems {
+  variantMappingResults: ExtendedMappingResults;
+  customPills: TUserSavedFilter[];
+  hasCustomPillError: boolean;
+  isLoading: boolean;
+  menuItemsEditionPill: ISidebarMenuItem[];
+  deleteCustomPill: (id: string) => any;
+  duplicateCustomPill: (queryPill: ISavedFilter) => any;
+  editCustomPill: (queryPill: ISavedFilter, tag: string, queryBuilderId: string) => any;
+  learnMoreLink?: string;
+  filterMapper?: TCustomFilterMapper;
+  queryDictionary: IDictionary;
+  validateName: (title: string, tag: string) => any;
+}
+
+export const getMenuItems = ({
+  variantMappingResults,
+  customPills,
+  hasCustomPillError,
+  isLoading,
+  menuItemsEditionPill,
+  deleteCustomPill,
+  duplicateCustomPill,
+  editCustomPill,
+  validateName,
+  learnMoreLink,
+  filterMapper,
+  queryDictionary,
+}: IGetMenuItems) => [
   {
     key: 'patient',
     title: intl.get('screen.patientsnv.category_patient'),
@@ -183,7 +221,7 @@ export const getMenuItems = (
   {
     key: 'category_variant',
     title: intl.get('screen.patientsnv.category_variant'),
-    icon: <LineStyleIcon className={styles.sideMenuIcon} />,
+    icon: <LineStyleIcon />,
     panelContent: filtersContainer(
       variantMappingResults,
       INDEXES.VARIANT,
@@ -195,7 +233,7 @@ export const getMenuItems = (
   {
     key: 'category_genomic',
     title: intl.get('screen.patientsnv.category_genomic'),
-    icon: <GeneIcon className={styles.sideMenuIcon} />,
+    icon: <GeneIcon />,
     panelContent: filtersContainer(
       variantMappingResults,
       INDEXES.VARIANT,
@@ -207,7 +245,7 @@ export const getMenuItems = (
   {
     key: 'category_cohort',
     title: intl.get('screen.patientsnv.category_cohort'),
-    icon: <FrequencyIcon className={styles.sideMenuIcon} />,
+    icon: <FrequencyIcon />,
     panelContent: filtersContainer(
       variantMappingResults,
       INDEXES.VARIANT,
@@ -219,12 +257,151 @@ export const getMenuItems = (
   {
     key: 'category_pathogenicity',
     title: intl.get('screen.patientsnv.category_pathogenicity'),
-    icon: <DiseaseIcon className={styles.sideMenuIcon} />,
+    icon: <DiseaseIcon />,
     panelContent: filtersContainer(
       variantMappingResults,
       INDEXES.VARIANT,
       VARIANT_RQDM_QB_ID,
       filterGroups[FilterTypes.Pathogenicity_germline],
+      filterMapper,
+    ),
+  },
+  {
+    key: 'custom_pill',
+    title: intl.get('screen.patientsnv.category_queries'),
+    icon: <FilterFilled className={styles.sideMenuIcon} />,
+    panelContent: (
+      <QueriesSidebar
+        customPills={customPills}
+        hasError={hasCustomPillError}
+        isLoading={isLoading}
+        dictionary={{
+          emptyText: intl.get('screen.patientsnv.queriesSidebar.emptyText'),
+          learnMore: intl.get('screen.patientsnv.queriesSidebar.learnMore'),
+          title: intl.get('screen.patientsnv.queriesSidebar.title'),
+          errorText: intl.get('screen.patientsnv.queriesSidebar.errorText'),
+          deleteCustomPill: {
+            modal: {
+              title: intl.get('customPill.delete.modal.title'),
+              okText: intl.get('customPill.delete.modal.okText'),
+              cancelText: intl.get('customPill.delete.modal.cancelText'),
+              message: intl.get('customPill.delete.modal.message'),
+              existingFilters: intl.get('customPill.delete.modal.existingFilters'),
+              errorMessage: intl.get('customPill.delete.modal.errorMessage'),
+            },
+            notification: {
+              error: {
+                description: intl.get('customPill.delete.notification.error.description'),
+                message: intl.get('customPill.delete.notification.error.message'),
+              },
+              success: intl.get('customPill.delete.notification.success'),
+            },
+          },
+          editCustomPill: {
+            title: intl.get('customPill.edit.title'),
+            cancelText: intl.get('customPill.edit.cancelText'),
+            saveText: intl.get('customPill.edit.saveText'),
+            nameAlreadyExist: {
+              message: intl.get('customPill.edit.nameAlreadyExist.message'),
+              description: intl.get('customPill.edit.nameAlreadyExist.description'),
+              okText: intl.get('customPill.edit.nameAlreadyExist.okText'),
+            },
+            save: {
+              confirmation: {
+                title: intl.get('customPill.edit.save.confirmation.title'),
+                message: intl.get('customPill.edit.save.confirmation.message'),
+                existingFilters: intl.get('customPill.edit.save.confirmation.existingFilters'),
+                existingFiltersError: intl.get(
+                  'customPill.edit.save.confirmation.existingFiltersError',
+                ),
+                cancelText: intl.get('customPill.edit.save.confirmation.cancelText'),
+                okText: intl.get('customPill.edit.save.confirmation.okText'),
+              },
+              emptyQuery: {
+                title: intl.get('customPill.edit.save.emptyQuery.title'),
+                message: intl.get('customPill.edit.save.emptyQuery.message'),
+                closeText: intl.get('customPill.edit.save.emptyQuery.closeText'),
+              },
+            },
+          },
+        }}
+        learnMoreLink={learnMoreLink}
+        queryBuilderId={VARIANT_RQDM_QB_ID}
+        queryDictionary={queryDictionary}
+        queryEditionQBId={QUERY_EDITION_QB_ID}
+        editMenuItems={menuItemsEditionPill}
+        tag={VARIANT_RQDM_QB_ID_FILTER_TAG}
+        editPill={editCustomPill}
+        duplicatePill={duplicateCustomPill}
+        deletePill={deleteCustomPill}
+        getFiltersByPill={fetchFiltersByCustomPill}
+        validateName={validateName}
+      />
+    ),
+  },
+];
+
+export const getMenuItemsEditionPill = (
+  variantMappingResults: ExtendedMappingResults,
+  filterMapper?: TCustomFilterMapper,
+) => [
+  {
+    key: 'patient',
+    title: intl.get('screen.patientsnv.category_patient'),
+    icon: <UserOutlined className={styles.sideMenuIcon} />,
+    panelContent: filtersContainer(
+      variantMappingResults,
+      INDEXES.VARIANT,
+      QUERY_EDITION_QB_ID,
+      filterGroups[FilterTypes.Patient],
+      filterMapper,
+    ),
+  },
+  {
+    key: 'category_variant',
+    title: intl.get('screen.patientsnv.category_variant'),
+    icon: <LineStyleIcon />,
+    panelContent: filtersContainer(
+      variantMappingResults,
+      INDEXES.VARIANT,
+      QUERY_EDITION_QB_ID,
+      filterGroups[FilterTypes.Variant_germline],
+      filterMapper,
+    ),
+  },
+  {
+    key: 'category_genomic',
+    title: intl.get('screen.patientsnv.category_genomic'),
+    icon: <GeneIcon />,
+    panelContent: filtersContainer(
+      variantMappingResults,
+      INDEXES.VARIANT,
+      QUERY_EDITION_QB_ID,
+      filterGroups[FilterTypes.Gene],
+      filterMapper,
+    ),
+  },
+  {
+    key: 'category_cohort',
+    title: intl.get('screen.patientsnv.category_cohort'),
+    icon: <FrequencyIcon />,
+    panelContent: filtersContainer(
+      variantMappingResults,
+      INDEXES.VARIANT,
+      QUERY_EDITION_QB_ID,
+      filterGroups[FilterTypes.Frequency_germline],
+      filterMapper,
+    ),
+  },
+  {
+    key: 'category_pathogenicity',
+    title: intl.get('screen.patientsnv.category_pathogenicity'),
+    icon: <DiseaseIcon />,
+    panelContent: filtersContainer(
+      variantMappingResults,
+      INDEXES.VARIANT,
+      QUERY_EDITION_QB_ID,
+      filterGroups[FilterTypes.Pathogenicity],
       filterMapper,
     ),
   },

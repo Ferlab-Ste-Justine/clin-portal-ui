@@ -36,6 +36,66 @@
   "compound.heterozygous": "{num, plural, =0 {Compound Heterozygous} other {Compound Heterozygous}}",
   "compound.heterozygous.abbrev": "{num, plural, =0 {Compound Het.} other {Compound Het.}}",
   "condition": "Condition",
+  "customPill": {
+    "delete": {
+      "modal": {
+        "title": "Delete this query?",
+        "okText": "Delete",
+        "cancelText": "Cancel",
+        "message": "You are about to delete the custom query \"{title}\", which may affect your results.",
+        "existingFilters": "Affected saved filters:",
+        "errorMessage": "We are currently unable to fetch your list of filters."
+      },
+      "notification": {
+        "error": {
+          "description": "An error has occurred and we were unable to delete your query. Please try again.",
+          "message": "Failed to delete query"
+        },
+        "success": "Query successfully deleted"
+      }
+    },
+    "duplicate": {
+      "duplicateTitleSuffix": "Copy",
+      "notification": {
+        "error": {
+          "description": "An error has occurred and we were unable to duplicate your query. Please try again.",
+          "message": "Failed to duplicate query"
+        }
+      }
+    },
+    "edit": {
+      "title": "Edit a custom query",
+      "cancelText": "Cancel",
+      "saveText": "Save",
+      "nameAlreadyExist": {
+        "message": "Name already in use",
+        "description": "A custom query with this name already exists. Please assign a unique name.",
+        "okText": "Close"
+      },
+      "notification": {
+        "error": {
+          "description": "An error occurred and we were unable to save your changes. Please try again.",
+          "message": "Changes not saved"
+        },
+        "success": "Changes successfully saved"
+      },
+      "save": {
+        "confirmation": {
+          "title": "Edit this query?",
+          "message": "You are about to edit the custom query “{title}”, which may affect your results.",
+          "existingFilters": "Affected saved filters:",
+          "existingFiltersError": "We are currently unable to fetch your list of filters.",
+          "cancelText": "Cancel",
+          "okText": "Save"
+        },
+        "emptyQuery": {
+          "title": "Query cannot be empty",
+          "message": "Your custom query must contain at least one criteria.",
+          "closeText": "Close"
+        }
+      }
+    }
+  },
   "deletion": "Deletion",
   "download.report": "Download report",
   "view.ucsc": "View UCSC",
@@ -390,6 +450,21 @@
   "querybuilder.actions.delete.title": "Delete this query?",
   "querybuilder.actions.labels": "Labels",
   "querybuilder.actions.new": "New",
+  "querybuilder.actions.saveCustomPill.error.defaultMessage": "An error has occurred",
+  "querybuilder.actions.saveCustomPill.error.nameAlreadyExist": "A query with this name already exists",
+  "querybuilder.actions.saveCustomPill.form.error.required": "This field is required",
+  "querybuilder.actions.saveCustomPill.input.label": "Query name",
+  "querybuilder.actions.saveCustomPill.input.maximumLength": "characters maximum",
+  "querybuilder.actions.saveCustomPill.input.placeholder": "Untitled query",
+  "querybuilder.actions.saveCustomPill.modal.cancel": "Cancel",
+  "querybuilder.actions.saveCustomPill.modal.errorNotification.description": "An error occurred and we were unable to save your query. Please try again.",
+  "querybuilder.actions.saveCustomPill.modal.errorNotification.message": "Failed to create query",
+  "querybuilder.actions.saveCustomPill.modal.message": "You will find your saved queries in the sidebar under \"Queries\".",
+  "querybuilder.actions.saveCustomPill.modal.save": "Save",
+  "querybuilder.actions.saveCustomPill.modal.successNotification": "Custom query successfully created",
+  "querybuilder.actions.saveCustomPill.modal.title": "Save this query",
+  "querybuilder.actions.saveCustomPill.tooltip.disabled": "Custom queries cannot include other custom queries.",
+  "querybuilder.actions.saveCustomPill.tooltip.enabled": "Save as a custom query.",
   "querybuilder.filters.actions.all": "All",
   "querybuilder.filters.actions.apply": "Apply",
   "querybuilder.filters.actions.clear": "Clear",
@@ -626,6 +701,7 @@
   "screen.patientsnv.category_patient": "Patient",
   "screen.patientsnv.category_rqdm": "RQDM Panel",
   "screen.patientsnv.category_variant": "Variant",
+  "screen.patientsnv.category_queries": "Queries",
   "screen.patientsnv.drawer.affected": "Affected",
   "screen.patientsnv.drawer.allprof": "Allele Depth ALT",
   "screen.patientsnv.drawer.allratio": "Allelic Ratio ALT / (ALT+REF)",
@@ -708,6 +784,10 @@
   "screen.patientsnv.results.table.download.info.message": "This process may take several minutes.",
   "screen.patientsnv.results.table.download.error.title": "An error has occurred",
   "screen.patientsnv.results.table.download.error.message": "Your download could not be processed. Please try again or contact support.",
+  "screen.patientsnv.queriesSidebar.emptyText": "You can create custom queries by adding criteria to the query bar and clicking the save button.",
+  "screen.patientsnv.queriesSidebar.errorText": "We were unable to load your custom queries. Please refresh the application and try again.",
+  "screen.patientsnv.queriesSidebar.learnMore": "Learn more",
+  "screen.patientsnv.queriesSidebar.title": "My Queries",
   "screen.prescription.entity.analyse.card.title": "Analysis",
   "screen.prescription.entity.analyse.card.title.foetus": "Analysis (prenatal)",
   "screen.prescription.entity.analysisCard.askedAnalysis": "Requested Analysis",

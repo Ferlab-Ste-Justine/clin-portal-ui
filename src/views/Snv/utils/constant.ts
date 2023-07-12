@@ -6,6 +6,7 @@ import { WeightedAverage } from 'store/global/types';
 
 export const SNV_VARIANT_PATIENT_QB_ID = 'patient-variant-repo';
 export const VARIANT_RQDM_QB_ID = 'rqdm-variant-repo';
+export const QUERY_EDITION_QB_ID = 'query-edition';
 
 export const DEFAULT_PAGE_INDEX = 1;
 export const DEFAULT_PAGE_SIZE = 20;

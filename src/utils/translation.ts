@@ -281,6 +281,31 @@ export const getQueryBuilderDictionary = (
         buttonTitle: intl.get('querybuilder.actions.clear.buttonTitle'),
         description: intl.get('querybuilder.actions.clear.description'),
       },
+      saveCustomPill: {
+        form: {
+          error: {
+            fieldRequired: intl.get('querybuilder.actions.saveCustomPill.form.error.required'),
+            nameAlreadyExists: intl.get(
+              'querybuilder.actions.saveCustomPill.error.nameAlreadyExist',
+            ),
+          },
+        },
+        input: {
+          label: intl.get('querybuilder.actions.saveCustomPill.input.label'),
+          placeholder: intl.get('querybuilder.actions.saveCustomPill.input.placeholder'),
+          maximumLength: intl.get('querybuilder.actions.saveCustomPill.input.maximumLength'),
+        },
+        modal: {
+          title: intl.get('querybuilder.actions.saveCustomPill.modal.title'),
+          okText: intl.get('querybuilder.actions.saveCustomPill.modal.save'),
+          cancelText: intl.get('querybuilder.actions.saveCustomPill.modal.cancel'),
+          message: intl.get('querybuilder.actions.saveCustomPill.modal.message'),
+        },
+        tooltip: {
+          enabled: intl.get('querybuilder.actions.saveCustomPill.tooltip.enabled'),
+          disabled: intl.get('querybuilder.actions.saveCustomPill.tooltip.disabled'),
+        },
+      },
     },
   };
 };
