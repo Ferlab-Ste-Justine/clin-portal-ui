@@ -99,14 +99,16 @@ export const generateFilters = ({
       );
     });
 
-const translateWhenNeeded = (group: string, key: string) =>
+const translateWhenNeeded = (group: string, key: string, type: string = '') =>
   intl
     .get(`filters.options.${underscoreToDot(group)}.${keyEnhance(key)}`)
-    .defaultMessage(removeUnderscoreAndCapitalize(keyEnhanceBooleanOnlyExcept(group, key)));
+    .defaultMessage(removeUnderscoreAndCapitalize(keyEnhanceBooleanOnlyExcept(group, key, type)));
 
-const keyEnhanceBooleanOnlyExcept = (field: string, fkey: string) => {
-  if (['1', 'true'].includes(fkey)) return 'True';
-  if (['0', 'false'].includes(fkey)) return 'False';
+export const keyEnhanceBooleanOnlyExcept = (field: string, fkey: string, type: string = '') => {
+  if (type === 'boolean') {
+    if (['1', 'true'].includes(fkey)) return 'True';
+    if (['0', 'false'].includes(fkey)) return 'False';
+  }
   return ['chromosome'].includes(field) ? fkey : keyEnhance(fkey);
 };
 
@@ -115,6 +117,7 @@ export const getFilters = (aggregations: Aggregations | null, key: string): IFil
   if (isTermAgg(aggregations[key])) {
     return aggregations[key!].buckets
       .map((f: any) => {
+        // enable boolean to use key_as_string instead of '1' or '0'
         const enhanceKey = f.key_as_string ?? f.key;
         const translatedKey = translateWhenNeeded(key, enhanceKey);
         const name = translatedKey ? translatedKey : enhanceKey;
@@ -195,6 +198,16 @@ export const getFilterGroup = (
       }
     }
   }
+
+  const facetTranslate = () => {
+    const translateType = extendedMapping?.type || '';
+
+    return (value: string) => {
+      const name = translateWhenNeeded(extendedMapping?.field!, value, translateType);
+      return transformNameIfNeeded(extendedMapping?.field?.replaceAll('.', '__')!, value, name);
+    };
+  };
+
   return {
     field: extendedMapping?.field || '',
     title,
@@ -203,10 +216,7 @@ export const getFilterGroup = (
       nameMapping: [],
       withFooter: filterFooter,
       extraFilterDictionary,
-      facetTranslate: (value: string) => {
-        const name = translateWhenNeeded(extendedMapping?.field!, value);
-        return transformNameIfNeeded(extendedMapping?.field?.replaceAll('.', '__')!, value, name);
-      },
+      facetTranslate: facetTranslate(),
     },
   };
 };
