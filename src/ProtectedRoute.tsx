@@ -1,13 +1,14 @@
 import React from 'react';
-import { Route, RouteProps } from 'react-router-dom';
+import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
 
-import LoginWrapper from 'components/LoginWrapper';
 import Forbidden from 'components/Results/Forbidden';
 import { Roles, validate } from 'components/Roles/Rules';
 import Spinner from 'components/uiKit/Spinner';
 import ConditionalWrapper from 'components/utils/ConditionalWrapper';
 import { useRpt } from 'hooks/useRpt';
+import { REDIRECT_URI_KEY } from 'utils/constants';
+import { STATIC_ROUTES } from 'utils/routes';
 
 type OwnProps = Omit<RouteProps, 'component' | 'render' | 'children'> & {
   layout?: (children: any) => React.ReactElement;
@@ -26,7 +27,14 @@ const ProtectedRoute = ({ roles, children, layout, ...routeProps }: OwnProps) =>
   }
 
   if (showLogin) {
-    return <LoginWrapper Component={<Spinner size={'large'} />} />;
+    return (
+      <Redirect
+        to={{
+          pathname: STATIC_ROUTES.LANDING,
+          search: `${REDIRECT_URI_KEY}=${routeProps.location?.pathname}${routeProps.location?.search}`,
+        }}
+      />
+    );
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks

@@ -5,6 +5,7 @@ export enum STATIC_ROUTES {
   ARCHIVE_EXPLORATION = '/archive/exploration',
   SNV_EXPLORATION_RQDM = '/snv/exploration',
   CNV_EXPLORATION_RQDM = '/cnv/exploration',
+  LANDING = '/landing',
 }
 
 export enum DYNAMIC_ROUTES {
