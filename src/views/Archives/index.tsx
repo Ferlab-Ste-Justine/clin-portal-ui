@@ -35,6 +35,7 @@ export type DocsWithTaskInfo = FhirDoc & {
   srRef: string;
   basedOnSrRef: string;
   size: string;
+  originalSize: number;
   title: string;
   format: string;
   url: string;

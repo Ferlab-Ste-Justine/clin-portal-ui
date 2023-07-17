@@ -13,12 +13,11 @@ import StatusTag from '../components/StatusTag';
 import { getPrescriptionStatusDictionnary } from '../utils/constant';
 
 interface OwnProps {
-  patientId: string;
   data: PatientRequest[];
   loading?: boolean;
 }
 
-const getRequestColumns = (patientId: string): TableColumnType<Record<string, any>>[] => [
+const getRequestColumns = (): TableColumnType<Record<string, any>>[] => [
   {
     key: 'id',
     dataIndex: 'id',
@@ -60,15 +59,15 @@ const getRequestColumns = (patientId: string): TableColumnType<Record<string, an
   {
     key: 'links',
     title: intl.get('screen.prescription.entity.request.links'),
-    render: (data: PatientRequest) => <Links patientId={patientId} prescriptionId={data.id} />,
+    render: (data: PatientRequest) => <Links prescriptionId={data.id} />,
   },
 ];
 
-const RequestTable = ({ patientId, loading = false, data = [] }: OwnProps) => (
+const RequestTable = ({ loading = false, data = [] }: OwnProps) => (
   <Table
     loading={loading}
     size="small"
-    columns={getRequestColumns(patientId)}
+    columns={getRequestColumns()}
     dataSource={data.map((data, index) => ({ ...data, key: index }))}
     bordered
     locale={{

@@ -1,0 +1,14 @@
+@import 'src/style/themes/clin/colors';
+
+.geneUploadIdsPopover {
+    max-width: 400px;
+    
+    :global(.ant-descriptions-item) {
+        padding: 0 !important;
+    }
+    
+    :global(.ant-descriptions-item-label) {
+        color: $gray-8;
+        font-weight: 500;
+    }
+}

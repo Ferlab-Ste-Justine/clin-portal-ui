@@ -19,12 +19,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains('LDM-CHUSJ').should('exist');
     cy.contains('LDM-CUSM').should('exist');
     cy.contains(/^LDM-CHUS$/).should('exist');
-    // Le lien "Variants" du tableau des prescriptions est visible
-    cy.contains('Variants').should('exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes sont visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('exist');
-    cy.contains('Variants').should('exist');
 
     // Accéder à la page de tous les variants
     cy.visitVariantsPage();
@@ -33,7 +27,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUSJ
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
 
     // Accéder aux variants d'un patient du CHUSJ
@@ -43,7 +36,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CHUSJ)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ)
     cy.visitVariantsPatientPage(epCUSM_ldmCHUSJ.patientProbId, epCUSM_ldmCHUSJ.prescriptionId, 6);
@@ -52,7 +44,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CUSM)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM)
     cy.visitVariantsPatientPage(epCUSM_ldmCUSM.patientProbId, epCUSM_ldmCUSM.prescriptionId, 6);
@@ -61,7 +52,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUS
     cy.visitPrescriptionEntityPage(epCHUS_ldmCHUS.prescriptionId);
     cy.contains(epCHUS_ldmCHUS.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CHUS
     cy.visitVariantsPatientPage(epCHUS_ldmCHUS.patientProbId, epCHUS_ldmCHUS.prescriptionId, 6);
@@ -84,12 +74,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains('LDM-CHUSJ').should('exist');
     cy.contains('LDM-CUSM').should('exist');
     cy.contains(/^LDM-CHUS$/).should('exist');
-    // Le lien "Variants" du tableau des prescriptions est visible
-    cy.contains('Variants').should('exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes sont visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('exist');
-    cy.contains('Variants').should('exist');
 
     // Accéder à la page de tous les variants
     cy.visitVariantsPage();
@@ -98,7 +82,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUSJ
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
 
     // Accéder aux variants d'un patient du CHUSJ
@@ -108,7 +91,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CHUSJ)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ)
     cy.visitVariantsPatientPage(epCUSM_ldmCHUSJ.patientProbId, epCUSM_ldmCHUSJ.prescriptionId, 6);
@@ -117,7 +99,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CUSM)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM)
     cy.visitVariantsPatientPage(epCUSM_ldmCUSM.patientProbId, epCUSM_ldmCUSM.prescriptionId, 6);
@@ -126,7 +107,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUS
     cy.visitPrescriptionEntityPage(epCHUS_ldmCHUS.prescriptionId);
     cy.contains(epCHUS_ldmCHUS.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CHUS
     cy.visitVariantsPatientPage(epCHUS_ldmCHUS.patientProbId, epCHUS_ldmCHUS.prescriptionId, 6);
@@ -149,12 +129,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains('LDM-CHUSJ').should('exist');
     cy.contains('LDM-CUSM').should('exist');
     cy.contains(/^LDM-CHUS$/).should('exist');
-    // Le lien "Variants" du tableau des prescriptions est visible
-    cy.contains('Variants').should('exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes sont visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('exist');
-    cy.contains('Variants').should('exist');
 
     // Accéder à la page de tous les variants
     cy.visitVariantsPage();
@@ -163,7 +137,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUSJ
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
 
     // Accéder aux variants d'un patient du CHUSJ
@@ -173,7 +146,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CHUSJ)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ)
     cy.visitVariantsPatientPage(epCUSM_ldmCHUSJ.patientProbId, epCUSM_ldmCHUSJ.prescriptionId, 6);
@@ -183,7 +155,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM)
     cy.visitVariantsPatientPage(epCUSM_ldmCUSM.patientProbId, epCUSM_ldmCUSM.prescriptionId, 6);
@@ -193,7 +164,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCHUS_ldmCHUS.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCHUS_ldmCHUS.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CHUS
     cy.visitVariantsPatientPage(epCHUS_ldmCHUS.patientProbId, epCHUS_ldmCHUS.prescriptionId, 6);
@@ -216,12 +186,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains('LDM-CHUSJ').should('exist');
     cy.contains('LDM-CUSM').should('exist');
     cy.contains(/^LDM-CHUS$/).should('exist');
-    // Le lien "Variants" du tableau des prescriptions est visible
-    cy.contains('Variants').should('exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes sont visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('exist');
-    cy.contains('Variants').should('exist');
 
     // Accéder à la page de tous les variants
     cy.visitVariantsPage();
@@ -230,7 +194,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUSJ
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
 
     // Accéder aux variants d'un patient du CHUSJ
@@ -240,7 +203,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CHUSJ)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ)
     cy.visitVariantsPatientPage(epCUSM_ldmCHUSJ.patientProbId, epCUSM_ldmCHUSJ.prescriptionId, 6);
@@ -250,7 +212,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM)
     cy.visitVariantsPatientPage(epCUSM_ldmCUSM.patientProbId, epCUSM_ldmCUSM.prescriptionId, 6);
@@ -260,7 +221,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCHUS_ldmCHUS.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCHUS_ldmCHUS.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CHUS
     cy.visitVariantsPatientPage(epCHUS_ldmCHUS.patientProbId, epCHUS_ldmCHUS.prescriptionId, 6);
@@ -283,12 +243,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains('LDM-CHUSJ').should('exist');
     cy.contains('LDM-CUSM').should('exist');
     cy.contains(/^LDM-CHUS$/).should('exist');
-    // Le lien "Variants" du tableau des prescriptions est visible
-    cy.contains('Variants').should('exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes sont visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('exist');
-    cy.contains('Variants').should('exist');
 
     // Accéder à la page de tous les variants
     cy.visitVariantsPage();
@@ -298,7 +252,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
 
     // Accéder aux variants d'un patient du CHUSJ
@@ -309,7 +262,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ)
     cy.visitVariantsPatientPage(epCUSM_ldmCHUSJ.patientProbId, epCUSM_ldmCHUSJ.prescriptionId, 6);
@@ -318,7 +270,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CUSM)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM)
     cy.visitVariantsPatientPage(epCUSM_ldmCUSM.patientProbId, epCUSM_ldmCUSM.prescriptionId, 6);
@@ -328,7 +279,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCHUS_ldmCHUS.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCHUS_ldmCHUS.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CHUS
     cy.visitVariantsPatientPage(epCHUS_ldmCHUS.patientProbId, epCHUS_ldmCHUS.prescriptionId, 6);
@@ -351,12 +301,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains('LDM-CHUSJ').should('exist');
     cy.contains('LDM-CUSM').should('exist');
     cy.contains(/^LDM-CHUS$/).should('exist');
-    // Le lien "Variants" du tableau des prescriptions est visible
-    cy.contains('Variants').should('exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes sont visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('exist');
-    cy.contains('Variants').should('exist');
 
     // Accéder à la page de tous les variants
     cy.visitVariantsPage();
@@ -366,7 +310,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
 
     // Accéder aux variants d'un patient du CHUSJ
@@ -377,7 +320,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ)
     cy.visitVariantsPatientPage(epCUSM_ldmCHUSJ.patientProbId, epCUSM_ldmCHUSJ.prescriptionId, 6);
@@ -387,7 +329,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM)
     cy.visitVariantsPatientPage(epCUSM_ldmCUSM.patientProbId, epCUSM_ldmCUSM.prescriptionId, 6);
@@ -396,7 +337,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUS
     cy.visitPrescriptionEntityPage(epCHUS_ldmCHUS.prescriptionId);
     cy.contains(epCHUS_ldmCHUS.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CHUS
     cy.visitVariantsPatientPage(epCHUS_ldmCHUS.patientProbId, epCHUS_ldmCHUS.prescriptionId, 6);
@@ -419,12 +359,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains('LDM-CHUSJ').should('exist');
     cy.contains('LDM-CUSM').should('exist');
     cy.contains(/^LDM-CHUS$/).should('exist');
-    // Le lien "Variants" du tableau des prescriptions est visible
-    cy.contains('Variants').should('exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes sont visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('exist');
-    cy.contains('Variants').should('exist');
 
     // Accéder à la page de tous les variants
     cy.visitVariantsPage();
@@ -434,7 +368,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
 
     // Accéder aux variants d'un patient du CHUSJ
@@ -445,7 +378,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ)
     cy.visitVariantsPatientPage(epCUSM_ldmCHUSJ.patientProbId, epCUSM_ldmCHUSJ.prescriptionId, 6);
@@ -455,7 +387,6 @@ describe('Accès des utilisateurs', () => {
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains('*****').should('exist');
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('not.exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM)
     cy.visitVariantsPatientPage(epCUSM_ldmCUSM.patientProbId, epCUSM_ldmCUSM.prescriptionId, 6);
@@ -464,7 +395,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUS
     cy.visitPrescriptionEntityPage(epCHUS_ldmCHUS.prescriptionId);
     cy.contains(epCHUS_ldmCHUS.firstNameProb).should('exist');
-    cy.contains('Variants').should('exist');
     cy.contains('Fichiers').should('exist');
     // Accéder aux variants d'un patient du CHUS
     cy.visitVariantsPatientPage(epCHUS_ldmCHUS.patientProbId, epCHUS_ldmCHUS.prescriptionId, 6);
@@ -487,12 +417,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains(/^CHUSJ$/).should('not.exist');
     cy.contains(/^CUSM$/).should('exist');
     cy.contains(/^CHUS$/).should('not.exist');
-    // Le lien "Variants" du tableau des prescriptions n'est pas isible
-    cy.contains('Variants').should('not.exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes ne sont pas visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('not.exist');
-    cy.contains('Variants').should('not.exist');
 
     // Accéder à la page de tous les variants est impossible
     cy.visit('/snv/exploration');
@@ -508,8 +432,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CHUSJ)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains(epCUSM_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('not.exist');
-    cy.contains('Fichiers').should('not.exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CHUSJ) est impossible
     cy.visit('/snv/exploration/patient/' + epCUSM_ldmCHUSJ.patientProbId + '/' + epCUSM_ldmCHUSJ.prescriptionId);
     cy.contains('403').should('exist', { timeout: 20 * 1000 });
@@ -517,8 +439,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CUSM (LDM: CUSM)
     cy.visitPrescriptionEntityPage(epCUSM_ldmCUSM.prescriptionId);
     cy.contains(epCUSM_ldmCUSM.firstNameProb).should('exist');
-    cy.contains('Variants').should('not.exist');
-    cy.contains('Fichiers').should('not.exist');
     // Accéder aux variants d'un patient du CUSM (LDM: CUSM) est impossible
     cy.visit('/snv/exploration/patient/' + epCUSM_ldmCUSM.patientProbId + '/' + epCUSM_ldmCUSM.prescriptionId);
     cy.contains('403').should('exist', { timeout: 20 * 1000 });
@@ -547,12 +467,6 @@ describe('Accès des utilisateurs', () => {
     cy.contains(/^CHUSJ$/).should('exist');
     cy.contains(/^CUSM$/).should('not.exist');
     cy.contains(/^CHUS$/).should('not.exist');
-    // Le lien "Variants" du tableau des prescriptions n'est pas isible
-    cy.contains('Variants').should('not.exist');
-    // Les liens "Fichiers" et "Variants" du tableau des requêtes ne sont pas visibles
-    cy.get('div[id*="tab-requests"]').click({ force: true });
-    cy.contains('Fichiers').should('not.exist');
-    cy.contains('Variants').should('not.exist');
 
     // Accéder à la page de tous les variants est impossible
     cy.visit('/snv/exploration');
@@ -561,8 +475,6 @@ describe('Accès des utilisateurs', () => {
     // Accéder à la page Prescription d'un patient du CHUSJ
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains(epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');
-    cy.contains('Variants').should('not.exist');
-    cy.contains('Fichiers').should('not.exist');
     // Accéder aux variants d'un patient du CHUSJ est impossible
     cy.visit('/snv/exploration/patient/' + epCHUSJ_ldmCHUSJ.patientProbId + '/' + epCHUSJ_ldmCHUSJ.prescriptionId);
     cy.contains('403').should('exist', { timeout: 20 * 1000 });

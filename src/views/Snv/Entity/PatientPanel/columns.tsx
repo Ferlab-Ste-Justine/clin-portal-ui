@@ -131,11 +131,7 @@ export const getPatientPanelColumns = (
     sorter: (a, b) => a.ad_alt - b.ad_alt,
     render: (ad_alt) => {
       const displayValue = ad_alt ? formatNumber(ad_alt) : TABLE_EMPTY_PLACE_HOLDER;
-      return (
-        <span data-cy='ad_alt'>
-          {displayValue}
-        </span>
-      );
+      return <span data-cy="ad_alt">{displayValue}</span>;
     },
   },
   {
@@ -146,11 +142,7 @@ export const getPatientPanelColumns = (
     sorter: (a, b) => a.ad_total - b.ad_total,
     render: (ad_total) => {
       const displayValue = ad_total ? formatNumber(ad_total) : TABLE_EMPTY_PLACE_HOLDER;
-      return (
-        <span data-cy='ad_total'>
-          {displayValue}
-        </span>
-      );
+      return <span data-cy="ad_total">{displayValue}</span>;
     },
   },
   {

@@ -1,22 +1,25 @@
+import { useEffect, useMemo, useState } from 'react';
 import intl from 'react-intl-universal';
-import { Link } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { MedicineBoxOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Row } from 'antd';
-import { extractPatientId } from 'api/fhir/helper';
+import { Space, Tabs } from 'antd';
+import { FhirApi } from 'api/fhir';
+import { extractPatientId, extractServiceRequestId } from 'api/fhir/helper';
+import { ServiceRequestEntity } from 'api/fhir/models';
 import { useServiceRequestEntity } from 'graphql/prescriptions/actions';
 import { GraphqlBackend } from 'providers';
 import ApolloProvider from 'providers/ApolloProvider';
 
-import LineStyleIcon from 'components/icons/LineStyleIcon';
-import ContentWithHeader from 'components/Layout/ContentWithHeader';
-import ScrollContentWithFooter from 'components/Layout/ScrollContentWithFooter';
 import Forbidden from 'components/Results/Forbidden';
-import { LimitTo, Roles } from 'components/Roles/Rules';
 
-import AnalysisCard from './AnalysisCard';
-import ClinicalInformationCard from './ClinicalInformationCard';
-import ParentCard from './ParentCard';
-import PatientCard from './PatientCard';
+import PrescriptionDetails from './Tabs/Details';
+import PrescriptionFiles from './Tabs/Files';
+import PrescriptionVariants from './Tabs/Variants';
+import { getPatientAndRequestId } from './Tabs/Variants/utils';
+import PrescriptionEntityContext, {
+  PrescriptionEntityContextType,
+  PrescriptionEntityVariantInfo,
+} from './context';
 
 import styles from './index.module.scss';
 
@@ -24,60 +27,112 @@ interface OwnProps {
   prescriptionId: string;
 }
 
+enum PrescriptionEntityTabs {
+  DETAILS = '#details',
+  VARIANTS = '#variants',
+  FILES = '#files',
+}
+
 const PrescriptionEntity = ({ prescriptionId }: OwnProps) => {
+  const { hash } = useLocation();
+  const { push } = useHistory();
+  const [requestLoading, setRequestLoading] = useState(true);
   const { prescription, loading } = useServiceRequestEntity(prescriptionId);
+
+  const [selectedRequest, setSelectedRequest] = useState<ServiceRequestEntity>();
+  const [selectedBasedOnRequest, setBasedOnRequest] = useState<ServiceRequestEntity>();
+  const [variantInfo, setVariantInfo] = useState<PrescriptionEntityVariantInfo>();
+
+  useEffect(() => {
+    const subjectRequestId = prescription?.subject?.resource?.requests?.[0]?.id;
+
+    if (subjectRequestId) {
+      FhirApi.fetchServiceRequestEntity(subjectRequestId).then(({ data }) => {
+        setSelectedRequest(data?.data.ServiceRequest);
+        data?.data.ServiceRequest.basedOn ? null : setRequestLoading(false);
+      });
+    }
+  }, [prescription?.subject?.resource?.requests]);
+
+  useEffect(() => {
+    if (selectedRequest?.basedOn) {
+      FhirApi.fetchServiceRequestEntity(selectedRequest?.basedOn.reference).then(({ data }) => {
+        setBasedOnRequest(data?.data.ServiceRequest);
+        setRequestLoading(false);
+      });
+    }
+  }, [selectedRequest]);
+
+  const memoedContextValue = useMemo<PrescriptionEntityContextType>(() => {
+    const prescriptionId = prescription ? extractServiceRequestId(prescription.id) : undefined;
+    const patientId = selectedBasedOnRequest
+      ? extractPatientId(selectedBasedOnRequest?.subject.reference)
+      : undefined;
+    const { requestId } = getPatientAndRequestId(selectedBasedOnRequest?.subject.resource);
+
+    return {
+      loading: loading || requestLoading,
+      patientId,
+      prescription,
+      prescriptionId,
+      selectedRequest,
+      selectedBasedOnRequest,
+      setVariantInfo,
+      variantInfo: variantInfo || {
+        patientId,
+        requestId,
+      },
+    };
+  }, [
+    prescription,
+    selectedRequest,
+    selectedBasedOnRequest,
+    loading,
+    requestLoading,
+    variantInfo,
+    setVariantInfo,
+  ]);
 
   if (!loading && !prescription) {
     return <Forbidden />;
   }
 
   return (
-    <ContentWithHeader
-      headerProps={{
-        icon: <MedicineBoxOutlined />,
-        title: intl.get('screen.prescription.entity.title', { id: prescriptionId }),
-        actions: [
-          <LimitTo key="variants" roles={[Roles.Variants]}>
-            <Link
-              key="variants"
-              to={`/snv/exploration/patient/${extractPatientId(
-                prescription?.subject?.resource?.id!,
-              )}/${prescriptionId}`}
-            >
-              <Button type="primary" icon={<LineStyleIcon height="14" width="14" />} data-cy="SeeVariantsButton">
-                {intl.get('screen.prescription.entity.see.variant')}
-              </Button>
-            </Link>
-          </LimitTo>,
-        ],
-      }}
-    >
-      <ScrollContentWithFooter className={styles.prescriptionEntityWrapper} container>
-        <Row gutter={[24, 24]}>
-          <Col span={12}>
-            <AnalysisCard prescription={prescription} loading={loading} />
-          </Col>
-          <Col span={12}>
-            <PatientCard prescription={prescription} loading={loading} />
-          </Col>
-          {prescription?.note && (
-            <Col span={24}>
-              <Card title={intl.get('screen.prescription.entity.comment.card.title')}>
-                {prescription?.note.text}
-              </Card>
-            </Col>
-          )}
-          <Col span={24}>
-            <ClinicalInformationCard prescription={prescription} loading={loading} />
-          </Col>
-          {prescription?.extensions?.map((extension, index) => (
-            <Col key={index} span={24}>
-              <ParentCard loading={loading} extension={extension} />
-            </Col>
-          ))}
-        </Row>
-      </ScrollContentWithFooter>
-    </ContentWithHeader>
+    <PrescriptionEntityContext.Provider value={memoedContextValue}>
+      <Tabs
+        defaultActiveKey={PrescriptionEntityTabs.DETAILS}
+        activeKey={hash || PrescriptionEntityTabs.DETAILS}
+        onChange={(activeKey) => push({ hash: activeKey })}
+        tabBarExtraContent={{
+          left: (
+            <Space direction="horizontal" className={styles.headerIcon}>
+              <MedicineBoxOutlined />
+              {prescriptionId}
+            </Space>
+          ),
+        }}
+        className={styles.prescriptionEntityContainer}
+      >
+        <Tabs.TabPane
+          key={PrescriptionEntityTabs.DETAILS}
+          tab={intl.get('prescription.tabs.title.details')}
+        >
+          <PrescriptionDetails />
+        </Tabs.TabPane>
+        <Tabs.TabPane
+          key={PrescriptionEntityTabs.VARIANTS}
+          tab={intl.get('prescription.tabs.title.variants')}
+        >
+          <PrescriptionVariants />
+        </Tabs.TabPane>
+        <Tabs.TabPane
+          key={PrescriptionEntityTabs.FILES}
+          tab={intl.get('prescription.tabs.title.files')}
+        >
+          <PrescriptionFiles />
+        </Tabs.TabPane>
+      </Tabs>
+    </PrescriptionEntityContext.Provider>
   );
 };
 

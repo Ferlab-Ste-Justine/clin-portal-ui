@@ -1,6 +1,5 @@
 import intl from 'react-intl-universal';
 import { Card, Descriptions, Space, Typography } from 'antd';
-import { extractPatientId } from 'api/fhir/helper';
 
 import CollapsePanel from 'components/containers/collapse';
 
@@ -115,10 +114,7 @@ const ClinicalInformation = ({ prescription, loading }: OwnProps) => {
               </Descriptions>
             </Card.Grid>
           </div>
-          <RequestTable
-            patientId={extractPatientId(prescription?.subject.reference)}
-            data={prescription?.subject?.resource?.requests}
-          />
+          <RequestTable data={prescription?.subject?.resource?.requests} />
         </Space>
       ) : (
         <></>

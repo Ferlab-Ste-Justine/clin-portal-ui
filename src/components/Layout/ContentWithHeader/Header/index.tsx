@@ -9,7 +9,7 @@ const { Title } = Typography;
 
 export type ContentHeaderProps = {
   icon?: React.ReactNode;
-  title: string;
+  title?: string;
   loading?: boolean;
   extra?: ReactNode[];
   actions?: ReactNode[];
@@ -33,18 +33,18 @@ const ContentHeader = ({
           <ArrowLeftOutlined onClick={() => history.goBack()} className={styles.backArrow} />
         )}
         {icon && <span className={styles.headerIcon}>{icon}</span>}
-        <Space size={12}>
-          <Title level={3}>{title}</Title>
-          <Skeleton
-            title={{ width: 200 }}
-            paragraph={false}
-            loading={loading}
-            className={styles.titleSkeleton}
-            active
-          >
+        <Skeleton
+          title={{ width: 200 }}
+          paragraph={false}
+          loading={loading}
+          className={styles.titleSkeleton}
+          active
+        >
+          <Space size={12}>
+            {title && <Title level={3}>{title}</Title>}
             <Space>{extra}</Space>
-          </Skeleton>
-        </Space>
+          </Space>
+        </Skeleton>
       </Space>
       <Space className={styles.actionsWrapper}>{actions}</Space>
     </div>

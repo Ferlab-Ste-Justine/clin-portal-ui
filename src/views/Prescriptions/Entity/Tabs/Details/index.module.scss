@@ -1,0 +1,14 @@
+@import 'src/style/themes/clin/layout';
+
+.prescriptionEntityWrapper {
+  height: calc(100vh - #{$main-header-height} - #{$page-header-height});
+  overflow: scroll;
+
+  .content {
+    padding: 24px;
+  }
+
+  :global(.ant-card) {
+    height: 100%;
+  }
+}

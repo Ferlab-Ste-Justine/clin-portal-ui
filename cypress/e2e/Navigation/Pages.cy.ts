@@ -48,8 +48,10 @@ describe('Affichage de toutes les pages et modals', () => {
   it('Prescription', () => {
     cy.visitPrescriptionEntityPage(epCHUSJ_ldmCHUSJ.prescriptionId);
 
-    cy.contains('Prescription ID : '+epCHUSJ_ldmCHUSJ.prescriptionId).should('exist', {timeout: 20*1000});
-    cy.contains('Voir les variants').should('exist', {timeout: 20*1000});
+    cy.get('div[role="tablist"]').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist', {timeout: 20*1000});
+    cy.contains('Détails').should('exist', {timeout: 20*1000});
+    cy.contains('Variants').should('exist', {timeout: 20*1000});
+    cy.contains('Fichiers').should('exist', {timeout: 20*1000});
     cy.contains('Analyse').should('exist', {timeout: 20*1000});
     cy.contains('ID prescription').should('exist', {timeout: 20*1000});
     cy.contains('Statut').should('exist', {timeout: 20*1000});
@@ -124,13 +126,13 @@ describe('Affichage de toutes les pages et modals', () => {
   it('Variants d\'un patient', () => {
     cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
 
+    cy.contains('Détails').should('exist', {timeout: 20*1000});
     cy.contains('Variants').should('exist', {timeout: 20*1000});
+    cy.contains('Fichiers').should('exist', {timeout: 20*1000});
+    cy.contains('Requête :').should('exist', {timeout: 20*1000});
+    cy.contains('Cas-index ('+epCHUSJ_ldmCHUSJ.requestProbId+')').should('exist', {timeout: 20*1000});
     cy.contains('SNV').should('exist', {timeout: 20*1000});
     cy.contains('CNV').should('exist', {timeout: 20*1000});
-    cy.contains('Patient ID : '+epCHUSJ_ldmCHUSJ.patientProbId).should('exist', {timeout: 20*1000});
-    cy.contains('Prescription ID :').should('exist', {timeout: 20*1000});
-    cy.contains('Échantillon : ').should('exist', {timeout: 20*1000});
-    cy.contains('Cas-index').should('exist', {timeout: 20*1000});
     cy.contains('Panel RQDM').should('exist', {timeout: 20*1000});
     cy.contains('Variant').should('exist', {timeout: 20*1000});
     cy.contains('Gène').should('exist', {timeout: 20*1000});
@@ -209,13 +211,13 @@ describe('Affichage de toutes les pages et modals', () => {
   it('CNVs d\'un patient', () => {
     cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
 
+    cy.contains('Détails').should('exist', {timeout: 20*1000});
     cy.contains('Variants').should('exist', {timeout: 20*1000});
+    cy.contains('Fichiers').should('exist', {timeout: 20*1000});
+    cy.contains('Requête :').should('exist', {timeout: 20*1000});
+    cy.contains('Cas-index ('+epCHUSJ_ldmCHUSJ.requestProbId+')').should('exist', {timeout: 20*1000});
     cy.contains('SNV').should('exist', {timeout: 20*1000});
     cy.contains('CNV').should('exist', {timeout: 20*1000});
-    cy.contains('Patient ID : '+epCHUSJ_ldmCHUSJ.patientProbId).should('exist', {timeout: 20*1000});
-    cy.contains('Prescription ID :').should('exist', {timeout: 20*1000});
-    cy.contains('Échantillon :').should('exist', {timeout: 20*1000});
-    cy.contains('Cas-index').should('exist', {timeout: 20*1000});
     cy.contains('Panel RQDM').should('exist', {timeout: 20*1000});
     cy.contains('Variant').should('exist', {timeout: 20*1000});
     cy.contains('Gène').should('exist', {timeout: 20*1000});

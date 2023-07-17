@@ -15,6 +15,7 @@ declare namespace Cypress {
     visitArchivesPatientPage(patientId: string): cy & CyEventEmitter;
     visitBioinformaticsAnalysisPage(bioAnalysisId: string): cy & CyEventEmitter;
     visitCNVsPatientPage(patientId: string, prescriptionId: string, nbGraphqlCalls: number): cy & CyEventEmitter;
+    visitFilesPatientPage(prescriptionId: string): cy & CyEventEmitter;
     visitPrescriptionEntityPage(prescriptionId: string): cy & CyEventEmitter;
     visitPrescriptionsPage(): cy & CyEventEmitter;
     visitVariantEntityPage(locusId: string, nbGraphqlCalls: number): cy & CyEventEmitter;

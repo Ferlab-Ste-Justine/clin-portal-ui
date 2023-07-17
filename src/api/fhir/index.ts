@@ -1,7 +1,10 @@
 import { sendRequestWithRpt } from 'api';
 import { getFhirPractitionerId } from 'auth/keycloak';
 import { PatientTaskResults } from 'graphql/patients/models/Patient';
-import { SEARCH_PATIENT_FILES_QUERY } from 'graphql/patients/queries';
+import {
+  SEARCH_PATIENT_FILES_QUERY,
+  SEARCH_PRESCRIPTION_FILES_QUERY,
+} from 'graphql/patients/queries';
 import { ANALYSIS_ENTITY_QUERY } from 'graphql/prescriptions/queries';
 import { FHIR_GRAPHQL_URL } from 'providers/ApolloProvider';
 
@@ -43,6 +46,18 @@ const searchPatientFiles = (searchValue: string) =>
     url: FHIR_GRAPHQL_URL,
     data: {
       query: SEARCH_PATIENT_FILES_QUERY(searchValue).loc?.source.body,
+      variables: {
+        searchValue,
+      },
+    },
+  });
+
+const searchPrescriptionFiles = (searchValue: string) =>
+  sendRequestWithRpt<{ data: { taskList: PatientTaskResults } }>({
+    method: 'POST',
+    url: FHIR_GRAPHQL_URL,
+    data: {
+      query: SEARCH_PRESCRIPTION_FILES_QUERY(searchValue).loc?.source.body,
       variables: {
         searchValue,
       },
@@ -94,6 +109,7 @@ export const FhirApi = {
   searchPatient,
   searchPractitionerRole,
   searchPatientFiles,
+  searchPrescriptionFiles,
   downloadFileMetadata,
   fetchTaskMetadata,
   fetchServiceRequestCodes,

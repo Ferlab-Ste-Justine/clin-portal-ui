@@ -2,8 +2,7 @@ import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { extractOrganizationId } from 'api/fhir/helper';
-import { AnalysisResult, ITableAnalysisResult } from 'graphql/prescriptions/models/Prescription';
-import Links from 'views/Prescriptions/components/Links';
+import { ITableAnalysisResult } from 'graphql/prescriptions/models/Prescription';
 import StatusTag from 'views/Prescriptions/components/StatusTag';
 import { getPrescriptionStatusDictionnary } from 'views/Prescriptions/utils/constant';
 
@@ -99,16 +98,5 @@ export const prescriptionsColumns = (): ProColumnType<ITableAnalysisResult>[] =>
     tooltip: intl.get('screen.patientsearch.table.mrn.tooltip'),
     sorter: { multiple: 1 },
     defaultHidden: true,
-  },
-  {
-    key: 'links',
-    title: intl.get('screen.patientsearch.table.links'),
-    render: (results: AnalysisResult) => (
-      <Links
-        patientId={results.patient_id}
-        prescriptionId={results.prescription_id}
-        withDownload={false}
-      />
-    ),
   },
 ];

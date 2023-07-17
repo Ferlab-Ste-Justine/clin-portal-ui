@@ -1,0 +1,16 @@
+@import 'src/style/themes/clin/layout';
+
+.cnvVariant {
+  height: calc(100vh - #{$main-header-height} - #{2 * $page-header-height});
+  display: flex;
+
+  .sideMenu {
+    li[role='menuitem'] {
+      color: white;
+
+      span[class$='-title-content'] {
+        margin-left: 0 !important;
+      }
+    }
+  }
+}

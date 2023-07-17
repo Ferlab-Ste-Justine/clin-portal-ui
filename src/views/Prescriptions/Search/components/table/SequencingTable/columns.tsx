@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { extractOrganizationId } from 'api/fhir/helper';
 import { ITableSequencingResult, SequencingResult } from 'graphql/sequencing/models';
-import Links from 'views/Prescriptions/components/Links';
 import StatusTag from 'views/Prescriptions/components/StatusTag';
 import { getPrescriptionStatusDictionnary } from 'views/Prescriptions/utils/constant';
 
@@ -88,13 +87,6 @@ export const sequencingsColumns = (): ProColumnType<ITableSequencingResult>[] =>
     ),
     sorter: { multiple: 1 },
     title: intl.get('screen.patientsearch.table.prescription'),
-  },
-  {
-    key: 'links',
-    title: intl.get('screen.patientsearch.table.links'),
-    render: (results: SequencingResult) => (
-      <Links patientId={results.patient_id} prescriptionId={results.request_id} />
-    ),
   },
   {
     key: 'requester',

@@ -1,0 +1,8 @@
+@import 'src/style/themes/clin/layout';
+
+.loadingContainer {
+    height: calc(100vh - #{$main-header-height} - #{2 * $page-header-height});
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

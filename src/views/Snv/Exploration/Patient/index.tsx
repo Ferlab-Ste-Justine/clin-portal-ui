@@ -56,7 +56,7 @@ const SnvExplorationPatient = () => {
             patientId={patientid}
             prescriptionId={prescriptionid}
           />,
-          ...patientTags(patientid, prescriptionid, prescription, basedOnPrescription),
+          ...patientTags(patientid, prescription, basedOnPrescription),
         ],
         loading: headerLoading,
       }}

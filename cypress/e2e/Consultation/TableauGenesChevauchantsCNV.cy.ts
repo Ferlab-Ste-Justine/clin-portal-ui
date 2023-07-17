@@ -7,7 +7,7 @@ beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
   cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
 
-  cy.get('body').find('span[class*="ant-select-selection-item"]').click({force: true});
+  cy.get('body').find('span[class*="ant-select-selection-item"]').eq(1).click({force: true});
   cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
 
   cy.get('thead[class="ant-table-thead"]').contains('Début').click({force: true});

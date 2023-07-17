@@ -193,7 +193,7 @@
   "layout.main.menu.archives": "Archives",
   "layout.main.menu.home": "Accueil",
   "layout.main.menu.prescriptions": "Prescriptions",
-  "layout.main.menu.variants": "Variants",
+  "layout.main.menu.variants": "Exploration",
   "layout.main.menu.panels": "Panels",
   "layout.main.menu.panels.tooltip": "Télécharger les panels du RQDM en format Excel",
   "links.file": "Fichier",
@@ -782,6 +782,15 @@
   "upload.gene.ids.modal.upload.btn": "Téléverser",
   "upload.gene.ids.modal.upload.file.btn": "Téléverser un fichier",
   "upload.gene.ids.modal.uploadBtnText": "Téléverser une liste de gènes",
+  "upload.gene.ids.modal.tooltip.title": "Identifiants et formats de fichier acceptés",
+  "upload.gene.ids.modal.tooltip.label.identifiers": "Identifiants",
+  "upload.gene.ids.modal.tooltip.label.separatedBy": "Séparateurs",
+  "upload.gene.ids.modal.tooltip.label.fileFormats": "Formats de fichier",
+  "upload.gene.ids.modal.tooltip.label.limit": "Limite",
+  "upload.gene.ids.modal.tooltip.info.identifiers": "Symbole du gène, Alias, Ensembl ID",
+  "upload.gene.ids.modal.tooltip.info.separatedBy": "virgule, espace blanc, retour de ligne",
+  "upload.gene.ids.modal.tooltip.info.fileFormats": ".txt, .csv, .tsv",
+  "upload.gene.ids.modal.tooltip.info.limit": "1500 éléments autorisés par téléversement",
   "variant.acmg.verdict.label": "Verdict",
   "varsome": "Varsome",
   "x.weeks": "{weeks, plural, =1 {# semaine} other {# semaines}}",
@@ -843,11 +852,28 @@
   "donors.zyg.abrv.HEM": "Hemizygote",
   "donors.zyg.abrv.HET": "Hétérozygote",
   "donor.zygosity.tooltip": "Zygosité",
-  "donors" : {
+  "donors": {
     "status": {
       "unknown": "Indéterminé",
       "affected": "Atteint",
       "not_affected": "Non atteint"
     }
-  }
+  },
+  "prescription.tabs.title.details": "Détails",
+  "prescription.tabs.title.variants": "Variants",
+  "prescription.tabs.title.files": "Fichiers",
+  "prescription.variants.header.request": "Requête",
+  "screen.prescription.entity.file.table.column.analysis": "Analyse bioinfo",
+  "screen.prescription.entity.file.table.column.date": "Date",
+  "screen.prescription.entity.file.table.column.actions": "Actions",
+  "screen.prescription.entity.file.table.column.filename": "Nom du fichier",
+  "screen.prescription.entity.file.table.column.format": "Format",
+  "screen.prescription.entity.file.table.column.hash": "Hash",
+  "screen.prescription.entity.file.table.column.patient": "Patient",
+  "screen.prescription.entity.file.table.column.request": "Requête",
+  "screen.prescription.entity.file.table.column.run": "Run",
+  "screen.prescription.entity.file.table.column.sampleldm": "Échantillon (LDM)",
+  "screen.prescription.entity.file.table.column.size": "Taille",
+  "screen.prescription.entity.file.table.column.type": "Type",
+  "screen.prescription.entity.file.table.column.position": "Position"
 }

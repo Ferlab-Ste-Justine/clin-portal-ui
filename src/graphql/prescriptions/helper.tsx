@@ -2,7 +2,10 @@ import { ServiceRequestEntity } from 'api/fhir/models';
 
 import PositionTag from 'components/uiKit/PositionTag';
 
-const getFamilyCode = (prescription: ServiceRequestEntity | undefined, patientid: string) => {
+export const getFamilyCode = (
+  prescription: ServiceRequestEntity | undefined,
+  patientid: string,
+) => {
   const familyReference = prescription?.extensions?.find(function (o) {
     return o.extension?.[1].valueReference?.reference.includes(patientid);
   });

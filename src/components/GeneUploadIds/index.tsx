@@ -5,11 +5,14 @@ import { MatchTableItem } from '@ferlab/ui/core/components/UploadIds/types';
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { Descriptions } from 'antd';
 import { ArrangerApi } from 'api/arranger';
 import { INDEXES } from 'graphql/constants';
 import { CHECK_GENE_MATCH_QUERY } from 'graphql/genes/queries';
 import { hydrateResults } from 'graphql/models';
 import { GeneEntity } from 'graphql/variants/models';
+
+import styles from './index.module.scss';
 
 interface OwnProps {
   queryBuilderId: string;
@@ -52,6 +55,26 @@ const GenesUploadIds = ({ queryBuilderId, field }: OwnProps) => (
     }}
     limitItem={1500}
     placeHolder="ex. ENSG00000157764, TP53"
+    popoverProps={{
+      title: intl.get('upload.gene.ids.modal.tooltip.title'),
+      overlayClassName: styles.geneUploadIdsPopover,
+      content: (
+        <Descriptions column={1}>
+          <Descriptions.Item label={intl.get('upload.gene.ids.modal.tooltip.label.identifiers')}>
+            {intl.get('upload.gene.ids.modal.tooltip.info.identifiers')}
+          </Descriptions.Item>
+          <Descriptions.Item label={intl.get('upload.gene.ids.modal.tooltip.label.separatedBy')}>
+            {intl.get('upload.gene.ids.modal.tooltip.info.separatedBy')}
+          </Descriptions.Item>
+          <Descriptions.Item label={intl.get('upload.gene.ids.modal.tooltip.label.fileFormats')}>
+            {intl.get('upload.gene.ids.modal.tooltip.info.fileFormats')}
+          </Descriptions.Item>
+          <Descriptions.Item label={intl.get('upload.gene.ids.modal.tooltip.label.limit')}>
+            {intl.get('upload.gene.ids.modal.tooltip.info.limit')}
+          </Descriptions.Item>
+        </Descriptions>
+      ),
+    }}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({
         query: CHECK_GENE_MATCH_QUERY.loc?.source.body,

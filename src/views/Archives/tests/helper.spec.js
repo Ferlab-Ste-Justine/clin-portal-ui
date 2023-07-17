@@ -78,6 +78,7 @@ describe('extracDocsFromTask', () => {
         srRef: 'id',
         basedOnSrRef: 'reference',
         size: '1.02 KB',
+        originalSize: 1024,
         title: 'title',
         format: 'CRAM',
         action: {

@@ -41,6 +41,7 @@ export const extractDocsFromTask = (tasks: PatientTaskResults) => {
             srRef: extractServiceRequestId(task.focus.request.id),
             basedOnSrRef: extractServiceRequestId(task.focus.request.basedOn.reference),
             size: formatFileSize(Number(content.attachment.size)) as string,
+            originalSize: content.attachment.size,
             title: content.attachment.title,
             format: content.format,
             action: {
