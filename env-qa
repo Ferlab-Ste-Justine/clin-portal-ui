@@ -8,7 +8,7 @@ REACT_APP_SHOW_TRANSLATION_BTN=true
 REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY=true
 REACT_APP_FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS=prenatal
 # AUTH
-REACT_APP_KEYCLOAK_CONFIG={"realm": "clin", "url": "https://auth.qa.cqgc.hsj.rtss.qc.ca/auth/", "clientId": "clin-client", "authClientId": "clin-acl"}
+REACT_APP_KEYCLOAK_CONFIG={"realm": "clin", "url": "https://auth.qa.cqgc.hsj.rtss.qc.ca/", "clientId": "clin-client", "authClientId": "clin-acl"}
 # API
 REACT_APP_ARRANGER_API=https://data-api.qa.cqgc.hsj.rtss.qc.ca
 REACT_APP_ARRANGER_PROJECT_ID=clin_qa
