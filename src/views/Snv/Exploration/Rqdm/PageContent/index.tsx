@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
+import { resetSearchAfterQueryConfig } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
@@ -13,6 +14,7 @@ import Download from 'views/Snv/components/Download';
 import {
   DEFAULT_OFFSET,
   DEFAULT_PAGE_INDEX,
+  DEFAULT_PAGE_SIZE,
   DEFAULT_QUERY_CONFIG,
   DEFAULT_SORT_QUERY,
   VARIANT_RQDM_QB_ID,
@@ -75,6 +77,18 @@ const PageContent = ({ variantMapping }: OwnProps) => {
       searchAfter: undefined,
     });
 
+    setPageIndex(DEFAULT_PAGE_INDEX);
+    // eslint-disable-next-line
+  }, [JSON.stringify(activeQuery)]);
+
+  useEffect(() => {
+    resetSearchAfterQueryConfig(
+      {
+        ...DEFAULT_QUERY_CONFIG,
+        size: DEFAULT_QUERY_CONFIG.size || DEFAULT_PAGE_SIZE,
+      },
+      setVariantQueryConfig,
+    );
     setPageIndex(DEFAULT_PAGE_INDEX);
     // eslint-disable-next-line
   }, [JSON.stringify(activeQuery)]);

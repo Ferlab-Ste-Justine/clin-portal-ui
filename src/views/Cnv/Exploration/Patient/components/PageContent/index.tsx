@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
+import { resetSearchAfterQueryConfig } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
@@ -78,6 +79,8 @@ const PageContent = ({ variantMapping, patientId, prescriptionId }: OwnProps) =>
     });
   }, [variantQueryConfig]);
 
+  const activeQuerySnapshot = JSON.stringify(activeQuery);
+
   useEffect(() => {
     setVariantQueryConfig({
       ...variantQueryConfig,
@@ -85,8 +88,18 @@ const PageContent = ({ variantMapping, patientId, prescriptionId }: OwnProps) =>
     });
 
     setPageIndex(DEFAULT_PAGE_INDEX);
-    // eslint-disable-next-line
-  }, [JSON.stringify(activeQuery)]);
+  }, [activeQuerySnapshot]);
+
+  useEffect(() => {
+    resetSearchAfterQueryConfig(
+      {
+        ...DEFAULT_QUERY_CONFIG,
+        size: DEFAULT_QUERY_CONFIG.size || DEFAULT_PAGE_SIZE,
+      },
+      setVariantQueryConfig,
+    );
+    setPageIndex(DEFAULT_PAGE_INDEX);
+  }, [activeQuerySnapshot]);
 
   return (
     <>
