@@ -59,10 +59,10 @@ Cypress.Commands.add('closePopup', () => {
 Cypress.Commands.add('login', (user: string, password: string) => {
   cy.session([user], () => {
     cy.visit('/');
-    cy.get('input[type="email"]').should('exist', {timeout: 60*1000});
+    cy.get('input[id="username"]').should('exist', {timeout: 60*1000});
 
-    cy.get('input[type="email"]').type(user);
-    cy.get('input[type="password"]').type(password, {log: false});
+    cy.get('input[id="username"]').type(user);
+    cy.get('input[id="password"]').type(password, {log: false});
     cy.get('button[type="submit"]').click();
   });
 });
