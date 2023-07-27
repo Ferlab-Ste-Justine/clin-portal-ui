@@ -1,0 +1,21 @@
+{
+  "headers": ["prescription_id",
+              "patient_id",
+              "status",
+              "created_on",
+              "timestamp",
+              "analysis_code",
+              "ldm",
+              "ep",
+              "requester",
+              "prenatal",
+              "patient_mrn"],
+  "content": ["{{prescriptionId}}",
+              "{{patientId}}",
+              "active",
+              "{{stampDate}}",
+              "RGDI",
+              "LDM-CHUSJ",
+              "CHUSJ",
+              "MRN-283773"]
+}

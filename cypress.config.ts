@@ -1,21 +1,12 @@
 import { defineConfig } from 'cypress';
+import { getDateTime } from './cypress/support/utils';
 
-let date = new Date();
-const joinWithPadding = (l: number[]) => l.reduce((xs, x) => xs + `${x}`.padStart(2, '0'), '');
-const strDate = joinWithPadding([
-  date.getFullYear(),
-  date.getMonth() + 1,
-  date.getDate()
-]);
-const strTime = joinWithPadding([
-  date.getHours(),
-  date.getMinutes()
-]);
+const { strDate, strTime } = getDateTime();
 
 export default defineConfig({
   projectId: 'e6jd58',
   chromeWebSecurity: false,
-  video: true,
+  video: false,
   videoUploadOnPasses: false,
   screenshotOnRunFailure: true,
   viewportWidth: 1920,

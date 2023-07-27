@@ -5,12 +5,7 @@ const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
 
 beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
-
-  cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
-  cy.visit('/snv/exploration/patient/'+epCHUSJ_ldmCHUSJ.patientProbId+'/'+epCHUSJ_ldmCHUSJ.prescriptionId+'?sharedFilterId='+Cypress.env('shared_filter_id'));
-  cy.wait('@getPOSTgraphql', {timeout: 5000});
-  cy.wait('@getPOSTgraphql', {timeout: 5000});
-  cy.wait('@getPOSTgraphql', {timeout: 5000});
+  cy.visitAndIntercept('/snv/exploration/patient/'+epCHUSJ_ldmCHUSJ.patientProbId+'/'+epCHUSJ_ldmCHUSJ.prescriptionId+'?sharedFilterId='+Cypress.env('shared_filter_id'), 'POST', '**/graphql', 3);
 
   cy.get('body').find('div[role="tabpanel"]').find('tr[data-row-key="9ea37b2966662962908b94b1898dc0a9ac4e9645"]').find('td[class*="ant-table-cell-fix-left"]').eq(1).find('svg[class="anticon"]').first().click({force: true});
 });

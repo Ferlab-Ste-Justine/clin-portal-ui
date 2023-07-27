@@ -1,7 +1,10 @@
 /// <reference types="Cypress" />
 import '@testing-library/cypress/add-commands';
 
-// Add Custom commands here and their types in `./index.d.ts`
+export interface Replacement {
+  placeholder: string;
+  value: string;
+}
 
 Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp) => {
   cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
@@ -26,10 +29,14 @@ Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp
   cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 });
 
-Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {
+Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number) => {
+  if (eq == undefined) {
+    eq = 0;
+  }
+
   cy.intercept(methodHTTP, routeMatcher).as('getRouteMatcher');
 
-  cy.get(selector).click({force: true});
+  cy.get(selector).eq(eq).click({force: true});
 
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 20*1000});
@@ -128,6 +135,48 @@ Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp
     .its('length').should('eq', dictionnary.length);
 });
 
+Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Replacement[]) => {
+  const arrReplacements = replacements !== undefined ? replacements : [];
+  cy.fixture(fixture).then((expectedData) => {
+    cy.exec(`ls cypress/downloads/*`).then((result) => {
+      const filename = result.stdout.trim();
+      cy.readFile(`${filename}`).then((file) => {
+        let fileWithData = file;
+        arrReplacements.forEach((replacement) => {
+          fileWithData = fileWithData.replace(replacement.placeholder, replacement.value);
+        });
+        expectedData.content.forEach((value: any) => {
+          let valueWithData = value
+          arrReplacements.forEach((replacement) => {
+            valueWithData = valueWithData.replace(replacement.placeholder, replacement.value);
+          });
+          expect(fileWithData).to.include(valueWithData);
+        });
+      });
+    });
+  });
+});
+
+Cypress.Commands.add('validateFileHeaders', (fixture: string) => {
+  cy.fixture(fixture).then((expectedData) => {
+    cy.exec(`ls cypress/downloads/*`).then((result) => {
+      const filename = result.stdout.trim();
+      cy.readFile(`${filename}`).then((file) => {
+        expectedData.headers.forEach((header: any) => {
+          expect(file).to.include(header);
+        });
+      });
+    });
+  });
+});
+
+Cypress.Commands.add('validateFileName', (namePattern: string) => {
+  cy.exec(`ls cypress/downloads/`+namePattern).then((result) => {
+    const filename = result.stdout.trim();
+    cy.readFile(`${filename}`).should('exist');
+  });
+});
+
 Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {
   cy.intercept(methodHTTP, routeMatcher).as('getRouteMatcher');
 
@@ -191,8 +240,9 @@ Cypress.Commands.add('visitVariantEntityPage', (locusId: string, nbGraphqlCalls:
                        nbGraphqlCalls);
 });
 
-Cypress.Commands.add('visitVariantsPage', () => {
-  cy.visitAndIntercept('/snv/exploration',
+Cypress.Commands.add('visitVariantsPage', (sharedFilterOption?: string) => {
+  const strSharedFilterOption = sharedFilterOption !== undefined ? sharedFilterOption : '';
+  cy.visitAndIntercept('/snv/exploration'+strSharedFilterOption,
                        'POST',
                        '**/graphql',
                        3);

@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/cypress/downloads
 /cypress/screenshots
 /cypress/videos
 /cypress/results
