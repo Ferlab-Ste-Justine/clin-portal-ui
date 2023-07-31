@@ -32,7 +32,7 @@ describe('Page d\'une analyse bioinformatique - Vérifier les informations affic
     cy.get('[data-cy="ExperimentCard_Card"]').contains('Illumina NovaSeq').should('exist');
     cy.get('[data-cy="ExperimentCard_Card"]').contains('RocheKapaHyperExome').should('exist');
     cy.get('[data-cy="ExperimentCard_Card"]').contains('A00516').should('exist');
-    cy.get('[data-cy="ExperimentCard_Card"]').contains('2020-11-06').should('exist');
+    cy.get('[data-cy="ExperimentCard_Card"]').contains('2020-11-03').should('exist');
     cy.get('[data-cy="ExperimentCard_Card"]').contains(epCHUSJ_ldmCHUSJ.aliquotProbId).should('exist');
   });
   
