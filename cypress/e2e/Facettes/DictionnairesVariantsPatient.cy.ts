@@ -259,6 +259,17 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_pathogenicity', /^VEP$/, 1, dictionnary);
   });
 
+  it('Pathogénicité - ACMG de Exomiser', () => {
+    const dictionnary = ['Pathogenic',
+                         'Likely Pathogenic',
+                         'Uncertain Significance',
+                         'Likely Benign',
+                         'Benign',
+                         'No Data'];
+
+    cy.validateDictionnary('category_pathogenicity', /^ACMG de Exomiser$/, 3, dictionnary);
+  });
+
   it('Pathogénicité - Verdict ACMG', () => {
     const dictionnary = ['Pathogenic',
                           'Likely Pathogenic',
