@@ -9,18 +9,30 @@ export const wrapSqonWithDonorIdAndSrId = (
   if (patientId || prescriptionId) {
     const subContent: any[] = [];
 
+    let donorFilter: any;
+
     if (patientId) {
-      subContent.push({
+      donorFilter = {
         content: { field: 'donors.patient_id', value: [patientId] },
         op: TermOperators.in,
-      });
+      };
     }
 
     if (prescriptionId) {
-      subContent.push({
+      donorFilter = {
         content: { field: 'donors.service_request_id', value: [prescriptionId] },
         op: TermOperators.in,
+      };
+    }
+
+    if (resolvedSqon.op === 'or') {
+      resolvedSqon.content.forEach((sqon: any) => {
+        sqon.content?.push(donorFilter);
+        sqon.pivot = 'donors';
       });
+      return resolvedSqon;
+    } else {
+      subContent.push(donorFilter);
     }
 
     return {
