@@ -909,5 +909,6 @@
   "screen.prescription.entity.file.table.column.sampleldm": "Échantillon (LDM)",
   "screen.prescription.entity.file.table.column.size": "Taille",
   "screen.prescription.entity.file.table.column.type": "Type",
-  "screen.prescription.entity.file.table.column.position": "Position"
+  "screen.prescription.entity.file.table.column.position": "Position",
+  "view": "{value} / écran"
 }

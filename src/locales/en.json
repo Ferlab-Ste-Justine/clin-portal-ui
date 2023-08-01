@@ -906,5 +906,6 @@
   "screen.prescription.entity.file.table.column.sampleldm": "Sample (LDM)",
   "screen.prescription.entity.file.table.column.size": "Size",
   "screen.prescription.entity.file.table.column.type": "Type",
-  "screen.prescription.entity.file.table.column.position": "Position"
+  "screen.prescription.entity.file.table.column.position": "Position",
+  "view": "{value} / view"
 }
