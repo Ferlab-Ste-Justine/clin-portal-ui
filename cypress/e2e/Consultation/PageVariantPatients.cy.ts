@@ -207,7 +207,7 @@ describe('Page d\'un variant (onglet Patients) - Valider les fonctionnalités du
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('Analyse').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('Analyse').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT').click({force: true});
-    cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('23').should('exist');
+    cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains(/^23$/).should('exist');
   });
 
   it('Filtres', () => {

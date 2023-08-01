@@ -211,10 +211,11 @@ describe('Page d\'un variant (onglet Résumé) - Valider les liens disponibles',
   });
   
   it('Lien SpliceAI de la section Conséquences géniques', () => {
-    cy.intercept('GET', '**/pangolin/**').as('getGETpangolin');
+    cy.intercept('GET', '**/rest.ensembl.org/**').as('getGETensembl');
     cy.get('[data-cy="Consequences_PRDX1_SpliceAi_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.wait('@getGETpangolin', {timeout: 30000});
-    cy.get('body').contains('1-45508847-C-T').should('exist');
+    cy.wait('@getGETensembl', {timeout: 30000});
+    cy.get('body').contains('SpliceAI').should('exist');
+    cy.url().should('include', '1-45508847-C-T')
   });
   
   it('Lien pLI de la section Conséquences géniques', () => {
