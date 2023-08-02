@@ -22,8 +22,12 @@ const useSavedFiltersActions = (savedFilterTag: string) => {
 
   const handleOnDeleteFilter = (id: string) => dispatch(deleteSavedFilter(id));
 
-  const handleOnShareFilter = (filter: ISavedFilter) => {
-    copy(`${getCurrentUrl()}?${SHARED_FILTER_ID_QUERY_PARAM_KEY}=${filter.id}`);
+  const handleOnShareFilter = (filter: ISavedFilter | any) => {
+    let url = `${getCurrentUrl()}?${SHARED_FILTER_ID_QUERY_PARAM_KEY}=${filter.id}`;
+    if (filter.tag?.includes('patient')) {
+      url = url.concat(`&variantSection=${filter.tag.split('_')[0]}`).concat('#variants');
+    }
+    copy(url);
     dispatch(
       globalActions.displayMessage({
         content: 'Copied share url',
