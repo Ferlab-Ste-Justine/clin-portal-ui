@@ -1,7 +1,16 @@
 import { defineConfig } from 'cypress';
+
 import { getDateTime } from './cypress/support/utils';
 
 const { strDate, strTime } = getDateTime();
+
+const getName = (url: string) => {
+  if (url.includes('clin-')) {
+    return url.replace('https://', '').split('.')[0].split('-').splice(2, 4).join('-');
+  } else {
+    return 'QA';
+  }
+};
 
 export default defineConfig({
   projectId: 'e6jd58',
@@ -20,15 +29,25 @@ export default defineConfig({
     baseUrl: 'https://portail.qa.cqgc.hsj.rtss.qc.ca/',
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
     slowTestThreshold: 60000,
-    experimentalSessionAndOrigin: true
+    experimentalSessionAndOrigin: true,
+    downloadsFolder: `cypress/downloads/${getName(process.env.CYPRESS_BASE_URL)}`,
+    fixturesFolder: `cypress/fixtures/${getName(process.env.CYPRESS_BASE_URL)}/`,
+    screenshotsFolder: `cypress/screenshots/${getName(process.env.CYPRESS_BASE_URL)}`,
+    videosFolder: `cypress/videos/${getName(process.env.CYPRESS_BASE_URL)}/`,
   },
   retries: {
-    "runMode": 2,
-    "openMode": 0
+    runMode: 2,
+    openMode: 0,
   },
   reporter: 'junit',
   reporterOptions: {
-     "mochaFile": 'cypress/results/'+strDate+'_'+strTime+'-[hash].xml',
-     rootSuiteTitle: 'Tests Cypress'
-  }
+    mochaFile:
+      'cypress/results/' +
+      `${process.env.CYPRESS_BASE_URL}/` +
+      strDate +
+      '_' +
+      strTime +
+      '-[hash].xml',
+    rootSuiteTitle: 'Tests Cypress',
+  },
 });
