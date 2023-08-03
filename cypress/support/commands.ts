@@ -89,6 +89,10 @@ Cypress.Commands.add('logout', () => {
   cy.wait(1000);
 });
 
+Cypress.Commands.add('removeFilesFromFolder', (folder: string) => {
+  cy.exec(`rm ${folder}/*`, {failOnNonZeroExit: false});
+});
+
 Cypress.Commands.add('resetColumns', (eq: number) => {
   cy.get('svg[data-icon="setting"]').eq(eq).click({force: true});
   cy.wait(1000);
@@ -143,7 +147,7 @@ Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp
 Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Replacement[]) => {
   const arrReplacements = replacements !== undefined ? replacements : [];
   cy.fixture(fixture).then((expectedData) => {
-    cy.exec(`ls cypress/downloads/*`).then((result) => {
+    cy.exec(`ls ${Cypress.config('downloadsFolder')}/*`).then((result) => {
       const filename = result.stdout.trim();
       cy.readFile(`${filename}`).then((file) => {
         let fileWithData = file;
@@ -164,7 +168,7 @@ Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Rep
 
 Cypress.Commands.add('validateFileHeaders', (fixture: string) => {
   cy.fixture(fixture).then((expectedData) => {
-    cy.exec(`ls cypress/downloads/*`).then((result) => {
+    cy.exec(`ls ${Cypress.config('downloadsFolder')}/*`).then((result) => {
       const filename = result.stdout.trim();
       cy.readFile(`${filename}`).then((file) => {
         expectedData.headers.forEach((header: any) => {
@@ -176,7 +180,7 @@ Cypress.Commands.add('validateFileHeaders', (fixture: string) => {
 });
 
 Cypress.Commands.add('validateFileName', (namePattern: string) => {
-  cy.exec(`ls cypress/downloads/`+namePattern).then((result) => {
+  cy.exec(`ls ${Cypress.config('downloadsFolder')}/`+namePattern).then((result) => {
     const filename = result.stdout.trim();
     cy.readFile(`${filename}`).should('exist');
   });

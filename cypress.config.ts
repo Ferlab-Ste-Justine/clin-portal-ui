@@ -4,9 +4,10 @@ import { getDateTime } from './cypress/support/utils';
 
 const { strDate, strTime } = getDateTime();
 
-const getName = (url: string) => {
-  if (url.includes('clin-')) {
-    return url.replace('https://', '').split('.')[0].split('-').splice(2, 4).join('-');
+const getName = (url: string|undefined) => {
+  const strUrl = url !== undefined ? url : "";
+  if (strUrl.includes('clin-')) {
+    return strUrl.replace('https://', '').split('.')[0].split('-').splice(2, 4).join('-');
   } else {
     return 'QA';
   }
@@ -31,7 +32,6 @@ export default defineConfig({
     slowTestThreshold: 60000,
     experimentalSessionAndOrigin: true,
     downloadsFolder: `cypress/downloads/${getName(process.env.CYPRESS_BASE_URL)}`,
-    fixturesFolder: `cypress/fixtures/${getName(process.env.CYPRESS_BASE_URL)}/`,
     screenshotsFolder: `cypress/screenshots/${getName(process.env.CYPRESS_BASE_URL)}`,
     videosFolder: `cypress/videos/${getName(process.env.CYPRESS_BASE_URL)}/`,
   },
@@ -43,7 +43,7 @@ export default defineConfig({
   reporterOptions: {
     mochaFile:
       'cypress/results/' +
-      `${process.env.CYPRESS_BASE_URL}/` +
+      `${getName(process.env.CYPRESS_BASE_URL)}/` +
       strDate +
       '_' +
       strTime +

@@ -5,7 +5,7 @@ const { strDate } = getDateTime();
 const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
 
 beforeEach(() => {
-  cy.exec('rm cypress/downloads/*', {failOnNonZeroExit: false});
+  cy.removeFilesFromFolder(Cypress.config('downloadsFolder'));
 
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
   cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);

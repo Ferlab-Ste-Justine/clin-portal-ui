@@ -8,6 +8,7 @@ declare namespace Cypress {
     closePopup(): cy & CyEventEmitter;
     login(user: string, password: string): cy & CyEventEmitter;
     logout(): cy & CyEventEmitter;
+    removeFilesFromFolder(folder: string): cy & CyEventEmitter;
     resetColumns(eq: number): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     validateDictionnary(section: string, facetTitle: RegExp, facetRank: number, dictionnary: (string|RegExp)[]): cy & CyEventEmitter;
