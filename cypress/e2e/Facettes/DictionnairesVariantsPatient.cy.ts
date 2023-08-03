@@ -15,18 +15,20 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
 
   it('Panel RQDM - RQDM', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM)',
-                          'Congenital Myopathies (MYOC)',
-                          'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
-                          'Hematological malignancies predisposition (TUHEM)',
-                          'Congenital Myasthenia (MYAC)',
-                          'Global Muscular diseases (Global Panel) (MMG)',
-                          'Muscular Dystrophies (DYSM)',
-                          'Nuclear Mitochondriopathies (MITN)',
-                          'Pediatric cancer predisposition (TUPED)',
-                          'Polymalformation (POLYM)',
-                          'RGDI+ (RGDI+)',
-                          'Rhabdomyolysis (RHAB)',
-                          'No Data'];
+                         'Congenital Myopathies (MYOC)',
+                         'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
+                         'Hematological malignancies predisposition (TUHEM)',
+                         'Congenital Myasthenia (MYAC)',
+                         'Global Muscular diseases (Global Panel) (MMG)',
+                         'Muscular Dystrophies (DYSM)',
+                         'Nuclear Mitochondriopathies (MITN)',
+                         'Pediatric cancer predisposition (TUPED)',
+                         'Polymalformation (POLYM)',
+                         'RGDI+ (RGDI+)',
+                         'Rhabdomyolysis (RHAB)',
+                         'Solid Tumor (somatic) (SSOLID)',
+                         'Leukemia (somatic) (SHEMA)',
+                         'No Data'];
 
     cy.validateDictionnary('rqdm', /^RQDM$/, 0, dictionnary);
   });
@@ -209,18 +211,20 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
 
   it('Gène - RQDM', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM)',
-                          'Congenital Myopathies (MYOC)',
-                          'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
-                          'Hematological malignancies predisposition (TUHEM)',
-                          'Congenital Myasthenia (MYAC)',
-                          'Global Muscular diseases (Global Panel) (MMG)',
-                          'Muscular Dystrophies (DYSM)',
-                          'Nuclear Mitochondriopathies (MITN)',
-                          'Pediatric cancer predisposition (TUPED)',
-                          'Polymalformation (POLYM)',
-                          'RGDI+ (RGDI+)',
-                          'Rhabdomyolysis (RHAB)',
-                          'No Data'];
+                         'Congenital Myopathies (MYOC)',
+                         'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
+                         'Hematological malignancies predisposition (TUHEM)',
+                         'Congenital Myasthenia (MYAC)',
+                         'Global Muscular diseases (Global Panel) (MMG)',
+                         'Muscular Dystrophies (DYSM)',
+                         'Nuclear Mitochondriopathies (MITN)',
+                         'Pediatric cancer predisposition (TUPED)',
+                         'Polymalformation (POLYM)',
+                         'RGDI+ (RGDI+)',
+                         'Rhabdomyolysis (RHAB)',
+                         'Solid Tumor (somatic) (SSOLID)',
+                         'Leukemia (somatic) (SHEMA)',
+                         'No Data'];
 
     cy.validateDictionnary('category_genomic', /^RQDM$/, 4, dictionnary);
   });

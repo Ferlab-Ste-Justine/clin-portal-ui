@@ -13,20 +13,22 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
     cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
   });
 
-  it('Panel RQDM - RQDM', () => {
+  it('Panel RQDM - RQDM [CLIN-2127]', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM)',
-                          'Congenital Myopathies (MYOC)',
-                          'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
-                          'Hematological malignancies predisposition (TUHEM)',
-                          'Congenital Myasthenia (MYAC)',
-                          'Global Muscular diseases (Global Panel) (MMG)',
-                          'Muscular Dystrophies (DYSM)',
-                          'Nuclear Mitochondriopathies (MITN)',
-                          'Pediatric cancer predisposition (TUPED)',
-                          'Polymalformation (POLYM)',
-                          'RGDI+ (RGDI+)',
-                          'Rhabdomyolysis (RHAB)',
-                          'No Data'];
+                         'Congenital Myopathies (MYOC)',
+                         'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
+                         'Hematological malignancies predisposition (TUHEM)',
+                         'Congenital Myasthenia (MYAC)',
+                         'Global Muscular diseases (Global Panel) (MMG)',
+                         'Muscular Dystrophies (DYSM)',
+                         'Nuclear Mitochondriopathies (MITN)',
+                         'Pediatric cancer predisposition (TUPED)',
+                         'Polymalformation (POLYM)',
+                         'RGDI+ (RGDI+)',
+                         'Rhabdomyolysis (RHAB)',
+                         'Solid Tumor (somatic) (SSOLID)',
+                         'Leukemia (somatic) (SHEMA)',
+                         'No Data'];
 
     cy.validateDictionnary('rqdm', /^RQDM$/, 0, dictionnary);
   });
@@ -69,20 +71,22 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_variant', /^Chromosome$/, 2, dictionnary);
   });
 
-  it('Gène - Panel RQDM', () => {
+  it('Gène - Panel RQDM [CLIN-2127]', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM)',
-                          'Congenital Myopathies (MYOC)',
-                          'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
-                          'Hematological malignancies predisposition (TUHEM)',
-                          'Congenital Myasthenia (MYAC)',
-                          'Global Muscular diseases (Global Panel) (MMG)',
-                          'Muscular Dystrophies (DYSM)',
-                          'Nuclear Mitochondriopathies (MITN)',
-                          'Pediatric cancer predisposition (TUPED)',
-                          'Polymalformation (POLYM)',
-                          'RGDI+ (RGDI+)',
-                          'Rhabdomyolysis (RHAB)',
-                          'No Data'];
+                         'Congenital Myopathies (MYOC)',
+                         'Global Developmental Delay / Intellectual Deficiency (Trio) (RGDI)',
+                         'Hematological malignancies predisposition (TUHEM)',
+                         'Congenital Myasthenia (MYAC)',
+                         'Global Muscular diseases (Global Panel) (MMG)',
+                         'Muscular Dystrophies (DYSM)',
+                         'Nuclear Mitochondriopathies (MITN)',
+                         'Pediatric cancer predisposition (TUPED)',
+                         'Polymalformation (POLYM)',
+                         'RGDI+ (RGDI+)',
+                         'Rhabdomyolysis (RHAB)',
+                         'Solid Tumor (somatic) (SSOLID)',
+                         'Leukemia (somatic) (SHEMA)',
+                         'No Data'];
 
     cy.validateDictionnary('category_genomic', /^Panel RQDM$/, 0, dictionnary);
   });

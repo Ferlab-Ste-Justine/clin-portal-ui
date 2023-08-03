@@ -270,6 +270,8 @@ describe('Page des variants - Dictionnaire', () => {
                           'Polymalformation (POLYM)',
                           'RGDI+ (RGDI+)',
                           'Rhabdomyolysis (RHAB)',
+                          'Solid Tumor (somatic) (SSOLID)',
+                          'Leukemia (somatic) (SHEMA)',
                           'No Data'];
 
     cy.validateDictionnary('category_genomic', /^RQDM$/, 4, dictionnary);
