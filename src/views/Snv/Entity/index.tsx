@@ -95,6 +95,12 @@ const VariantEntityPage = () => {
         icon: <LineStyleIcon />,
         title: data?.hgvsg,
         loading,
+        style: {
+          overflow: 'hidden',
+          maxWidth: '40ch',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+        },
         extra: buildExtra(),
       }}
     >

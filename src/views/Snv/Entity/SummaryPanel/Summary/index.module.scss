@@ -8,15 +8,21 @@
   }
 
   .infoCard {
-    min-width: 300px;
+    min-width: 150px;
     background-color: $gray-2;
+
     .row {
       &:not(:last-child) {
         margin-bottom: 8px;
       }
 
+      .noWrap {
+        flex-flow: unset;
+        overflow-wrap: anywhere;
+      }
+
       .infoTitle {
-        width: 100px;
+        min-width: 100px;
       }
 
       .infoValue {

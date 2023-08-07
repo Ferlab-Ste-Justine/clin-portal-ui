@@ -30,10 +30,10 @@ const SummaryCard = ({ loading, variant, genes }: OwnProps) => {
   return (
     <Card className={styles.summaryCard}>
       <Spin spinning={loading}>
-        <Row>
-          <Col>
+        <Row gutter={16}>
+          <Col span={6}>
             <Card className={styles.infoCard}>
-              <Row className={styles.row}>
+              <Row className={`${styles.row} ${styles.noWrap}`}>
                 <Text className={styles.infoTitle}>
                   {intl.get('screen.variantDetails.summaryTab.summaryTable.chromosome')}
                 </Text>
@@ -50,7 +50,7 @@ const SummaryCard = ({ loading, variant, genes }: OwnProps) => {
                 </Text>
               </Row>
               <Row className={styles.row}>
-                <Text className={styles.infoTitle}>
+                <Text className={`${styles.infoValue} ${styles.noWrap}`}>
                   {intl.get('screen.variantDetails.summaryTab.summaryTable.alleleAlt')}
                 </Text>
                 <Text className={styles.infoValue} data-cy="Summary_AlleleAlt">
@@ -61,13 +61,16 @@ const SummaryCard = ({ loading, variant, genes }: OwnProps) => {
                 <Text className={styles.infoTitle}>
                   {intl.get('screen.variantDetails.summaryTab.summaryTable.alleleRef')}
                 </Text>
-                <Text className={styles.infoValue} data-cy="Summary_AlleleRef">
+                <Text
+                  className={`${styles.infoValue} ${styles.noWrap}`}
+                  data-cy="Summary_AlleleRef"
+                >
                   {variant?.reference}
                 </Text>
               </Row>
             </Card>
           </Col>
-          <Col className={styles.resumeContent}>
+          <Col span={6} className={styles.resumeContent}>
             <Row className={styles.row}>
               <Text className={styles.contentTitle}>
                 {intl.get('screen.variantDetails.summaryTab.summaryTable.type')}
@@ -98,7 +101,7 @@ const SummaryCard = ({ loading, variant, genes }: OwnProps) => {
             </Row>
           </Col>
           <Divider className={styles.divider} type="vertical" />
-          <Col className={styles.resumeContent}>
+          <Col span={6} className={styles.resumeContent}>
             <Row className={styles.row}>
               <Text className={styles.contentTitle}>ClinVar</Text>
               <Text className={styles.contentValue} data-cy="Summary_Clinvar">
@@ -131,7 +134,7 @@ const SummaryCard = ({ loading, variant, genes }: OwnProps) => {
             </Row>
           </Col>
           <Divider className={styles.divider} type="vertical" />
-          <Col className={styles.resumeContent}>
+          <Col span={6} className={styles.resumeContent}>
             <Row className={styles.row}>
               <Text className={styles.contentTitle}>
                 Patients{' '}

@@ -14,6 +14,7 @@ export type ContentHeaderProps = {
   extra?: ReactNode[];
   actions?: ReactNode[];
   showBackArrow?: boolean;
+  style?: React.CSSProperties;
 };
 
 const ContentHeader = ({
@@ -23,6 +24,7 @@ const ContentHeader = ({
   extra,
   actions,
   showBackArrow = false,
+  style,
 }: ContentHeaderProps): React.ReactElement => {
   const history = useHistory();
 
@@ -41,7 +43,11 @@ const ContentHeader = ({
           active
         >
           <Space size={12}>
-            {title && <Title level={3}>{title}</Title>}
+            {title && (
+              <Title style={style} level={3}>
+                {title}
+              </Title>
+            )}
             <Space>{extra}</Space>
           </Space>
         </Skeleton>
