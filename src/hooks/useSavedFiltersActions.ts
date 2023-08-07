@@ -7,6 +7,8 @@ import { createSavedFilter, deleteSavedFilter, updateSavedFilter } from 'store/s
 import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'utils/constants';
 import { getCurrentUrl } from 'utils/helper';
 
+import { TUserSavedFilter } from '../api/savedFilter/models';
+
 const useSavedFiltersActions = (savedFilterTag: string) => {
   const dispatch = useAppDispatch();
 
@@ -22,7 +24,7 @@ const useSavedFiltersActions = (savedFilterTag: string) => {
 
   const handleOnDeleteFilter = (id: string) => dispatch(deleteSavedFilter(id));
 
-  const handleOnShareFilter = (filter: ISavedFilter | any) => {
+  const handleOnShareFilter = (filter: TUserSavedFilter) => {
     let url = `${getCurrentUrl()}?${SHARED_FILTER_ID_QUERY_PARAM_KEY}=${filter.id}`;
     if (filter.tag?.includes('patient')) {
       url = url.concat(`&variantSection=${filter.tag.split('_')[0]}`).concat('#variants');
