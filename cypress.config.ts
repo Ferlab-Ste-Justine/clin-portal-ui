@@ -4,10 +4,9 @@ import { getDateTime } from './cypress/support/utils';
 
 const { strDate, strTime } = getDateTime();
 
-const getName = (url: string|undefined) => {
-  const strUrl = url !== undefined ? url : "";
-  if (strUrl.includes('clin-')) {
-    return strUrl.replace('https://', '').split('.')[0].split('-').splice(2, 4).join('-');
+const getName = (url = '') => {
+  if (url.includes('clin-')) {
+    return url.replace('https://', '').split('.')[0].split('-').splice(2, 4).join('-');
   } else {
     return 'QA';
   }
