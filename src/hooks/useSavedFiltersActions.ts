@@ -24,10 +24,11 @@ const useSavedFiltersActions = (savedFilterTag: string) => {
 
   const handleOnDeleteFilter = (id: string) => dispatch(deleteSavedFilter(id));
 
-  const handleOnShareFilter = (filter: TUserSavedFilter) => {
+  const handleOnShareFilter = (filter: ISavedFilter) => {
     let url = `${getCurrentUrl()}?${SHARED_FILTER_ID_QUERY_PARAM_KEY}=${filter.id}`;
-    if (filter.tag?.includes('patient')) {
-      url = url.concat(`&variantSection=${filter.tag.split('_')[0]}`).concat('#variants');
+    const aFilter = filter as TUserSavedFilter;
+    if (aFilter.tag?.includes('patient')) {
+      url = url.concat(`&variantSection=${aFilter.tag.split('_')[0]}`).concat('#variants');
     }
     copy(url);
     dispatch(
