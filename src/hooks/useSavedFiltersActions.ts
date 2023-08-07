@@ -28,7 +28,7 @@ const useSavedFiltersActions = (savedFilterTag: string) => {
     let url = `${getCurrentUrl()}?${SHARED_FILTER_ID_QUERY_PARAM_KEY}=${filter.id}`;
     const aFilter = filter as TUserSavedFilter;
     if (aFilter.tag?.includes('patient')) {
-      url = url.concat(`&variantSection=${aFilter.tag.split('_')[0]}`).concat('#variants');
+      url = url.concat(`&variantSection=${aFilter.tag.split('_')[0]}`).concat('#variants')
     }
     copy(url);
     dispatch(
