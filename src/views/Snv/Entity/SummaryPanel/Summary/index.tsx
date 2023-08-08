@@ -50,10 +50,13 @@ const SummaryCard = ({ loading, variant, genes }: OwnProps) => {
                 </Text>
               </Row>
               <Row className={styles.row}>
-                <Text className={`${styles.infoValue} ${styles.noWrap}`}>
+                <Text className={styles.infoTitle}>
                   {intl.get('screen.variantDetails.summaryTab.summaryTable.alleleAlt')}
                 </Text>
-                <Text className={styles.infoValue} data-cy="Summary_AlleleAlt">
+                <Text
+                  className={`${styles.infoValue} ${styles.noWrap}`}
+                  data-cy="Summary_AlleleAlt"
+                >
                   {variant?.alternate}
                 </Text>
               </Row>
