@@ -242,7 +242,7 @@ describe('Page d\'un variant (onglet Résumé) - Valider les liens disponibles',
   
   it('Lien Varsome de la section Critères ACMG', () => {
     cy.get('[data-cy="ACMGCriteria_Varsome_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.url().should('include', '10380010455088470004')
+    cy.url().should('include', '10380010455088470004');
   });
   
   it('Lien PubMed de la section Critères ACMG', () => {

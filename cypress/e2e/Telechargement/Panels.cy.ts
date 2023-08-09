@@ -7,7 +7,7 @@ beforeEach(() => {
   cy.visit('/');
 
   cy.get('[class="ant-page-header-heading-extra"] svg[data-icon="download"]').click({force: true});
-  cy.wait(5000);
+  cy.waitWhileSpin(5000);
 });
 
 describe('Télécharger les panels', () => {

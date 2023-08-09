@@ -5,12 +5,12 @@ const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
 
 beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
-  cy.visitBioinformaticsAnalysisPage(epCHUSJ_ldmCHUSJ.bioAnalysisId);
+  cy.visitBioinformaticsAnalysisPage(epCHUSJ_ldmCHUSJ.bioAnalProbId);
 });
 
 describe('Page d\'une analyse bioinformatique - Vérifier les informations affichées', () => {
   it('Panneau Analyse', () => {
-    cy.get('[data-cy="AnalysisCard_Card"]').contains(epCHUSJ_ldmCHUSJ.bioAnalysisId).should('exist');
+    cy.get('[data-cy="AnalysisCard_Card"]').contains(epCHUSJ_ldmCHUSJ.bioAnalProbId).should('exist');
     cy.get('[data-cy="AnalysisCard_Card"]').contains('GEBA').should('exist');
     cy.get('[data-cy="AnalysisCard_Card"]').contains(epCHUSJ_ldmCHUSJ.stampDate).should('exist');
     cy.get('[data-cy="AnalysisCard_Card"]').contains(epCHUSJ_ldmCHUSJ.requestProbId).should('exist');

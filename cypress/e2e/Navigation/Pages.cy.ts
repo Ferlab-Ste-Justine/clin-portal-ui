@@ -89,9 +89,9 @@ describe('Affichage de toutes les pages et modals', () => {
   });
  
   it('Analyse bioinformatique', () => {
-    cy.visitBioinformaticsAnalysisPage(epCHUSJ_ldmCHUSJ.bioAnalysisId);
+    cy.visitBioinformaticsAnalysisPage(epCHUSJ_ldmCHUSJ.bioAnalProbId);
 
-    cy.contains('Analyse bioinformatique : '+epCHUSJ_ldmCHUSJ.bioAnalysisId).should('exist', {timeout: 20*1000});
+    cy.contains('Analyse bioinformatique : '+epCHUSJ_ldmCHUSJ.bioAnalProbId).should('exist', {timeout: 20*1000});
     cy.contains('ID').should('exist', {timeout: 20*1000});
     cy.contains('Type d\'analyse').should('exist', {timeout: 20*1000});
     cy.contains('Date').should('exist', {timeout: 20*1000});

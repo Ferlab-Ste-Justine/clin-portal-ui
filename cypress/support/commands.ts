@@ -9,13 +9,13 @@ export interface Replacement {
 Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp) => {
   cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
     .find('[aria-expanded="true"]').should('exist');
-  cy.wait(1000);
+  cy.waitWhileSpin(1000);
   cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
     .find('button').then(($button) => {
       if ($button.hasClass('ant-btn-link')) {
         cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
           .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
-        cy.wait(1000);
+        cy.waitWhileSpin(1000);
       };
   });
 
@@ -76,7 +76,7 @@ Cypress.Commands.add('login', (user: string, password: string) => {
 
 Cypress.Commands.add('logout', () => {
     cy.visit('/');
-    cy.wait(5*1000);
+    cy.waitWhileSpin(5*1000);
 
     cy.get('div').then(($div) => {
         if ($div.hasClass('App')) {
@@ -103,6 +103,32 @@ Cypress.Commands.add('resetColumns', (eq: number) => {
   });
   
   cy.get('button[class*="ProTablePopoverColumnResetBtn"]').eq(eq).should('be.disabled', {timeout: 20*1000});
+});
+
+Cypress.Commands.add('showColumn', (column: string, eq: number) => {
+  cy.intercept('PUT', '**/user').as('getPOSTuser');
+
+  cy.get('div[class="ant-popover-inner"]').eq(eq)
+    .find('div[class="ant-space-item"]').contains(column)
+    .find('[type="checkbox"]').check({force: true});
+  cy.wait('@getPOSTuser', {timeout: 20*1000});
+});
+
+Cypress.Commands.add('sortTableAndIntercept', (column: string, nbCalls: number, eq: number = 0) => {
+  cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+
+  cy.get('thead[class="ant-table-thead"]').eq(eq).contains(column).click({force: true});
+
+  for (let i = 0; i < nbCalls; i++) {
+    cy.wait('@getPOSTgraphql', {timeout: 60*1000});
+  };
+
+  cy.waitWhileSpin(1000);
+});
+
+Cypress.Commands.add('sortTableAndWait', (column: string, eq: number = 0) => {
+  cy.get('thead[class="ant-table-thead"]').eq(eq).contains(column).click({force: true});
+  cy.waitWhileSpin(1000);
 });
 
 Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {
@@ -186,6 +212,64 @@ Cypress.Commands.add('validateFileName', (namePattern: string) => {
   });
 });
 
+Cypress.Commands.add('validatePaging', (total: string, eq: number) => {
+  cy.get('body').find('span[class*="ant-select-selection-item"]').eq(eq).click({force: true});
+  cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
+  cy.waitWhileSpin(20*1000);
+  cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 100 de '+total).should('exist');
+
+  cy.get('body').find('span[class*="ant-select-selection-item"]').eq(eq).click({force: true});
+  cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').click({force: true});
+  cy.waitWhileSpin(20*1000);
+  cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 20 de '+total).should('exist');
+  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
+  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
+
+  cy.get('body').find('button[type="button"]').contains('Suivant').click({force: !!eq});
+  cy.waitWhileSpin(20*1000);
+  cy.get('div[class*="ProTableHeader"]').contains('Résultats 21 - 40 de '+total).should('exist');
+  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
+  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
+
+  cy.get('body').find('button[type="button"]').contains('Suivant').click({force: true});
+  cy.waitWhileSpin(20*1000);
+  cy.get('div[class*="ProTableHeader"]').contains('Résultats 41 - 60 de '+total).should('exist');
+  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
+  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
+
+  cy.get('body').find('button[type="button"]').contains('Précédent').click({force: true});
+  cy.waitWhileSpin(20*1000);
+  cy.get('div[class*="ProTableHeader"]').contains('Résultats 21 - 40 de '+total).should('exist');
+  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
+  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
+
+  cy.get('body').find('button[type="button"]').contains('Début').click({force: true});
+  cy.waitWhileSpin(20*1000);
+  cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 20 de '+total).should('exist');
+  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
+  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
+});
+
+Cypress.Commands.add('validateTableDataRowKeyAttr', (dataRowKey: string, eq: number, expectedAttr: string, expectedValue: string) => {
+  cy.get('tr[data-row-key="'+dataRowKey+'"]').find('td').eq(eq).find('['+expectedAttr+'="'+expectedValue+'"]').should('exist');
+});
+
+Cypress.Commands.add('validateTableDataRowKeyClass', (dataRowKey: string, eq: number, expectedClass: string) => {
+  cy.get('tr[data-row-key="'+dataRowKey+'"]').find('td').eq(eq).find('[class*="'+expectedClass+'"]').should('exist');
+});
+
+Cypress.Commands.add('validateTableDataRowKeyContent', (dataRowKey: string, eq: number, expectedContent: string|RegExp) => {
+  cy.get('tr[data-row-key="'+dataRowKey+'"]').find('td').eq(eq).contains(expectedContent).should('exist');
+});
+
+Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number, selector: string = '') => {
+  cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: 5*1000});
+  cy.get(selector+' tr[class*="ant-table-row"]').eq(0)
+  .then(($firstRow) => {
+    cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
+  });
+});
+
 Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {
   cy.intercept(methodHTTP, routeMatcher).as('getRouteMatcher');
 
@@ -204,8 +288,8 @@ Cypress.Commands.add('visitArchivesPatientPage', (patientId: string) => {
   cy.resetColumns(0);
 });
 
-Cypress.Commands.add('visitBioinformaticsAnalysisPage', (bioAnalysisId: string) => {
-  cy.visitAndIntercept('/bioinformatics-analysis/' + bioAnalysisId,
+Cypress.Commands.add('visitBioinformaticsAnalysisPage', (bioAnalProbId: string) => {
+  cy.visitAndIntercept('/bioinformatics-analysis/' + bioAnalProbId,
                        'POST',
                        '**/$graphql*',
                        1);
@@ -258,12 +342,21 @@ Cypress.Commands.add('visitVariantsPage', (sharedFilterOption?: string) => {
   cy.resetColumns(0);
 });
 
-Cypress.Commands.add('visitVariantsPatientPage', (patientId: string, prescriptionId: string, nbGraphqlCalls: number) => {
-  cy.visitAndIntercept('/prescription/entity/' + prescriptionId + '#variants',
+Cypress.Commands.add('visitVariantsPatientPage', (patientId: string, prescriptionId: string, nbGraphqlCalls: number, sharedFilterOption?: string) => {
+  const strSharedFilterOption = sharedFilterOption !== undefined ? '?sharedFilterId='+sharedFilterOption+'&variantSection=snv' : '';
+  cy.visitAndIntercept('/prescription/entity/' + prescriptionId + strSharedFilterOption + '#variants',
                        'POST',
                        '**/graphql',
                        nbGraphqlCalls,);
   cy.resetColumns(0);
+});
+
+Cypress.Commands.add('waitWhileSpin', (ms: number) => {
+  cy.get('body').should(($body) => {
+    if ($body.hasClass('ant-spin-container')) {
+      cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: ms});
+    }
+  });
 });
 
 Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message));
