@@ -27,4 +27,3 @@ Url (storybook, ...)
 
 ## Mention
 
-@kstonge @luclemo
