@@ -11,6 +11,7 @@ describe('Page des prescriptions et requêtes - Rechercher des prescriptions', (
 
   beforeEach(() => {
     cy.visitPrescriptionsPage();
+    cy.checkValueFacet(0, 'Approuvée');
   });
 
   it('Par numéro de prescription', () => {
@@ -109,6 +110,7 @@ describe('Page des prescriptions et requêtes - Rechercher des requêtes', () =>
 
   beforeEach(() => {
     cy.visitPrescriptionsPage();
+    cy.checkValueFacet(0, 'Approuvée');
     cy.get('div[id*="tab-requests"]').click({force: true});
 
     cy.resetColumns(1);

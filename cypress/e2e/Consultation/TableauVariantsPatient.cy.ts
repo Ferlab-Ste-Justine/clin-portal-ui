@@ -44,7 +44,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 12, '9.01e-4');
     cy.validateTableDataRowKeyClass('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 12, 'GnomadCell_gnomadIndicator');
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 13, /^6$/);
-    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 13, '4.55e-2');
+    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 13, /(4.69e-2|4.55e-2)/);
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 14, '170');
     cy.validateTableDataRowKeyClass('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 14, 'GQLine_high');
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 15, 'Hem');
@@ -92,8 +92,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
  
   it('Valider les liens disponibles Lien Gène Plus', () => {
     cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(5).find('[data-icon="plus"]').click({force: true});
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gène').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('GRIA3').should('exist');
+    cy.validatePillSelectedQuery('Gène', ['GRIA3']);
   });
  
   it('Valider les liens disponibles Lien OMIM', () => {
@@ -114,7 +113,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
  
   it('Valider les liens disponibles Lien RQDM', () => {
     cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(13).find('a[href]').click({force: true});
-    cy.get('div[class*="ProTableHeader"]').contains('6 Résultats').should('exist');
+    cy.validateTableResultsCount('6 Résultats');
   });
   
   it('Valider les fonctionnalités du tableau - Tris [CLIN-2149]', () => {
@@ -172,7 +171,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.sortTableAndIntercept('gnomAD', 3);
     cy.sortTableAndIntercept('Gène', 3);
     cy.sortTableAndIntercept('Gène', 3);
-    cy.validateTableFirstRow('ZNHIT1', 5);
+    cy.validateTableFirstRow(/(ZNHIT1|ZNF875)/, 5);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

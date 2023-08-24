@@ -219,66 +219,66 @@ describe('Page d\'un variant (onglet Patients) - Valider les fonctionnalités du
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').contains('RGDI').should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('not.exist');
-    cy.get('div[class*="ProTableHeader"]').contains('24 Résultats').should('exist');
+    cy.validateTableResultsCount('24 Résultats');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(0).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-link"]').last().click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
-    cy.get('div[class*="ProTableHeader"]').contains('24 Résultats').should('not.exist');
+    cy.validateTableResultsCount('24 Résultats', false);
 
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(1).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('li[data-menu-id*="unknown"]').find('[type="checkbox"]').check({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').contains('Indéterminé').should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('not.exist');
-    cy.get('div[class*="ProTableHeader"]').contains('1 Résultats').should('exist');
+    cy.validateTableResultsCount('1 Résultats');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(1).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-link"]').last().click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
-    cy.get('div[class*="ProTableHeader"]').contains('1 Résultats').should('not.exist');
+    cy.validateTableResultsCount('1 Résultats', false);
 
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(2).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('li[data-menu-id*="not_affected"]').find('[type="checkbox"]').check({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').contains('Non atteint').should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('not.exist');
-    cy.get('div[class*="ProTableHeader"]').contains('7 Résultats').should('exist');
+    cy.validateTableResultsCount('7 Résultats');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(2).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-link"]').last().click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
-    cy.get('div[class*="ProTableHeader"]').contains('7 Résultats').should('not.exist');
+    cy.validateTableResultsCount('7 Résultats', false);
 
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(3).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('li[data-menu-id*="PASS"]').find('[type="checkbox"]').check({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').contains('PASS').should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
-    cy.get('div[class*="ProTableHeader"]').contains('82 Résultats').should('exist');
+    cy.validateTableResultsCount('82 Résultats');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(3).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-link"]').last().click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
-    cy.get('div[class*="ProTableHeader"]').contains('82 Résultats').should('exist');
+    cy.validateTableResultsCount('82 Résultats');
   });
 
   it('Pagination [CLIN-1662]', () => {
     cy.get('span[class*="ant-select-selection-item"]').click({force: true});
     cy.get('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
-    cy.get('div[class*="ProTableHeader"]').contains('74 Résultats').should('exist');
+    cy.validateTableResultsCount('74 Résultats');
 
     cy.get('span[class*="ant-select-selection-item"]').click({force: true});
     cy.get('div[class*="ant-select-item-option-content"]').contains('20').click({force: true});
-    cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 20 de 74').should('exist');
+    cy.validateTableResultsCount('Résultats 1 - 20 de 74');
 
     cy.get('[class*="ant-pagination-item-2"]').click({force: true});
-    cy.get('div[class*="ProTableHeader"]').contains('Résultats 21 - 40 de 74').should('exist');
+    cy.validateTableResultsCount('Résultats 21 - 40 de 74');
 
     cy.get('[class*="anticon-right"]').click({force: true});
-    cy.get('div[class*="ProTableHeader"]').contains('Résultats 41 - 60 de 74').should('exist');
+    cy.validateTableResultsCount('Résultats 41 - 60 de 74');
 
     cy.get('[class*="anticon-left"]').click({force: true});
-    cy.get('div[class*="ProTableHeader"]').contains('Résultats 21 - 40 de 74').should('exist');
+    cy.validateTableResultsCount('Résultats 21 - 40 de 74');
   });
 });

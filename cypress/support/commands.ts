@@ -6,6 +6,24 @@ export interface Replacement {
   value: string;
 }
 
+Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, isRqdmActive: boolean = false) => {
+  cy.get('li[data-key="' + section + '"]').click({force: true});
+
+  if (isRqdmActive) {
+    cy.get('span[class*="FilterContainer_title"]').contains('Panel RQDM', {timeout: 5000}).click({force: true});
+  }
+
+  if (section !== 'rqdm') {
+    cy.get('span[class*="FilterContainer_title"]').contains(facetTitle, {timeout: 5000}).click({force: true});
+    cy.wait(1000);
+  }
+
+  cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
+    .find('div[class*="CheckboxFilter_checkboxFilterItem"]', {timeout: 5000}).contains(value)
+    .find('[type="checkbox"]').check({force: true});
+  cy.clickApplyFacet(4);
+});
+
 Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp) => {
   cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
     .find('[aria-expanded="true"]').should('exist');
@@ -43,15 +61,14 @@ Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string,
   };
 });
 
-Cypress.Commands.add('clickApplyFacet', () => {
+Cypress.Commands.add('clickApplyFacet', (nbCalls: number) => {
   cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
   
-  cy.get('span[data-key="apply"]', {timeout: 20*1000}).click({force: true});
+  cy.get('span[data-key="apply"]', {timeout: 20*1000}).click({force: true, multiple: true});
   
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+  for (let i = 0; i < nbCalls; i++) {
+    cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+  };
 });
 
 Cypress.Commands.add('closePopup', () => {
@@ -141,6 +158,11 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
   };
 });
 
+Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
+  const strExist = shouldExist ? 'exist' : 'not.exist';
+  cy.get('[id="query-builder-header-tools"]').contains('Tout effacer').should(strExist);
+});
+
 Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp, facetRank: number, dictionnary: (string|RegExp)[]) => {
   cy.get('li[data-key="' + section + '"]').click({force: true});
 
@@ -168,6 +190,13 @@ Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp
   cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
     .find('div[class*="CheckboxFilter_checkboxFilterItem"]')
     .its('length').should('eq', dictionnary.length);
+});
+
+Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, expectedCount: string|RegExp, isRqdmActive: boolean = false) => {
+  cy.checkAndClickApplyFacet(section, facetTitle, facetRank, value, isRqdmActive);
+
+  cy.validatePillSelectedQuery(facetTitle, [value]);
+  cy.get('body').contains(expectedCount).should('exist');
 });
 
 Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Replacement[]) => {
@@ -212,42 +241,59 @@ Cypress.Commands.add('validateFileName', (namePattern: string) => {
   });
 });
 
+Cypress.Commands.add('validateOperatorSelectedQuery', (expectedOperator: string) => {
+  cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').contains(expectedOperator).should('exist');
+});
+
 Cypress.Commands.add('validatePaging', (total: string, eq: number) => {
   cy.get('body').find('span[class*="ant-select-selection-item"]').eq(eq).click({force: true});
   cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
   cy.waitWhileSpin(20*1000);
-  cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 100 de '+total).should('exist');
+  cy.validateTableResultsCount('Résultats 1 - 100 de '+total);
 
   cy.get('body').find('span[class*="ant-select-selection-item"]').eq(eq).click({force: true});
   cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').click({force: true});
   cy.waitWhileSpin(20*1000);
-  cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 20 de '+total).should('exist');
+  cy.validateTableResultsCount('Résultats 1 - 20 de '+total);
   cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
   cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
 
   cy.get('body').find('button[type="button"]').contains('Suivant').click({force: !!eq});
   cy.waitWhileSpin(20*1000);
-  cy.get('div[class*="ProTableHeader"]').contains('Résultats 21 - 40 de '+total).should('exist');
+  cy.validateTableResultsCount('Résultats 21 - 40 de '+total);
   cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
   cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
   cy.get('body').find('button[type="button"]').contains('Suivant').click({force: true});
   cy.waitWhileSpin(20*1000);
-  cy.get('div[class*="ProTableHeader"]').contains('Résultats 41 - 60 de '+total).should('exist');
+  cy.validateTableResultsCount('Résultats 41 - 60 de '+total);
   cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
   cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
   cy.get('body').find('button[type="button"]').contains('Précédent').click({force: true});
   cy.waitWhileSpin(20*1000);
-  cy.get('div[class*="ProTableHeader"]').contains('Résultats 21 - 40 de '+total).should('exist');
+  cy.validateTableResultsCount('Résultats 21 - 40 de '+total);
   cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
   cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
   cy.get('body').find('button[type="button"]').contains('Début').click({force: true});
   cy.waitWhileSpin(20*1000);
-  cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - 20 de '+total).should('exist');
+  cy.validateTableResultsCount('Résultats 1 - 20 de '+total);
   cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
   cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
+});
+
+Cypress.Commands.add('validatePillSelectedQuery', (facetTitle: string|RegExp, values: (string|RegExp)[], eq: number = 0) => {
+  if (facetTitle == '') {
+    cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').should('not.exist');
+  }
+  else {
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').eq(eq).contains(facetTitle).should('exist');
+  }
+
+  for (let i = 0; i < values.length; i++) {
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_queryValuesContainer"]').eq(eq).contains(values[i]).should('exist');
+    }
 });
 
 Cypress.Commands.add('validateTableDataRowKeyAttr', (dataRowKey: string, eq: number, expectedAttr: string, expectedValue: string) => {
@@ -268,6 +314,15 @@ Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq:
   .then(($firstRow) => {
     cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
   });
+});
+
+Cypress.Commands.add('validateTableResultsCount', (expectedCount: string|RegExp, shouldExist: boolean = true) => {
+  const strExist = shouldExist ? 'exist' : 'not.exist';
+  cy.get('div[class*="ProTableHeader"]').contains(expectedCount).should(strExist);
+});
+
+Cypress.Commands.add('validateTotalSelectedQuery', (expectedCount: string|RegExp) => {
+  cy.get('[class*="QueryBar_selected"]').find('[class*="QueryBar_total"]').contains(expectedCount).should('exist');
 });
 
 Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {

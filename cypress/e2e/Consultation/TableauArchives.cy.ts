@@ -81,6 +81,6 @@ describe('Page d\'archives - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
-    cy.get('div[class*="ProTableHeader"]').contains('Résultats 1 - ').should('not.exist');
+    cy.validateTableResultsCount('Résultats 1 - ', false);
   });
 });

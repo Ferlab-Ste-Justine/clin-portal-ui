@@ -78,8 +78,7 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
  
   it('Valider les liens disponibles Lien Gène Plus', () => {
     cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(6).find('[data-icon="plus"]').click({force: true});
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gène').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WDR37').should('exist');
+    cy.validatePillSelectedQuery('Gène', ['WDR37']);
   });
  
   it('Valider les liens disponibles Lien OMIM', () => {

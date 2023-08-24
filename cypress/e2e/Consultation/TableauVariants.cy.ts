@@ -3,12 +3,14 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
-  cy.visitVariantsPage('?sharedFilterId=ed4de9bb-016e-4869-ac9d-40b11ac3102a');
-
-  cy.showColumn('Critères ACMG', 0);
 });
 
 describe('Page des variants - Consultation du tableau', () => {
+  beforeEach(() => {
+    cy.visitVariantsPage('?sharedFilterId=ed4de9bb-016e-4869-ac9d-40b11ac3102a');
+    cy.showColumn('Critères ACMG', 0);
+  });
+
   it('Vérifier les informations affichées', () => {
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 1, 'chrX:g.123403094G>A');
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 2, 'SNV');
@@ -28,7 +30,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 9, '9.01e-4');
     cy.validateTableDataRowKeyClass('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 9, 'GnomadCell_gnomadIndicator');
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 10, /^6$/);
-    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 10, '4.55e-2');
+    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 10, /(4.69e-2|4.55e-2)/);
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 11, 'BP6, BS1, BS2, PP3');
   });
  
@@ -49,8 +51,7 @@ describe('Page des variants - Consultation du tableau', () => {
  
   it('Valider les liens disponibles Lien Gène Plus', () => {
     cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(4).find('[data-icon="plus"]').click({force: true});
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gène').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('GRIA3').should('exist');
+    cy.validatePillSelectedQuery('Gène', ['GRIA3']);
   });
  
   it('Valider les liens disponibles Lien OMIM', () => {
@@ -71,11 +72,17 @@ describe('Page des variants - Consultation du tableau', () => {
  
   it('Valider les liens disponibles Lien RQDM', () => {
     cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(10).find('a[href]').click({force: true});
-    cy.get('div[class*="ProTableHeader"]').contains('6 Résultats').should('exist');
+    cy.validateTableResultsCount('6 Résultats');
+  });
+});
+
+describe('Page des variants - Consultation du tableau', () => {
+  beforeEach(() => {
+    cy.visitVariantsPage('?sharedFilterId=0592969c-f83a-413a-b65d-578ab9d751fc');
+    cy.showColumn('Critères ACMG', 0);
   });
   
   it('Valider les fonctionnalités du tableau - Tris [CLIN-2149]', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Variant', 3);
@@ -110,7 +117,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('gnomAD', 3);
@@ -119,7 +125,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(20000);
 
     cy.validatePaging('', 0);

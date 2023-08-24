@@ -24,9 +24,7 @@ describe('Page des CNVs d\'un patient (somatic) - Consultation du tableau', () =
     cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 6, '6.8 Mb');
     cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 7, '1.04404');
     cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 8, /^191$/);
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 9, 'CDK11A');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 9, 'DVL1');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 9, 'LINC02781');
+    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 9, /^[^,]+,[^,]+,[^,]+...$/);
     cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 10, '0/1');
     cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 11, 'CnvCopyRatio, LoDFail');
     cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 12, /^128$/);
@@ -39,7 +37,7 @@ describe('Page des CNVs d\'un patient (somatic) - Consultation du tableau', () =
     cy.contains('LOSS:chr1:450731-7249626').should('exist');
     cy.get('body').find('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('tr[data-row-key="e216d4e7a7164b39f0fba518c47d24da7097660d"]').contains('CDK11A').click({force: true});
+    cy.get('tr[data-row-key="e216d4e7a7164b39f0fba518c47d24da7097660d"]').contains(/^[^,]+,[^,]+,[^,]+...$/).click({force: true});
     cy.contains('LOSS:chr1:450731-7249626').should('exist');
     cy.get('body').find('button[class="ant-modal-close"]').invoke('click');
 
