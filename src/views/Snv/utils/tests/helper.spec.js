@@ -628,4 +628,79 @@ describe('wrapSqonWithDonorIdAndSrId', () => {
 
     expect(wrapSqonWithDonorIdAndSrId(initialSqon, '922552', null)).toEqual(expected);
   });
+
+  test('with clinvar AND', () => {
+    const initialSqon = {
+      content: [
+        {
+          content: {
+            field: 'clinvar.clin_sig',
+            index: 'Variants',
+            value: ['Benign'],
+          },
+          op: 'in',
+        },
+        {
+          content: {
+            field: 'donors.gq',
+            index: 'Variants',
+            value: [20],
+          },
+          op: '>=',
+        },
+      ],
+      op: 'and',
+      pivot: 'donors',
+    };
+
+    const expected = {
+      content: [
+        {
+          content: [
+            {
+              content: {
+                field: 'clinvar.clin_sig',
+                index: 'Variants',
+                value: ['Benign'],
+              },
+              op: 'in',
+            },
+            {
+              content: {
+                field: 'donors.patient_id',
+                value: ['923753'],
+              },
+              op: 'in',
+            },
+          ],
+          op: 'and',
+          pivot: 'donors',
+        },
+        {
+          content: [
+            {
+              content: {
+                field: 'donors.gq',
+                index: 'Variants',
+                value: [20],
+              },
+              op: '>=',
+            },
+            {
+              content: {
+                field: 'donors.patient_id',
+                value: ['923753'],
+              },
+              op: 'in',
+            },
+          ],
+          op: 'and',
+          pivot: 'donors',
+        },
+      ],
+      op: 'and',
+    };
+
+    expect(wrapSqonWithDonorIdAndSrId(initialSqon, '923753', null)).toEqual(expected);
+  });
 });

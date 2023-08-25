@@ -57,7 +57,9 @@ export const wrapSqonWithDonorIdAndSrId = (
           handleContent(item, patientFilter, prescriptionFilter),
         );
       }
-    } else if (sqon && Array.isArray(sqon.content)) {
+    } else if (sqon && Array.isArray(sqon.content) && sqon.content.length > 1) {
+      return explodeOrCondition(sqon);
+    } else if (sqon && Array.isArray(sqon.content) && sqon.content.length <= 1) {
       return {
         ...sqon,
         content: addFilters(sqon.content, patientFilter, prescriptionFilter),
