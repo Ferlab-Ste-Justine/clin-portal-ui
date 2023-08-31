@@ -480,7 +480,7 @@
   "screen.bioinfo.analysis.samples.title": "Samples",
   "screen.bioinfo.analysis.samples.type": "Sample Type",
   "screen.bioinfo.analysis.title": "Bioinformatics Analysis: {id}",
-  "screen.landing.title" : "Analysis and diagnostics",
+  "screen.landing.title" : "Analyses and Diagnostics",
   "screen.landing.description" : "The Quebec Center for Clinical Genomics offers a high-throughput clinical sequencing platform for the molecular diagnosis of Quebec patients in partnership with the eight laboratories of the Quebec Molecular Diagnostic Network.",
   "screen.patient.creation.createPrescription": "Create a prescription",
   "screen.patient.details.edit.firstname": "Firstname",
