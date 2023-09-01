@@ -80,9 +80,13 @@ Cypress.Commands.add('closePopup', () => {
   });
 });
 
-Cypress.Commands.add('login', (user: string, password: string) => {
-  cy.session([user], () => {
+Cypress.Commands.add('login', (user: string, password: string, restoreSession: boolean = true) => {
+  const strUserSession = restoreSession ? user : Math.random();
+  cy.session([strUserSession], () => {
     cy.visit('/');
+    cy.get('button[class*="ant-btn-primary ant-btn-lg"]').should('exist', {timeout: 60*1000});
+    cy.get('button[class*="ant-btn-primary ant-btn-lg"]').click();
+
     cy.get('input[id="username"]').should('exist', {timeout: 60*1000});
 
     cy.get('input[id="username"]').type(user);

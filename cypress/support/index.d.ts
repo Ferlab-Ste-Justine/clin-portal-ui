@@ -7,7 +7,7 @@ declare namespace Cypress {
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     clickApplyFacet(nbCalls: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
-    login(user: string, password: string): cy & CyEventEmitter;
+    login(user: string, password: string, restoreSession: boolean = true): cy & CyEventEmitter;
     logout(): cy & CyEventEmitter;
     removeFilesFromFolder(folder: string): cy & CyEventEmitter;
     resetColumns(eq: number): cy & CyEventEmitter;
