@@ -6,10 +6,10 @@ export interface Replacement {
   value: string;
 }
 
-Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, isRqdmActive: boolean = false) => {
+Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, isRqdmExpand: boolean = false) => {
   cy.get('li[data-key="' + section + '"]').click({force: true});
 
-  if (isRqdmActive) {
+  if (isRqdmExpand) {
     cy.get('span[class*="FilterContainer_title"]').contains('Panel RQDM', {timeout: 5000}).click({force: true});
   }
 
@@ -125,7 +125,7 @@ Cypress.Commands.add('resetColumns', (eq: number) => {
   
   cy.get('button[class*="ProTablePopoverColumnResetBtn"]').eq(eq).should('be.disabled', {timeout: 20*1000});
   cy.get('svg[data-icon="setting"]').eq(eq).click({force: true});
-  cy.wait(1000);
+  cy.get('div[class*="Header_ProTableHeader"]').click({force: true, multiple: true});
 });
 
 Cypress.Commands.add('showColumn', (column: string, eq: number) => {
@@ -198,8 +198,27 @@ Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp
     .its('length').should('eq', dictionnary.length);
 });
 
-Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, expectedCount: string|RegExp, isRqdmActive: boolean = false) => {
-  cy.checkAndClickApplyFacet(section, facetTitle, facetRank, value, isRqdmActive);
+Cypress.Commands.add('validateExpandCollapse', (section: string, isRqdmExpand: boolean = false) => {
+  const eq = isRqdmExpand ? 1 : 0;
+
+  cy.get('li[data-key="' + section + '"]').click({force: true});
+
+  if (section !== 'rqdm') {
+    cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(eq).find('[aria-expanded="false"]').should('exist');
+    cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').contains('Tout ouvrir').should('exist');
+
+    cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').click({force: true});
+  }
+  cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').contains('Tout fermer').should('exist');
+  cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(eq).find('[aria-expanded="true"]').should('exist');
+
+  cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').click({force: true});
+  cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(eq).find('[aria-expanded="false"]').should('exist');
+  cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').contains('Tout ouvrir').should('exist');
+});
+
+Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, expectedCount: string|RegExp, isRqdmExpand: boolean = false) => {
+  cy.checkAndClickApplyFacet(section, facetTitle, facetRank, value, isRqdmExpand);
 
   cy.validatePillSelectedQuery(facetTitle, [value]);
   cy.get('body').contains(expectedCount).should('exist');
@@ -251,42 +270,47 @@ Cypress.Commands.add('validateOperatorSelectedQuery', (expectedOperator: string)
   cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').contains(expectedOperator).should('exist');
 });
 
-Cypress.Commands.add('validatePaging', (total: string, eq: number) => {
-  cy.get('body').find('span[class*="ant-select-selection-item"]').eq(eq).click({force: true});
-  cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
+Cypress.Commands.add('validatePaging', (total: string, eqSelect: number, eqTab: number = 0) => {
+  cy.get('span[class*="ant-select-selection-item"]').eq(eqSelect).click({force: true});
+  cy.get('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
   cy.waitWhileSpin(20*1000);
   cy.validateTableResultsCount('Résultats 1 - 100 de '+total);
 
-  cy.get('body').find('span[class*="ant-select-selection-item"]').eq(eq).click({force: true});
-  cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20 ').click({force: true});
+  cy.get('span[class*="ant-select-selection-item"]').eq(eqSelect).click({force: true});
+  cy.get('div[class*="ant-select-item-option-content"]').contains('20 ').click({force: true});
   cy.waitWhileSpin(20*1000);
+  cy.wait(2000);
   cy.validateTableResultsCount('Résultats 1 - 20 de '+total);
-  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
-  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
 
-  cy.get('body').find('button[type="button"]').contains('Suivant').click({force: !!eq});
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Suivant').click({force: !!eqSelect});
   cy.waitWhileSpin(20*1000);
+  cy.wait(2000);
   cy.validateTableResultsCount('Résultats 21 - 40 de '+total);
-  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
-  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
-  cy.get('body').find('button[type="button"]').contains('Suivant').click({force: true});
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Suivant').click({force: true});
   cy.waitWhileSpin(20*1000);
+  cy.wait(2000);
   cy.validateTableResultsCount('Résultats 41 - 60 de '+total);
-  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
-  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
-  cy.get('body').find('button[type="button"]').contains('Précédent').click({force: true});
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').click({force: true});
   cy.waitWhileSpin(20*1000);
+  cy.wait(2000);
   cy.validateTableResultsCount('Résultats 21 - 40 de '+total);
-  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
-  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
-  cy.get('body').find('button[type="button"]').contains('Début').click({force: true});
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').click({force: true});
   cy.waitWhileSpin(20*1000);
+  cy.wait(2000);
   cy.validateTableResultsCount('Résultats 1 - 20 de '+total);
-  cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
-  cy.get('body').find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
+  cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
 });
 
 Cypress.Commands.add('validatePillSelectedQuery', (facetTitle: string|RegExp, values: (string|RegExp)[], eq: number = 0) => {

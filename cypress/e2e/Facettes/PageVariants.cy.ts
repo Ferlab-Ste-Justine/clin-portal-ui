@@ -11,6 +11,10 @@ describe('Page des variants - Filtrer avec les facettes', () => {
     cy.visitVariantsPage();
   });
 
+  it('Patient - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('patient');
+  });
+
   it('Patient - Analyse', () => {
     cy.validateFacetFilter('patient', 'Analyse', 0, 'MYOC', /^870 60\d{1}$/);
   });

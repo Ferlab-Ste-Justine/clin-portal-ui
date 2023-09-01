@@ -63,7 +63,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Généticien (CHUSJ, CUSM, CHUS)', () => {
-    cy.login(Cypress.env('username_G_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
+    cy.login(Cypress.env('username_G_CHUSJ_CUSM_CHUS'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible
@@ -118,7 +118,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Docteur et généticien (CHUSJ)', () => {
-    cy.login(Cypress.env('username_DG_CHUSJ'), Cypress.env('password'));
+    cy.login(Cypress.env('username_DG_CHUSJ'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible
@@ -175,7 +175,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Généticien (CHUSJ)', () => {
-    cy.login(Cypress.env('username_G_CHUSJ'), Cypress.env('password'));
+    cy.login(Cypress.env('username_G_CHUSJ'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible
@@ -232,7 +232,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Généticien (CUSM)', () => {
-    cy.login(Cypress.env('username_G_CUSM'), Cypress.env('password'));
+    cy.login(Cypress.env('username_G_CUSM'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible
@@ -290,7 +290,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Docteur et généticien (CHUS)', () => {
-    cy.login(Cypress.env('username_DG_CHUS'), Cypress.env('password'));
+    cy.login(Cypress.env('username_DG_CHUS'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible
@@ -348,7 +348,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Généticien (CHUS)', () => {
-    cy.login(Cypress.env('username_G_CHUS'), Cypress.env('password'));
+    cy.login(Cypress.env('username_G_CHUS'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible
@@ -406,7 +406,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Docteur (CUSM)', () => {
-    cy.login(Cypress.env('username_D_CUSM'), Cypress.env('password'));
+    cy.login(Cypress.env('username_D_CUSM'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible
@@ -456,7 +456,7 @@ describe('Accès des utilisateurs', () => {
   });
 
   it('Résident (CHUSJ)', () => {
-    cy.login(Cypress.env('username_R_CHUSJ'), Cypress.env('password'));
+    cy.login(Cypress.env('username_R_CHUSJ'), Cypress.env('password').replace('$', '!'));
     cy.visit('/');
 
     // Le bouton Panels est visible

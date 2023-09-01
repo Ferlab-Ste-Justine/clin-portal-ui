@@ -49,7 +49,7 @@ describe('Page des fichiers d\'un patient - Consultation du tableau', () => {
     cy.contains('Analyse bioinformatique : '+epCHUSJ_ldmCHUSJ.bioAnalFthId).should('exist', {timeout: 20*1000});
   });
   
-  it('Valider les fonctionnalités du tableau - Tris', () => {
+  it('Valider les fonctionnalités du tableau - Tri Format', () => {
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
     cy.sortTableAndWait('Patient');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
@@ -60,42 +60,78 @@ describe('Page des fichiers d\'un patient - Consultation du tableau', () => {
     cy.sortTableAndWait('Format');
     cy.validateTableFirstRow('VCF', 1);
     cy.sortTableAndWait('Format');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Requête', () => {
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+    cy.sortTableAndWait('Patient');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
+    cy.sortTableAndWait('Patient');
+    
     cy.sortTableAndWait('Requête');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestProbId, 3);
     cy.sortTableAndWait('Requête');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestFthId, 3);
-    cy.sortTableAndWait('Requête');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Analyse bioinfo', () => {
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+    cy.sortTableAndWait('Patient');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
+    cy.sortTableAndWait('Patient');
+    
     cy.sortTableAndWait('Analyse bioinfo');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalProbId, 5);
     cy.sortTableAndWait('Analyse bioinfo');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalFthId, 5);
-    cy.sortTableAndWait('Analyse bioinfo');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Date', () => {
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+    cy.sortTableAndWait('Patient');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
+    cy.sortTableAndWait('Patient');
+    
     cy.sortTableAndWait('Date');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.stampDate, 6);
     cy.sortTableAndWait('Date');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.stampDate, 6);
-    cy.sortTableAndWait('Date');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Taille', () => {
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+    cy.sortTableAndWait('Patient');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
+    cy.sortTableAndWait('Patient');
+    
     cy.sortTableAndWait('Taille');
     cy.validateTableFirstRow('242 B', 8);
     cy.sortTableAndWait('Taille');
     cy.validateTableFirstRow('3.11 GB', 8);
-    cy.sortTableAndWait('Taille');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Run', () => {
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+    cy.sortTableAndWait('Patient');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
+    cy.sortTableAndWait('Patient');
+    
     cy.sortTableAndWait('Run');
     cy.validateTableFirstRow('A00516_0169_16774', 10);
     cy.sortTableAndWait('Run');
     cy.validateTableFirstRow('A00516_0169_16776', 10);
-    cy.sortTableAndWait('Run');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Type', () => {
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+    cy.sortTableAndWait('Patient');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
+    cy.sortTableAndWait('Patient');
+    
     cy.sortTableAndWait('Type');
     cy.validateTableFirstRow('ALIR', 11);
     cy.sortTableAndWait('Type');
     cy.validateTableFirstRow('SSUP', 11);
-    cy.sortTableAndWait('Type');
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

@@ -108,60 +108,69 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
     cy.get('body').contains(/^ABLIM1$/).should('exist');
   });
   
-  it('Valider les fonctionnalités du tableau - Tris [CLIN-2149]', () => {
+  it('Valider les fonctionnalités du tableau - Tri Variant', () => {
     cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('chr10:g.100063786T>C', 2);
     cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('chrY:g.56884027T>G', 2);
-    cy.sortTableAndIntercept('Variant', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Type [CLIN-2149]', () => {
     cy.sortTableAndIntercept('Type', 1);
     cy.validateTableFirstRow('Ind', 3);
     cy.sortTableAndIntercept('Type', 1);
     cy.validateTableFirstRow('Sub', 3);
-    cy.sortTableAndIntercept('Type', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Gène', () => {
     cy.sortTableAndIntercept('Gène', 1);
     cy.validateTableFirstRow('-', 6);
     cy.sortTableAndIntercept('Gène', 1);
     cy.validateTableFirstRow('ZZZ3', 6);
-    cy.sortTableAndIntercept('Gène', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Exo.', () => {
     cy.sortTableAndIntercept('Exo.', 1);
     cy.validateTableFirstRow('-', 10);
     cy.sortTableAndIntercept('Exo.', 1);
     cy.validateTableFirstRow('-', 10);
-    cy.sortTableAndIntercept('Exo.', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri ACMG Exo.', () => {
     cy.sortTableAndIntercept('ACMG Exo.', 1);
     cy.validateTableFirstRow('-', 11);
     cy.sortTableAndIntercept('ACMG Exo.', 1);
     cy.validateTableFirstRow('-', 11);
-    cy.sortTableAndIntercept('ACMG Exo.', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri gnomAD', () => {
     cy.sortTableAndIntercept('gnomAD', 1);
     cy.validateTableFirstRow('-', 13);
     cy.sortTableAndIntercept('gnomAD', 1);
     cy.validateTableFirstRow('1.00e+0', 13);
-    cy.sortTableAndIntercept('gnomAD', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri CMC', () => {
     cy.sortTableAndIntercept('CMC', 1);
     cy.validateTableFirstRow('-', 14);
     cy.sortTableAndIntercept('CMC', 1);
     cy.validateTableFirstRow('419', 14);
-    cy.sortTableAndIntercept('CMC', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Hotspot', () => {
     cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
-    cy.get('tr').eq(0).find('td').eq(12).find('[class*="hotspotOutlined"]').should('exist');
+    cy.wait(1000);
+    cy.get('[class*="ant-table-row"]').eq(0).find('td').eq(15).find('[class*="hotspotOutlined"]').should('exist');
     cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
-    cy.get('tr').eq(0).find('td').eq(12).find('[class*="hotspotFilled"]').should('exist');
-    cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
+    cy.wait(1000);
+    cy.get('[class*="ant-table-row"]').eq(0).find('td').eq(15).find('[class*="hotspotFilled"]').should('exist');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri CMC tier', () => {
     cy.sortTableAndIntercept('CMC tier', 1);
     cy.validateTableFirstRow('-', 25);
     cy.sortTableAndIntercept('CMC tier', 1);
     cy.validateTableFirstRow('Other', 25);
-    cy.sortTableAndWait('CMC tier');
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

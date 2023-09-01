@@ -13,8 +13,16 @@ describe('Page des CNVs d\'un patient - Filtrer avec les facettes', () => {
     cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
   });
 
+  it('Panel RQDM - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('rqdm');
+  });
+
   it('Panel RQDM - Panel RQDM', () => {
     cy.validateFacetFilter('rqdm', 'Panel RQDM', 0, 'POLYM', /^26$/);
+  });
+
+  it('Variant - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_variant');
   });
 
   it('Variant - Type de variant', () => {
@@ -23,6 +31,10 @@ describe('Page des CNVs d\'un patient - Filtrer avec les facettes', () => {
 
   it('Variant - Chromosome', () => {
     cy.validateFacetFilter('category_variant', 'Chromosome', 2, '15', /^16$/);
+  });
+
+  it('Gène - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_genomic', true);
   });
 
   it('Gène - Panel RQDM', () => {
@@ -47,6 +59,10 @@ describe('Page des CNVs d\'un patient - Filtrer avec les facettes', () => {
 
   it('Gène - COSMIC', () => {
     cy.validateFacetFilter('category_genomic', 'COSMIC', 5, 'Other tumour types', /^1$/, true);
+  });
+
+  it('Occurrence - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_occurrence');
   });
 
   it('Occurrence - Filtre (Dragen)', () => {

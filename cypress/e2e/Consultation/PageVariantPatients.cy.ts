@@ -23,6 +23,12 @@ describe('Page d\'un variant (onglet Patients) - Vérifier les informations affi
         orderMasculin    = 1;
         orderIndetermine = 0;
       };
+
+      if(invokeText.includes("Féminin")) {
+        orderFeminin     = 1;
+        orderMasculin    = 0;
+        orderIndetermine = 2;
+      };
         
       cy.get('[data-cy="PieChart_Gender"]').contains('Sexe').should('exist');
       cy.get('[data-cy="PieChart_Gender"]').find('path[opacity="1"]').eq(orderIndetermine).trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
@@ -165,52 +171,56 @@ describe('Page d\'un variant (onglet Patients) - Valider les liens disponibles',
 });
 
 describe('Page d\'un variant (onglet Patients) - Valider les fonctionnalités du tableau', () => {
-  it('Tris', () => {
+  it('Tri Analyse', () => {
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('Analyse').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('HYPM').should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('Analyse').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('RGDI').should('exist');
-    cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('Analyse').click({force: true});
+  });
 
+  it('Tri QP', () => {
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('QP').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('3.14').should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('QP').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('3.14').should('exist');
-    cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('QP').click({force: true});
+  });
 
+  it('Tri ALT', () => {
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).find('[data-cy="ad_alt"]').contains(/^18$/).should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).find('[data-cy="ad_alt"]').contains(/^152$/).should('exist');
-    cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT').click({force: true});
+  });
 
+  it('Tri ALT+REF', () => {
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT+REF').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).find('[data-cy="ad_total"]').contains(/^18$/).should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT+REF').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).find('[data-cy="ad_total"]').contains(/^152$/).should('exist');
-    cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT+REF').click({force: true});
+  });
 
+  it('Tri ALT/(ALT+REF)', () => {
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT/(ALT+REF)').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('0.47').should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT/(ALT+REF)').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('1.00').should('exist');
-    cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT/(ALT+REF)').click({force: true});
+  });
 
+  it('Tri QG', () => {
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('QG').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains(/^7$/).should('exist');
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('QG').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains('440').should('exist');
-    cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('QG').click({force: true});
   });
 
-  it('Tri multiple [CLIN-1664]', () => {
+  it('Tri multiple', () => {
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('Analyse').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('Analyse').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').contains('ALT').click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[class*="ant-table-row"]').eq(0).contains(/^23$/).should('exist');
   });
 
-  it('Filtres', () => {
+  it('Filtre Analyse', () => {
     cy.get('span[class*="ant-select-selection-item"]').click({force: true});
     cy.get('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
 
@@ -225,6 +235,11 @@ describe('Page d\'un variant (onglet Patients) - Valider les fonctionnalités du
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
     cy.validateTableResultsCount('24 Résultats', false);
+  });
+
+  it('Filtre Sexe', () => {
+    cy.get('span[class*="ant-select-selection-item"]').click({force: true});
+    cy.get('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
 
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(1).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('li[data-menu-id*="unknown"]').find('[type="checkbox"]').check({force: true});
@@ -237,6 +252,11 @@ describe('Page d\'un variant (onglet Patients) - Valider les fonctionnalités du
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
     cy.validateTableResultsCount('1 Résultats', false);
+  });
+
+  it('Filtre Statut', () => {
+    cy.get('span[class*="ant-select-selection-item"]').click({force: true});
+    cy.get('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
 
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(2).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('li[data-menu-id*="not_affected"]').find('[type="checkbox"]').check({force: true});
@@ -249,7 +269,12 @@ describe('Page d\'un variant (onglet Patients) - Valider les fonctionnalités du
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});
     cy.get('[data-cy="VariantPatient_GridCard"]').find('tr[data-row-key*="'+epCHUS_ldmCHUS.patientProbId+'"]').should('exist');
     cy.validateTableResultsCount('7 Résultats', false);
+  });
 
+  it('Filtre Filtre', () => {
+    cy.get('span[class*="ant-select-selection-item"]').click({force: true});
+    cy.get('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
+    
     cy.get('[data-cy="VariantPatient_GridCard"]').find('thead[class="ant-table-thead"]').find('span[class*="ant-dropdown-trigger"]').eq(3).click({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('li[data-menu-id*="PASS"]').find('[type="checkbox"]').check({force: true});
     cy.get('div[class="ant-table-filter-dropdown"]').find('button[class*="ant-btn-primary"]').last().click({force: true});

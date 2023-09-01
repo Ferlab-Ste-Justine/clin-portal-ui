@@ -434,21 +434,21 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
     cy.validateDictionnary('category_occurrence', /^Transmission$/, 4, dictionnary);
   });
 
-  it('Variant - Hét. composé', () => {
+  it('Occurrence - Hét. composé', () => {
     const dictionnary = ['False',
                          'True'];
 
     cy.validateDictionnary('category_occurrence', /^Hét. composé$/, 5, dictionnary);
   });
 
-  it('Variant - Hét. composé potentiel', () => {
+  it('Occurrence - Hét. composé potentiel', () => {
     const dictionnary = ['False',
                          'True'];
 
     cy.validateDictionnary('category_occurrence', /^Hét. composé potentiel$/, 6, dictionnary);
   });
 
-  it('Variant - Filtre (Dragen)', () => {
+  it('Occurrence - Filtre (Dragen)', () => {
     const dictionnary = ['PASS',
                          'DRAGENSnpHardQUAL',
                          'DRAGENIndelHardQUAL',

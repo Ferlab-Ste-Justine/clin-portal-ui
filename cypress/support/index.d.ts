@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 declare namespace Cypress {
   interface Chainable {
-    checkAndClickApplyFacet(section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, isRqdmActive: boolean = false): cy & CyEventEmitter;
+    checkAndClickApplyFacet(section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, isRqdmExpand: boolean = false): cy & CyEventEmitter;
     checkValueFacet(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     clickApplyFacet(nbCalls: number): cy & CyEventEmitter;
@@ -17,13 +17,14 @@ declare namespace Cypress {
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     validateClearAllButton(shouldExist: boolean): cy & CyEventEmitter;
     validateDictionnary(section: string, facetTitle: RegExp, facetRank: number, dictionnary: (string|RegExp)[]): cy & CyEventEmitter;
-    validateFacetFilter(section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, expectedCount: string|RegExp, isRqdmActive: boolean = false): cy & CyEventEmitter;
+    validateExpandCollapse(section: string, isRqdmExpand: boolean = false): cy & CyEventEmitter;
+    validateFacetFilter(section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, expectedCount: string|RegExp, isRqdmExpand: boolean = false): cy & CyEventEmitter;
     validateFileContent(fixture: string, replacements?: Replacement[]): cy & CyEventEmitter;
     validateFileHeaders(fixture: string): cy & CyEventEmitter;
     validateFileName(namePattern: string): cy & CyEventEmitter;
     validateOperatorSelectedQuery(expectedOperator: string): cy & CyEventEmitter;
     validatePillSelectedQuery(facetTitle: string|RegExp, values: (string|RegExp)[], eq: number = 0): cy & CyEventEmitter;
-    validatePaging(total: string, eq: number): cy & CyEventEmitter;
+    validatePaging(total: string, eqSelect: number, eqTab: number = 0): cy & CyEventEmitter;
     validateTableDataRowKeyAttr(dataRowKey: string, eq: number, expectedAttr: string, expectedValue: string): cy & CyEventEmitter;
     validateTableDataRowKeyClass(dataRowKey: string, eq: number, expectedClass: string): cy & CyEventEmitter;
     validateTableDataRowKeyContent(dataRowKey: string, eq: number, expectedContent: string|RegExp): cy & CyEventEmitter;

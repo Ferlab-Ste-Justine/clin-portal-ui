@@ -51,36 +51,39 @@ describe('Page des CNVs d\'un patient - Consultation du tableau', () => {
     cy.get('body').find('button[class="ant-modal-close"]').invoke('click');
   });
   
-  it('Valider les fonctionnalités du tableau - Tris', () => {
+  it('Valider les fonctionnalités du tableau - Tri Chr.', () => {
     cy.sortTableAndIntercept('Chr.', 1);
     cy.validateTableFirstRow(/^1$/, 2);
     cy.sortTableAndIntercept('Chr.', 1);
     cy.validateTableFirstRow(/^Y$/, 2);
-    cy.sortTableAndIntercept('Chr.', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Début', () => {
     cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('14 806', 3);
     cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('238 158 998', 3);
-    cy.sortTableAndIntercept('Début', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri MS', () => {
     cy.sortTableAndIntercept('MS', 1);
     cy.validateTableFirstRow('0.00831442', 7);
     cy.sortTableAndIntercept('MS', 1);
     cy.validateTableFirstRow('2.7587', 7);
-    cy.sortTableAndIntercept('MS', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri CN', () => {
     cy.sortTableAndIntercept('CN', 1);
     cy.validateTableFirstRow(/^0$/, 8);
     cy.sortTableAndIntercept('CN', 1);
     cy.validateTableFirstRow(/^6$/, 8);
-    cy.sortTableAndIntercept('CN', 1);
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Qual.', () => {
     cy.sortTableAndIntercept('Qual.', 1);
     cy.validateTableFirstRow(/^3$/, 13);
     cy.sortTableAndIntercept('Qual.', 1);
     cy.validateTableFirstRow('150', 13);
-    cy.sortTableAndIntercept('Qual.', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

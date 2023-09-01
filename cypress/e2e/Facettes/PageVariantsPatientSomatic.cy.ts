@@ -13,7 +13,11 @@ describe('Page des variants d\'un patient (somatic) - Filtrer avec les facettes'
     cy.visitVariantsPatientPage(presc_SOMATIC.patientProbId, presc_SOMATIC.prescriptionId, 3);
   });
 
-  it('Variant - Analyse bioinformatique [CLIN-2156]', () => {
+  it('Variant - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_variant');
+  });
+
+  it('Variant - Analyse bioinformatique', () => {
     cy.validateFacetFilter('category_variant', 'Analyse bioinformatique', 1, 'Tumor Only', /^195 065$/);
   });
 

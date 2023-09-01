@@ -127,7 +127,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.get('body').contains(/^GRIA3$/).should('exist');
   });
   
-  it('Valider les fonctionnalités du tableau - Tris [CLIN-2149]', () => {
+  it('Valider les fonctionnalités du tableau - Tri Variant', () => {
     cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
@@ -135,55 +135,86 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.validateTableFirstRow('chr10:g.100049106G>A', 2);
     cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('chrY:g.9951709_9951710del', 2);
-    cy.sortTableAndIntercept('Variant', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Type [CLIN-2149]', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Type', 1);
     cy.validateTableFirstRow('Ins', 3);
     cy.sortTableAndIntercept('Type', 1);
     cy.validateTableFirstRow('SNV', 3);
-    cy.sortTableAndIntercept('Type', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Gène', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Gène', 1);
     cy.validateTableFirstRow('-', 5);
     cy.sortTableAndIntercept('Gène', 1);
     cy.validateTableFirstRow('ZZZ3', 5);
-    cy.sortTableAndIntercept('Gène', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Exo.', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Exo.', 1);
     cy.validateTableFirstRow('-', 9);
     cy.sortTableAndIntercept('Exo.', 1);
     cy.validateTableFirstRow('0.9641', 9);
-    cy.sortTableAndIntercept('Exo.', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri ACMG Exo.', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('ACMG Exo.', 1);
     cy.validateTableFirstRow('-', 10);
     cy.sortTableAndIntercept('ACMG Exo.', 1);
     cy.validateTableFirstRow('VUS', 10);
-    cy.sortTableAndIntercept('ACMG Exo.', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri gnomAD', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('gnomAD', 1);
     cy.validateTableFirstRow('-', 12);
     cy.sortTableAndIntercept('gnomAD', 1);
     cy.validateTableFirstRow('1.00e+0', 12);
-    cy.sortTableAndIntercept('gnomAD', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri RQDM', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('RQDM', 1);
     cy.validateTableFirstRow('-', 13);
     cy.sortTableAndIntercept('RQDM', 1);
     cy.validateTableFirstRow('1.00e+0', 13);
-    cy.sortTableAndIntercept('RQDM', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri CMC', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('CMC', 1);
     cy.validateTableFirstRow('-', 28);
     cy.sortTableAndIntercept('CMC', 1);
     cy.validateTableFirstRow('419', 28);
-    cy.sortTableAndIntercept('CMC', 1);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri CMC tier', () => {
+    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('CMC tier', 1);
     cy.validateTableFirstRow('-', 29);
     cy.sortTableAndIntercept('CMC tier', 1);
     cy.validateTableFirstRow('Other', 29);
-    cy.sortTableAndIntercept('CMC tier', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

@@ -50,31 +50,33 @@ describe('Page d\'archives - Consultation du tableau', () => {
     cy.contains('Analyse bioinformatique : '+epCHUSJ_ldmCHUSJ.bioAnalProbId).should('exist', {timeout: 20*1000});
   });
   
-  it('Valider les fonctionnalités du tableau - Tris', () => {
+  it('Valider les fonctionnalités du tableau - Tri Patient', () => {
     cy.sortTableAndWait('Patient');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 4);
-    cy.sortTableAndWait('Patient');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Format', () => {
     cy.sortTableAndWait('Format');
     cy.validateTableFirstRow('BED', 3);
     cy.sortTableAndWait('Format');
     cy.validateTableFirstRow('VCF', 3);
-    cy.sortTableAndWait('Format');
-
-    cy.sortTableAndWait('Requête');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestProbId, 5);
-    cy.sortTableAndWait('Requête');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestProbId, 5);
-    cy.sortTableAndWait('Requête');
-
-    cy.sortTableAndWait('Analyse bioinfo');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalProbId, 7);
-    cy.sortTableAndWait('Analyse bioinfo');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalProbId, 7);
-    cy.sortTableAndWait('Analyse bioinfo');
   });
 
-  it('Valider les fonctionnalités du tableau - Tri multiple [CLIN-1664]', () => {
+  it('Valider les fonctionnalités du tableau - Tri Requête', () => {
+    cy.sortTableAndWait('Requête');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestProbId, 5);
+    cy.sortTableAndWait('Requête');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestProbId, 5);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Analyse bioinfo', () => {
+    cy.sortTableAndWait('Analyse bioinfo');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalProbId, 7);
+    cy.sortTableAndWait('Analyse bioinfo');
+    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalProbId, 7);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndWait('Format');
     cy.sortTableAndWait('Patient');
     cy.validateTableFirstRow('BED', 3);

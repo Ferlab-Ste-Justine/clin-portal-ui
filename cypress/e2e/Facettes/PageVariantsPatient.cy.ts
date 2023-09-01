@@ -13,8 +13,16 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3);
   });
 
+  it('Panel RQDM - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('rqdm');
+  });
+
   it('Panel RQDM - RQDM', () => {
     cy.validateFacetFilter('rqdm', 'RQDM', 0, 'POLYM', /^24 975$/);
+  });
+
+  it('Variant - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_variant');
   });
 
   it('Variant - Type de variant', () => {
@@ -31,6 +39,10 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
 
   it('Variant - Chromosome', () => {
     cy.validateFacetFilter('category_variant', 'Chromosome', 3, '19', /^11 806$/);
+  });
+
+  it('Gène - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_genomic');
   });
 
   it('Gène - Type de gène', () => {
@@ -65,6 +77,10 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateFacetFilter('category_genomic', 'COSMIC', 9, 'Leukaemia', /^183$/);
   });
 
+  it('Pathogénicité - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_pathogenicity');
+  });
+
   it('Pathogénicité - ClinVar', () => {
     cy.validateFacetFilter('category_pathogenicity', 'ClinVar', 0, 'Likely Benign', /^1 162$/);
   });
@@ -73,7 +89,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateFacetFilter('category_pathogenicity', 'VEP', 1, 'HIGH', /^671$/);
   });
 
-  it('Pathogénicité - ACMG de Exomiser [CLIN-2156]', () => {
+  it('Pathogénicité - ACMG de Exomiser', () => {
     cy.validateFacetFilter('category_pathogenicity', 'ACMG de Exomiser', 3, 'Uncertain Significance', /^13$/);
   });
 
@@ -106,7 +122,11 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Pathogénicité - CMC tier', () => {
-    cy.validateFacetFilter('category_pathogenicity', 'CMC tier', 18, 'Tier 3', /^267$/);
+    cy.validateFacetFilter('category_pathogenicity', 'CMC tier', 18, 'Tier 3', /^266$/);
+  });
+
+  it('Occurrence - Expand all/Collapse all', () => {
+    cy.validateExpandCollapse('category_occurrence');
   });
 
   it('Occurrence - Zygosité', () => {
