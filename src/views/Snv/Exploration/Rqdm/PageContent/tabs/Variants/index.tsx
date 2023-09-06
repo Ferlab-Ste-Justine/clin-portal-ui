@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
@@ -26,6 +25,8 @@ type OwnProps = {
   setPageIndex: (value: number) => void;
   setDownloadKeys: TDownload;
   queryBuilderId: string;
+  setDownloadTriggered: any;
+  setSelectedRows: any;
 };
 
 export const scrollToTop = (scrollContentId: string) =>
@@ -42,10 +43,11 @@ const VariantsTab = ({
   pageIndex,
   setPageIndex,
   setDownloadKeys,
+  setDownloadTriggered,
+  setSelectedRows,
 }: OwnProps) => {
   const dispatch = useDispatch();
   const { user } = useUser();
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const initialColumnState = user.config.data_exploration?.tables?.snv?.columns;
 
   return (
@@ -82,16 +84,15 @@ const VariantsTab = ({
               total: results.total,
             },
             enableColumnSort: true,
-            onSelectedRowsChange: setSelectedKeys,
+            onSelectedRowsChange: (key, row) => {
+              setSelectedRows(row);
+            },
             onSelectAllResultsChange: () => {
-              setSelectedKeys([ALL_KEYS]);
+              setSelectedRows([]);
+              setDownloadKeys([ALL_KEYS]);
             },
             onTableExportClick: () => {
-              if (selectedKeys.length === 0) {
-                setDownloadKeys([ALL_KEYS]);
-              } else {
-                setDownloadKeys(selectedKeys);
-              }
+              setDownloadTriggered(true);
             },
             onColumnSortChange: (columns) => {
               dispatch(

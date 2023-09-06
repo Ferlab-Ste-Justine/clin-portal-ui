@@ -28,9 +28,8 @@ export const useLazyResultQuery = <
   options?: QueryHookOptions<TData, TVariables>,
 ): IBaseQueryResults<TData> => {
   const { data, error, loading, previousData } = useQuery<TData, TVariables>(query, options);
-
-  const result = data ? data : previousData;
-  return { error, loading, result };
+  const result = data && !loading ? data : previousData;
+  return { error, loading, result: error ? undefined : result };
 };
 
 /**

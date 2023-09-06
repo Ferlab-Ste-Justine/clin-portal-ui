@@ -9,8 +9,11 @@ import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { Tabs } from 'antd';
 import { ExtendedMappingResults } from 'graphql/models';
 import { useVariants } from 'graphql/variants/actions';
-import { VARIANT_QUERY_NO_DONORS } from 'graphql/variants/queries';
-import Download from 'views/Snv/components/Download';
+import { VARIANT_QUERY, VARIANT_QUERY_NO_DONORS } from 'graphql/variants/queries';
+import { VariantType } from 'views/Prescriptions/Entity/context';
+import { VARIANT_KEY } from 'views/Prescriptions/utils/export';
+import VariantContentLayout from 'views/Snv/Exploration/components/VariantContentLayout';
+import { getVariantColumns } from 'views/Snv/Exploration/variantColumns';
 import {
   DEFAULT_OFFSET,
   DEFAULT_PAGE_INDEX,
@@ -20,9 +23,8 @@ import {
   VARIANT_RQDM_QB_ID,
 } from 'views/Snv/utils/constant';
 
+import Download from 'components/Download';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
-
-import VariantContentLayout from '../../components/VariantContentLayout';
 
 import VariantsTab from './tabs/Variants';
 
@@ -93,6 +95,9 @@ const PageContent = ({ variantMapping }: OwnProps) => {
     // eslint-disable-next-line
   }, [JSON.stringify(activeQuery)]);
 
+  const [downloadTriggered, setDownloadTriggered] = useState(false);
+  const [selectedRows, setSelectedRows] = useState<any[]>([]);
+
   return (
     <>
       <VariantContentLayout
@@ -116,17 +121,27 @@ const PageContent = ({ variantMapping }: OwnProps) => {
               pageIndex={pageIndex}
               setPageIndex={setPageIndex}
               setDownloadKeys={setDownloadKeys}
+              setDownloadTriggered={setDownloadTriggered}
+              setSelectedRows={setSelectedRows}
             />
           </Tabs.TabPane>
         </Tabs>
       </VariantContentLayout>
       <Download
-        queryBuilderId={VARIANT_RQDM_QB_ID}
+        maxAllowed={2000}
+        columnKey={VARIANT_KEY}
         downloadKeys={downloadKeys}
-        setDownloadKeys={setDownloadKeys}
         queryVariables={queryVariables}
-        queryConfig={variantQueryConfig}
-        variants={variantResults}
+        prefix={'SNV'}
+        operations={variantQueryConfig.operations}
+        query={VARIANT_QUERY}
+        setDownloadKeys={setDownloadKeys}
+        data={selectedRows}
+        columns={getVariantColumns(VARIANT_RQDM_QB_ID, VariantType.GERMLINE)}
+        total={variantResults.total}
+        setTriggered={setDownloadTriggered}
+        triggered={downloadTriggered}
+        queryKey={'Variants'}
       />
     </>
   );

@@ -6,6 +6,7 @@ import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
 import { IQueryResults } from 'graphql/models';
 import { ITableVariantEntity, VariantEntity } from 'graphql/variants/models';
 import { findDonorById } from 'graphql/variants/selector';
+import { VariantType } from 'views/Prescriptions/Entity/context';
 import { getVariantTypeFromSNVVariantEntity } from 'views/Prescriptions/Entity/Tabs/Variants/utils';
 import { ALL_KEYS, VARIANT_KEY } from 'views/Prescriptions/utils/export';
 import IGVModal from 'views/Snv/components//IGVModal';
@@ -32,6 +33,9 @@ type OwnProps = {
   setPageIndex: (value: number) => void;
   setDownloadKeys: TDownload;
   queryBuilderId: string;
+  setVariantType: (variantType: VariantType) => void;
+  setDownloadTriggered: any;
+  setSelectedRows: any;
 };
 
 export const scrollToTop = (scrollContentId: string) =>
@@ -49,6 +53,9 @@ const VariantsTab = ({
   pageIndex,
   setPageIndex,
   setDownloadKeys,
+  setVariantType,
+  setDownloadTriggered,
+  setSelectedRows,
 }: OwnProps) => {
   const dispatch = useDispatch();
   const { user } = useUser();
@@ -56,7 +63,6 @@ const VariantsTab = ({
   const [drawerOpened, toggleDrawer] = useState(false);
   const [modalOpened, toggleModal] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<VariantEntity | undefined>(undefined);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   const openDrawer = (record: VariantEntity) => {
     setSelectedVariant(record);
@@ -72,7 +78,7 @@ const VariantsTab = ({
   const initialColumnState = user.config.data_exploration?.tables?.patientSnv?.columns;
 
   const variantType = getVariantTypeFromSNVVariantEntity(results.data?.[0]);
-
+  setVariantType(variantType);
   const columns = getVariantColumns(
     queryBuilderId,
     variantType,
@@ -125,16 +131,15 @@ const VariantsTab = ({
                 total: results.total || 0,
               },
               enableColumnSort: true,
-              onSelectedRowsChange: setSelectedKeys,
+              onSelectedRowsChange: (key, row) => {
+                setSelectedRows(row);
+              },
               onSelectAllResultsChange: () => {
-                setSelectedKeys([ALL_KEYS]);
+                setSelectedRows([]);
+                setDownloadKeys([ALL_KEYS]);
               },
               onTableExportClick: () => {
-                if (selectedKeys.length === 0) {
-                  setDownloadKeys([ALL_KEYS]);
-                } else {
-                  setDownloadKeys(selectedKeys);
-                }
+                setDownloadTriggered(true);
               },
               onColumnSortChange: (columns) => {
                 dispatch(

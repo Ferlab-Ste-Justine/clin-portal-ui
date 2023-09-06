@@ -28,7 +28,7 @@ interface OwnProps {
   prescriptionId: string;
 }
 
-enum PrescriptionEntityTabs {
+export enum PrescriptionEntityTabs {
   DETAILS = '#details',
   QC = '#qc',
   VARIANTS = '#variants',

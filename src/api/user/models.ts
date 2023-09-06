@@ -28,6 +28,7 @@ export type TUserConfig = {
       prescriptionEntityFiles?: TUserTableConfig;
       requests?: TUserTableConfig;
       snv?: TUserTableConfig;
+      genes?: TUserTableConfig;
     };
   };
 };

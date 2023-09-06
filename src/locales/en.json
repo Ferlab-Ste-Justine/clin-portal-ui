@@ -946,5 +946,29 @@
   "screen.prescription.entity.file.table.column.size": "Size",
   "screen.prescription.entity.file.table.column.type": "Type",
   "screen.prescription.entity.file.table.column.position": "Position",
-  "view": "{value} / view"
+  "view": "{value} / view",
+  "pages": {
+    "coverage_genic": {
+      "general": "General",
+      "coverage_genic": "Gene coverage",
+      "gene_filter_placeholder": "Filter by gene ",
+      "gene_filter_label": "Gene",
+      "panel_filter_placeholder": "Filter by RQDM panel ",
+      "panel_filter_label": "Panel",
+      "clear_filters": "Clear filters",
+      "average_coverage_weighted_label": "Average coverage:",
+      "columns": {
+        "gene": "Gene",
+        "size": "Size",
+        "averageCoverage": "Avg. Cov.",
+        "tooltips": {
+          "average": "Gene average coverage",
+          "proportion": "Gene proportion in % with a coverage of {value}x and more"
+        }
+      }
+    }
+  },
+  "numbers": {
+    "separator": ","
+  }
 }

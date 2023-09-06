@@ -210,10 +210,16 @@ export const downloadAsTSV = (
   prefix: string,
   mapping: any = {},
   patientId?: string,
+  forceFilter: boolean = false,
 ) => {
-  const filtered = extractSelectionFromResults(data, dataKeys, key);
   const headers = columns.map((c) => c.key);
-  const tsv = exportAsTSV(filtered, headers, mapping, prefix, patientId);
+  const tsv = exportAsTSV(
+    forceFilter ? extractSelectionFromResults(data, dataKeys, key) : data,
+    headers,
+    mapping,
+    prefix,
+    patientId,
+  );
   downloadText(tsv, `${prefix}_${makeFilenameDatePart()}.tsv`, 'text/csv');
 };
 

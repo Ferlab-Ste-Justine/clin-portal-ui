@@ -23,13 +23,14 @@ export const DEFAULT_SORT_QUERY = [
   { field: 'hgvsg', order: SortDirection.Asc },
 ] as ISort[];
 
-export const DEFAULT_QUERY_CONFIG: IQueryConfig = {
+export const DEFAULT_QUERY_CONFIG: IQueryConfig | any = {
   pageIndex: DEFAULT_OFFSET,
   size: DEFAULT_PAGE_SIZE,
   sort: DEFAULT_SORT_QUERY,
   searchAfter: undefined,
   firstPageFlag: undefined,
   operations: undefined,
+  weightedAverages: [],
 };
 
 export enum FilterTypes {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
-import { tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
-import { resetSearchAfterQueryConfig } from '@ferlab/ui/core/components/ProTable/utils';
+import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
@@ -9,8 +8,12 @@ import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { Tabs } from 'antd';
 import { ExtendedMappingResults } from 'graphql/models';
 import { useVariants } from 'graphql/variants/actions';
+import { VARIANT_QUERY } from 'graphql/variants/queries';
 import { cloneDeep } from 'lodash';
-import Download from 'views/Snv/components/Download';
+import { VariantType } from 'views/Prescriptions/Entity/context';
+import { VARIANT_KEY } from 'views/Prescriptions/utils/export';
+import VariantContentLayout from 'views/Snv/Exploration/components/VariantContentLayout';
+import { getVariantColumns } from 'views/Snv/Exploration/variantColumns';
 import {
   DEFAULT_OFFSET,
   DEFAULT_PAGE_INDEX,
@@ -21,9 +24,8 @@ import {
 } from 'views/Snv/utils/constant';
 import { wrapSqonWithDonorIdAndSrId } from 'views/Snv/utils/helper';
 
+import Download from 'components/Download';
 import { SNV_EXPLORATION_PATIENT_FILTER_TAG } from 'utils/queryBuilder';
-
-import VariantContentLayout from '../../components/VariantContentLayout';
 
 import VariantsTab from './tabs/Variants';
 
@@ -79,6 +81,9 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
   }, [variantQueryConfig]);
 
   const activeQuerySnapshot = JSON.stringify(activeQuery);
+  const [selectedRows, setSelectedRows] = useState<any[]>([]);
+
+  const [downloadTriggered, setDownloadTriggered] = useState(false);
 
   useEffect(() => {
     setVariantQueryConfig({
@@ -99,6 +104,8 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
     );
     setPageIndex(DEFAULT_PAGE_INDEX);
   }, [activeQuerySnapshot]);
+
+  const [variantType, setVariantType] = useState<VariantType | null>(null);
 
   return (
     <VariantContentLayout
@@ -123,14 +130,31 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
             pageIndex={pageIndex}
             setPageIndex={setPageIndex}
             setDownloadKeys={setDownloadKeys}
+            setVariantType={setVariantType}
+            setDownloadTriggered={setDownloadTriggered}
+            setSelectedRows={setSelectedRows}
           />
           <Download
-            queryBuilderId={SNV_VARIANT_PATIENT_QB_ID}
             downloadKeys={downloadKeys}
-            setDownloadKeys={setDownloadKeys}
             queryVariables={queryVariables}
-            queryConfig={variantQueryConfig}
-            variants={variantResults}
+            triggered={downloadTriggered}
+            setTriggered={setDownloadTriggered}
+            total={variantResults.total}
+            prefix={'SNV'}
+            setDownloadKeys={setDownloadKeys}
+            operations={variantQueryConfig.operations}
+            query={VARIANT_QUERY}
+            maxAllowed={2000}
+            data={selectedRows}
+            columns={
+              variantType
+                ? getVariantColumns(SNV_VARIANT_PATIENT_QB_ID, variantType, patientId).filter(
+                    (h) => h.key !== 'actions',
+                  )
+                : []
+            }
+            queryKey={'Variants'}
+            columnKey={VARIANT_KEY}
             patientId={patientId}
           />
         </Tabs.TabPane>

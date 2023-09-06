@@ -7,10 +7,11 @@ import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { Card } from 'antd';
 import { useVariants } from 'graphql/cnv/actions';
+import { VARIANT_QUERY } from 'graphql/cnv/queries';
 import { ExtendedMappingResults } from 'graphql/models';
 import { cloneDeep } from 'lodash';
-import Download from 'views/Cnv/Exploration/components/Download';
 import VariantContentLayout from 'views/Cnv/Exploration/components/VariantContentLayout';
+import { getVariantColumns } from 'views/Cnv/Exploration/variantColumns';
 import {
   CNV_VARIANT_PATIENT_QB_ID,
   DEFAULT_OFFSET,
@@ -20,7 +21,10 @@ import {
   DEFAULT_SORT_QUERY,
 } from 'views/Cnv/utils/constant';
 import { wrapSqonWithPatientIdAndRequestId } from 'views/Cnv/utils/helper';
+import { VariantType } from 'views/Prescriptions/Entity/context';
+import { MAX_VARIANTS_DOWNLOAD } from 'views/Prescriptions/utils/export';
 
+import Download from 'components/Download';
 import { CNV_EXPLORATION_PATIENT_FILTER_TAG } from 'utils/queryBuilder';
 
 import VariantsTable from './components/Variants';
@@ -101,6 +105,9 @@ const PageContent = ({ variantMapping, patientId, prescriptionId }: OwnProps) =>
     setPageIndex(DEFAULT_PAGE_INDEX);
   }, [activeQuerySnapshot]);
 
+  const [downloadTriggered, setDownloadTriggered] = useState(false);
+  const [variantType, setVariantType] = useState(VariantType.GERMLINE);
+  const [selectedRows, setSelectedRows] = useState<any[]>([]);
   return (
     <>
       <VariantContentLayout
@@ -119,15 +126,35 @@ const PageContent = ({ variantMapping, patientId, prescriptionId }: OwnProps) =>
             pageIndex={pageIndex}
             setPageIndex={setPageIndex}
             setDownloadKeys={setDownloadKeys}
+            setVariantType={setVariantType}
+            setSelectedRows={setSelectedRows}
+            setDownloadTriggered={setDownloadTriggered}
           />
         </Card>
       </VariantContentLayout>
       <Download
         downloadKeys={downloadKeys}
-        setDownloadKeys={setDownloadKeys}
         queryVariables={queryVariables}
-        queryConfig={variantQueryConfig}
-        variants={variantResults}
+        prefix="CNV"
+        columnKey={'hash'}
+        maxAllowed={MAX_VARIANTS_DOWNLOAD}
+        setDownloadKeys={setDownloadKeys}
+        columns={getVariantColumns(
+          variantType,
+          () => {},
+          () => {},
+        )}
+        query={VARIANT_QUERY}
+        mapping={{
+          // mapping of some column keys with query field
+          length: 'reflen',
+          filter: 'filters',
+        }}
+        triggered={downloadTriggered}
+        setTriggered={setDownloadTriggered}
+        total={variantResults.total}
+        queryKey={'cnv'}
+        data={selectedRows}
       />
     </>
   );

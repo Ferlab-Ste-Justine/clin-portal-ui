@@ -1,11 +1,13 @@
 /* eslint-disable simple-import-sort/imports */
 // required for the theme to be correctly applied
-
+/// <reference types="@welldone-software/why-did-you-render" />
+// import './wdyr';
 import 'style/themes/clin/dist/antd.css';
 import 'style/themes/clin/main.scss';
 import './index.css';
 
 import React from 'react';
+import './prototypes/number';
 import ReactDOM from 'react-dom';
 
 // Import App after the style to make sure styles is apply correctly!

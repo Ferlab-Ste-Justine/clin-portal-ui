@@ -36,6 +36,31 @@ export interface AnalysisResult extends ArrangerNodeData {
   assignments: string[];
 }
 
+export interface GeneCoverage {
+  gene: string;
+  size: number;
+  average_coverage: number;
+  coverage5: number;
+  coverage15: number;
+  coverage30: number;
+  coverage50: number;
+  coverage100: number;
+  coverage200: number;
+  coverage300: number;
+  coverage400: number;
+  coverage500: number;
+  coverage1000: number;
+  aliquot_id: string;
+  service_request_id: string;
+  batch_id: string;
+  start: number;
+  end: number;
+  omim_gene_id: string;
+  ensembl_gene_id: string;
+  hash: string;
+  chromosome: string;
+}
+
 export interface AnalysisSequencingRequest {
   id: string;
   score: number;

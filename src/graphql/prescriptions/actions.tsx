@@ -7,6 +7,7 @@ import { AnalysisResult } from 'graphql/prescriptions/models/Prescription';
 import { INDEX_EXTENDED_MAPPING } from 'graphql/queries';
 import { useLazyResultQuery, useLazyResultQueryOnLoadOnly } from 'graphql/utils/query';
 import { valueSetID } from 'views/Prescriptions/Entity/constants';
+import { ITableGeneCoverage } from 'views/Prescriptions/Entity/GenericCoverage';
 
 import {
   ANALYSE_CODESYSTEME,
@@ -21,6 +22,7 @@ import {
   ANALYSE_VALUESET,
   ANALYSIS_ENTITY_QUERY,
   ANALYSIS_TASK_QUERY,
+  COVERAGES_QUERY,
   PRESCRIPTIONS_QUERY,
 } from './queries';
 
@@ -39,6 +41,34 @@ export const usePrescription = (
     loading,
     total: prescriptions?.hits.total,
     searchAfter: computeSearchAfter(prescriptions?.hits?.edges || [], operations),
+  };
+};
+
+export const useCoverage = (
+  variables?: any,
+  operations?: IQueryOperationsConfig,
+): GqlResults<ITableGeneCoverage> => {
+  const { loading, result } = useLazyResultQuery<any>(COVERAGES_QUERY, {
+    variables: {
+      ...variables,
+      weigthedAverage: {
+        value: 'average_coverage',
+        weight: 'size',
+      },
+    },
+    fetchPolicy: 'network-only',
+  });
+
+  const coverages = result?.Coverages;
+  return {
+    aggregations: coverages?.aggregations || {},
+    data: hydrateResults(
+      coverages?.hits?.edges || [],
+      operations?.previous,
+    ) as ITableGeneCoverage[],
+    loading,
+    total: coverages?.hits.total,
+    searchAfter: computeSearchAfter(coverages?.hits?.edges || [], operations),
   };
 };
 

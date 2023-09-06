@@ -950,5 +950,29 @@
   "screen.prescription.entity.file.table.column.size": "Taille",
   "screen.prescription.entity.file.table.column.type": "Type",
   "screen.prescription.entity.file.table.column.position": "Position",
-  "view": "{value} / écran"
+  "view": "{value} / écran",
+  "pages": {
+    "coverage_genic": {
+      "general": "Général",
+      "coverage_genic": "Couverture génique",
+      "gene_filter_placeholder": "Filtrer par gène ",
+      "gene_filter_label": "Gène ",
+      "panel_filter_placeholder": "Filtrer par panel du RQDM ",
+      "panel_filter_label": "Panel ",
+      "clear_filters": "Effacer les filtres",
+      "average_coverage_weighted_label": "Couverture moyenne :",
+      "columns": {
+        "gene": "Gène",
+        "size": "Longueur",
+        "averageCoverage": "Couv. Moy.",
+        "tooltips": {
+          "average": "Couverture moyenne du gène",
+          "proportion": "Proportion du gène en % avec une couverture de {value}x et plus"
+        }
+      }
+    }
+  },
+  "numbers": {
+    "separator": " "
+  }
 }

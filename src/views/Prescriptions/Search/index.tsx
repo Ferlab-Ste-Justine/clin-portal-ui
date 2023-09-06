@@ -200,6 +200,9 @@ const PrescriptionSearch = (): React.ReactElement => {
         'prescription_id',
         prescriptionsColumns(),
         'PR',
+        {},
+        undefined,
+        true,
       );
       setDownloadPrescriptionKeys([]); // reset download
     }
@@ -218,6 +221,9 @@ const PrescriptionSearch = (): React.ReactElement => {
         'request_id',
         sequencingsColumns(),
         'RQ',
+        {},
+        undefined,
+        true,
       );
       setDownloadSequencingKeys([]); // reset download
     }

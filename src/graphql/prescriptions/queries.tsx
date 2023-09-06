@@ -36,6 +36,61 @@ export const PRESCRIPTIONS_QUERY = gql`
     }
   }
 `;
+export const COVERAGES_QUERY = gql`
+  query GeneCoverageInformation(
+    $sqon: JSON
+    $first: Int
+    $offset: Int
+    $sort: [Sort]
+    $searchAfter: JSON
+  ) {
+    Coverages {
+      hits(filters: $sqon, first: $first, offset: $offset, sort: $sort, searchAfter: $searchAfter) {
+        edges {
+          searchAfter
+          node {
+            gene
+            size
+            average_coverage
+            coverage5
+            coverage15
+            coverage30
+            coverage50
+            coverage100
+            coverage200
+            coverage300
+            coverage500
+            coverage1000
+            aliquot_id
+            service_request_id
+            batch_id
+            start
+            end
+            omim_gene_id
+            ensembl_gene_id
+            hash
+            chromosome
+          }
+        }
+        total
+      }
+      aggregations(filters: $sqon, weightedAverages: $weightedAverages) {
+        average_coverage {
+          weighted_avg {
+            value
+          }
+        }
+        panels {
+          buckets {
+            key
+            key_as_string
+            doc_count
+          }
+        }
+      }
+    }
+  }
+`;
 
 export const PRESCRIPTIONS_SEARCH_QUERY = gql`
   query AnalysisSearch($sqon: JSON, $first: Int, $offset: Int) {

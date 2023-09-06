@@ -41,7 +41,7 @@ export const downloadFile = (blob: Blob, filename: string) => {
 
 export const getPatientPosition = (gender: string, position: string) => {
   const loweredPosition = position.toLowerCase() || UNKNOWN_TAG;
-  const loweredSex = gender.toLowerCase() || UNKNOWN_TAG;
+  const loweredSex = gender?.toLowerCase() || UNKNOWN_TAG;
   if (loweredPosition === PATIENT_POSITION.PARENT && loweredSex !== UNKNOWN_TAG) {
     return loweredSex === GENDER.FEMALE ? PARENT_TYPE.MOTHER : PARENT_TYPE.FATHER;
   }

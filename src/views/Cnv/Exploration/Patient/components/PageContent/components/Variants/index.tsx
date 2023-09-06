@@ -29,6 +29,9 @@ type OwnProps = {
   setDownloadKeys: TDownload;
   pageIndex: number;
   setPageIndex: (value: number) => void;
+  setDownloadTriggered: any;
+  setVariantType: any;
+  setSelectedRows: any;
 };
 
 const VariantsTable = ({
@@ -37,7 +40,10 @@ const VariantsTable = ({
   queryConfig,
   pageIndex,
   setPageIndex,
+  setDownloadTriggered,
+  setVariantType,
   setDownloadKeys,
+  setSelectedRows,
 }: OwnProps) => {
   const dispatch = useDispatch();
   const { user } = useUser();
@@ -45,8 +51,6 @@ const VariantsTable = ({
   const [selectedVariant, setSelectedVariant] = useState<VariantEntity | undefined>(undefined);
   const [genesModalOpened, toggleGenesModal] = useState(false);
   const [modalOpened, toggleModal] = useState(false);
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-
   const openGenesModal = (record: VariantEntity) => {
     setSelectedVariant(record);
     toggleGenesModal(true);
@@ -60,6 +64,7 @@ const VariantsTable = ({
   const initialColumnState = user.config.data_exploration?.tables?.patientCnv?.columns;
 
   const variantType = getVariantTypeFromCNVVariantEntity(results.data?.[0]);
+  setVariantType(variantType);
 
   return (
     <>
@@ -108,16 +113,16 @@ const VariantsTable = ({
                 total: results.total || 0,
               },
               enableColumnSort: true,
-              onSelectedRowsChange: setSelectedKeys,
+
+              onSelectedRowsChange: (key, row) => {
+                setSelectedRows(row);
+              },
               onSelectAllResultsChange: () => {
-                setSelectedKeys([ALL_KEYS]);
+                setSelectedRows([]);
+                setDownloadKeys([ALL_KEYS]);
               },
               onTableExportClick: () => {
-                if (selectedKeys.length === 0) {
-                  setDownloadKeys([ALL_KEYS]);
-                } else {
-                  setDownloadKeys(selectedKeys);
-                }
+                setDownloadTriggered(true);
               },
               onColumnSortChange: (columns) => {
                 dispatch(
