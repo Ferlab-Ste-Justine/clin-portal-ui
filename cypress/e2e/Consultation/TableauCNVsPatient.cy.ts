@@ -52,41 +52,41 @@ describe('Page des CNVs d\'un patient - Consultation du tableau', () => {
   });
   
   it('Valider les fonctionnalités du tableau - Tris', () => {
-    cy.sortTableAndIntercept('Chr.', 3);
+    cy.sortTableAndIntercept('Chr.', 1);
     cy.validateTableFirstRow(/^1$/, 2);
-    cy.sortTableAndIntercept('Chr.', 3);
+    cy.sortTableAndIntercept('Chr.', 1);
     cy.validateTableFirstRow(/^Y$/, 2);
-    cy.sortTableAndIntercept('Chr.', 0);
+    cy.sortTableAndIntercept('Chr.', 1);
 
-    cy.sortTableAndIntercept('Début', 3);
+    cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('14 806', 3);
-    cy.sortTableAndIntercept('Début', 3);
+    cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('238 158 998', 3);
-    cy.sortTableAndIntercept('Début', 0);
+    cy.sortTableAndIntercept('Début', 1);
 
-    cy.sortTableAndIntercept('MS', 3);
+    cy.sortTableAndIntercept('MS', 1);
     cy.validateTableFirstRow('0.00831442', 7);
-    cy.sortTableAndIntercept('MS', 3);
+    cy.sortTableAndIntercept('MS', 1);
     cy.validateTableFirstRow('2.7587', 7);
-    cy.sortTableAndIntercept('MS', 0);
+    cy.sortTableAndIntercept('MS', 1);
 
-    cy.sortTableAndIntercept('CN', 3);
+    cy.sortTableAndIntercept('CN', 1);
     cy.validateTableFirstRow(/^0$/, 8);
-    cy.sortTableAndIntercept('CN', 3);
+    cy.sortTableAndIntercept('CN', 1);
     cy.validateTableFirstRow(/^6$/, 8);
-    cy.sortTableAndIntercept('CN', 0);
+    cy.sortTableAndIntercept('CN', 1);
 
-    cy.sortTableAndIntercept('Qual.', 3);
+    cy.sortTableAndIntercept('Qual.', 1);
     cy.validateTableFirstRow(/^3$/, 13);
-    cy.sortTableAndIntercept('Qual.', 3);
+    cy.sortTableAndIntercept('Qual.', 1);
     cy.validateTableFirstRow('150', 13);
-    cy.sortTableAndIntercept('Qual.', 0);
+    cy.sortTableAndIntercept('Qual.', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.sortTableAndIntercept('Chr.', 3);
+    cy.sortTableAndIntercept('Chr.', 1);
     cy.sortTableAndIntercept('Début', 0);
-    cy.sortTableAndIntercept('Début', 3);
+    cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('207 526 712', 3);
   });
 

@@ -1,0 +1,20 @@
+{
+  "headers": ["gene",
+              "size",
+              "average_coverage",
+              "coverage5",
+              "coverage15",
+              "coverage30",
+              "coverage50",
+              "coverage100",
+              "coverage200",
+              "coverage300",
+              "coverage500",
+              "coverage1000"],
+  "content": ["RPL41",
+              "69",
+              "86.14492753623189",
+              "0.44927537",
+              "0.4347884",
+              "0.14492753"]
+}

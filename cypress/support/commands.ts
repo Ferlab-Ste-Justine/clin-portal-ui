@@ -124,6 +124,8 @@ Cypress.Commands.add('resetColumns', (eq: number) => {
   });
   
   cy.get('button[class*="ProTablePopoverColumnResetBtn"]').eq(eq).should('be.disabled', {timeout: 20*1000});
+  cy.get('svg[data-icon="setting"]').eq(eq).click({force: true});
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('showColumn', (column: string, eq: number) => {
@@ -256,7 +258,7 @@ Cypress.Commands.add('validatePaging', (total: string, eq: number) => {
   cy.validateTableResultsCount('Résultats 1 - 100 de '+total);
 
   cy.get('body').find('span[class*="ant-select-selection-item"]').eq(eq).click({force: true});
-  cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').click({force: true});
+  cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20 ').click({force: true});
   cy.waitWhileSpin(20*1000);
   cy.validateTableResultsCount('Résultats 1 - 20 de '+total);
   cy.get('body').find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
@@ -366,7 +368,7 @@ Cypress.Commands.add('visitCQPatientPage', (prescriptionId: string) => {
   cy.visitAndIntercept('/prescription/entity/' + prescriptionId + '#qc',
                        'POST',
                        '**/$graphql*',
-                       4);
+                       3);
 });
 
 Cypress.Commands.add('visitFilesPatientPage', (prescriptionId: string) => {

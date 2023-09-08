@@ -108,60 +108,61 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
   });
   
   it('Valider les fonctionnalités du tableau - Tris [CLIN-2149]', () => {
-    cy.sortTableAndIntercept('Variant', 3);
+    cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('chr10:g.100063786T>C', 2);
-    cy.sortTableAndIntercept('Variant', 3);
+    cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('chrY:g.56884027T>G', 2);
-    cy.sortTableAndWait('Variant');
+    cy.sortTableAndIntercept('Variant', 1);
 
-    cy.sortTableAndIntercept('Type', 3);
+    cy.sortTableAndIntercept('Type', 1);
     cy.validateTableFirstRow('Ind', 3);
-    cy.sortTableAndIntercept('Type', 3);
+    cy.sortTableAndIntercept('Type', 1);
     cy.validateTableFirstRow('Sub', 3);
-    cy.sortTableAndWait('Type');
+    cy.sortTableAndIntercept('Type', 1);
 
-    cy.sortTableAndIntercept('Gène', 3);
+    cy.sortTableAndIntercept('Gène', 1);
     cy.validateTableFirstRow('-', 6);
-    cy.sortTableAndIntercept('Gène', 3);
+    cy.sortTableAndIntercept('Gène', 1);
     cy.validateTableFirstRow('ZZZ3', 6);
-    cy.sortTableAndWait('Gène');
+    cy.sortTableAndIntercept('Gène', 1);
 
-    cy.sortTableAndIntercept('Exo.', 3);
+    cy.sortTableAndIntercept('Exo.', 1);
     cy.validateTableFirstRow('-', 10);
-    cy.sortTableAndIntercept('Exo.', 3);
+    cy.sortTableAndIntercept('Exo.', 1);
     cy.validateTableFirstRow('-', 10);
-    cy.sortTableAndWait('Exo.');
+    cy.sortTableAndIntercept('Exo.', 1);
 
-    cy.sortTableAndIntercept('ACMG Exo.', 3);
+    cy.sortTableAndIntercept('ACMG Exo.', 1);
     cy.validateTableFirstRow('-', 11);
-    cy.sortTableAndIntercept('ACMG Exo.', 3);
+    cy.sortTableAndIntercept('ACMG Exo.', 1);
     cy.validateTableFirstRow('-', 11);
-    cy.sortTableAndWait('ACMG Exo.');
+    cy.sortTableAndIntercept('ACMG Exo.', 1);
 
-    cy.sortTableAndIntercept('gnomAD', 3);
+    cy.sortTableAndIntercept('gnomAD', 1);
     cy.validateTableFirstRow('-', 13);
-    cy.sortTableAndIntercept('gnomAD', 3);
+    cy.sortTableAndIntercept('gnomAD', 1);
     cy.validateTableFirstRow('1.00e+0', 13);
-    cy.sortTableAndWait('gnomAD');
+    cy.sortTableAndIntercept('gnomAD', 1);
 
-    cy.sortTableAndIntercept('CMC', 3);
+    cy.sortTableAndIntercept('CMC', 1);
     cy.validateTableFirstRow('-', 14);
-    cy.sortTableAndIntercept('CMC', 3);
+    cy.sortTableAndIntercept('CMC', 1);
     cy.validateTableFirstRow('419', 14);
-    cy.sortTableAndWait('CMC');
+    cy.sortTableAndIntercept('CMC', 1);
 
-    cy.sortTableAndIntercept('CMC tier', 3);
+    cy.sortTableAndIntercept('CMC tier', 1);
     cy.validateTableFirstRow('-', 24);
-    cy.sortTableAndIntercept('CMC tier', 3);
+    cy.sortTableAndIntercept('CMC tier', 1);
     cy.validateTableFirstRow('Other', 24);
-    cy.sortTableAndWait('CMC tier');
+    cy.sortTableAndIntercept('CMC tier', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.sortTableAndIntercept('Gène', 3);
-    cy.sortTableAndIntercept('Gène', 3);
-    cy.sortTableAndIntercept('Variant', 3);
-    cy.validateTableFirstRow('chr1:g.77580945G>A', 2);
+    cy.sortTableAndIntercept('Gène', 1);
+    cy.sortTableAndIntercept('Gène', 1);
+    cy.sortTableAndWait('Variant');
+    cy.sortTableAndIntercept('Variant', 1);
+    cy.validateTableFirstRow('chr1:g.77633035C>T', 2);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

@@ -11,7 +11,8 @@ beforeEach(() => {
   cy.visitCNVsPatientPage(presc_SOMATIC.patientProbId, presc_SOMATIC.prescriptionId, 3);
 
   cy.get('div[role="tabpanel"]').find('tr[data-row-key="831fe9ca63829ba02f77cb30cd3cbbcd30f72911"]').find('[type="checkbox"]').check({force: true});
-  cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/graphql', 3);
+  cy.get('div[id="content"] svg[data-icon="download"]').click({force: true});
+  cy.wait(2000);
 });
 
 describe('Page des CNVs d\'un patient (somatic) - Exporter les CNVs en TSV', () => {

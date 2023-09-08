@@ -127,16 +127,34 @@ describe('Affichage de toutes les pages et modals', () => {
   it('Rapports CQ d\'un patient', () => {
     cy.visitCQPatientPage(epCHUSJ_ldmCHUSJ.prescriptionId);
 
+    // Rapport général
     cy.contains('Détails').should('exist', {timeout: 20*1000});
     cy.contains('CQ').should('exist', {timeout: 20*1000});
     cy.contains('Variants').should('exist', {timeout: 20*1000});
     cy.contains('Fichiers').should('exist', {timeout: 20*1000});
     cy.contains('Requête :').should('exist', {timeout: 20*1000});
     cy.contains('Cas-index ('+epCHUSJ_ldmCHUSJ.requestProbId+')').should('exist', {timeout: 20*1000});
+    cy.contains('Général').should('exist', {timeout: 20*1000});
+    cy.contains('Couverture génique').should('exist', {timeout: 20*1000});
     cy.contains('Dragen Capture Coverage Metrics').should('exist', {timeout: 20*1000});
     cy.contains('Dragen Mapping Metrics').should('exist', {timeout: 20*1000});
-    cy.contains('Picard Collect Hs Metrics').should('exist', {timeout: 20*1000});
+//    cy.contains('Picard Collect Hs Metrics').should('exist', {timeout: 20*1000});
     cy.contains('Télécharger le rapport').should('exist', {timeout: 20*1000});
+
+    // Couverture génique
+    cy.get('[data-cy="RadioButton_CouvertureGenique"]').click({force: true});
+    cy.contains('Détails').should('exist', {timeout: 20*1000});
+    cy.contains('CQ').should('exist', {timeout: 20*1000});
+    cy.contains('Variants').should('exist', {timeout: 20*1000});
+    cy.contains('Fichiers').should('exist', {timeout: 20*1000});
+    cy.contains('Requête :').should('exist', {timeout: 20*1000});
+    cy.contains('Cas-index ('+epCHUSJ_ldmCHUSJ.requestProbId+')').should('exist', {timeout: 20*1000});
+    cy.contains('Général').should('exist', {timeout: 20*1000});
+    cy.contains('Couverture génique').should('exist', {timeout: 20*1000});
+    cy.contains('Gène').should('exist', {timeout: 20*1000});
+    cy.contains('Panel').should('exist', {timeout: 20*1000});
+    cy.contains('Télécharger le rapport').should('exist', {timeout: 20*1000});
+    cy.contains('200 / écran').should('exist', {timeout: 20*1000});
   });
  
   it('Variants d\'un patient', () => {

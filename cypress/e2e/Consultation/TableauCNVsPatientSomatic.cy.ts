@@ -49,72 +49,72 @@ describe('Page des CNVs d\'un patient (somatic) - Consultation du tableau', () =
   });
   
   it('Valider les fonctionnalités du tableau - Tris [CLIN-2135]', () => {
-    cy.sortTableAndIntercept('Variant', 3);
+    cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('GAIN:chr10:104353843-104454535', 1);
-    cy.sortTableAndIntercept('Variant', 3);
+    cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('LOSS:chrX:624329-13938568', 1);
-    cy.sortTableAndWait('Variant');
+    cy.sortTableAndIntercept('Variant', 1);
 
-    cy.sortTableAndIntercept('Chr.', 3);
+    cy.sortTableAndIntercept('Chr.', 1);
     cy.validateTableFirstRow(/^1$/, 2);
-    cy.sortTableAndIntercept('Chr.', 3);
+    cy.sortTableAndIntercept('Chr.', 1);
     cy.validateTableFirstRow(/^X$/, 2);
-    cy.sortTableAndWait('Chr.');
+    cy.sortTableAndIntercept('Chr.', 1);
 
-    cy.sortTableAndIntercept('Début', 3);
+    cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('66 872', 3);
-    cy.sortTableAndIntercept('Début', 3);
+    cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('228 007 104', 3);
-    cy.sortTableAndWait('Début');
+    cy.sortTableAndIntercept('Début', 1);
 
-    cy.sortTableAndIntercept('Fin', 3);
+    cy.sortTableAndIntercept('Fin', 1);
     cy.validateTableFirstRow('465 288', 4);
-    cy.sortTableAndIntercept('Fin', 3);
+    cy.sortTableAndIntercept('Fin', 1);
     cy.validateTableFirstRow('228 511 965', 4);
-    cy.sortTableAndWait('Fin');
+    cy.sortTableAndIntercept('Fin', 1);
 
-    cy.sortTableAndIntercept('Événement', 3);
+    cy.sortTableAndIntercept('Événement', 1);
     cy.validateTableFirstRow('GAIN', 5);
-    cy.sortTableAndIntercept('Événement', 3);
+    cy.sortTableAndIntercept('Événement', 1);
     cy.validateTableFirstRow('LOSS', 5);
-    cy.sortTableAndWait('Événement');
+    cy.sortTableAndIntercept('Événement', 1);
 
-    cy.sortTableAndIntercept('Longueur', 3);
+    cy.sortTableAndIntercept('Longueur', 1);
     cy.validateTableFirstRow('3.1 kb', 6);
-    cy.sortTableAndIntercept('Longueur', 3);
+    cy.sortTableAndIntercept('Longueur', 1);
     cy.validateTableFirstRow('92.4 Mb', 6);
-    cy.sortTableAndWait('Longueur');
+    cy.sortTableAndIntercept('Longueur', 1);
 
-    cy.sortTableAndIntercept('MS', 3);
+    cy.sortTableAndIntercept('MS', 1);
     cy.validateTableFirstRow('0.0347309', 7);
-    cy.sortTableAndIntercept('MS', 3);
+    cy.sortTableAndIntercept('MS', 1);
     cy.validateTableFirstRow('1.83177', 7);
-    cy.sortTableAndWait('MS');
+    cy.sortTableAndIntercept('MS', 1);
 
-    cy.sortTableAndIntercept('# Gènes', 3);
+    cy.sortTableAndIntercept('# Gènes', 1);
     cy.validateTableFirstRow(/^0$/, 8);
-    cy.sortTableAndIntercept('# Gènes', 3);
+    cy.sortTableAndIntercept('# Gènes', 1);
     cy.validateTableFirstRow(/^670$/, 8);
-    cy.sortTableAndWait('# Gènes');
+    cy.sortTableAndIntercept('# Gènes', 1);
 
-    cy.sortTableAndIntercept('Qual.', 3);
+    cy.sortTableAndIntercept('Qual.', 1);
     cy.validateTableFirstRow(/^90$/, 12);
-    cy.sortTableAndIntercept('Qual.', 3);
+    cy.sortTableAndIntercept('Qual.', 1);
     cy.validateTableFirstRow(/^200$/, 12);
-    cy.sortTableAndWait('Qual.');
+    cy.sortTableAndIntercept('Qual.', 1);
 
-    cy.sortTableAndIntercept('BC', 3);
+    cy.sortTableAndIntercept('BC', 1);
     cy.validateTableFirstRow(/^6$/, 13);
-    cy.sortTableAndIntercept('BC', 3);
+    cy.sortTableAndIntercept('BC', 1);
     cy.validateTableFirstRow(/^7553$/, 13);
-    cy.sortTableAndWait('BC');
+    cy.sortTableAndIntercept('BC', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.sortTableAndIntercept('Chr.', 3);
-    cy.sortTableAndIntercept('Chr.', 3);
+    cy.sortTableAndIntercept('Chr.', 1);
+    cy.sortTableAndIntercept('Chr.', 1);
     cy.sortTableAndWait('Début');
-    cy.sortTableAndIntercept('Début', 3);
+    cy.sortTableAndIntercept('Début', 1);
     cy.validateTableFirstRow('154 144 278', 3);
   });
 
