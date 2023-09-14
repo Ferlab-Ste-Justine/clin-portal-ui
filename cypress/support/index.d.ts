@@ -24,7 +24,7 @@ declare namespace Cypress {
     validateFileName(namePattern: string): cy & CyEventEmitter;
     validateOperatorSelectedQuery(expectedOperator: string): cy & CyEventEmitter;
     validatePillSelectedQuery(facetTitle: string|RegExp, values: (string|RegExp)[], eq: number = 0): cy & CyEventEmitter;
-    validatePaging(total: string, eqSelect: number, eqTab: number = 0): cy & CyEventEmitter;
+    validatePaging(total: string|RegExp, eqSelect: number, eqTab: number = 0): cy & CyEventEmitter;
     validateTableDataRowKeyAttr(dataRowKey: string, eq: number, expectedAttr: string, expectedValue: string): cy & CyEventEmitter;
     validateTableDataRowKeyClass(dataRowKey: string, eq: number, expectedClass: string): cy & CyEventEmitter;
     validateTableDataRowKeyContent(dataRowKey: string, eq: number, expectedContent: string|RegExp): cy & CyEventEmitter;

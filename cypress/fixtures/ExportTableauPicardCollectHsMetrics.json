@@ -56,7 +56,7 @@
                "TARGET_TERRITORY",
                "TOTAL_READS",
                "ZERO_CVG_TARGETS_PCT"],
-   "content": [15.826005,
+   "contentGermline": [15.826005,
                0.832632,
                "KAPA_HyperExome_hg38_capture_targets",
                42988611,

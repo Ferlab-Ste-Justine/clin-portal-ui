@@ -26,8 +26,8 @@ describe('Page d\'un variant (onglet Patients) - Vérifier les informations affi
 
       if(invokeText.includes("Féminin")) {
         orderFeminin     = 1;
-        orderMasculin    = 0;
-        orderIndetermine = 2;
+        orderMasculin    = 2;
+        orderIndetermine = 0;
       };
         
       cy.get('[data-cy="PieChart_Gender"]').contains('Sexe').should('exist');

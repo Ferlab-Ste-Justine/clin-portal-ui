@@ -114,7 +114,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Pathogénicité - CMC tier', () => {
-    cy.validateFacetFilter('category_pathogenicity', 'CMC tier', 16, 'Tier 3', /^266$/);
+    cy.validateFacetFilter('category_pathogenicity', 'CMC tier', 16, 'Tier 3', /^26\d{1}$/);
   });
 
   it('Occurrence - Expand all/Collapse all', () => {

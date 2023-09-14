@@ -280,6 +280,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Rhabdomyolysis (RHAB)',
                          'Solid Tumor (somatic) (SSOLID)',
                          'Leukemia (somatic) (SHEMA)',
+                         'Severe Combined Immune Deficiency (SCID)',
                          'No Data'];
 
     cy.validateDictionnary('category_genomic', /^RQDM$/, 4, dictionnary);

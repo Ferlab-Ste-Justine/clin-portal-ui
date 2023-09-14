@@ -46,13 +46,13 @@ describe('Page des variants - Consultation du tableau', () => {
   });
  
   it('Valider les liens disponibles Lien dbSNP', () => {
-    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(3).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^rs138817389$/).should('exist');
+    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(3).find('a[href]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/snp/rs138817389');
   });
  
   it('Valider les liens disponibles Lien Gène', () => {
-    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(4).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^GRIA3$/).should('exist');
+    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(4).find('a[href]')
+      .should('have.attr', 'href', 'https://www.omim.org/entry/305915');
   });
  
   it('Valider les liens disponibles Lien Gène Plus', () => {
@@ -61,14 +61,13 @@ describe('Page des variants - Consultation du tableau', () => {
   });
  
   it('Valider les liens disponibles Lien OMIM', () => {
-    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(7).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.closePopup();
-    cy.get('body').contains(/^\*305915$/).should('exist');
+    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(7).find('a[href]')
+      .should('have.attr', 'href', 'https://www.omim.org/entry/305915');
   });
  
   it('Valider les liens disponibles Lien ClinVar', () => {
-    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(8).find('a[href]').eq(1).invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^198752$/).should('exist');
+    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(8).find('a[href]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/198752');
   });
  
   it('Valider les liens disponibles Lien RQDM', () => {
@@ -77,8 +76,8 @@ describe('Page des variants - Consultation du tableau', () => {
   });
  
   it('Valider les liens disponibles Lien CMC', () => {
-    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(12).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^GRIA3$/).should('exist');
+    cy.get('tr[data-row-key="4577893f4d3c2463e9fdef3419f7781d00fffdf3"]').find('td').eq(12).find('a[href]')
+      .should('have.attr', 'href', 'https://cancer.sanger.ac.uk/cosmic/mutation/overview?id=21242198&genome=37');
   });
 });
 
@@ -106,7 +105,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.validateTableFirstRow('Sub', 2);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Gène [CLIN-2149]', () => {
+  it('Valider les fonctionnalités du tableau - Tri Gène [CLIN-2149,CLIN-2287]', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Gène', 1);

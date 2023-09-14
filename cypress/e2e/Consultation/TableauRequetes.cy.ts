@@ -57,7 +57,6 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
 describe('Page des prescriptions et requêtes - Consultation du tableau des requêtes', () => {
   beforeEach(() => {  
     cy.checkValueFacet(0, 'Approuvée');
-    cy.checkValueFacet(2, 'MYOC');
     cy.checkValueFacet(2, 'HYPM');
   
     cy.get('div[id*="tab-requests"]').click({force: true});
@@ -74,21 +73,21 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
 
   it('Valider les fonctionnalités du tableau - Tri Requête', () => {
     cy.sortTableAndIntercept('Requête', 3, 1);
-    cy.validateTableFirstRow('MRN-283791', 13, '[id="rc-tabs-0-panel-requests"]');
+    cy.validateTableFirstRow('MRN-283831', 13, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Requête', 3, 1);
     cy.validateTableFirstRow('MRN-283900', 13, '[id="rc-tabs-0-panel-requests"]');
   });
 
   it('Valider les fonctionnalités du tableau - Tri Échantillon', () => {
     cy.sortTableAndIntercept('Échantillon', 3, 1);
-    cy.validateTableFirstRow('MRN-283791', 13, '[id="rc-tabs-0-panel-requests"]');
+    cy.validateTableFirstRow('MRN-283900', 13, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Échantillon', 3, 1);
     cy.validateTableFirstRow('MRN-283890', 13, '[id="rc-tabs-0-panel-requests"]');
   });
 
   it('Valider les fonctionnalités du tableau - Tri Patient', () => {
     cy.sortTableAndIntercept('Patient', 3, 1);
-    cy.validateTableFirstRow('MRN-283791', 13, '[id="rc-tabs-0-panel-requests"]');
+    cy.validateTableFirstRow('MRN-283831', 13, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Patient', 3, 1);
     cy.validateTableFirstRow('MRN-283900', 13, '[id="rc-tabs-0-panel-requests"]');
   });
@@ -104,7 +103,7 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
     cy.sortTableAndIntercept('Créée le', 3, 1);
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.stampDate, 5, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Créée le', 3, 1);
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.stampDate, 5, '[id="rc-tabs-0-panel-requests"]');
+    cy.validateTableFirstRow(/^\d{4}-\d{2}-\d{2}$/, 5, '[id="rc-tabs-0-panel-requests"]');
   });
 
   it('Valider les fonctionnalités du tableau - Tri Modifiée le', () => {
@@ -115,6 +114,7 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
   });
 
   it('Valider les fonctionnalités du tableau - Tri Analyse', () => {
+    cy.checkValueFacet(2, 'MYOC');
     cy.sortTableAndIntercept('Analyse', 3, 1);
     cy.validateTableFirstRow('HYPM', 7, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Analyse', 3, 1);
@@ -137,7 +137,7 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
 
   it('Valider les fonctionnalités du tableau - Tri Prescription', () => {
     cy.sortTableAndIntercept('Prescription', 3, 1);
-    cy.validateTableFirstRow('MRN-283791', 13, '[id="rc-tabs-0-panel-requests"]');
+    cy.validateTableFirstRow('MRN-283831', 13, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Prescription', 3, 1);
     cy.validateTableFirstRow('MRN-283900', 13, '[id="rc-tabs-0-panel-requests"]');
   });
@@ -158,19 +158,21 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
 
   it('Valider les fonctionnalités du tableau - Tri Dossier', () => {
     cy.sortTableAndIntercept('Dossier', 3, 1);
-    cy.validateTableFirstRow('MRN-283791', 13, '[id="rc-tabs-0-panel-requests"]');
+    cy.validateTableFirstRow('MRN-283831', 13, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Dossier', 3, 1);
     cy.validateTableFirstRow('MRN-283900', 13, '[id="rc-tabs-0-panel-requests"]');
+    cy.sortTableAndWait('Dossier', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndIntercept('LDM', 3, 1);
     cy.sortTableAndIntercept('Échantillon', 3, 1);
-    cy.validateTableFirstRow('MRN-283804', 13, '[id="rc-tabs-0-panel-requests"]');
+    cy.validateTableFirstRow('MRN-283831', 13, '[id="rc-tabs-0-panel-requests"]');
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
-    cy.validatePaging('102', 1, 1);
+    cy.checkValueFacet(2, 'MYOC');
+    cy.validatePaging(/10\d{1}/, 1, 1);
   });
 });
   

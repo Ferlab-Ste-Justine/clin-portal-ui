@@ -56,7 +56,8 @@
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
       "npm run lint:fix"
-    ]
+    ],
+    "!src/cypress/**/*.{ts,tsx}": "echo Ignoring Cypress files"
   },
   "browserslist": {
     "production": [

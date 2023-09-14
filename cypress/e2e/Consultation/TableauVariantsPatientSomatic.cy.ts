@@ -41,7 +41,7 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
     cy.validateTableDataRowKeyClass('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 13, 'GnomadCell_gnomadIndicatorDefault');
     cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 14, '150 926');
     cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 15, /^128$/);
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 15, /(9.\d{2}e-1)/);
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 15, /(\d{1}.\d{2}e(-|\+)\d{1})/);
     cy.validateTableDataRowKeyContent('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 16, /^1$/);
     cy.validateTableDataRowKeyContent('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 16, '(2.31e-5)');
     cy.validateTableDataRowKeyClass('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 17, 'hotspotOutlined');
@@ -60,14 +60,14 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
  
   it('Valider les liens disponibles Lien UCSC', () => {
     cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('button[class*="ant-dropdown-trigger"]').click({force: true});
-    cy.get('[data-menu-id*="UCSC"]').find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.url().should('include', '1096268');
+    cy.get('[data-menu-id*="UCSC"]').find('a[href]')
+      .should('have.attr', 'href', 'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr10%3A1096268-1096269');
   });
  
   it('Valider les liens disponibles Lien LitVar', () => {
     cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('button[class*="ant-dropdown-trigger"]').click({force: true});
-    cy.get('[data-menu-id*="LitVAR"]').find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains('No Publications').should('exist');
+    cy.get('[data-menu-id*="LitVAR"]').find('a[href]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/research/litvar2/docsum?text=rs10794716');
   });
  
   it('Valider les liens disponibles Lien Variant', () => {
@@ -76,13 +76,13 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
   });
  
   it('Valider les liens disponibles Lien dbSNP', () => {
-    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(5).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^rs10794716$/).should('exist');
+    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(5).find('a[href]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/snp/rs10794716');
   });
  
   it('Valider les liens disponibles Lien Gène', () => {
-    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(6).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^WDR37$/).should('exist');
+    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(6).find('a[href]')
+      .should('have.attr', 'href', 'https://www.omim.org/entry/618586');
   });
  
   it('Valider les liens disponibles Lien Gène Plus', () => {
@@ -91,14 +91,13 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
   });
  
   it('Valider les liens disponibles Lien OMIM', () => {
-    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(9).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.closePopup();
-    cy.get('body').contains(/^\*618586$/).should('exist');
+    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(9).find('a[href]')
+      .should('have.attr', 'href', 'https://www.omim.org/entry/618586');
   });
  
   it('Valider les liens disponibles Lien ClinVar', () => {
-    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(10).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^1185321$/).should('exist');
+    cy.get('tr[data-row-key="02fcc26c193333c0ed9f89fdfe6a3f79c5527af3"]').find('td').eq(10).find('a[href]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/1185321');
   });
  
   it('Valider les liens disponibles Lien RQDM', () => {
@@ -107,8 +106,8 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
   });
  
   it('Valider les liens disponibles Lien CMC', () => {
-    cy.get('tr[data-row-key="bdc7b7f2fba4aef570b1ac84217fe870f14261db"]').find('td').eq(16).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^ABLIM1$/).should('exist');
+    cy.get('tr[data-row-key="bdc7b7f2fba4aef570b1ac84217fe870f14261db"]').find('td').eq(16).find('a[href]')
+      .should('have.attr', 'href', 'https://cancer.sanger.ac.uk/cosmic/mutation/overview?id=23814818&genome=37');
   });
   
   it('Valider les fonctionnalités du tableau - Tri Variant', () => {

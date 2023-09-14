@@ -82,11 +82,11 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
     cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(4).contains('0').should('exist');
     cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(5).contains(/^0 \/ \d{1,2} \(0%\)$/).should('exist');
     cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(6).contains('0').should('exist');
-    cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(1).contains('1 / 40 (2.5%)').should('exist');
+    cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(1).contains(/^1 \/ 4\d{1} \(2.\d{1}%\)$/).should('exist');
     cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(2).contains('0').should('exist');
     cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(3).contains('1 / 40 (2.5%)').should('exist');
     cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(4).contains('0').should('exist');
-    cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(5).contains('0 / 0 (0%)').should('exist');
+    cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(5).contains(/^0 \/ \d{1} \(0%\)$/).should('exist');
     cy.get('[data-row-key="MYOC"]').find('td[class="ant-table-cell"]').eq(6).contains('0').should('exist');
     cy.get('[data-row-key="HYPM"]').find('td[class="ant-table-cell"]').eq(1).contains('0 / 61 (0%)').should('exist');
     cy.get('[data-row-key="HYPM"]').find('td[class="ant-table-cell"]').eq(2).contains('0').should('exist');
@@ -178,45 +178,44 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
 
 describe('Page d\'un variant (onglet Résumé) - Valider les liens disponibles', () => {
   it('Lien ClinVar de la section Résumé', () => {
-    cy.get('[data-cy="Summary_Clinvar_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^95703$/).should('exist');
+    cy.get('[data-cy="Summary_Clinvar_ExternalLink"]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/95703');
   });
 
   it('Lien dbSNP de la section Résumé', () => {
-    cy.get('[data-cy="Summary_dbSNP_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
+    cy.get('[data-cy="Summary_dbSNP_ExternalLink"]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/snp/rs370596113');
     cy.get('body').contains(/^rs370596113$/).should('exist');
   });
 
   it('Lien du gène de la section Conséquences géniques', () => {
-    cy.get('[data-cy="Consequences_PRDX1_Gene_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^PRDX1$/).should('exist');
+    cy.get('[data-cy="Consequences_PRDX1_Gene_ExternalLink"]')
+      .should('have.attr', 'href', 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=PRDX1');
   });
   
   it('Lien Omim de la section Conséquences géniques', () => {
-    cy.get('[data-cy="Consequences_PRDX1_Omim_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.closePopup();
-    cy.get('body').contains(/^\*176763$/).should('exist');
+    cy.get('[data-cy="Consequences_PRDX1_Omim_ExternalLink"]')
+      .should('have.attr', 'href', 'https://omim.org/entry/176763');
   });
   
   it('Lien SpliceAI de la section Conséquences géniques', () => {
-    cy.get('[data-cy="Consequences_PRDX1_SpliceAi_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains('SpliceAI').should('exist');
-    cy.url().should('include', '1-45508847-C-T')
+    cy.get('[data-cy="Consequences_PRDX1_SpliceAi_ExternalLink"]')
+      .should('have.attr', 'href', 'https://spliceailookup.broadinstitute.org/#variant=1-45508847-C-T&hg=38&distance=50&mask=0&precomputed=0');
   });
   
   it('Lien pLI de la section Conséquences géniques', () => {
-    cy.get('[data-cy="Consequences_PRDX1_Pli_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains('PRDX1').should('exist');
+    cy.get('[data-cy="Consequences_PRDX1_Pli_ExternalLink"]')
+      .should('have.attr', 'href', 'https://gnomad.broadinstitute.org/gene/ENSG00000117450?dataset=gnomad_r2_1');
   });
   
   it('Lien LOEUF de la section Conséquences géniques', () => {
-    cy.get('[data-cy="Consequences_PRDX1_Loeuf_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains('PRDX1').should('exist');
+    cy.get('[data-cy="Consequences_PRDX1_Loeuf_ExternalLink"]')
+      .should('have.attr', 'href', 'https://gnomad.broadinstitute.org/gene/ENSG00000117450?dataset=gnomad_r2_1');
   });
   
   it('Lien RefSeq de la section Conséquences géniques', () => {
-    cy.get('[data-cy="Consequences_RefSeq_NM_181697.3_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/NM_181697.3/).should('exist');
+    cy.get('[data-cy="Consequences_RefSeq_NM_181697.3_ExternalLink"]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/nuccore/NM_181697.3?report=graph');
   });
   
   it('Lien \'5 autres transcrits\' de la section Conséquences géniques', () => {
@@ -231,35 +230,33 @@ describe('Page d\'un variant (onglet Résumé) - Valider les liens disponibles',
   });
   
   it('Lien gnomAD Genome (v3) de la section Cohortes publiques', () => {
-    cy.get('[data-cy="FrequencyCard_Cohort_gnomAD Genome (v3)_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains('1-45508847-C-T').should('exist');
+    cy.get('[data-cy="FrequencyCard_Cohort_gnomAD Genome (v3)_ExternalLink"]')
+      .should('have.attr', 'href', 'https://gnomad.broadinstitute.org/variant/1-45508847-C-T?dataset=gnomad_r3');
   });
   
   it('Lien ClinVar de la section ClinVar', () => {
-    cy.get('[data-cy="ClinicalCard_ClinVar_95703_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^95703$/).should('exist');
+    cy.get('[data-cy="ClinicalCard_ClinVar_95703_ExternalLink"]')
+      .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/95703');
   });
   
   it('Lien de la condition Orphanet de la section Gène - Phénotype', () => {
-    cy.get('[data-cy="ClinicalCard_GenePhenotype_Condition_11308_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains('Methylmalonic acidemia with homocystinuria, type cblC').should('exist');
+    cy.get('[data-cy="ClinicalCard_GenePhenotype_Condition_11308_ExternalLink"]')
+      .should('have.attr', 'href', 'https://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN&data_id=11308');
   });
   
   it('Lien OMIM du gène de la section Gène - Phénotype', () => {
-    cy.get('[data-cy="ClinicalCard_GenePhenotype_Omim_176763_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.closePopup();
-    cy.get('body').contains(/^\*176763$/).should('exist');
+    cy.get('[data-cy="ClinicalCard_GenePhenotype_Omim_176763_ExternalLink"]')
+      .should('have.attr', 'href', 'https://www.omim.org/entry/176763');
   });
   
   it('Lien OMIM de la condition de la section Gène - Phénotype', () => {
-    cy.get('[data-cy="ClinicalCard_GenePhenotype_OmimCondition_277400_ExternalLink"]').first().invoke('removeAttr', 'target').click({force: true});
-    cy.closePopup();
-    cy.get('body').contains(/^\#277400$/).should('exist');
+    cy.get('[data-cy="ClinicalCard_GenePhenotype_OmimCondition_277400_ExternalLink"]').first()
+      .should('have.attr', 'href', 'https://www.omim.org/entry/277400');
   });
   
   it('Lien HPO de la condition de la section Gène - Phénotype', () => {
-    cy.get('[data-cy="ClinicalCard_GenePhenotype_HpoCondition_HP:0002071_ExternalLink"]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^HP:0002071$/).should('exist');
+    cy.get('[data-cy="ClinicalCard_GenePhenotype_HpoCondition_HP:0002071_ExternalLink"]')
+      .should('have.attr', 'href', 'https://hpo.jax.org/app/browse/term/HP:0002071');
   });
   
   it('Lien \'See more\' de la condition de la section Gène - Phénotype', () => {

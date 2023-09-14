@@ -272,45 +272,49 @@ Cypress.Commands.add('validateOperatorSelectedQuery', (expectedOperator: string)
   cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').contains(expectedOperator).should('exist');
 });
 
-Cypress.Commands.add('validatePaging', (total: string, eqSelect: number, eqTab: number = 0) => {
+Cypress.Commands.add('validatePaging', (total: string|RegExp, eqSelect: number, eqTab: number = 0) => {
+  if (typeof total === 'string') {
+    total = new RegExp(total);
+  }
+
   cy.get('span[class*="ant-select-selection-item"]').eq(eqSelect).click({force: true});
   cy.get('div[class*="ant-select-item-option-content"]').contains('100').click({force: true});
   cy.waitWhileSpin(20*1000);
-  cy.validateTableResultsCount('Résultats 1 - 100 de '+total);
+  cy.validateTableResultsCount(new RegExp('Résultats 1 - 100 de '+total.source));
 
   cy.get('span[class*="ant-select-selection-item"]').eq(eqSelect).click({force: true});
   cy.get('div[class*="ant-select-item-option-content"]').contains('20 ').click({force: true});
   cy.waitWhileSpin(20*1000);
   cy.wait(2000);
-  cy.validateTableResultsCount('Résultats 1 - 20 de '+total);
+  cy.validateTableResultsCount(new RegExp('Résultats 1 - 20 de '+total.source));
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
 
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Suivant').click({force: !!eqSelect});
   cy.waitWhileSpin(20*1000);
   cy.wait(2000);
-  cy.validateTableResultsCount('Résultats 21 - 40 de '+total);
+  cy.validateTableResultsCount(new RegExp('Résultats 21 - 40 de '+total.source));
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Suivant').click({force: true});
   cy.waitWhileSpin(20*1000);
   cy.wait(2000);
-  cy.validateTableResultsCount('Résultats 41 - 60 de '+total);
+  cy.validateTableResultsCount(new RegExp('Résultats 41 - 60 de '+total.source));
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').click({force: true});
   cy.waitWhileSpin(20*1000);
   cy.wait(2000);
-  cy.validateTableResultsCount('Résultats 21 - 40 de '+total);
+  cy.validateTableResultsCount(new RegExp('Résultats 21 - 40 de '+total.source));
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('not.be.disabled');
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('not.be.disabled');
 
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').click({force: true});
   cy.waitWhileSpin(20*1000);
   cy.wait(2000);
-  cy.validateTableResultsCount('Résultats 1 - 20 de '+total);
+  cy.validateTableResultsCount(new RegExp('Résultats 1 - 20 de '+total.source));
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Précédent').parent('button').should('be.disabled');
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
 });

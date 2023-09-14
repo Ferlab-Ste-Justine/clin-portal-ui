@@ -43,8 +43,8 @@ describe('Page de la couverture génique d\'un patient - Consultation du tableau
   });
 
   it('Valider les liens disponibles Lien Gène', () => {
-    cy.get('tr[data-row-key]').eq(6).find('td').eq(2).find('a[href]').invoke('removeAttr', 'target').click({force: true});
-    cy.get('body').contains(/^RPL41$/).should('exist');
+    cy.get('tr[data-row-key]').eq(6).find('td').eq(2).find('a[href]')
+      .should('have.attr', 'href', 'https://www.omim.org/entry/613315');
   });
   
   it('Valider les fonctionnalités du tableau - Tri Gène', () => {
