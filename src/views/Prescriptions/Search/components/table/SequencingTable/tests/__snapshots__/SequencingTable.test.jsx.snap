@@ -10,24 +10,26 @@ exports[`SequencingTable should be as the snapshot 1`] = `
     style={Object {}}
   >
     <div>
-      <div
-        className="ant-space ant-space-horizontal ant-space-align-center"
-        style={Object {}}
-      >
+      <div>
         <div
-          className="ant-space-item"
+          className="ant-space ant-space-horizontal ant-space-align-center"
           style={Object {}}
         >
-          <span
-            className="ant-typography"
-            style={
-              Object {
-                "WebkitLineClamp": undefined,
-              }
-            }
+          <div
+            className="ant-space-item"
+            style={Object {}}
           >
-            Aucun résultat
-          </span>
+            <span
+              className="ant-typography"
+              style={
+                Object {
+                  "WebkitLineClamp": undefined,
+                }
+              }
+            >
+              Aucun résultat
+            </span>
+          </div>
         </div>
       </div>
       <div

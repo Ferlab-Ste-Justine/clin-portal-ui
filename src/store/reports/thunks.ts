@@ -6,14 +6,8 @@ import capitalize from 'lodash/capitalize';
 import { v4 as uuid } from 'uuid';
 
 import { globalActions } from 'store/global';
-import { MIME_TYPES } from 'utils/constants';
-import { downloadFile } from 'utils/helper';
-
-const extractFilename = (contentDisposition: string = '') => {
-  const split = contentDisposition.split(';');
-  const filenameEntry = split.find((e) => e?.startsWith(' filename=')) || '';
-  return filenameEntry.split('=')?.[1] || '';
-};
+import { HTTP_HEADERS, MIME_TYPES } from 'utils/constants';
+import { downloadFile, extractFilename } from 'utils/helper';
 
 const showErrorNotification = (
   reportNameI18n: string,
@@ -43,7 +37,10 @@ const proceedToDownload = async (
       return showErrorNotification(reportNameI18n, dispatch);
     }
     const headers = response.headers;
-    const filename = extractFilename(headers['content-disposition']) || filenameIfNotFoundInHeaders;
+    const filename = extractFilename(
+      headers[HTTP_HEADERS.CONTENT_DISPOSITION],
+      filenameIfNotFoundInHeaders,
+    );
     const blob = new Blob([data as BlobPart], { type: MIME_TYPES.APPLICATION_XLSX });
 
     downloadFile(blob, filename);

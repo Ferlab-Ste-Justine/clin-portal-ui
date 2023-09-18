@@ -38,6 +38,7 @@
   "compound.heterozygous.abbrev": "{num, plural, =0 {Compound Het.} other {Compound Het.}}",
   "condition": "Condition",
   "deletion": "Deletion",
+  "download.documents": "Download documents",
   "download.report": "Download Report",
   "view.ucsc": "View UCSC",
   "view.litvar": "View LitVAR",

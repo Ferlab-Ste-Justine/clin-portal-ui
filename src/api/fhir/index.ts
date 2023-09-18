@@ -95,6 +95,13 @@ const prescriptionAssignment = (analysis_id: string, assignements: string[]) =>
     },
   });
 
+const downloadDocuments = (analysis_id: string) =>
+  sendRequestWithRpt({
+    method: 'GET',
+    url: `${FORM_API_URL}/render/${analysis_id}?format=pdf`,
+    responseType: 'blob',
+  });
+
 const fetchTaskMetadata = (taskId: string) =>
   sendRequestWithRpt<Bundle<any>>({
     method: 'GET',
@@ -134,6 +141,7 @@ export const FhirApi = {
   fetchTaskMetadata,
   fetchServiceRequestCodes,
   fetchServiceRequestEntity,
+  downloadDocuments,
   prescriptionAssignment,
   getFileURL,
 };
