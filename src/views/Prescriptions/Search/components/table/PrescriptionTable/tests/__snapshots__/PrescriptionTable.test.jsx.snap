@@ -10,26 +10,24 @@ exports[`PrescriptionTable should be as the snapshot 1`] = `
     style={Object {}}
   >
     <div>
-      <div>
+      <div
+        className="ant-space ant-space-horizontal ant-space-align-center"
+        style={Object {}}
+      >
         <div
-          className="ant-space ant-space-horizontal ant-space-align-center"
+          className="ant-space-item"
           style={Object {}}
         >
-          <div
-            className="ant-space-item"
-            style={Object {}}
-          >
-            <span
-              className="ant-typography"
-              style={
-                Object {
-                  "WebkitLineClamp": undefined,
-                }
+          <span
+            className="ant-typography"
+            style={
+              Object {
+                "WebkitLineClamp": undefined,
               }
-            >
-              Aucun résultat
-            </span>
-          </div>
+            }
+          >
+            Aucun résultat
+          </span>
         </div>
       </div>
       <div
