@@ -8,7 +8,7 @@ import { extractServiceRequestId } from 'api/fhir/helper';
 
 import ContentHeader from 'components/Layout/ContentWithHeader/Header';
 import Footer from 'components/Layout/Footer';
-import { globalActions } from 'store/global';
+import { globalActions, useLang } from 'store/global';
 import { HTTP_HEADERS, MIME_TYPES } from 'utils/constants';
 import { downloadFile, extractFilename } from 'utils/helper';
 
@@ -24,10 +24,11 @@ const PrescriptionDetails = () => {
   const { prescription, loading } = usePrescriptionEntityContext();
   const [downloadingDocuments, setDownloadingDocuments] = useState(false);
   const dispatch = useDispatch();
+  const lang = useLang();
 
   const downloadDocuments = () => {
     const id = extractServiceRequestId(prescription?.id!);
-    FhirApi.downloadDocuments(id)
+    FhirApi.downloadDocuments(id, lang)
       .then(({ data, error, response }) => {
         if (error) {
           dispatch(

@@ -8,6 +8,7 @@ import {
 import { ANALYSIS_ENTITY_QUERY } from 'graphql/prescriptions/queries';
 import { FHIR_GRAPHQL_URL } from 'providers/ApolloProvider';
 
+import { LANG } from 'utils/constants';
 import EnvironmentVariables from 'utils/EnvVariables';
 import { downloadFile } from 'utils/helper';
 
@@ -95,10 +96,10 @@ const prescriptionAssignment = (analysis_id: string, assignements: string[]) =>
     },
   });
 
-const downloadDocuments = (analysis_id: string) =>
+const downloadDocuments = (analysis_id: string, lang = LANG.FR) =>
   sendRequestWithRpt({
     method: 'GET',
-    url: `${FORM_API_URL}/render/${analysis_id}?format=pdf`,
+    url: `${FORM_API_URL}/render/${analysis_id}?format=pdf&lang=${lang}`,
     responseType: 'blob',
   });
 
