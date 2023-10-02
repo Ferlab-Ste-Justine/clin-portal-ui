@@ -123,6 +123,9 @@ const getDonorZygosity = (patientId: string) => ({
   tooltip: intl.get('donor.zygosity.tooltip'),
   dataIndex: 'donors',
   width: 100,
+  sorter: {
+    multiple: 1,
+  },
   render: (record: ArrangerResultsTree<DonorsEntity>) => {
     const zyg = renderDonorByKey('donors.zygosity', findDonorById(record, patientId)) as string;
 
@@ -199,6 +202,9 @@ export const getVariantColumns = (
     columns.push({
       className: style.userAffectedBtnCell,
       key: 'actions',
+      sorter: {
+        multiple: 1,
+      },
       title: intl.get('screen.patientsnv.results.table.actions'),
       fixed: 'left',
       render: (record: VariantEntity) => (
@@ -285,6 +291,9 @@ export const getVariantColumns = (
       width: 59,
       render: (record: VariantEntity) =>
         renderDonorByKey('donors.bioinfo_analysis_code', findDonorById(record.donors, patientId)),
+      sorter: {
+        multiple: 1,
+      },
     });
   }
 
@@ -409,9 +418,6 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.acmg_classification'),
         tooltip: intl.get('screen.patientsnv.results.table.acmg_classification.tooltip'),
         width: 110,
-        sorter: {
-          multiple: 1,
-        },
         render: (record: VariantEntity) =>
           renderAcmgExo(findDonorById(record.donors, patientId)?.exomiser?.acmg_classification),
       },
@@ -480,6 +486,9 @@ export const getVariantColumns = (
           title: intl.get('screen.patientsnv.results.table.gq'),
           tooltip: intl.get('gq.tooltip'),
           width: 59,
+          sorter: {
+            multiple: 1,
+          },
           render: (record: VariantEntity) =>
             renderDonorByKey('donors.gq', findDonorById(record.donors, patientId)),
         },
@@ -527,22 +536,31 @@ export const getVariantColumns = (
             renderDonorByKey('pch', findDonorById(record.donors, patientId)),
         },
         {
-          key: 'transmission',
+          key: 'donors.transmission',
           title: intl.get('screen.patientsnv.results.table.transmission'),
           defaultHidden: true,
           width: 200,
+          sorter: {
+            multiple: 1,
+          },
           render: (record: VariantEntity) =>
             renderDonorByKey('transmission', findDonorById(record.donors, patientId)),
         },
         {
           ...getDonorQd(patientId),
+          sorter: {
+            multiple: 1,
+          },
         },
         {
-          key: 'po',
+          key: 'donors.parental_origin',
           title: intl.get('po'),
           tooltip: intl.get('parental.origin'),
           defaultHidden: true,
           width: 180,
+          sorter: {
+            multiple: 1,
+          },
           render: (record: VariantEntity) =>
             renderDonorByKey('po', findDonorById(record.donors, patientId)),
         },
@@ -565,55 +583,79 @@ export const getVariantColumns = (
           title: intl.get('screen.patientsnv.results.table.sq'),
           tooltip: intl.get('sq.tooltip'),
           width: 59,
+          sorter: {
+            multiple: 1,
+          },
           render: (record: VariantEntity) =>
             renderDonorByKey('donors.sq', findDonorById(record.donors, patientId)),
         },
         {
           ...getDonorZygosity(patientId),
+          sorter: {
+            multiple: 1,
+          },
         },
         {
           ...getAcmgCriteriaCol(),
+          sorter: {
+            multiple: 1,
+          },
         },
         {
           ...getDonorQd(patientId),
+          sorter: {
+            multiple: 1,
+          },
         },
       );
     }
 
     columns.push(
       {
-        key: 'alt',
+        key: 'donors.ad_alt',
         title: intl.get('screen.patientsnv.results.table.altprof'),
         tooltip: intl.get('filters.group.donors.ad_alt'),
         defaultHidden: true,
         width: 120,
+        sorter: {
+          multiple: 1,
+        },
         render: (record: VariantEntity) =>
           renderDonorByKey('alt', findDonorById(record.donors, patientId)),
       },
       {
-        key: 'alttotal',
+        key: 'donors.ad_total',
         title: intl.get('screen.patientsnv.results.table.alttotal'),
         tooltip: intl.get('total.depth'),
         defaultHidden: true,
         width: 120,
+        sorter: {
+          multiple: 1,
+        },
         render: (record: VariantEntity) =>
           renderDonorByKey('alttotal', findDonorById(record.donors, patientId)),
       },
       {
-        key: 'altratio',
+        key: 'donors.ad_ratio',
         title: intl.get('screen.patientsnv.results.table.altratio'),
         tooltip: intl.get('screen.patientsnv.results.table.altratio.tooltip'),
         defaultHidden: true,
         width: 120,
+        sorter: {
+          multiple: 1,
+        },
         render: (record: VariantEntity) =>
           renderDonorByKey('altratio', findDonorById(record.donors, patientId)),
       },
       {
-        key: 'filter',
+        key: 'donors.filters',
         title: intl.get('screen.patientsnv.results.table.filter'),
         tooltip: intl.get('screen.variantDetails.patientsTab.filter.tooltip'),
         defaultHidden: true,
         width: 160,
+        sorter: {
+          multiple: 1,
+        },
         render: (record: VariantEntity) =>
           renderDonorByKey('filter', findDonorById(record.donors, patientId)),
       },
@@ -622,6 +664,9 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.acmg_evidence'),
         tooltip: intl.get('screen.patientsnv.results.table.acmg_evidence.tooltip'),
         width: 150,
+        sorter: {
+          multiple: 1,
+        },
         defaultHidden: true,
         render: (record: VariantEntity) =>
           renderDonorByKey(
