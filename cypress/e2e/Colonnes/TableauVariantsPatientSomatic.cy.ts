@@ -96,12 +96,12 @@ describe('Page des variants d\'un patient (somatic) - Colonnes du tableau', () =
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(17)
-      .should('not.have.class', 'ant-table-column-has-sorters')
+      .should('have.class', 'ant-table-column-has-sorters')
       .contains('QS').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(18)
-      .should('not.have.class', 'ant-table-column-has-sorters')
+      .should('have.class', 'ant-table-column-has-sorters')
       .contains('Zyg.').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
