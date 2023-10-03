@@ -1,7 +1,7 @@
 /* eslint-disable simple-import-sort/imports */
 // required for the theme to be correctly applied
 /// <reference types="@welldone-software/why-did-you-render" />
-// import './wdyr';
+// import 'utils/wdyr';
 import 'style/themes/clin/dist/antd.css';
 import 'style/themes/clin/main.scss';
 import './index.css';

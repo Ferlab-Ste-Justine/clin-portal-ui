@@ -7,7 +7,7 @@ import ProTable from '@ferlab/ui/core/components/ProTable/index';
 import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
 import { resetSearchAfterQueryConfig } from '@ferlab/ui/core/components/ProTable/utils';
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
-import { ISort } from '@ferlab/ui/core/graphql/types';
+import { IQueryConfig, ISort } from '@ferlab/ui/core/graphql/types';
 import { Button, Card, Divider, Input, Select, Space, Typography } from 'antd';
 import { useCoverage } from 'graphql/prescriptions/actions';
 import { GeneCoverage } from 'graphql/prescriptions/models/Prescription';
@@ -277,7 +277,6 @@ const Index = ({ downloadFile }: any) => {
                   </>,
                 ],
                 extra: [
-                  // eslint-disable-next-line react/jsx-key
                   <Button
                     key={'downloadFile'}
                     onClick={() => downloadFile('CSV', 'COVGENE')}
@@ -308,9 +307,8 @@ const Index = ({ downloadFile }: any) => {
                 setQueryConfig({
                   pageIndex: DEFAULT_PAGE_INDEX,
                   size: queryConfig.size,
-                  // @ts-ignore
                   sort: formatQuerySortList(sorter),
-                });
+                } as IQueryConfig);
               }}
               dictionary={getProTableDictionary()}
             />
