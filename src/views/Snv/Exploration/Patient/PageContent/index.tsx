@@ -24,7 +24,7 @@ import {
 } from 'views/Snv/utils/constant';
 import { wrapSqonWithDonorIdAndSrId } from 'views/Snv/utils/helper';
 
-import Download from 'components/Download';
+import DownloadTSVWrapper from 'components/Download';
 import { SNV_EXPLORATION_PATIENT_FILTER_TAG } from 'utils/queryBuilder';
 
 import VariantsTab from './tabs/Variants';
@@ -134,7 +134,7 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
             setDownloadTriggered={setDownloadTriggered}
             setSelectedRows={setSelectedRows}
           />
-          <Download
+          <DownloadTSVWrapper
             downloadKeys={downloadKeys}
             queryVariables={queryVariables}
             triggered={downloadTriggered}

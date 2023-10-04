@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { IQueryOperationsConfig } from '@ferlab/ui/core/graphql/types';
 import { hydrateResults } from '@ferlab/ui/core/graphql/utils';
 import { downloadAsTSV } from 'views/Prescriptions/utils/export';
 
@@ -11,25 +12,25 @@ import { sendRequestWithRpt } from '../api';
 import { ARRANGER_API_PROJECT_URL } from '../providers/ApolloProvider';
 
 type OwnProps = {
-  downloadKeys: any;
-  queryVariables: any;
+  downloadKeys: string[];
+  queryVariables: any; // can be anything because of new weighted average obj
   maxAllowed: number;
   columns?: any;
   prefix: string;
   triggered: boolean;
-  setTriggered: any;
+  setTriggered: (value: boolean) => void;
   total: number;
   mapping?: any;
   columnKey: string;
-  data: any;
+  data: any; // Type any because this component is generic so data can be of any types
   query: any;
-  operations?: any;
-  patientId?: any;
+  operations?: IQueryOperationsConfig;
+  patientId?: string;
   queryKey: string;
-  setDownloadKeys: any;
+  setDownloadKeys: (value: string[]) => void;
 };
 
-const Download = ({
+const DownloadTSVWrapper = ({
   maxAllowed,
   downloadKeys,
   columns,
@@ -125,4 +126,4 @@ const Download = ({
   );
 };
 
-export default Download;
+export default DownloadTSVWrapper;

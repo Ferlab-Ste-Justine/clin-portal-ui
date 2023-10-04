@@ -24,7 +24,7 @@ import { wrapSqonWithPatientIdAndRequestId } from 'views/Cnv/utils/helper';
 import { VariantType } from 'views/Prescriptions/Entity/context';
 import { MAX_VARIANTS_DOWNLOAD } from 'views/Prescriptions/utils/export';
 
-import Download from 'components/Download';
+import DownloadTSVWrapper from 'components/Download';
 import { CNV_EXPLORATION_PATIENT_FILTER_TAG } from 'utils/queryBuilder';
 
 import VariantsTable from './components/Variants';
@@ -132,7 +132,7 @@ const PageContent = ({ variantMapping, patientId, prescriptionId }: OwnProps) =>
           />
         </Card>
       </VariantContentLayout>
-      <Download
+      <DownloadTSVWrapper
         downloadKeys={downloadKeys}
         queryVariables={queryVariables}
         prefix="CNV"

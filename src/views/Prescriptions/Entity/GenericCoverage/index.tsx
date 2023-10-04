@@ -16,7 +16,7 @@ import IGVModal from 'views/Cnv/Exploration/components/IGVModal';
 import { ALL_KEYS, VARIANT_KEY } from 'views/Prescriptions/utils/export';
 import { DEFAULT_PAGE_INDEX, DEFAULT_QUERY_CONFIG } from 'views/Snv/utils/constant';
 
-import Download from 'components/Download';
+import DownloadTSVWrapper from 'components/Download';
 import FixedSizeTable from 'components/Layout/FixedSizeTable';
 import { useRpt } from 'hooks/useRpt';
 import { useGlobals } from 'store/global';
@@ -314,7 +314,7 @@ const Index = ({ downloadFile }: any) => {
             />
           )}
         />
-        <Download
+        <DownloadTSVWrapper
           maxAllowed={2000}
           prefix={'GC'}
           columnKey={'key'}

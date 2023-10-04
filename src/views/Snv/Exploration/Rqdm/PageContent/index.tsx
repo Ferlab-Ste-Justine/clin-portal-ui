@@ -23,7 +23,7 @@ import {
   VARIANT_RQDM_QB_ID,
 } from 'views/Snv/utils/constant';
 
-import Download from 'components/Download';
+import DownloadTSVWrapper from 'components/Download';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 
 import VariantsTab from './tabs/Variants';
@@ -127,7 +127,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
           </Tabs.TabPane>
         </Tabs>
       </VariantContentLayout>
-      <Download
+      <DownloadTSVWrapper
         maxAllowed={2000}
         columnKey={VARIANT_KEY}
         downloadKeys={downloadKeys}

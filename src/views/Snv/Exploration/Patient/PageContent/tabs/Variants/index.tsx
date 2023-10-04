@@ -34,8 +34,8 @@ type OwnProps = {
   setDownloadKeys: TDownload;
   queryBuilderId: string;
   setVariantType: (variantType: VariantType) => void;
-  setDownloadTriggered: any;
-  setSelectedRows: any;
+  setDownloadTriggered: (value: boolean) => void;
+  setSelectedRows: (value: ITableVariantEntity[]) => void;
 };
 
 export const scrollToTop = (scrollContentId: string) =>

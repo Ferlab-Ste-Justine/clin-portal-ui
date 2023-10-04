@@ -1,5 +1,9 @@
 import { ApolloError } from '@apollo/client';
-import { IQueryOperationsConfig, IQueryVariable } from '@ferlab/ui/core/graphql/types';
+import {
+  IQueryConfig,
+  IQueryOperationsConfig,
+  IQueryVariable,
+} from '@ferlab/ui/core/graphql/types';
 import { computeSearchAfter, hydrateResults } from '@ferlab/ui/core/graphql/utils';
 import { AnalysisTaskEntity, ServiceRequestEntity } from 'api/fhir/models';
 import { ExtendedMappingResults, GqlResults } from 'graphql/models';
@@ -8,6 +12,8 @@ import { INDEX_EXTENDED_MAPPING } from 'graphql/queries';
 import { useLazyResultQuery, useLazyResultQueryOnLoadOnly } from 'graphql/utils/query';
 import { valueSetID } from 'views/Prescriptions/Entity/constants';
 import { ITableGeneCoverage } from 'views/Prescriptions/Entity/GenericCoverage';
+
+import { WeightedAverage } from 'store/global/types';
 
 import {
   ANALYSE_CODESYSTEME,
@@ -45,7 +51,7 @@ export const usePrescription = (
 };
 
 export const useCoverage = (
-  variables?: any,
+  variables?: IQueryConfig & { weightedAverages?: WeightedAverage[] },
   operations?: IQueryOperationsConfig,
 ): GqlResults<ITableGeneCoverage> => {
   const { loading, result } = useLazyResultQuery<any>(COVERAGES_QUERY, {
@@ -62,10 +68,7 @@ export const useCoverage = (
   const coverages = result?.Coverages;
   return {
     aggregations: coverages?.aggregations || {},
-    data: hydrateResults(
-      coverages?.hits?.edges || [],
-      operations?.previous,
-    ) as ITableGeneCoverage[],
+    data: hydrateResults(coverages?.hits?.edges || []) as ITableGeneCoverage[],
     loading,
     total: coverages?.hits.total,
     searchAfter: computeSearchAfter(coverages?.hits?.edges || [], operations),
