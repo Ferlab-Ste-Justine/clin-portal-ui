@@ -11,7 +11,7 @@ import { ExtendedMappingResults } from 'graphql/models';
 import { useVariants } from 'graphql/variants/actions';
 import { VARIANT_QUERY, VARIANT_QUERY_NO_DONORS } from 'graphql/variants/queries';
 import { VariantType } from 'views/Prescriptions/Entity/context';
-import { MAX_VARIANTS_WITH_DONORS_DOWNLOAD, VARIANT_KEY } from 'views/Prescriptions/utils/export';
+import { MAX_VARIANTS_DOWNLOAD, VARIANT_KEY } from 'views/Prescriptions/utils/export';
 import VariantContentLayout from 'views/Snv/Exploration/components/VariantContentLayout';
 import { getVariantColumns } from 'views/Snv/Exploration/variantColumns';
 import {
@@ -128,7 +128,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
         </Tabs>
       </VariantContentLayout>
       <DownloadTSVWrapper
-        maxAllowed={MAX_VARIANTS_WITH_DONORS_DOWNLOAD}
+        maxAllowed={MAX_VARIANTS_DOWNLOAD}
         columnKey={VARIANT_KEY}
         downloadKeys={downloadKeys}
         queryVariables={queryVariables}
