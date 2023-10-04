@@ -36,5 +36,5 @@ export type FhirAnalysisCodeMap = {
 
 export type WeightedAverage = {
   field: string;
-  size: string;
+  weight: string;
 };

@@ -11,7 +11,7 @@ import { useVariants } from 'graphql/variants/actions';
 import { VARIANT_QUERY } from 'graphql/variants/queries';
 import { cloneDeep } from 'lodash';
 import { VariantType } from 'views/Prescriptions/Entity/context';
-import { VARIANT_KEY } from 'views/Prescriptions/utils/export';
+import { MAX_VARIANTS_WITH_DONORS_DOWNLOAD, VARIANT_KEY } from 'views/Prescriptions/utils/export';
 import VariantContentLayout from 'views/Snv/Exploration/components/VariantContentLayout';
 import { getVariantColumns } from 'views/Snv/Exploration/variantColumns';
 import {
@@ -144,7 +144,7 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
             setDownloadKeys={setDownloadKeys}
             operations={variantQueryConfig.operations}
             query={VARIANT_QUERY}
-            maxAllowed={2000}
+            maxAllowed={MAX_VARIANTS_WITH_DONORS_DOWNLOAD}
             data={selectedRows}
             columns={
               variantType
