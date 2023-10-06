@@ -9,6 +9,12 @@
   white-space: nowrap;
 }
 
+// prevent safari double tooltip
+.variantTableCellElipsis::after {
+  content: '';
+  display: block;
+}
+
 .variantTableCell {
   min-width: 160px;
 }

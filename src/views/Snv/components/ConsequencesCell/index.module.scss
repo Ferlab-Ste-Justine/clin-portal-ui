@@ -29,6 +29,12 @@
   white-space: nowrap;
 }
 
+// prevent safari double tooltip
+.detail::after {
+  content: '';
+  display: block;
+}
+
 .bullet {
   margin-right: 8px;
 }
