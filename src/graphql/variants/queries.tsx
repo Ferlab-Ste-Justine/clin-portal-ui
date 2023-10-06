@@ -23,6 +23,7 @@ const VARIANT_QUERY_BASE_FIELDS = `
   chromosome
   start
   end
+  hotspot
   consequences {
     hits {
       edges {

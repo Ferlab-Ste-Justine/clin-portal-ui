@@ -90,7 +90,7 @@ const filterGroups: {
       },
     ],
   },
-  [FilterTypes.Pathogenicity]: {
+  [FilterTypes.Pathogenicity_germline]: {
     groups: [
       {
         facets: [
@@ -116,7 +116,7 @@ const filterGroups: {
       },
       {
         title: intl.get('oncology'),
-        facets: ['cmc__sample_mutated', 'cmc__sample_ratio', 'cmc__tier'],
+        facets: ['cmc__sample_mutated', 'cmc__sample_ratio', 'cmc__tier', 'hotspot'],
       },
     ],
   },
@@ -205,7 +205,7 @@ export const getMenuItems = (
       variantMappingResults,
       INDEXES.VARIANT,
       VARIANT_RQDM_QB_ID,
-      filterGroups[FilterTypes.Pathogenicity],
+      filterGroups[FilterTypes.Pathogenicity_germline],
       filterMapper,
     ),
   },

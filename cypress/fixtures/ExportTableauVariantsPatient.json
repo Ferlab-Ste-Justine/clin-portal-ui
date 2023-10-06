@@ -24,7 +24,9 @@
               "alttotal",
               "altratio",
               "filter",
-              "donors.exomiser.acmg_evidence"],
+              "donors.exomiser.acmg_evidence",
+              "cmc.sample_mutated",
+              "cmc.tier"],
   "content": ["chrX:g.123403094G>A",
               "SNV",
               "rs138817389",
@@ -48,5 +50,7 @@
               "84",
               "1.00",
               "PASS",
-              "PP4, BP6_Strong"]
+              "PP4, BP6_Strong",
+              "3",
+              "Other"]
 }

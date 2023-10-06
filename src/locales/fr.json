@@ -784,6 +784,8 @@
   "screen.variantsearch.rqdm.title": "Banque de variants du RQDM",
   "screen.variantsearch.table.gnomAd": "gnomAD ",
   "screen.variantsearch.table.gnomAd.tooltip": "gnomAD Genome 3.1.1",
+  "screen.variantsearch.table.hotspot": "Hotspot ",
+  "screen.variantsearch.table.hotspot.tooltip": "Cancer Hotspot",
   "screen.variantsearch.title": "Variants",
   "see.less": "Voir moins",
   "see.more": "Voir plus",

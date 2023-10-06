@@ -9,7 +9,10 @@
               "acmgVerdict",
               "external_frequencies.gnomad_genomes_3_1_1.af",
               "frequency_RQDM.total.pf",
-              "acmgcriteria"],
+              "cmc.sample_mutated",
+              "hotspot",
+              "acmgcriteria",
+              "cmc.tier"],
   "content": ["chrX:g.123403094G>A",
               "SNV",
               "rs138817389",
@@ -20,5 +23,8 @@
               "Benign",
               "0.000900893",
               "0.04",
-              "BP6, BS1, BS2, PP3"]
+              "3",
+              "--",
+              "BP6, BS1, BS2, PP3",
+              "Other"]
 }

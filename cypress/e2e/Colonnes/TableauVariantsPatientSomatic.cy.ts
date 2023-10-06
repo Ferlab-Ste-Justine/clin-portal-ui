@@ -86,60 +86,65 @@ describe('Page des variants d\'un patient (somatic) - Colonnes du tableau', () =
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(15)
+      .should('have.class', 'ant-table-column-has-sorters')
+      .find('[data-icon="fire"]').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
+      .find('th[class*="ant-table-cell"]').eq(16)
       .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('QS').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
-      .find('th[class*="ant-table-cell"]').eq(16)
+      .find('th[class*="ant-table-cell"]').eq(17)
       .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Zyg.').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('Critères ACMG').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(15)
+      .find('div[class="ant-space-item"]').eq(16)
       .contains('Critères ACMG').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('QP').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(16)
+      .find('div[class="ant-space-item"]').eq(17)
       .contains('QP').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('ALT').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(17)
+      .find('div[class="ant-space-item"]').eq(18)
       .contains('ALT').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('ALT+REF').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(18)
+      .find('div[class="ant-space-item"]').eq(19)
       .contains('ALT+REF').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('ALT/(ALT+REF)').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(19)
+      .find('div[class="ant-space-item"]').eq(20)
       .contains('ALT/(ALT+REF)').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('Filtre').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(20)
+      .find('div[class="ant-space-item"]').eq(21)
       .contains('Filtre').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('Crit. Exo.').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(21)
+      .find('div[class="ant-space-item"]').eq(22)
       .contains('Crit. Exo.').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .contains('CMC tier').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(22)
+      .find('div[class="ant-space-item"]').eq(23)
       .contains('CMC tier').should('exist');
   });
 

@@ -228,7 +228,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Ambiguous Orf',
                           'Sense Intronic',
                           'Sense Overlapping',
-                          'Antisense/antisense RNA',
+                          'Antisense RNA',
                           'Known Ncrna',
                           'Pseudogene',
                           'Processed Pseudogene',
@@ -246,7 +246,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Macro LncRNA',
                           '3prime Overlapping NcRNA',
                           'Disrupted Domain',
-                          'VaultRNA/vault RNA',
+                          'Vault RNA',
                           'Bidirectional Promoter LncRNA',
                           'No Data'];
 
@@ -408,5 +408,13 @@ describe('Page des variants - Dictionnaire', () => {
                          'No Data'];
 
     cy.validateDictionnary('category_pathogenicity', /^CMC tier$/, 15, dictionnary);
+  });
+
+  it('Pathogénicité - Hotspot', () => {
+    const dictionnary = ['True',
+                         'False',
+                         'No Data'];
+
+    cy.validateDictionnary('category_pathogenicity', /^Hotspot$/, 16, dictionnary);
   });
 });

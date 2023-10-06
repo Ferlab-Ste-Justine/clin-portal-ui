@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
-import { PlusOutlined } from '@ant-design/icons';
+import { FireFilled, FireOutlined, PlusOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
@@ -164,6 +164,25 @@ const getCmcSampleMutatedCol = (variantType: VariantType, patientId?: string) =>
     ) : (
       TABLE_EMPTY_PLACE_HOLDER
     ),
+});
+
+const getHotspotCol = () => ({
+  key: 'hotspot',
+  title: intl.get('screen.variantsearch.table.hotspot'),
+  tooltip: `${intl.get('screen.variantsearch.table.hotspot.tooltip')}`,
+  iconTitle: <FireOutlined />,
+  sorter: {
+    multiple: 1,
+  },
+  width: 50,
+  render: (record: VariantEntity) => {
+    if (record.hotspot === true) {
+      return <FireFilled className={style.hotspotFilled} />;
+    } else if (record.hotspot === false) {
+      return <FireOutlined className={style.hotspotOutlined} />;
+    }
+    return TABLE_EMPTY_PLACE_HOLDER;
+  },
 });
 
 export const getVariantColumns = (
@@ -542,6 +561,9 @@ export const getVariantColumns = (
       }
       columns.push(
         {
+          ...getHotspotCol(),
+        },
+        {
           key: 'donors.sq',
           title: intl.get('screen.patientsnv.results.table.sq'),
           tooltip: intl.get('sq.tooltip'),
@@ -620,6 +642,11 @@ export const getVariantColumns = (
         key: 'cmc.sample_ratio',
         title: intl.get('screen.patientsnv.results.table.cmc'),
         defaultHidden: true,
+      });
+    }
+    if (!patientId) {
+      columns.push({
+        ...getHotspotCol(),
       });
     }
   }
@@ -720,6 +747,14 @@ export const renderGeneToString = (variant: any) => {
   }
 
   return TABLE_EMPTY_PLACE_HOLDER;
+};
+
+export const renderHotspotToString = (variant: any) => {
+  const hotspot = variant.hotspot;
+  if (hotspot === null) {
+    return TABLE_EMPTY_PLACE_HOLDER;
+  }
+  return hotspot.toString();
 };
 
 export const renderDonorToString = (key: string, donor?: DonorsEntity) =>

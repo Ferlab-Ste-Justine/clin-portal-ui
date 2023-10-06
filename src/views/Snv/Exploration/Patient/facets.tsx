@@ -118,7 +118,7 @@ const filterGroups: {
       },
     ],
   },
-  [FilterTypes.Pathogenicity]: {
+  [FilterTypes.Pathogenicity_germline]: {
     groups: [
       {
         facets: ['clinvar__clin_sig', 'consequences__vep_impact'],
@@ -152,6 +152,43 @@ const filterGroups: {
       {
         title: intl.get('oncology'),
         facets: ['cmc__sample_mutated', 'cmc__sample_ratio', 'cmc__tier'],
+      },
+    ],
+  },
+  [FilterTypes.Pathogenicity_somatic_tumor_only]: {
+    groups: [
+      {
+        facets: ['clinvar__clin_sig', 'consequences__vep_impact'],
+      },
+      {
+        title: intl.get('exomiser'),
+        facets: [
+          'donors__exomiser__gene_combined_score',
+          'donors__exomiser__acmg_classification',
+          'donors__exomiser__acmg_evidence',
+        ],
+      },
+      {
+        title: intl.get('varsome'),
+        facets: ['varsome__acmg__verdict__verdict', 'varsome__acmg__classifications__name'],
+      },
+      {
+        title: intl.get('predictions'),
+        facets: [
+          'consequences__predictions__cadd_phred',
+          'consequences__predictions__cadd_score',
+          'consequences__predictions__dann_score',
+          'consequences__predictions__fathmm_pred',
+          'consequences__predictions__lrt_pred',
+          'consequences__predictions__polyphen2_hvar_pred',
+          'consequences__predictions__sift_pred',
+          'genes__spliceai__ds',
+          'consequences__predictions__revel_score',
+        ],
+      },
+      {
+        title: intl.get('oncology'),
+        facets: ['cmc__sample_mutated', 'cmc__sample_ratio', 'cmc__tier', 'hotspot'],
       },
     ],
   },
@@ -247,17 +284,19 @@ export const getMenuItems = (
   filterMapper: TCustomFilterMapper,
   variantType: VariantType = VariantType.GERMLINE,
 ): ISidebarMenuItem[] => {
-  const [filterVariantType, filterFrequencyType, filterOccType] =
+  const [filterVariantType, filterFrequencyType, filterOccType, filterPathType] =
     variantType === VariantType.GERMLINE
       ? [
           FilterTypes.Variant_germline,
           FilterTypes.Frequency_germline,
           FilterTypes.Occurrence_germline,
+          FilterTypes.Pathogenicity_germline,
         ]
       : [
           FilterTypes.Variant_somatic_tumor_only,
           FilterTypes.Frequency_somatic_tumor_only,
           FilterTypes.Occurrence_somatic_tumor_only,
+          FilterTypes.Pathogenicity_somatic_tumor_only,
         ];
 
   return [
@@ -317,7 +356,7 @@ export const getMenuItems = (
         variantMappingResults,
         INDEXES.VARIANT,
         SNV_VARIANT_PATIENT_QB_ID,
-        filterGroups[FilterTypes.Pathogenicity],
+        filterGroups[filterPathType],
         filterMapper,
       ),
     },

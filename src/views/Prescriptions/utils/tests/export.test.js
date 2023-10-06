@@ -73,6 +73,18 @@ describe('customMapping SNV', () => {
     };
     expect(customMapping('SNV', 'acmgVerdict', row)).toEqual('Lik. Benign');
   });
+  test('should map hotspot null', () => {
+    const row = {
+      hotspot: null,
+    };
+    expect(customMapping('SNV', 'hotspot', row)).toEqual('--');
+  });
+  test('should map hotspot false', () => {
+    const row = {
+      hotspot: false,
+    };
+    expect(customMapping('SNV', 'hotspot', row)).toEqual('false');
+  });
   test('should map omim', () => {
     const row = {
       consequences: {

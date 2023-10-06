@@ -180,7 +180,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Ambiguous Orf',
                           'Sense Intronic',
                           'Sense Overlapping',
-                          'Antisense/antisense RNA',
+                          'Antisense RNA',
                           'Known Ncrna',
                           'Pseudogene',
                           'Processed Pseudogene',
@@ -198,7 +198,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Macro LncRNA',
                           '3prime Overlapping NcRNA',
                           'Disrupted Domain',
-                          'VaultRNA/vault RNA',
+                          'Vault RNA',
                           'Bidirectional Promoter LncRNA',
                           'No Data'];
 

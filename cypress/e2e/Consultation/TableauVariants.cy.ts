@@ -34,9 +34,10 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 10, /(4.69e-2|4.55e-2|4.41e-2)/);
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 11, /^3$/);
     cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 11, '(6.93e-5)');
-    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 12, 'BP6, BS1, BS2, PP3');
-    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 13, 'Other');
-    cy.validateTableDataRowKeyClass('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 13, 'ant-tag-default');
+    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 12, '-');
+    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 13, 'BP6, BS1, BS2, PP3');
+    cy.validateTableDataRowKeyContent('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 14, 'Other');
+    cy.validateTableDataRowKeyClass('4577893f4d3c2463e9fdef3419f7781d00fffdf3', 14, 'ant-tag-default');
   });
  
   it('Valider les liens disponibles Lien Variant', () => {
@@ -131,11 +132,17 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.validateTableFirstRow('419', 11);
     cy.sortTableAndIntercept('CMC', 1);
 
+    cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
+    cy.validateTableFirstRow('-', 12);
+    cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
+    cy.get('tr').eq(0).find('td').eq(12).find('[class*="hotspotFilled"]').should('exist');
+    cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
+
     cy.sortTableAndIntercept('CMC tier', 1);
-    cy.validateTableFirstRow('-', 13);
+    cy.validateTableFirstRow('-', 14);
     cy.sortTableAndIntercept('CMC tier', 1);
-    cy.validateTableFirstRow('Other', 13);
-    cy.sortTableAndIntercept('CMC tier', 1);
+    cy.validateTableFirstRow('Other', 14);
+    cy.sortTableAndWait('CMC tier');
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

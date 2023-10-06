@@ -13,6 +13,7 @@ import {
   renderClinvarToString,
   renderDonorToString,
   renderGeneToString,
+  renderHotspotToString,
   renderOmimToString,
 } from 'views/Snv/Exploration/variantColumns';
 
@@ -145,6 +146,8 @@ export const customMapping = (prefix: string, key: string, row: any, patientId: 
       return convertToPlain(getAcmgRuleContent(row.varsome));
     } else if (key === 'consequence') {
       return convertToPlain(renderConsequencesToString(row));
+    } else if (key === 'hotspot') {
+      return convertToPlain(renderHotspotToString(row));
     } else if (
       [
         'donors.exomiser.gene_combined_score',

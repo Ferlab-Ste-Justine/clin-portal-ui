@@ -152,6 +152,7 @@ export type VariantEntity = {
   frequency_RQDM: frequency_RQDMEntity;
   consequences?: ArrangerResultsTree<ConsequenceEntity>;
   varsome?: Varsome;
+  hotspot: boolean;
   genes?: ArrangerResultsTree<GeneEntity>;
   donors?: ArrangerResultsTree<DonorsEntity>;
   external_frequencies?: ExternalFrequenciesEntity;

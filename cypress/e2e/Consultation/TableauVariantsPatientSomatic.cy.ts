@@ -40,18 +40,19 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
     cy.validateTableDataRowKeyClass('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 13, 'GnomadCell_gnomadIndicatorDefault');
     cy.validateTableDataRowKeyContent('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 14, /^1$/);
     cy.validateTableDataRowKeyContent('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 14, '(2.31e-5)');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 15, '64.73');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 16, 'Het');
-    cy.validateTableDataRowKeyClass('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 16, 'ant-tag-blue');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 17, 'BA1, BP4, BP6, PM4');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 18, '-');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 19, '321');
+    cy.validateTableDataRowKeyClass('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 15, 'hotspotOutlined');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 16, '64.73');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 17, 'Het');
+    cy.validateTableDataRowKeyClass('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 17, 'ant-tag-blue');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 18, 'BA1, BP4, BP6, PM4');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 19, '-');
     cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 20, '321');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 21, '1.00');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 22, 'PASS');
-    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 23, '-');
-    cy.validateTableDataRowKeyContent('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 24, 'Other');
-    cy.validateTableDataRowKeyClass('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 24, 'ant-tag-default');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 21, '321');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 22, '1.00');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 23, 'PASS');
+    cy.validateTableDataRowKeyContent('02fcc26c193333c0ed9f89fdfe6a3f79c5527af3', 24, '-');
+    cy.validateTableDataRowKeyContent('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 25, 'Other');
+    cy.validateTableDataRowKeyClass('bdc7b7f2fba4aef570b1ac84217fe870f14261db', 25, 'ant-tag-default');
   });
  
   it('Valider les liens disponibles Lien UCSC', () => {
@@ -150,11 +151,17 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
     cy.validateTableFirstRow('419', 14);
     cy.sortTableAndIntercept('CMC', 1);
 
+    cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
+    cy.get('tr').eq(0).find('td').eq(12).find('[class*="hotspotOutlined"]').should('exist');
+    cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
+    cy.get('tr').eq(0).find('td').eq(12).find('[class*="hotspotFilled"]').should('exist');
+    cy.clickAndIntercept('thead[class="ant-table-thead"] [data-icon="fire"]', 'POST', '**/graphql', 1);
+
     cy.sortTableAndIntercept('CMC tier', 1);
-    cy.validateTableFirstRow('-', 24);
+    cy.validateTableFirstRow('-', 25);
     cy.sortTableAndIntercept('CMC tier', 1);
-    cy.validateTableFirstRow('Other', 24);
-    cy.sortTableAndIntercept('CMC tier', 1);
+    cy.validateTableFirstRow('Other', 25);
+    cy.sortTableAndWait('CMC tier');
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
