@@ -10,7 +10,19 @@
       overflow-wrap: unset;
       white-space: nowrap;
     }
+
+    // prevent safari double tooltip
+    div::after {
+      content: '';
+      display: block;
+    }
   }
+}
+
+// prevent safari double tooltip
+.variantTableCellElipsis::after {
+  content: '';
+  display: block;
 }
 
 .variantTableCell {
@@ -64,6 +76,12 @@
     overflow-wrap: unset;
     white-space: nowrap;
   }
+
+  div::after {
+    content: '';
+    display: block;
+  }
+
 }
 
 .hotspotFilled{
