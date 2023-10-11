@@ -288,6 +288,7 @@ export const getQueryBuilderDictionary = (
             nameAlreadyExists: intl.get(
               'querybuilder.actions.saveCustomPill.error.nameAlreadyExist',
             ),
+            invalidFormat: intl.get('querybuilder.actions.saveCustomPill.error.invalidFormat'),
           },
         },
         input: {

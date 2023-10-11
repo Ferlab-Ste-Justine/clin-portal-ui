@@ -35,14 +35,29 @@ const fetchCustomPills = createAsyncThunk<
   return result;
 });
 
+interface ICreateError {
+  error: {
+    message?: string;
+    translationKey?: string;
+    name?: string;
+  };
+}
+
 const createCustomPill = createAsyncThunk<TUserSavedFilter, TUserSavedFilterInsert>(
   'customPills/create',
   async (customPill, thunkAPI) => {
     const { data, error } = await CustomPillApi.create(customPill);
 
     if (error) {
+      // TODO need to be fix in back response
+      if (
+        error.response?.status === 422 &&
+        (error.response?.data as ICreateError)?.error?.translationKey
+      ) {
+        throw new Error('Already exists');
+      }
       if (error.response?.status === 422) {
-        throw new Error(error.response.status.toString());
+        throw new Error('Invalid format');
       }
       thunkAPI.dispatch(
         globalActions.displayNotification({

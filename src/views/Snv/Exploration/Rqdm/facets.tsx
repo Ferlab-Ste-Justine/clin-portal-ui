@@ -401,7 +401,7 @@ export const getMenuItemsEditionPill = (
       variantMappingResults,
       INDEXES.VARIANT,
       QUERY_EDITION_QB_ID,
-      filterGroups[FilterTypes.Pathogenicity],
+      filterGroups[FilterTypes.Pathogenicity_germline],
       filterMapper,
     ),
   },
