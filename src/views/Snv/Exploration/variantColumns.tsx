@@ -288,9 +288,6 @@ export const getVariantColumns = (
       width: 59,
       render: (record: VariantEntity) =>
         renderDonorByKey('donors.bioinfo_analysis_code', findDonorById(record.donors, patientId)),
-      sorter: {
-        multiple: 1,
-      },
     });
   }
 
@@ -661,9 +658,6 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.acmg_evidence'),
         tooltip: intl.get('screen.patientsnv.results.table.acmg_evidence.tooltip'),
         width: 150,
-        sorter: {
-          multiple: 1,
-        },
         defaultHidden: true,
         render: (record: VariantEntity) =>
           renderDonorByKey(
