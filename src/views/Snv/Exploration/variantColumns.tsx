@@ -108,7 +108,7 @@ export const getAcmgRuleContent = (varsome: Varsome) =>
     : TABLE_EMPTY_PLACE_HOLDER;
 
 const getDonorQd = (patientId: string) => ({
-  key: 'qd',
+  key: 'donors.qd',
   title: intl.get('qd'),
   tooltip: intl.get('qd.tooltip'),
   defaultHidden: true,
@@ -202,9 +202,6 @@ export const getVariantColumns = (
     columns.push({
       className: style.userAffectedBtnCell,
       key: 'actions',
-      sorter: {
-        multiple: 1,
-      },
       title: intl.get('screen.patientsnv.results.table.actions'),
       fixed: 'left',
       render: (record: VariantEntity) => (
@@ -418,6 +415,9 @@ export const getVariantColumns = (
         title: intl.get('screen.patientsnv.results.table.acmg_classification'),
         tooltip: intl.get('screen.patientsnv.results.table.acmg_classification.tooltip'),
         width: 110,
+        sorter: {
+          multiple: 1,
+        },
         render: (record: VariantEntity) =>
           renderAcmgExo(findDonorById(record.donors, patientId)?.exomiser?.acmg_classification),
       },
@@ -597,9 +597,6 @@ export const getVariantColumns = (
         },
         {
           ...getAcmgCriteriaCol(),
-          sorter: {
-            multiple: 1,
-          },
         },
         {
           ...getDonorQd(patientId),
