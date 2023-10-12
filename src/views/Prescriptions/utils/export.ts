@@ -162,7 +162,7 @@ export const customMapping = (prefix: string, key: string, row: any, patientId: 
         'pch',
         'donors.transmission',
         'donors.qd',
-        'donors.po',
+        'donors.parental_origin',
         'donors.ad_alt',
         'donors.ad_total',
         'donors.ad_ratio',
