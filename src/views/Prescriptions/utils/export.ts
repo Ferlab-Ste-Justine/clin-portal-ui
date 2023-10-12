@@ -160,13 +160,13 @@ export const customMapping = (prefix: string, key: string, row: any, patientId: 
         'donors_genotype',
         'ch',
         'pch',
-        'transmission',
-        'qd',
-        'po',
-        'alt',
-        'alttotal',
-        'altratio',
-        'filter',
+        'donors.transmission',
+        'donors.qd',
+        'donors.po',
+        'donors.ad_alt',
+        'donors.ad_total',
+        'donors.ad_ratio',
+        'donors.filters',
       ].includes(key)
     ) {
       return convertToPlain(renderDonorToString(key, findDonorById(row.donors, patientId)));

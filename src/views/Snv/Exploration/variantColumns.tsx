@@ -114,7 +114,7 @@ const getDonorQd = (patientId: string) => ({
   defaultHidden: true,
   width: 180,
   render: (record: VariantEntity) =>
-    renderDonorByKey('qd', findDonorById(record.donors, patientId)),
+    renderDonorByKey('donors.qd', findDonorById(record.donors, patientId)),
 });
 
 const getDonorZygosity = (patientId: string) => ({
@@ -541,7 +541,7 @@ export const getVariantColumns = (
             multiple: 1,
           },
           render: (record: VariantEntity) =>
-            renderDonorByKey('transmission', findDonorById(record.donors, patientId)),
+            renderDonorByKey('donors.transmission', findDonorById(record.donors, patientId)),
         },
         {
           ...getDonorQd(patientId),
@@ -559,7 +559,7 @@ export const getVariantColumns = (
             multiple: 1,
           },
           render: (record: VariantEntity) =>
-            renderDonorByKey('po', findDonorById(record.donors, patientId)),
+            renderDonorByKey('donors.parental_origin', findDonorById(record.donors, patientId)),
         },
       );
     } else if (variantType === VariantType.SOMATIC_TUMOR_ONLY) {
@@ -615,7 +615,7 @@ export const getVariantColumns = (
           multiple: 1,
         },
         render: (record: VariantEntity) =>
-          renderDonorByKey('alt', findDonorById(record.donors, patientId)),
+          renderDonorByKey('donors.ad_alt', findDonorById(record.donors, patientId)),
       },
       {
         key: 'donors.ad_total',
@@ -627,7 +627,7 @@ export const getVariantColumns = (
           multiple: 1,
         },
         render: (record: VariantEntity) =>
-          renderDonorByKey('alttotal', findDonorById(record.donors, patientId)),
+          renderDonorByKey('donors.ad_total', findDonorById(record.donors, patientId)),
       },
       {
         key: 'donors.ad_ratio',
@@ -639,7 +639,7 @@ export const getVariantColumns = (
           multiple: 1,
         },
         render: (record: VariantEntity) =>
-          renderDonorByKey('altratio', findDonorById(record.donors, patientId)),
+          renderDonorByKey('donors.ad_ration', findDonorById(record.donors, patientId)),
       },
       {
         key: 'donors.filters',
@@ -651,7 +651,7 @@ export const getVariantColumns = (
           multiple: 1,
         },
         render: (record: VariantEntity) =>
-          renderDonorByKey('filter', findDonorById(record.donors, patientId)),
+          renderDonorByKey('donors.filters', findDonorById(record.donors, patientId)),
       },
       {
         key: 'donors.exomiser.acmg_evidence',
@@ -857,21 +857,21 @@ const renderDonorByKey = (key: string, donor?: DonorsEntity) => {
         size={0}
       />
     );
-  } else if (key === 'transmission') {
+  } else if (key === 'donors.transmission') {
     return removeUnderscoreAndCapitalize(donor?.transmission! || '').defaultMessage(
       TABLE_EMPTY_PLACE_HOLDER,
     );
-  } else if (key === 'qd') {
+  } else if (key === 'donors.qd') {
     return donor?.qd ? donor.qd : TABLE_EMPTY_PLACE_HOLDER;
-  } else if (key === 'po') {
+  } else if (key === 'donors.parental_origin') {
     return donor ? displayParentalOrigin(donor?.parental_origin!) : TABLE_EMPTY_PLACE_HOLDER;
-  } else if (key === 'alt') {
+  } else if (key === 'donors.ad_alt') {
     return donor?.ad_alt ?? TABLE_EMPTY_PLACE_HOLDER;
-  } else if (key === 'alttotal') {
+  } else if (key === 'donors.ad_total') {
     return donor?.ad_total ?? TABLE_EMPTY_PLACE_HOLDER;
-  } else if (key === 'altratio') {
+  } else if (key === 'donors.ad_ratio') {
     return (donor?.ad_ratio ?? 0).toFixed(2) ?? TABLE_EMPTY_PLACE_HOLDER;
-  } else if (key === 'filter') {
+  } else if (key === 'donors.filters') {
     return formatFilters(donor?.filters);
   }
   return <></>;
