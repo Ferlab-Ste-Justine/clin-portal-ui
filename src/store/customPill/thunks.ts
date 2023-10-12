@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import {
   getQueryBuilderState,
+  removePillFromQueryBuilder,
   setQueryBuilderState,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import {
@@ -136,15 +137,29 @@ const updateCustomPill = createAsyncThunk<
 
 const deleteCustomPill = createAsyncThunk<
   { id: string; tag: string },
-  { id: string; tag: string },
+  { id: string; queryBuilderId: string; tag: string },
   { rejectValue: string }
->('customPills/delete', async ({ id, tag }, thunkAPI) => {
+>('customPills/delete', async ({ id, queryBuilderId, tag }, thunkAPI) => {
   const { data, error } = await CustomPillApi.destroy(id);
 
   if (error) {
+    thunkAPI.dispatch(
+      globalActions.displayNotification({
+        type: 'error',
+        message: intl.get('customPill.delete.notification.error.message'),
+        description: intl.get('customPill.delete.notification.error.description'),
+      }),
+    );
     return thunkAPI.rejectWithValue(error.message);
   }
 
+  thunkAPI.dispatch(
+    globalActions.displayMessage({
+      type: 'success',
+      content: intl.get('customPill.delete.notification.success'),
+    }),
+  );
+  removePillFromQueryBuilder(id, queryBuilderId);
   thunkAPI.dispatch(fetchSavedFilters());
 
   return { id: data!, tag };

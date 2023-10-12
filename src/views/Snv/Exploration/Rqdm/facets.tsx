@@ -183,7 +183,7 @@ interface IGetMenuItems {
   hasCustomPillError: boolean;
   isLoading: boolean;
   menuItemsEditionPill: ISidebarMenuItem[];
-  deleteCustomPill: (id: string) => any;
+  deleteCustomPill: (id: string, queryBuilderId: string) => any;
   duplicateCustomPill: (queryPill: ISavedFilter) => any;
   editCustomPill: (queryPill: ISavedFilter, tag: string, queryBuilderId: string) => any;
   learnMoreLink?: string;
@@ -288,13 +288,6 @@ export const getMenuItems = ({
               message: intl.get('customPill.delete.modal.message'),
               existingFilters: intl.get('customPill.delete.modal.existingFilters'),
               errorMessage: intl.get('customPill.delete.modal.errorMessage'),
-            },
-            notification: {
-              error: {
-                description: intl.get('customPill.delete.notification.error.description'),
-                message: intl.get('customPill.delete.notification.error.message'),
-              },
-              success: intl.get('customPill.delete.notification.success'),
             },
           },
           editCustomPill: {

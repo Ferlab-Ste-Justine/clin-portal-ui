@@ -25,7 +25,8 @@ const useCustomPillsActions = (tag: string) => {
     queryBuilderId: string,
   ) => dispatch(updateCustomPill({ ...customPill, tag: tag, queryBuilderId: queryBuilderId }));
 
-  const handleOnDeleteCustomPill = (id: string) => dispatch(deleteCustomPill({ id, tag }));
+  const handleOnDeleteCustomPill = (id: string, queryBuilderId: string) =>
+    dispatch(deleteCustomPill({ id, queryBuilderId, tag }));
 
   const handleOnDuplicateCustomPill = (customPill: ISavedFilter) =>
     dispatch(duplicateCustomPill({ ...customPill, tag }));
