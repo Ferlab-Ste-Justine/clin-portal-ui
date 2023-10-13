@@ -639,7 +639,7 @@ export const getVariantColumns = (
           multiple: 1,
         },
         render: (record: VariantEntity) =>
-          renderDonorByKey('donors.ad_ration', findDonorById(record.donors, patientId)),
+          renderDonorByKey('donors.ad_ratio', findDonorById(record.donors, patientId)),
       },
       {
         key: 'donors.filters',
