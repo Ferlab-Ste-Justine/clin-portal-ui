@@ -12,7 +12,7 @@ describe('Page des variants - Requêtes', () => {
   });
 
   it('Éditer une pilule via la facette', () => {
-    cy.checkAndClickApplyFacet('category_variant', 'Type de variant', 0, /^Insertion$/);
+    cy.checkAndClickApplyFacet('Variant', 'Type de variant', 'insertion');
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV','Insertion']);
     cy.validateTotalSelectedQuery('1.2M');
@@ -23,7 +23,7 @@ describe('Page des variants - Requêtes', () => {
   it('Éditer une pilule via son popup', () => {
     cy.get('[class*="QueryValues_queryValuesContainer"]').contains('SNV').click({force:true});
     cy.get('input[id="input-insertion"]').check({force: true});
-    cy.clickApplyFacet(3);
+    cy.clickAndIntercept('[data-cy="Apply_Type de variant"]', 'POST', '**/graphql', 3);
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV','Insertion']);
     cy.validateTotalSelectedQuery('1.2M');
@@ -32,7 +32,7 @@ describe('Page des variants - Requêtes', () => {
   });
 
   it('Ajouter une pilule à une requête', () => {
-    cy.checkAndClickApplyFacet('category_variant', 'Chromosome', 3, '19');
+    cy.checkAndClickApplyFacet('Variant', 'Chromosome', '19');
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validatePillSelectedQuery('Chromosome', ['19'], 1);
@@ -53,7 +53,7 @@ describe('Page des variants - Requêtes', () => {
     cy.validateTableResultsCount(/1 298 \d{3}/);
     cy.validateClearAllButton(false);
 
-    cy.checkAndClickApplyFacet('category_variant', 'Chromosome', 3, '19');
+    cy.checkAndClickApplyFacet('Variant', 'Chromosome', '19');
 
     cy.validatePillSelectedQuery('Chromosome', ['19']);
     cy.validateTotalSelectedQuery('82.6K');

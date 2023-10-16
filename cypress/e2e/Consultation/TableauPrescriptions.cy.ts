@@ -11,8 +11,8 @@ beforeEach(() => {
 
 describe('Page des prescriptions et requêtes - Consultation du tableau des prescriptions', () => {
   beforeEach(() => {  
-    cy.checkValueFacet(0, 'Approuvée');
-    cy.checkValueFacet(2, 'RGDI');
+    cy.checkValueFacet('Statut', 'active');
+    cy.checkValueFacet('Analyse', 'RGDI');
   
     cy.resetColumns(0);
   
@@ -48,9 +48,9 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des pres
 
 describe('Page des prescriptions et requêtes - Consultation du tableau des prescriptions', () => {
   beforeEach(() => {  
-    cy.checkValueFacet(0, 'Approuvée');
-    cy.checkValueFacet(2, 'MYOC');
-    cy.checkValueFacet(2, 'HYPM');
+    cy.checkValueFacet('Statut', 'active');
+    cy.checkValueFacet('Analyse', 'MYOC');
+    cy.checkValueFacet('Analyse', 'HYPM');
   
     cy.resetColumns(0);
   

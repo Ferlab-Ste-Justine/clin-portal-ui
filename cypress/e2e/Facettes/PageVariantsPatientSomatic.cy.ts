@@ -14,14 +14,22 @@ describe('Page des variants d\'un patient (somatic) - Filtrer avec les facettes'
   });
 
   it('Variant - Expand all/Collapse all', () => {
-    cy.validateExpandCollapse('category_variant');
+    cy.validateExpandCollapse('Variant');
   });
 
   it('Variant - Analyse bioinformatique', () => {
-    cy.validateFacetFilter('category_variant', 'Analyse bioinformatique', 1, 'Tumor Only', /^195 065$/);
+    cy.validateFacetFilter('Variant', 'Analyse bioinformatique', 'Tumor Only', 'TEBA', /^195 065$/);
+    cy.validateFacetRank(1, 'Analyse bioinformatique');
   });
 
   it('Pathogénicité - Hotspot', () => {
-    cy.validateFacetFilter('category_pathogenicity', 'Hotspot', 17, 'True', /^27$/);
+    cy.validateFacetFilter('Pathogénicité', 'Hotspot', 'True', 'true', /^27$/);
+    cy.validateFacetRank(17, 'Hotspot');
+  });
+
+  it('Occurrence - Qualité somatique', () => {
+    // TODO Filter
+    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetRank(6, 'Qualité somatique');
   });
 });

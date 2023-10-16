@@ -12,18 +12,21 @@ describe('Page des variants - Filtrer avec les facettes', () => {
   });
 
   it('Patient - Expand all/Collapse all', () => {
-    cy.validateExpandCollapse('patient');
+    cy.validateExpandCollapse('Patient');
   });
 
   it('Patient - Analyse', () => {
-    cy.validateFacetFilter('patient', 'Analyse', 0, 'MYOC', /^870 60\d{1}$/);
+    cy.validateFacetFilter('Patient', 'Analyse', 'MYOC', 'MYOC', /^870 60\d{1}$/);
+    cy.validateFacetRank(0, 'Analyse');
   });
 
   it('Patient - Statut clinique', () => {
-    cy.validateFacetFilter('patient', 'Statut clinique', 1, 'Non atteint', /^423 26\d{1}$/);
+    cy.validateFacetFilter('Patient', 'Statut clinique', 'Non atteint', 'not_affected', /^423 26\d{1}$/);
+    cy.validateFacetRank(1, 'Statut clinique');
   });
 
   it('Patient - Sexe', () => {
-    cy.validateFacetFilter('patient', 'Sexe', 2, 'Indéterminé', /^192 10\d{1}$/);
+    cy.validateFacetFilter('Patient', 'Sexe', 'Indéterminé', 'unknown', /^192 10\d{1}$/);
+    cy.validateFacetRank(2, 'Sexe');
   });
 });

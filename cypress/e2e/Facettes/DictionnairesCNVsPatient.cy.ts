@@ -30,7 +30,7 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'Leukemia (somatic) (SHEMA)',
                          'No Data'];
 
-    cy.validateDictionnary('rqdm', /^RQDM$/, 0, dictionnary);
+    cy.validateDictionnary('Panel RQDM', 'Panel RQDM', dictionnary);
   });
 
   it('Variant - Type de variant', () => {
@@ -38,7 +38,7 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                           'LOSS',
                           'No Data'];
 
-    cy.validateDictionnary('category_variant', /^Type de variant$/, 0, dictionnary);
+    cy.validateDictionnary('Variant', 'Type de variant', dictionnary);
   });
 
   it('Variant - Chromosome', () => {
@@ -68,7 +68,7 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'Y',
                          'No Data'];
 
-    cy.validateDictionnary('category_variant', /^Chromosome$/, 2, dictionnary);
+    cy.validateDictionnary('Variant', 'Chromosome', dictionnary);
   });
 
   it('Gène - Panel RQDM', () => {
@@ -88,7 +88,7 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'Leukemia (somatic) (SHEMA)',
                          'No Data'];
 
-    cy.validateDictionnary('category_genomic', /^Panel RQDM$/, 0, dictionnary);
+    cy.validateDictionnary('Gène', 'Panel RQDM', dictionnary);
   });
 
   it('Occurrence - Filtre (Dragen)', () => {
@@ -98,6 +98,6 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'LoDFail',
                          'No Data'];
 
-    cy.validateDictionnary('category_occurrence', /^Filtre \(Dragen\)$/, 0, dictionnary);
+    cy.validateDictionnary('Occurrence', 'Filtre \(Dragen\)', dictionnary);
   });
 });

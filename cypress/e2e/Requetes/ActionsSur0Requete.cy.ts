@@ -16,7 +16,7 @@ describe('Page des variants - Requêtes', () => {
     cy.validateTotalSelectedQuery('1.3M');
     cy.validateTableResultsCount(/1 298 \d{3}/);
 
-    cy.checkAndClickApplyFacet('category_variant', 'Type de variant', 0, 'SNV');
+    cy.checkAndClickApplyFacet('Variant', 'Type de variant', 'SNV');
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');

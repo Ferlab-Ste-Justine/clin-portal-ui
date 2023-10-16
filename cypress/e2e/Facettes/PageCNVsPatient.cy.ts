@@ -14,58 +14,92 @@ describe('Page des CNVs d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Panel RQDM - Expand all/Collapse all', () => {
-    cy.validateExpandCollapse('rqdm');
+    cy.validateExpandCollapse('Panel RQDM');
   });
 
   it('Panel RQDM - Panel RQDM', () => {
-    cy.validateFacetFilter('rqdm', 'Panel RQDM', 0, 'POLYM', /^26$/);
+    cy.validateFacetFilter('Panel RQDM', 'Panel RQDM', 'POLYM', 'POLYM', /^26$/);
+    cy.validateFacetRank(0, 'Panel RQDM');
   });
 
   it('Variant - Expand all/Collapse all', () => {
-    cy.validateExpandCollapse('category_variant');
+    cy.validateExpandCollapse('Variant');
   });
 
   it('Variant - Type de variant', () => {
-    cy.validateFacetFilter('category_variant', 'Type de variant', 0, 'GAIN', /^121$/);
+    cy.validateFacetFilter('Variant', 'Type de variant', 'GAIN', 'GAIN', /^121$/);
+    cy.validateFacetRank(0, 'Type de variant');
+  });
+
+  it('Variant - Longueur du CNV', () => {
+    // TODO Filter
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
+    cy.validateFacetRank(1, 'Longueur du CNV');
   });
 
   it('Variant - Chromosome', () => {
-    cy.validateFacetFilter('category_variant', 'Chromosome', 2, '15', /^16$/);
+    cy.validateFacetFilter('Variant', 'Chromosome', '15', '15', /^16$/);
+    cy.validateFacetRank(2, 'Chromosome');
+  });
+
+  it('Variant - Début du CNV', () => {
+    // TODO Filter
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
+    cy.validateFacetRank(3, 'Début du CNV');
+  });
+
+  it('Variant - Fin du CNV', () => {
+    // TODO Filter
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
+    cy.validateFacetRank(4, 'Fin du CNV');
   });
 
   it('Gène - Expand all/Collapse all', () => {
-    cy.validateExpandCollapse('category_genomic', true);
+    cy.validateExpandCollapse('Gène', true);
   });
 
   it('Gène - Panel RQDM', () => {
-    cy.validateFacetFilter('category_genomic', 'Panel RQDM', 0, 'POLYM', /^26$/);
+    cy.validateFacetFilter('Gène', 'Panel RQDM', 'POLYM', 'POLYM', /^26$/);
+    cy.validateFacetRank(0, 'Panel RQDM');
   });
 
   it('Gène - HPO', () => {
-    cy.validateFacetFilter('category_genomic', 'HPO', 1, 'Autosomal recessive inheritance (HP:0000007)', /^24$/, true);
+    cy.validateFacetFilter('Gène', 'HPO', 'Autosomal recessive inheritance (HP:0000007)', 'Autosomal recessive inheritance (HP:0000007)', /^24$/, true);
+    cy.validateFacetRank(1, 'HPO');
   });
 
   it('Gène - ORPHANET', () => {
-    cy.validateFacetFilter('category_genomic', 'ORPHANET', 2, 'Precursor B-cell acute lymphoblastic leukemia', /^(9|8)$/, true);
+    cy.validateFacetFilter('Gène', 'ORPHANET', 'Precursor B-cell acute lymphoblastic leukemia', 'Precursor B-cell acute lymphoblastic leukemia', /^(9|8)$/, true);
+    cy.validateFacetRank(2, 'ORPHANET');
   });
 
   it('Gène - OMIM', () => {
-    cy.validateFacetFilter('category_genomic', 'OMIM', 3, 'Fraser syndrome 3', /^2$/, true);
+    cy.validateFacetFilter('Gène', 'OMIM', 'Fraser syndrome 3', 'Fraser syndrome 3', /^2$/, true);
+    cy.validateFacetRank(3, 'OMIM');
   });
 
   it('Gène - DDD', () => {
-    cy.validateFacetFilter('category_genomic', 'DDD', 4, 'AGNATHIA-OTOCEPHALY COMPLEX biallelic', /^1$/, true);
+    cy.validateFacetFilter('Gène', 'DDD', 'AGNATHIA-OTOCEPHALY COMPLEX biallelic', 'AGNATHIA-OTOCEPHALY COMPLEX biallelic', /^1$/, true);
+    cy.validateFacetRank(4, 'DDD');
   });
 
   it('Gène - COSMIC', () => {
-    cy.validateFacetFilter('category_genomic', 'COSMIC', 5, 'Other tumour types', /^1$/, true);
+    cy.validateFacetFilter('Gène', 'COSMIC', 'Other tumour types', 'other tumour types', /^1$/, true);
+    cy.validateFacetRank(5, 'COSMIC');
   });
 
   it('Occurrence - Expand all/Collapse all', () => {
-    cy.validateExpandCollapse('category_occurrence');
+    cy.validateExpandCollapse('Occurrence');
   });
 
   it('Occurrence - Filtre (Dragen)', () => {
-    cy.validateFacetFilter('category_occurrence', 'Filtre (Dragen)', 0, 'CnvQual', /^98$/);
+    cy.validateFacetFilter('Occurrence', 'Filtre (Dragen)', 'CnvQual', 'cnvQual', /^98$/);
+    cy.validateFacetRank(0, 'Filtre (Dragen)');
+  });
+
+  it('Occurrence - Qualité du CNV', () => {
+    // TODO Filter
+    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetRank(1, 'Qualité du CNV');
   });
 });

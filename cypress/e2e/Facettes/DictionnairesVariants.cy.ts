@@ -28,7 +28,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Tumoral Exome (EXTUM)',
                          'No Data'];
 
-    cy.validateDictionnary('patient', /^Analyse$/, 0, dictionnary);
+    cy.validateDictionnary('Patient', 'Analyse', dictionnary);
   });
 
   it('Patient - Statut clinique', () => {
@@ -36,7 +36,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Non atteint',
                           'Inconnu'];
 
-    cy.validateDictionnary('patient', /^Statut clinique$/, 1, dictionnary);
+    cy.validateDictionnary('Patient', 'Statut clinique', dictionnary);
   });
 
   it('Patient - Sexe', () => {
@@ -45,7 +45,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Autre',
                          'Indéterminé'];
 
-    cy.validateDictionnary('patient', /^Sexe$/, 2, dictionnary);
+    cy.validateDictionnary('Patient', 'Sexe', dictionnary);
   });
 
   it('Variant - Type de variant', () => {
@@ -57,7 +57,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Séquence Altération',
                          'No Data'];
 
-    cy.validateDictionnary('category_variant', /^Type de variant$/, 0, dictionnary);
+    cy.validateDictionnary('Variant', 'Type de variant', dictionnary);
   });
 
   it('Variant - Conséquences', () => {
@@ -102,7 +102,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Intergenic',
                           'No Data'];
 
-    cy.validateDictionnary('category_variant', /^Conséquences$/, 1, dictionnary);
+    cy.validateDictionnary('Variant', 'Conséquences', dictionnary);
   });
 
   it('Variant - Référence externe', () => {
@@ -112,7 +112,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Cosmic',
                          'No Data'];
 
-    cy.validateDictionnary('category_variant', /^Référence externe$/, 2, dictionnary);
+    cy.validateDictionnary('Variant', 'Référence externe', dictionnary);
   });
 
   it('Variant - Chromosome', () => {
@@ -142,7 +142,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Y',
                          'No Data'];
 
-    cy.validateDictionnary('category_variant', /^Chromosome$/, 3, dictionnary);
+    cy.validateDictionnary('Variant', 'Chromosome', dictionnary);
   });
 
   it('Variant - Zygosité', () => {
@@ -150,7 +150,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'HEM',
                           'HET'];
 
-    cy.validateDictionnary('category_variant', /^Zygosité$/, 5, dictionnary);
+    cy.validateDictionnary('Variant', 'Zygosité', dictionnary);
   });
 
   it('Variant - Transmission', () => {
@@ -168,14 +168,14 @@ describe('Page des variants - Dictionnaire', () => {
                           'Unknown Proband Genotype',
                           'No Data'];
 
-    cy.validateDictionnary('category_variant', /^Transmission$/, 6, dictionnary);
+    cy.validateDictionnary('Variant', 'Transmission', dictionnary);
   });
 
   it('Variant - Hét. composé', () => {
     const dictionnary = ['False',
                          'True'];
 
-    cy.validateDictionnary('category_variant', /^Hét. composé$/, 7, dictionnary);
+    cy.validateDictionnary('Variant', 'Hét. composé', dictionnary);
   });
 
   it('Gène - Type de gène', () => {
@@ -249,7 +249,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Bidirectional Promoter LncRNA',
                           'No Data'];
 
-    cy.validateDictionnary('category_genomic', /^Type de gène$/, 0, dictionnary);
+    cy.validateDictionnary('Gène', 'Type de gène', dictionnary);
   });
 
   it('Gène - Référence externe', () => {
@@ -262,7 +262,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'DDD',
                          'No Data'];
 
-    cy.validateDictionnary('category_genomic', /^Référence externe$/, 1, dictionnary);
+    cy.validateDictionnary('Gène', 'Référence externe', dictionnary);
   });
 
   it('Gène - RQDM', () => {
@@ -283,7 +283,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Severe Combined Immune Deficiency (SCID)',
                          'No Data'];
 
-    cy.validateDictionnary('category_genomic', /^RQDM$/, 4, dictionnary);
+    cy.validateDictionnary('Gène', 'RQDM', dictionnary);
   });
 
   it('Pathogénicité - ClinVar', () => {
@@ -307,7 +307,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Low Penetrance',
                          'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^ClinVar$/, 0, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'ClinVar', dictionnary);
   });
 
   it('Pathogénicité - VEP', () => {
@@ -317,7 +317,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'MODIFIER',
                           'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^VEP$/, 1, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'VEP', dictionnary);
   });
 
   it('Pathogénicité - FATHMM', () => {
@@ -325,7 +325,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Tolerated',
                           'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^FATHMM$/, 5, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'FATHMM', dictionnary);
   });
 
   it('Pathogénicité - LRT', () => {
@@ -334,7 +334,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Unknown',
                           'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^LRT$/, 6, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'LRT', dictionnary);
   });
 
   it('Pathogénicité - Polyphen 2 HVAR', () => {
@@ -343,7 +343,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Possibily Damaging',
                           'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^Polyphen 2 HVAR$/, 7, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'Polyphen 2 HVAR', dictionnary);
   });
 
   it('Pathogénicité - SIFT', () => {
@@ -351,7 +351,7 @@ describe('Page des variants - Dictionnaire', () => {
                           'Tolerated',
                           'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^SIFT$/, 8, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'SIFT', dictionnary);
   });
 
   it('Pathogénicité - CMC tier', () => {
@@ -361,7 +361,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'Other',
                          'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^CMC tier$/, 13, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'CMC tier', dictionnary);
   });
 
   it('Pathogénicité - Hotspot', () => {
@@ -369,6 +369,6 @@ describe('Page des variants - Dictionnaire', () => {
                          'False',
                          'No Data'];
 
-    cy.validateDictionnary('category_pathogenicity', /^Hotspot$/, 14, dictionnary);
+    cy.validateDictionnary('Pathogénicité', 'Hotspot', dictionnary);
   });
 });

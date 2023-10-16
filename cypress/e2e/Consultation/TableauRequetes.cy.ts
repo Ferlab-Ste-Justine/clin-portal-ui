@@ -11,8 +11,8 @@ beforeEach(() => {
 
 describe('Page des prescriptions et requêtes - Consultation du tableau des requêtes', () => {
   beforeEach(() => {  
-    cy.checkValueFacet(0, 'Approuvée');
-    cy.checkValueFacet(2, 'RGDI');
+    cy.checkValueFacet('Statut', 'active');
+    cy.checkValueFacet('Analyse', 'RGDI');
   
     cy.get('div[id*="tab-requests"]').click({force: true});
     cy.resetColumns(1);
@@ -56,8 +56,8 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
 
 describe('Page des prescriptions et requêtes - Consultation du tableau des requêtes', () => {
   beforeEach(() => {  
-    cy.checkValueFacet(0, 'Approuvée');
-    cy.checkValueFacet(2, 'HYPM');
+    cy.checkValueFacet('Statut', 'active');
+    cy.checkValueFacet('Analyse', 'HYPM');
   
     cy.get('div[id*="tab-requests"]').click({force: true});
     cy.resetColumns(1);
@@ -114,7 +114,7 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
   });
 
   it('Valider les fonctionnalités du tableau - Tri Analyse', () => {
-    cy.checkValueFacet(2, 'MYOC');
+    cy.checkValueFacet('Analyse', 'MYOC');
     cy.sortTableAndIntercept('Analyse', 3, 1);
     cy.validateTableFirstRow('HYPM', 7, '[id="rc-tabs-0-panel-requests"]');
     cy.sortTableAndIntercept('Analyse', 3, 1);
@@ -171,7 +171,7 @@ describe('Page des prescriptions et requêtes - Consultation du tableau des requ
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
-    cy.checkValueFacet(2, 'MYOC');
+    cy.checkValueFacet('Analyse', 'MYOC');
     cy.validatePaging(/10\d{1}/, 1, 1);
   });
 });

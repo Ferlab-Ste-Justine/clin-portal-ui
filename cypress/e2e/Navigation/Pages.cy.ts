@@ -179,7 +179,7 @@ describe('Affichage de toutes les pages et modals', () => {
     cy.contains('Utiliser les filtres pour créer une requête').should('exist', {timeout: 20*1000});
 
     // Téléverser une liste de gènes
-    cy.get('[data-key="category_genomic"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Gène"]').click({force: true});
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.contains('Téléverser une liste de gènes').should('exist', {timeout: 20*1000});
     cy.contains('Copier-coller une liste d\'identifiants ou téléverser un fichier').should('exist', {timeout: 20*1000});

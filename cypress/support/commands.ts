@@ -6,45 +6,35 @@ export interface Replacement {
   value: string;
 }
 
-Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, isRqdmExpand: boolean = false) => {
-  cy.get('li[data-key="' + section + '"]').click({force: true});
+Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: string, value: string, isRqdmExpand: boolean = false) => {
+  cy.get('[data-cy="SidebarMenuItem_' + section + '"]').click({force: true});
 
   if (isRqdmExpand) {
-    cy.get('span[class*="FilterContainer_title"]').contains('Panel RQDM', {timeout: 5000}).click({force: true});
+    cy.get('[data-cy="FilterContainer_Panel RQDM"]').click({force: true});
   }
 
-  if (section !== 'rqdm') {
-    cy.get('span[class*="FilterContainer_title"]').contains(facetTitle, {timeout: 5000}).click({force: true});
+  if (section !== 'Panel RQDM') {
+    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').click({force: true});
     cy.wait(1000);
   }
 
-  cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
-    .find('div[class*="CheckboxFilter_checkboxFilterItem"]', {timeout: 5000}).contains(value)
-    .find('[type="checkbox"]').check({force: true});
-  cy.clickApplyFacet(4);
+  cy.get('[data-cy="Checkbox_' + facetTitle + '_' + value + '"]').check({force: true});
+  cy.clickAndIntercept('[data-cy="Apply_' + facetTitle + '"]', 'POST', '**/graphql', 4);
 });
 
-Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp) => {
-  cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
-    .find('[aria-expanded="true"]').should('exist');
+Cypress.Commands.add('checkValueFacet', (facetTitle: string, valueBack: string) => {
+  cy.get('[aria-expanded="true"] [data-cy="FilterContainer_' + facetTitle + '"]').should('exist');
   cy.waitWhileSpin(1000);
-  cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
+  cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
     .find('button').then(($button) => {
       if ($button.hasClass('ant-btn-link')) {
-        cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
+        cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
           .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
         cy.waitWhileSpin(1000);
       };
   });
 
-  cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
-
-  cy.get('div[class="Filter_facetCollapse__ft2Q2"]').eq(facetRank)
-    .find('div[class*="CheckboxFilter_checkboxFilterItem"]').contains(value)
-    .find('[type="checkbox"]').check({force: true});
-
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+  cy.clickAndIntercept('[data-cy="Checkbox_' + facetTitle + '_' + valueBack + '"]', 'POST', '**/graphql', 2);
 });
 
 Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number) => {
@@ -58,16 +48,6 @@ Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string,
 
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 20*1000});
-  };
-});
-
-Cypress.Commands.add('clickApplyFacet', (nbCalls: number) => {
-  cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
-  
-  cy.get('span[data-key="apply"]', {timeout: 20*1000}).click({force: true, multiple: true});
-  
-  for (let i = 0; i < nbCalls; i++) {
-    cy.wait('@getPOSTgraphql', {timeout: 20*1000});
   };
 });
 
@@ -171,41 +151,31 @@ Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
   cy.get('[id="query-builder-header-tools"]').contains('Tout effacer').should(strExist);
 });
 
-Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: RegExp, facetRank: number, dictionnary: (string|RegExp)[]) => {
-  cy.get('li[data-key="' + section + '"]').click({force: true});
+Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: string, dictionnary: (string|RegExp)[]) => {
+  cy.get('[data-cy="SidebarMenuItem_' + section + '"]').click({force: true});
 
-  if (section !== 'rqdm') {
-    cy.get('span[class*="FilterContainer_title"]').contains(facetTitle, {timeout: 5000}).click({force: true});
+  if (section !== 'Panel RQDM') {
+    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').click({force: true});
   }
   
-  cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
-    .then(($facet) => {
-      if ($facet.has('Dictionnaire')) {
-        cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
-          .find('button[role="switch"]', {timeout: 5000}).eq(0).click({force: true});
-        cy.wait(1000);
-      };
-    });
+  cy.get('[data-cy="Button_Dict_' + facetTitle + '"]').click({force: true});
+  cy.wait(1000);
 
   // Toutes les valeurs du dictionnaire sont présentes dans la facette
   for (let i = 0; i < dictionnary.length; i++) {
-    cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
-      .find('div[class*="CheckboxFilter_checkboxFilterItem"]').find('label').contains(dictionnary[i])
-      .should('exist');
+    cy.get('[data-cy*="Checkbox_' + facetTitle + '_"]').parents('label').contains(dictionnary[i]).should('exist');
     }
     
   // Aucune nouvelle valeur n'est présente dans la facette
-  cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(facetRank)
-    .find('div[class*="CheckboxFilter_checkboxFilterItem"]')
-    .its('length').should('eq', dictionnary.length);
+  cy.get('[data-cy*="Checkbox_' + facetTitle + '_"]').its('length').should('eq', dictionnary.length);
 });
 
 Cypress.Commands.add('validateExpandCollapse', (section: string, isRqdmExpand: boolean = false) => {
   const eq = isRqdmExpand ? 1 : 0;
 
-  cy.get('li[data-key="' + section + '"]').click({force: true});
+  cy.get('[data-cy="SidebarMenuItem_' + section + '"]').click({force: true});
 
-  if (section !== 'rqdm') {
+  if (section !== 'Panel RQDM') {
     cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(eq).find('[aria-expanded="false"]').should('exist');
     cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').contains('Tout ouvrir').should('exist');
 
@@ -219,11 +189,15 @@ Cypress.Commands.add('validateExpandCollapse', (section: string, isRqdmExpand: b
   cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').contains('Tout ouvrir').should('exist');
 });
 
-Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, expectedCount: string|RegExp, isRqdmExpand: boolean = false) => {
-  cy.checkAndClickApplyFacet(section, facetTitle, facetRank, value, isRqdmExpand);
+Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string|RegExp, valueFront: string, valueBack: string, expectedCount: string|RegExp, isRqdmExpand: boolean = false) => {
+  cy.checkAndClickApplyFacet(section, facetTitle.toString(), valueBack, isRqdmExpand);
 
-  cy.validatePillSelectedQuery(facetTitle, [value]);
+  cy.validatePillSelectedQuery(facetTitle, [valueFront]);
   cy.get('body').contains(expectedCount).should('exist');
+});
+
+Cypress.Commands.add('validateFacetRank', (facetRank: number, facetTitle: string|RegExp) => {
+  cy.get('div[class*="Filters_customFilterContainer"]').eq(facetRank).contains(facetTitle).should('exist');
 });
 
 Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Replacement[]) => {

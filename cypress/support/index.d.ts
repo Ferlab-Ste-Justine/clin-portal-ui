@@ -2,10 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 declare namespace Cypress {
   interface Chainable {
-    checkAndClickApplyFacet(section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, isRqdmExpand: boolean = false): cy & CyEventEmitter;
-    checkValueFacet(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
+    checkAndClickApplyFacet(section: string, facetTitle: string, valueBack: string, isRqdmExpand: boolean = false): cy & CyEventEmitter;
+    checkValueFacet(facetTitle: string, valueBack: string): cy & CyEventEmitter;
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
-    clickApplyFacet(nbCalls: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
     login(user: string, password: string, restoreSession: boolean = true): cy & CyEventEmitter;
     logout(): cy & CyEventEmitter;
@@ -16,9 +15,10 @@ declare namespace Cypress {
     sortTableAndWait(column: string, eq: number = 0): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     validateClearAllButton(shouldExist: boolean): cy & CyEventEmitter;
-    validateDictionnary(section: string, facetTitle: RegExp, facetRank: number, dictionnary: (string|RegExp)[]): cy & CyEventEmitter;
+    validateDictionnary(section: string, facetTitle: string, dictionnary: (string|RegExp)[]): cy & CyEventEmitter;
     validateExpandCollapse(section: string, isRqdmExpand: boolean = false): cy & CyEventEmitter;
-    validateFacetFilter(section: string, facetTitle: string|RegExp, facetRank: number, value: string|RegExp, expectedCount: string|RegExp, isRqdmExpand: boolean = false): cy & CyEventEmitter;
+    validateFacetFilter(section: string, facetTitle: string|RegExp, valueFront: string, valueBack: string, expectedCount: string|RegExp, isRqdmExpand: boolean = false): cy & CyEventEmitter;
+    validateFacetRank(facetRank: number, facetTitle: string|RegExp): cy & CyEventEmitter;
     validateFileContent(fixture: string, replacements?: Replacement[]): cy & CyEventEmitter;
     validateFileHeaders(fixture: string): cy & CyEventEmitter;
     validateFileName(namePattern: string): cy & CyEventEmitter;
