@@ -25,7 +25,7 @@ const SnvExplorationPatient = () => {
   const [prescription, setPrescription] = useState<ServiceRequestEntity>();
   const [basedOnPrescription, setBasedOnPrescription] = useState<ServiceRequestEntity>();
   const filterMapper = (filters: ISqonGroupFilter) =>
-    wrapSqonWithDonorIdAndSrId(filters, patientid /** prescriptionid */);
+    wrapSqonWithDonorIdAndSrId(filters, patientid /** prescriptionid */, undefined, 'flag1,flag2');
 
   useEffect(() => {
     setHeaderLoading(true);

@@ -48,7 +48,9 @@ const PageContent = ({ variantMapping, patientId }: OwnProps) => {
     wrapSqonWithDonorIdAndSrId(
       cloneDeep(resolveSyntheticSqon(queryList, query, variantMapping)),
       patientId,
+      undefined,
       /** prescriptionId Need to fix bug in ETL */
+      'flag1,flag2',
     );
 
   const queryVariables = {

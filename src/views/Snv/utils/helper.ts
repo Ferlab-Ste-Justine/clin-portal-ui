@@ -5,6 +5,7 @@ export const wrapSqonWithDonorIdAndSrId = (
   resolvedSqon: ISqonGroupFilter,
   patientId?: string,
   prescriptionId?: string,
+  withFlags?: string,
 ) => {
   const cleanSqon = (sqon: any, keyToRemove = 'pivot') => {
     if (typeof sqon !== 'object' || sqon === null) {
@@ -24,12 +25,23 @@ export const wrapSqonWithDonorIdAndSrId = (
     return sqon;
   };
 
-  const addFilters = (content: any, patientFilter: any, prescriptionFilter: any) => {
+  const addFilters = (
+    content: any,
+    patientFilter: any,
+    prescriptionFilter: any,
+    withFlagsFilter: any,
+  ) => {
     if (patientFilter) content.push(patientFilter);
     if (prescriptionFilter) content.push(prescriptionFilter);
+    if (withFlagsFilter) content.push(withFlagsFilter);
     return content;
   };
-  const handleContent = (sqon: any, patientFilter: any, prescriptionFilter: any): any => {
+  const handleContent = (
+    sqon: any,
+    patientFilter: any,
+    prescriptionFilter: any,
+    withFlagsFilter: any,
+  ): any => {
     // @ts-ignore
     const explodeOrCondition = (toExplode: any) => {
       toExplode.content = toExplode.content.map((item: any) => ({
@@ -37,6 +49,7 @@ export const wrapSqonWithDonorIdAndSrId = (
           Array.isArray(item.content) ? item.content : [item],
           patientFilter,
           prescriptionFilter,
+          withFlagsFilter,
         ),
         op: 'and',
         pivot: 'donors',
@@ -54,7 +67,7 @@ export const wrapSqonWithDonorIdAndSrId = (
         return explodeOrCondition(sqon);
       } else if (Array.isArray(sqon.content)) {
         sqon.content = sqon.content.map((item: any) =>
-          handleContent(item, patientFilter, prescriptionFilter),
+          handleContent(item, patientFilter, prescriptionFilter, withFlagsFilter),
         );
       }
     } else if (sqon && Array.isArray(sqon.content) && sqon.content.length > 1) {
@@ -62,13 +75,13 @@ export const wrapSqonWithDonorIdAndSrId = (
     } else if (sqon && Array.isArray(sqon.content) && sqon.content.length <= 1) {
       return {
         ...sqon,
-        content: addFilters(sqon.content, patientFilter, prescriptionFilter),
+        content: addFilters(sqon.content, patientFilter, prescriptionFilter, withFlagsFilter),
         pivot: 'donors',
       };
     } else {
       return {
         ...sqon,
-        content: addFilters([sqon], patientFilter, prescriptionFilter),
+        content: addFilters([sqon], patientFilter, prescriptionFilter, withFlagsFilter),
         pivot: 'donors',
         op: 'and',
       };
@@ -87,9 +100,13 @@ export const wrapSqonWithDonorIdAndSrId = (
     ? { content: { field: 'donors.patient_id', value: [patientId] }, op: TermOperators.in }
     : null;
 
-  if (patientId || prescriptionId) {
+  const withFlagsFilter = withFlags
+    ? { content: { field: 'withFlags', value: [withFlags] }, op: TermOperators.in }
+    : null;
+
+  if (patientId || prescriptionId || withFlags) {
     const cleanedSqon = cleanSqon(resolvedSqon);
-    return handleContent(cleanedSqon, patientFilter, prescriptionFilter);
+    return handleContent(cleanedSqon, patientFilter, prescriptionFilter, withFlagsFilter);
   }
 
   return resolvedSqon;
