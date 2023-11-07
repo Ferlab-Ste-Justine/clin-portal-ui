@@ -56,12 +56,21 @@ const createSavedFilter = createAsyncThunk<
   const { data, error } = await SavedFilterApi.create(filter);
 
   if (error) {
-    thunkAPI.dispatch(
-      globalActions.displayMessage({
-        type: 'error',
-        content: intl.get('api.savedFilter.error.messageUpdate'),
-      }),
-    );
+    if (error.response?.status === 422) {
+      thunkAPI.dispatch(
+        globalActions.displayMessage({
+          type: 'error',
+          content: intl.get('api.savedFilter.error.nameAlreadyExists'),
+        }),
+      );
+    } else {
+      thunkAPI.dispatch(
+        globalActions.displayMessage({
+          type: 'error',
+          content: intl.get('api.savedFilter.error.messageUpdate'),
+        }),
+      );
+    }
     return thunkAPI.rejectWithValue(error.message);
   }
 
@@ -84,12 +93,21 @@ const updateSavedFilter = createAsyncThunk<
   const { data, error } = await SavedFilterApi.update(id, filterInfo);
 
   if (error) {
-    thunkAPI.dispatch(
-      globalActions.displayMessage({
-        type: 'error',
-        content: intl.get('api.savedFilter.error.messageUpdate'),
-      }),
-    );
+    if (error.response?.status === 422) {
+      thunkAPI.dispatch(
+        globalActions.displayMessage({
+          type: 'error',
+          content: intl.get('api.savedFilter.error.nameAlreadyExists'),
+        }),
+      );
+    } else {
+      thunkAPI.dispatch(
+        globalActions.displayMessage({
+          type: 'error',
+          content: intl.get('api.savedFilter.error.messageUpdate'),
+        }),
+      );
+    }
     return thunkAPI.rejectWithValue(error.message);
   }
 

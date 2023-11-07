@@ -43,7 +43,7 @@
         "title": "Supprimer cette requête ?",
         "okText": "Supprimer",
         "cancelText": "Annuler",
-        "message": "Vous êtes sur le point de supprimer la requête personnalisée « {title} » , ce qui pourrait avoir un impact sur vos résultats.",
+        "message": "Vous êtes sur le point de supprimer la requête personnalisée « {title} », ce qui pourrait avoir un impact sur vos résultats.",
         "existingFilters": "Filtres sauvegardés affectés :",
         "errorMessage": "Nous ne sommes pas en mesure de récupérer votre liste de filtres pour le moment."
       },
@@ -958,6 +958,7 @@
   "api.savedFilter.error.title": "Erreur",
   "api.savedFilter.error.messageUpdate": "Impossible de mettre à jour le filtre",
   "api.savedFilter.error.messageDelete": "Impossible de supprimer le filtre",
+  "api.savedFilter.error.nameAlreadyExists": "Un filtre avec de nom existe déjà",
   "api.savedFilter.success.messageSaved": "Filtre sauvegardé",
   "api.savedFilter.success.messageDeleted": "Filtre supprimé",
   "inheritant.code.NRT": "No Reported Transmission",

@@ -201,6 +201,7 @@ const columns = [
   {
     title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.AAColumn'),
     dataIndex: 'aa',
+    key: 'aa',
     render: (aa: string) => (
       <div className={styles.longValue}>{aa || TABLE_EMPTY_PLACE_HOLDER}</div>
     ),
@@ -210,6 +211,7 @@ const columns = [
   {
     title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.ConsequenceColumn'),
     dataIndex: 'consequences',
+    key: 'consequences',
     render: (consequences: string[]) => {
       if (consequences.length === 0) {
         return <></>;
@@ -225,6 +227,7 @@ const columns = [
   {
     title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.CDNAChangeColumn'),
     dataIndex: 'codingDna',
+    key: 'codingDna',
     render: (codingDna: string) => (
       <div className={styles.longValue}>{codingDna || TABLE_EMPTY_PLACE_HOLDER}</div>
     ),
@@ -233,12 +236,14 @@ const columns = [
   {
     title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.VEP'),
     dataIndex: 'vep',
+    key: 'vep',
     render: (vep: Impact) => getVepImpactTag(vep.toLowerCase()),
     width: '10%',
   },
   {
     title: () => intl.get('prediction'),
     dataIndex: 'impact',
+    key: 'impact',
     render: (impacts: string[][]) => {
       if (impacts.length === 0) {
         return TABLE_EMPTY_PLACE_HOLDER;
@@ -280,6 +285,7 @@ const columns = [
   {
     title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.ConservationColumn'),
     dataIndex: 'conservation',
+    key: 'conservation',
     render: ({ phylo_p17way_primate_score, phyloP100way_vertebrate }: any) => (
       <div style={{ minWidth: 150 }}>
         <StackLayout horizontal className={styles.cellList}>
@@ -296,6 +302,7 @@ const columns = [
   {
     title: () => intl.get('ensemblID'),
     dataIndex: 'transcript',
+    key: 'transcript',
     render: (transcript: {
       transcriptId: string;
       isCanonical?: boolean;
@@ -334,6 +341,7 @@ const columns = [
   {
     title: () => intl.get('refSeq'),
     dataIndex: 'transcript',
+    key: 'transcript',
     render: (transcript: { ids: string[] }) => {
       if (!transcript.ids) {
         return TABLE_EMPTY_PLACE_HOLDER;
