@@ -33,3 +33,5 @@ export const MAIN_SCROLL_WRAPPER_ID = 'main-scroll-wrapper';
 export const SERVICE_REQUEST_CODE_MAP_KEY = 'fhir_service_request_codes';
 
 export const REDIRECT_URI_KEY = 'redirect_path';
+
+export const ALREADY_EXISTS_ERROR_STATUS = 422;

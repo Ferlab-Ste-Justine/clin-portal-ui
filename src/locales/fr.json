@@ -50,7 +50,7 @@
       "notification": {
         "error": {
           "description": "Une erreur s'est produite et nous n'avons pas été en mesure de supprimer votre requête. Veuillez réessayer.",
-          "message": "La suppression de la requête a échoué"
+          "message": "La suppression de la requête a échouée"
         },
         "success": "Requête supprimée avec succès"
       }
@@ -60,7 +60,7 @@
       "notification": {
         "error": {
           "description": "Une erreur s'est produite et nous n'avons pas été en mesure de dupliquer votre requête. Veuillez réessayer.",
-          "message": "La duplication de la requête a échoué"
+          "message": "La duplication de la requête a échouée"
         }
       }
     },
@@ -460,7 +460,7 @@
   "querybuilder.actions.saveCustomPill.input.placeholder": "Requête sans titre",
   "querybuilder.actions.saveCustomPill.modal.cancel": "Annuler",
   "querybuilder.actions.saveCustomPill.modal.errorNotification.description": "Une erreur s'est produite et nous n'avons pas été en mesure de créer votre requête. Veuillez réessayer.",
-  "querybuilder.actions.saveCustomPill.modal.errorNotification.message": "La création de la requête a échoué",
+  "querybuilder.actions.saveCustomPill.modal.errorNotification.message": "La création de la requête a échouée",
   "querybuilder.actions.saveCustomPill.modal.message": "Vous trouverez vos requêtes enregistrées dans la barre latérale sous la rubrique « Requêtes ».",
   "querybuilder.actions.saveCustomPill.modal.save": "Sauvegarder",
   "querybuilder.actions.saveCustomPill.modal.successNotification": "Requête créée avec succès",
@@ -958,7 +958,7 @@
   "api.savedFilter.error.title": "Erreur",
   "api.savedFilter.error.messageUpdate": "Impossible de mettre à jour le filtre",
   "api.savedFilter.error.messageDelete": "Impossible de supprimer le filtre",
-  "api.savedFilter.error.nameAlreadyExists": "Un filtre avec de nom existe déjà",
+  "api.savedFilter.error.nameAlreadyExists": "Un filtre avec ce nom existe déjà",
   "api.savedFilter.success.messageSaved": "Filtre sauvegardé",
   "api.savedFilter.success.messageDeleted": "Filtre supprimé",
   "inheritant.code.NRT": "No Reported Transmission",

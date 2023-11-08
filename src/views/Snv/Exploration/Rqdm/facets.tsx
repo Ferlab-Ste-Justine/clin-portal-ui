@@ -1,4 +1,3 @@
-// import { ReactElement } from 'react';
 import intl from 'react-intl-universal';
 import { FilterFilled, UserOutlined } from '@ant-design/icons';
 import QueriesSidebar from '@ferlab/ui/core/components/CustomPill/QueriesSidebar/index';
@@ -10,6 +9,7 @@ import { fetchFiltersByCustomPill } from 'api/customPill/customPill.utils';
 import { TUserSavedFilter } from 'api/savedFilter/models';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
+import { filtersContainer } from 'views/Snv/Exploration/components/filtersContainer';
 import {
   FilterTypes,
   GeneSearchFieldsMapping,
@@ -26,8 +26,6 @@ import { TCustomFilterMapper } from 'components/uiKit/FilterList';
 import { FilterInfo } from 'components/uiKit/FilterList/types';
 import VariantGeneSearch from 'components/VariantGeneSearch';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
-
-import { filtersContainer } from '../components/filtersContainer';
 
 import styles from '../facets.module.scss';
 

@@ -11,6 +11,7 @@ import { isEmpty } from 'lodash';
 import { v4 } from 'uuid';
 
 import { globalActions } from 'store/global';
+import { ALREADY_EXISTS_ERROR_STATUS } from 'utils/constants';
 import { FILTER_TAG_QB_ID_MAPPING } from 'utils/queryBuilder';
 
 const fetchSavedFilters = createAsyncThunk<
@@ -56,7 +57,7 @@ const createSavedFilter = createAsyncThunk<
   const { data, error } = await SavedFilterApi.create(filter);
 
   if (error) {
-    if (error.response?.status === 422) {
+    if (error.response?.status === ALREADY_EXISTS_ERROR_STATUS) {
       thunkAPI.dispatch(
         globalActions.displayMessage({
           type: 'error',
@@ -93,7 +94,7 @@ const updateSavedFilter = createAsyncThunk<
   const { data, error } = await SavedFilterApi.update(id, filterInfo);
 
   if (error) {
-    if (error.response?.status === 422) {
+    if (error.response?.status === ALREADY_EXISTS_ERROR_STATUS) {
       thunkAPI.dispatch(
         globalActions.displayMessage({
           type: 'error',

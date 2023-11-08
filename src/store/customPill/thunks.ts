@@ -20,6 +20,7 @@ import { v4 as getUUID } from 'uuid';
 
 import { globalActions } from 'store/global';
 import { fetchSavedFilters } from 'store/savedFilter/thunks';
+import { ALREADY_EXISTS_ERROR_STATUS } from 'utils/constants';
 
 const fetchCustomPills = createAsyncThunk<
   Record<string, TUserSavedFilter[]>,
@@ -50,14 +51,13 @@ const createCustomPill = createAsyncThunk<TUserSavedFilter, TUserSavedFilterInse
     const { data, error } = await CustomPillApi.create(customPill);
 
     if (error) {
-      // TODO need to be fix in back response
       if (
-        error.response?.status === 422 &&
+        error.response?.status === ALREADY_EXISTS_ERROR_STATUS &&
         (error.response?.data as ICreateError)?.error?.translationKey
       ) {
         throw new Error('Already exists');
       }
-      if (error.response?.status === 422) {
+      if (error.response?.status === ALREADY_EXISTS_ERROR_STATUS) {
         throw new Error('Invalid format');
       }
       thunkAPI.dispatch(

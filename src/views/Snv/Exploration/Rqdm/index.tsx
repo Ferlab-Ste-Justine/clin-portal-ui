@@ -1,18 +1,13 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-// import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import { CustomPillApi } from 'api/customPill';
-// import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
-// import { IValueFilter } from '@ferlab/ui/core/data/sqon/types';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMapping } from 'graphql/models';
 import { GraphqlBackend } from 'providers';
 import ApolloProvider from 'providers/ApolloProvider';
 
-// import { QUERY_EDITION_QB_ID } from 'views/Snv/utils/constant';
-// import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
 import useCustomPillsActions from 'hooks/useCustomPillsActions';
 import { useCustomPill } from 'store/customPill';
