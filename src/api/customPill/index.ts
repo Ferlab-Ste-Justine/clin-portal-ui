@@ -18,8 +18,7 @@ const headers = () => ({
 const fetchAll = (tag?: string) =>
   sendRequestWithRpt<TUserSavedFilter[]>({
     method: 'GET',
-    // url: `${SAVED_FILTER_API_URL}${tag ? '/tag/' + tag : ''}/type/${SavedFilterTypeEnum.Query}`,
-    url: `${SAVED_FILTER_API_URL}`,
+    url: `${SAVED_FILTER_API_URL}${tag ? '/tag/' + tag : ''}`,
     headers: headers(),
     params: { type: SavedFilterTypeEnum.Query },
   });
