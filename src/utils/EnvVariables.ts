@@ -16,6 +16,7 @@ export default class EnvironmentVariables {
     FORCE_FILTER_BOOLEAN_TO_DICTIONARY: process.env.REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY,
     FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS:
       process.env.REACT_APP_FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS,
+    SENTRY_API: process.env.REACT_APP_SENTRY_API,
   };
 
   static configFor(key: string): string {
