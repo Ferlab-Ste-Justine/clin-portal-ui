@@ -8,6 +8,7 @@ import { GetAnalysisNameByCode } from 'store/global/types';
 
 import { dictionaries } from '../graphql/utils/dictionaries';
 
+import { getQueriesSidebarDictionary } from './customPill';
 import { formatNumber } from './formatNumber';
 
 export const getFiltersDictionary = (): FiltersDict => ({
@@ -308,6 +309,7 @@ export const getQueryBuilderDictionary = (
         },
       },
     },
+    queriesSidebar: getQueriesSidebarDictionary(),
   };
 };
 

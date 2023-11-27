@@ -25,6 +25,7 @@ import LineStyleIcon from 'components/icons/LineStyleIcon';
 import { TCustomFilterMapper } from 'components/uiKit/FilterList';
 import { FilterInfo } from 'components/uiKit/FilterList/types';
 import VariantGeneSearch from 'components/VariantGeneSearch';
+import { getQueriesSidebarDictionary } from 'utils/customPill';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 
 import styles from '../facets.module.scss';
@@ -273,49 +274,7 @@ export const getMenuItems = ({
         customPills={customPills}
         hasError={hasCustomPillError}
         isLoading={isLoading}
-        dictionary={{
-          emptyText: intl.get('screen.patientsnv.queriesSidebar.emptyText'),
-          learnMore: intl.get('screen.patientsnv.queriesSidebar.learnMore'),
-          title: intl.get('screen.patientsnv.queriesSidebar.title'),
-          errorText: intl.get('screen.patientsnv.queriesSidebar.errorText'),
-          deleteCustomPill: {
-            modal: {
-              title: intl.get('customPill.delete.modal.title'),
-              okText: intl.get('customPill.delete.modal.okText'),
-              cancelText: intl.get('customPill.delete.modal.cancelText'),
-              message: intl.get('customPill.delete.modal.message'),
-              existingFilters: intl.get('customPill.delete.modal.existingFilters'),
-              errorMessage: intl.get('customPill.delete.modal.errorMessage'),
-            },
-          },
-          editCustomPill: {
-            title: intl.get('customPill.edit.title'),
-            cancelText: intl.get('customPill.edit.cancelText'),
-            saveText: intl.get('customPill.edit.saveText'),
-            nameAlreadyExist: {
-              message: intl.get('customPill.edit.nameAlreadyExist.message'),
-              description: intl.get('customPill.edit.nameAlreadyExist.description'),
-              okText: intl.get('customPill.edit.nameAlreadyExist.okText'),
-            },
-            save: {
-              confirmation: {
-                title: intl.get('customPill.edit.save.confirmation.title'),
-                message: intl.get('customPill.edit.save.confirmation.message'),
-                existingFilters: intl.get('customPill.edit.save.confirmation.existingFilters'),
-                existingFiltersError: intl.get(
-                  'customPill.edit.save.confirmation.existingFiltersError',
-                ),
-                cancelText: intl.get('customPill.edit.save.confirmation.cancelText'),
-                okText: intl.get('customPill.edit.save.confirmation.okText'),
-              },
-              emptyQuery: {
-                title: intl.get('customPill.edit.save.emptyQuery.title'),
-                message: intl.get('customPill.edit.save.emptyQuery.message'),
-                closeText: intl.get('customPill.edit.save.emptyQuery.closeText'),
-              },
-            },
-          },
-        }}
+        dictionary={getQueriesSidebarDictionary()}
         learnMoreLink={learnMoreLink}
         queryBuilderId={VARIANT_RQDM_QB_ID}
         queryDictionary={queryDictionary}
