@@ -32,8 +32,7 @@ describe('Page des CNVs d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Variant - Longueur du CNV', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
+    cy.validateFacetNumFilter('Variant', 'Longueur du CNV', '5', '2');
     cy.validateFacetRank(1, 'Longueur du CNV');
   });
 
@@ -43,14 +42,12 @@ describe('Page des CNVs d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Variant - Début du CNV', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
+    cy.validateFacetNumFilter('Variant', 'Début du CNV', '100000', '2');
     cy.validateFacetRank(3, 'Début du CNV');
   });
 
   it('Variant - Fin du CNV', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
+    cy.validateFacetNumFilter('Variant', 'Fin du CNV', '100000', '2');
     cy.validateFacetRank(4, 'Fin du CNV');
   });
 
@@ -98,8 +95,7 @@ describe('Page des CNVs d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Occurrence - Qualité du CNV', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetNumFilter('Occurrence', 'Qualité du CNV', '5', '12');
     cy.validateFacetRank(1, 'Qualité du CNV');
   });
 });

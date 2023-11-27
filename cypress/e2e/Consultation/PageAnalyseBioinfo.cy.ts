@@ -37,7 +37,7 @@ describe('Page d\'une analyse bioinformatique - Vérifier les informations affic
   });
   
   it('Panneau Échantillons', () => {
-    cy.get('[data-cy="SamplesCard_Table"]').contains(new RegExp("^" + epCHUSJ_ldmCHUSJ.sampleProbId + "$")).should('exist');
+    cy.get('[data-cy="SamplesCard_Table"]').contains(new RegExp(`^${epCHUSJ_ldmCHUSJ.sampleProbId}$`)).should('exist');
     cy.get('[data-cy="SamplesCard_Table"]').contains('DNA').should('exist');
     cy.get('[data-cy="SamplesCard_Table"]').contains('SP_'+epCHUSJ_ldmCHUSJ.sampleProbId).should('exist');
     cy.get('[data-cy="SamplesCard_Table"]').contains('NBL').should('exist');

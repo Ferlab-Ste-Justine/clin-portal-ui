@@ -206,6 +206,69 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.validateTableFirstRow('1.00e+0', 14);
   });
 
+  it('Valider les fonctionnalités du tableau - Tri QG', () => {
+    cy.sortTableAndIntercept('QG', 1);
+    cy.validateTableFirstRow(/^1$/, 15);
+    cy.sortTableAndIntercept('QG', 1);
+    cy.validateTableFirstRow('447', 15);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Zyg.', () => {
+    cy.sortTableAndIntercept('Zyg.', 1);
+    cy.validateTableFirstRow('Hem', 16);
+    cy.sortTableAndIntercept('Zyg.', 1);
+    cy.validateTableFirstRow('Hom', 16);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Trans.', () => {
+    cy.sortTableAndIntercept('Trans.', 1);
+    cy.validateTableFirstRow('-', 20);
+    cy.sortTableAndIntercept('Trans.', 1);
+    cy.validateTableFirstRow('XLR DNV', 20);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri QP', () => {
+    cy.sortTableAndIntercept('QP', 1);
+    cy.validateTableFirstRow(/^0$/, 21);
+    cy.sortTableAndIntercept('QP', 1);
+    cy.validateTableFirstRow('34.99', 21);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri OP', () => {
+    cy.sortTableAndIntercept('OP', 1);
+    cy.validateTableFirstRow('-', 22);
+    cy.sortTableAndIntercept('OP', 1);
+    cy.validateTableFirstRow('UNK', 22);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri A', () => {
+    cy.sortTableAndIntercept(/^A$/, 1);
+    cy.validateTableFirstRow(/^3$/, 23);
+    cy.sortTableAndIntercept(/^A$/, 1);
+    cy.validateTableFirstRow('458', 23);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri A+R', () => {
+    cy.sortTableAndIntercept(/^A\+R$/, 1);
+    cy.validateTableFirstRow(/^3$/, 24);
+    cy.sortTableAndIntercept(/^A\+R$/, 1);
+    cy.validateTableFirstRow('631', 24);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri A/(A+R)', () => {
+    cy.sortTableAndIntercept('A/(A+R)', 1);
+    cy.validateTableFirstRow('0.05', 25);
+    cy.sortTableAndIntercept('A/(A+R)', 1);
+    cy.validateTableFirstRow('1.00', 25);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Filtre', () => {
+    cy.sortTableAndIntercept('Filtre', 1);
+    cy.validateTableFirstRow('DRAGENIndelHardQUAL', 26);
+    cy.sortTableAndIntercept('Filtre', 1);
+    cy.validateTableFirstRow('PASS', 26);
+  });
+
   it('Valider les fonctionnalités du tableau - Tri CMC', () => {
     cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);

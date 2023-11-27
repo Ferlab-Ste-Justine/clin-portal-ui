@@ -47,8 +47,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Variant - Position', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
+    cy.validateFacetNumFilter('Variant', 'Position', '100000', '242');
     cy.validateFacetRank(4, 'Position');
   });
 
@@ -67,14 +66,12 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Gène - gnomAD pLi', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Gène"]').click({force: true});
+    cy.validateFacetNumFilter('Gène', 'gnomAD pLi', '0.01', '141 443');
     cy.validateFacetRank(2, 'gnomAD pLi');
   });
 
   it('Gène - gnomAD LOEUF', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Gène"]').click({force: true});
+    cy.validateFacetNumFilter('Gène', 'gnomAD LOEUF', '0.01', '59 125');
     cy.validateFacetRank(3, 'gnomAD LOEUF');
   });
 
@@ -114,62 +111,52 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Fréquence - Fréq. all. tous les patients', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'Fréq. all. tous les patients', '0.01', '8 705');
     cy.validateFacetRank(0, 'Fréq. all. tous les patients');
   });
 
   it('Fréquence - Fréq. all. patients atteints', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'Fréq. all. patients atteints', '0.01', '9 091');
     cy.validateFacetRank(1, 'Fréq. all. patients atteints');
   });
 
   it('Fréquence - Fréq. all. patients non atteints', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'Fréq. all. patients non atteints', '0.01', '18 346');
     cy.validateFacetRank(2, 'Fréq. all. patients non atteints');
   });
 
   it('Fréquence - gnomAD Exome 2.1.1', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'gnomAD Exome 2.1.1', '0.01', '134 845');
     cy.validateFacetRank(3, 'gnomAD Exome 2.1.1');
   });
 
   it('Fréquence - gnomAD Genome 2.1.1', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'gnomAD Genome 2.1.1', '0.01', '16 465');
     cy.validateFacetRank(4, 'gnomAD Genome 2.1.1');
   });
 
   it('Fréquence - gnomAD Genome 3.0', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'gnomAD Genome 3.0', '0.01', '8 829');
     cy.validateFacetRank(5, 'gnomAD Genome 3.0');
   });
 
   it('Fréquence - gnomAD Genome 3.1.1', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'gnomAD Genome 3.1.1', '0.01', '8 854');
     cy.validateFacetRank(6, 'gnomAD Genome 3.1.1');
   });
 
   it('Fréquence - gnomAD Genome 3.1.1 ALT', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'gnomAD Genome 3.1.1 ALT', '0.01', '1 378');
     cy.validateFacetRank(7, 'gnomAD Genome 3.1.1 ALT');
   });
 
   it('Fréquence - TopMed Bravo', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', 'TopMed Bravo', '0.01', '8 881');
     cy.validateFacetRank(8, 'TopMed Bravo');
   });
 
   it('Fréquence - 1000 Genome', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Fréquence"]').click({force: true});
+    cy.validateFacetNumFilter('Fréquence', '1000 Genome', '0.01', '182 677');
     cy.validateFacetRank(9, '1000 Genome');
   });
 
@@ -188,8 +175,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Pathogénicité - Score Exomiser', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'Score Exomiser', '0.6', '184 065');
     cy.validateFacetRank(2, 'Score Exomiser');
   });
 
@@ -204,20 +190,17 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Pathogénicité - CADD (Phred)', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'CADD (Phred)', '0.01', '179 165');
     cy.validateFacetRank(5, 'CADD (Phred)');
   });
 
   it('Pathogénicité - CADD (Raw)', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'CADD (Raw)', '0.01', '180 151');
     cy.validateFacetRank(6, 'CADD (Raw)');
   });
 
   it('Pathogénicité - DANN', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'DANN', '0.05', '179 067');
     cy.validateFacetRank(7, 'DANN');
   });
 
@@ -242,26 +225,22 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Pathogénicité - SpliceAI', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'SpliceAI', '0.01', '154 143');
     cy.validateFacetRank(12, 'SpliceAI');
   });
 
   it('Pathogénicité - REVEL', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'REVEL', '0.01', '180 624');
     cy.validateFacetRank(13, 'REVEL');
   });
 
   it('Pathogénicité - CMC', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'CMC', '5', '177 160');
     cy.validateFacetRank(14, 'CMC');
   });
 
   it('Pathogénicité - CMC (ratio)', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Pathogénicité"]').click({force: true});
+    cy.validateFacetNumFilter('Pathogénicité', 'CMC (ratio)', '0.01', '184 062');
     cy.validateFacetRank(15, 'CMC (ratio)');
   });
 
@@ -315,32 +294,27 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Occurrence - Qualité de profondeur', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetNumFilter('Occurrence', 'Qualité de profondeur', '0.01', '12');
     cy.validateFacetRank(8, 'Qualité de profondeur');
   });
 
   it('Occurrence - Profondeur allélique ALT', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetNumFilter('Occurrence', 'Profondeur allélique ALT', '5', '23 324');
     cy.validateFacetRank(9, 'Profondeur allélique ALT');
   });
 
   it('Occurrence - Profondeur totale ALT + REF', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetNumFilter('Occurrence', 'Profondeur totale ALT + REF', '5', '11 586');
     cy.validateFacetRank(10, 'Profondeur totale ALT + REF');
   });
 
   it('Occurrence - Ratio allélique ALT / (ALT+REF)', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetNumFilter('Occurrence', 'Ratio allélique ALT / (ALT+REF)', '0.05', /^1$/);
     cy.validateFacetRank(11, 'Ratio allélique ALT / (ALT+REF)');
   });
 
   it('Occurrence - Qualité du génotype', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetNumFilter('Occurrence', 'Qualité du génotype', '5', '3 025');
     cy.validateFacetRank(12, 'Qualité du génotype');
   });
 });

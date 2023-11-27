@@ -28,8 +28,7 @@ describe('Page des variants d\'un patient (somatic) - Filtrer avec les facettes'
   });
 
   it('Occurrence - Qualité somatique', () => {
-    // TODO Filter
-    cy.get('[data-cy="SidebarMenuItem_Occurrence"]').click({force: true});
+    cy.validateFacetNumFilter('Occurrence', 'Qualité somatique', '0.01', '11 865');
     cy.validateFacetRank(6, 'Qualité somatique');
   });
 });

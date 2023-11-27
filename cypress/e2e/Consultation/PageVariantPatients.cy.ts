@@ -14,8 +14,8 @@ describe('Page d\'un variant (onglet Patients) - Vérifier les informations affi
   it('Graphiques', () => {
     cy.get('[data-cy="PieChart_Gender"]').find('path[opacity="1"]').eq(1).trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
     cy.get('[data-cy="PieChart_Gender"]').find('div[style*="pointer-events"]').invoke('text').then((invokeText) => {
-      let orderIndetermine = 0;
-      let orderFeminin     = 1;
+      let orderIndetermine = 1;
+      let orderFeminin     = 0;
       let orderMasculin    = 2;
 
       if(invokeText.includes("Masculin")) {

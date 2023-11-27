@@ -50,11 +50,8 @@ describe('Page des fichiers d\'un patient - Consultation du tableau', () => {
   });
   
   it('Valider les fonctionnalités du tableau - Tri Format', () => {
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
     cy.sortTableAndWait('Patient');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
     cy.sortTableAndWait('Patient');
-
     cy.sortTableAndWait('Format');
     cy.validateTableFirstRow('BED', 1);
     cy.sortTableAndWait('Format');
@@ -62,72 +59,70 @@ describe('Page des fichiers d\'un patient - Consultation du tableau', () => {
     cy.sortTableAndWait('Format');
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Requête', () => {
+  it('Valider les fonctionnalités du tableau - Tri Patient', () => {
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
     cy.sortTableAndWait('Patient');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
     cy.sortTableAndWait('Patient');
-    
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Requête', () => {
+    cy.sortTableAndWait('Patient');
+    cy.sortTableAndWait('Patient');
     cy.sortTableAndWait('Requête');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestProbId, 3);
     cy.sortTableAndWait('Requête');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.requestFthId, 3);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Analyse bioinfo', () => {
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+  it('Valider les fonctionnalités du tableau - Tri Échantillon (LDM)', () => {
     cy.sortTableAndWait('Patient');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
     cy.sortTableAndWait('Patient');
-    
+    cy.sortTableAndWait('Échantillon (LDM)');
+    cy.validateTableFirstRow('NA24143_A', 4);
+    cy.sortTableAndWait('Échantillon (LDM)');
+    cy.validateTableFirstRow('NA24835_A', 4);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Analyse bioinfo', () => {  
+    cy.sortTableAndWait('Patient');
+    cy.sortTableAndWait('Patient');  
     cy.sortTableAndWait('Analyse bioinfo');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalProbId, 5);
     cy.sortTableAndWait('Analyse bioinfo');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.bioAnalFthId, 5);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Date', () => {
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+  it('Valider les fonctionnalités du tableau - Tri Date', () => {  
     cy.sortTableAndWait('Patient');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
-    cy.sortTableAndWait('Patient');
-    
+    cy.sortTableAndWait('Patient');  
     cy.sortTableAndWait('Date');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.stampDate, 6);
     cy.sortTableAndWait('Date');
     cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.stampDate, 6);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Taille', () => {
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+  it('Valider les fonctionnalités du tableau - Tri Taille', () => {    
     cy.sortTableAndWait('Patient');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
     cy.sortTableAndWait('Patient');
-    
     cy.sortTableAndWait('Taille');
     cy.validateTableFirstRow('242 B', 8);
     cy.sortTableAndWait('Taille');
     cy.validateTableFirstRow('3.11 GB', 8);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Run', () => {
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+  it('Valider les fonctionnalités du tableau - Tri Run', () => {    
     cy.sortTableAndWait('Patient');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
     cy.sortTableAndWait('Patient');
-    
     cy.sortTableAndWait('Run');
     cy.validateTableFirstRow('A00516_0169_16774', 10);
     cy.sortTableAndWait('Run');
     cy.validateTableFirstRow('A00516_0169_16776', 10);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Type', () => {
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientProbId, 2);
+  it('Valider les fonctionnalités du tableau - Tri Type', () => {    
     cy.sortTableAndWait('Patient');
-    cy.validateTableFirstRow(epCHUSJ_ldmCHUSJ.patientFthId, 2);
     cy.sortTableAndWait('Patient');
-    
     cy.sortTableAndWait('Type');
     cy.validateTableFirstRow('ALIR', 11);
     cy.sortTableAndWait('Type');

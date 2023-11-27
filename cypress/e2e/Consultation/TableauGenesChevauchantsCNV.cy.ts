@@ -18,20 +18,22 @@ describe('Modal des gènes chevauchant un CNV - Consultation du tableau', () => 
     cy.sortTableAndWait('Début');
     cy.get('tr[data-row-key="00b535001879d47abebd243f45e148428500448a"]').contains(/^2$/).click({force: true});
 
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').find('td').eq(0).contains('OCLN').should('exist');
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').find('td').eq(1).contains('RGDI').should('exist');
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').find('td').eq(2).contains('65.6 kb').should('exist');
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').find('td').eq(3).contains('6.6 kb').should('exist');
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').find('td').eq(4).contains(/^2$/).should('exist');
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').find('td').eq(5).contains('10.1 %').should('exist');
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').find('td').eq(6).contains('24.2 %').should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(0).contains('OCLN').should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(1).contains('RGDI').should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(2).contains('65.6 kb').should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(3).contains('6.6 kb').should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(4).contains(/^2$/).should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(5).contains('10.1 %').should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(6).contains('24.2 %').should('exist');
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(7).find('path[d*="M12.4"]').should('exist'); // Gène recoupe le CNV à une de ses extrémités
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').find('td').eq(7).find('path[d*="M15.6"]').should('exist');
   });
  
   it('Valider les liens disponibles Lien Gène', () => {
     cy.sortTableAndWait('Début');
     cy.get('tr[data-row-key="00b535001879d47abebd243f45e148428500448a"]').contains(/^2$/).click({force: true});
 
-    cy.get('div[role="dialog"]').find('tr[data-row-key="1"]').contains('OCLN')
+    cy.get('div[role="dialog"]').find('tr[data-row-key="0"]').contains('OCLN')
       .should('have.attr', 'href', 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=OCLN');
   });
 
@@ -93,6 +95,17 @@ describe('Modal des gènes chevauchant un CNV - Consultation du tableau', () => 
     cy.get('div[role="dialog"]').find('tr[class*="ant-table-row"]').eq(0).find('td').eq(6).contains('24.2 %').should('exist');
     cy.get('div[role="dialog"]').find('thead[class="ant-table-thead"]').contains('% CNV').click({force: true});
     cy.get('div[role="dialog"]').find('tr[class*="ant-table-row"]').eq(0).find('td').eq(6).contains('68.2 %').should('exist');
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Type', () => {
+    cy.get('tr[data-row-key="498403813965c489afc0ba3c70fddbc181703e39"]').contains(/^38$/).click({force: true});
+
+    cy.get('div[role="dialog"]').find('thead[class="ant-table-thead"]').contains('Type').click({force: true});
+    cy.get('div[role="dialog"]').find('tr[class*="ant-table-row"]').eq(0).find('td').eq(7).find('path[d*="M12.4"]').should('exist'); // Gène recoupe le CNV à une de ses extrémités
+    cy.get('div[role="dialog"]').find('tr[class*="ant-table-row"]').eq(0).find('td').eq(7).find('path[d*="M15.6"]').should('exist');
+    cy.get('div[role="dialog"]').find('thead[class="ant-table-thead"]').contains('Type').click({force: true});
+    cy.get('div[role="dialog"]').find('tr[class*="ant-table-row"]').eq(0).find('td').eq(7).find('path[d*="M10.8"]').should('exist'); // Gène entièrement contenu dans le CNV
+    cy.get('div[role="dialog"]').find('tr[class*="ant-table-row"]').eq(0).find('td').eq(7).find('path[d*="M13.2"]').should('exist');
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

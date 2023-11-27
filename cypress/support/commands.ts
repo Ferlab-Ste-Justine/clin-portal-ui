@@ -7,34 +7,34 @@ export interface Replacement {
 }
 
 Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: string, value: string, isRqdmExpand: boolean = false) => {
-  cy.get('[data-cy="SidebarMenuItem_' + section + '"]').click({force: true});
+  cy.get(`[data-cy="SidebarMenuItem_${section}"]`).click({force: true});
 
   if (isRqdmExpand) {
     cy.get('[data-cy="FilterContainer_Panel RQDM"]').click({force: true});
   }
 
   if (section !== 'Panel RQDM') {
-    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').click({force: true});
+    cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).click({force: true});
     cy.wait(1000);
   }
 
-  cy.get('[data-cy="Checkbox_' + facetTitle + '_' + value + '"]').check({force: true});
-  cy.clickAndIntercept('[data-cy="Apply_' + facetTitle + '"]', 'POST', '**/graphql', 4);
+  cy.get(`[data-cy="Checkbox_${facetTitle}_${value}"]`).check({force: true});
+  cy.clickAndIntercept(`[data-cy="Apply_${facetTitle}"]`, 'POST', '**/graphql', 4);
 });
 
 Cypress.Commands.add('checkValueFacet', (facetTitle: string, valueBack: string) => {
-  cy.get('[aria-expanded="true"] [data-cy="FilterContainer_' + facetTitle + '"]').should('exist');
+  cy.get(`[aria-expanded="true"] [data-cy="FilterContainer_${facetTitle}"]`).should('exist');
   cy.waitWhileSpin(1000);
-  cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
+  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
     .find('button').then(($button) => {
       if ($button.hasClass('ant-btn-link')) {
-        cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
+        cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
           .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
         cy.waitWhileSpin(1000);
       };
   });
 
-  cy.clickAndIntercept('[data-cy="Checkbox_' + facetTitle + '_' + valueBack + '"]', 'POST', '**/graphql', 2);
+  cy.clickAndIntercept(`[data-cy="Checkbox_${facetTitle}_${valueBack}"]`, 'POST', '**/graphql', 2);
 });
 
 Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number) => {
@@ -152,13 +152,13 @@ Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
 });
 
 Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: string, dictionnary: (string|RegExp)[], moreButton: boolean = false) => {
-  cy.get('[data-cy="SidebarMenuItem_' + section + '"]').click({force: true});
+  cy.get(`[data-cy="SidebarMenuItem_${section}"]`).click({force: true});
 
   if (section !== 'Panel RQDM') {
-    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').click({force: true});
+    cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).click({force: true});
   }
   
-  cy.get('[data-cy="Button_Dict_' + facetTitle + '"]').click({force: true});
+  cy.get(`[data-cy="Button_Dict_${facetTitle}"]`).click({force: true});
   cy.wait(1000);
 
   if (moreButton) {
@@ -169,17 +169,17 @@ Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: string
 
   // Toutes les valeurs du dictionnaire sont présentes dans la facette
   for (let i = 0; i < dictionnary.length; i++) {
-    cy.get('[data-cy*="Checkbox_' + facetTitle + '_"]').parents('label').contains(dictionnary[i]).should('exist');
+    cy.get(`[data-cy*="Checkbox_${facetTitle}_"]`).parents('label').contains(dictionnary[i]).should('exist');
     }
     
   // Aucune nouvelle valeur n'est présente dans la facette
-  cy.get('[data-cy*="Checkbox_' + facetTitle + '_"]').its('length').should('eq', dictionnary.length);
+  cy.get(`[data-cy*="Checkbox_${facetTitle}_"]`).its('length').should('eq', dictionnary.length);
 });
 
 Cypress.Commands.add('validateExpandCollapse', (section: string, isRqdmExpand: boolean = false) => {
   const eq = isRqdmExpand ? 1 : 0;
 
-  cy.get('[data-cy="SidebarMenuItem_' + section + '"]').click({force: true});
+  cy.get(`[data-cy="SidebarMenuItem_${section}"]`).click({force: true});
 
   if (section !== 'Panel RQDM') {
     cy.get('div[class="FilterContainer_filterContainer__O6v-O"]').eq(eq).find('[aria-expanded="false"]').should('exist');
@@ -195,14 +195,25 @@ Cypress.Commands.add('validateExpandCollapse', (section: string, isRqdmExpand: b
   cy.get('[class*="Filters_filterExpandBtnWrapper"] button[class*="ant-btn-link"]').contains('Tout ouvrir').should('exist');
 });
 
-Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string|RegExp, valueFront: string, valueBack: string, expectedCount: string|RegExp, isRqdmExpand: boolean = false) => {
-  cy.checkAndClickApplyFacet(section, facetTitle.toString(), valueBack, isRqdmExpand);
+Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string, valueFront: string, valueBack: string, expectedCount: string|RegExp, isRqdmExpand: boolean = false) => {
+  cy.checkAndClickApplyFacet(section, facetTitle, valueBack, isRqdmExpand);
 
   cy.validatePillSelectedQuery(facetTitle, [valueFront]);
   cy.get('body').contains(expectedCount).should('exist');
 });
 
-Cypress.Commands.add('validateFacetRank', (facetRank: number, facetTitle: string|RegExp) => {
+Cypress.Commands.add('validateFacetNumFilter', (section: string, facetTitle: string, value: string, expectedCount: string|RegExp) => {
+  cy.get(`[data-cy="SidebarMenuItem_${section}"]`).click({force: true});
+  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).click({force: true});
+  cy.get(`[data-cy="InputNumber_Max_${facetTitle}"]`).type(value, {force: true});
+  cy.get(`[data-cy="Checkbox_NoData_${facetTitle}"]`).check({force: true});
+  cy.get(`[data-cy="Button_Apply_${facetTitle}"]`).click({force: true});
+
+  cy.validatePillSelectedQuery(facetTitle, [value, 'No Data']);
+  cy.get('body').contains(expectedCount).should('exist');
+});
+
+Cypress.Commands.add('validateFacetRank', (facetRank: number, facetTitle: string) => {
   cy.get('div[class*="Filters_customFilterContainer"]').eq(facetRank).contains(facetTitle).should('exist');
 });
 
@@ -299,7 +310,7 @@ Cypress.Commands.add('validatePaging', (total: string|RegExp, eqSelect: number, 
   cy.get('div[class*="Pagination"]').eq(eqTab).find('button[type="button"]').contains('Début').parent('button').should('be.disabled');
 });
 
-Cypress.Commands.add('validatePillSelectedQuery', (facetTitle: string|RegExp, values: (string|RegExp)[], eq: number = 0) => {
+Cypress.Commands.add('validatePillSelectedQuery', (facetTitle: string, values: (string|RegExp)[], eq: number = 0) => {
   if (facetTitle == '') {
     cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').should('not.exist');
   }
@@ -352,7 +363,7 @@ Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, rout
 });
 
 Cypress.Commands.add('visitArchivesPatientPage', (patientId: string) => {
-  cy.visitAndIntercept('/archive/exploration?search=' + patientId,
+  cy.visitAndIntercept(`/archive/exploration?search=${patientId}`,
                        'POST',
                        '**/$graphql*',
                        1);
@@ -360,7 +371,7 @@ Cypress.Commands.add('visitArchivesPatientPage', (patientId: string) => {
 });
 
 Cypress.Commands.add('visitBioinformaticsAnalysisPage', (bioAnalProbId: string) => {
-  cy.visitAndIntercept('/bioinformatics-analysis/' + bioAnalProbId,
+  cy.visitAndIntercept(`/bioinformatics-analysis/${bioAnalProbId}`,
                        'POST',
                        '**/$graphql*',
                        1);
@@ -368,7 +379,7 @@ Cypress.Commands.add('visitBioinformaticsAnalysisPage', (bioAnalProbId: string) 
 
 Cypress.Commands.add('visitCNVsPatientPage', (patientId: string, prescriptionId: string, nbGraphqlCalls: number, sharedFilterOption?: string) => {
   const strSharedFilterOption = sharedFilterOption !== undefined ? sharedFilterOption+'&variantSection=cnv#variants' : '?variantSection=cnv#variants';
-  cy.visitAndIntercept('/prescription/entity/' + prescriptionId + strSharedFilterOption,
+  cy.visitAndIntercept(`/prescription/entity/${prescriptionId}${strSharedFilterOption}`,
                        'POST',
                        '**/graphql',
                        nbGraphqlCalls);
@@ -376,14 +387,14 @@ Cypress.Commands.add('visitCNVsPatientPage', (patientId: string, prescriptionId:
 });
 
 Cypress.Commands.add('visitCQPatientPage', (prescriptionId: string) => {
-  cy.visitAndIntercept('/prescription/entity/' + prescriptionId + '#qc',
+  cy.visitAndIntercept(`/prescription/entity/${prescriptionId}#qc`,
                        'POST',
                        '**/$graphql*',
                        3);
 });
 
 Cypress.Commands.add('visitFilesPatientPage', (prescriptionId: string) => {
-  cy.visitAndIntercept('/prescription/entity/' + prescriptionId + '#files',
+  cy.visitAndIntercept(`/prescription/entity/${prescriptionId}#files`,
                        'POST',
                        '**/$graphql*',
                        7);
@@ -391,7 +402,7 @@ Cypress.Commands.add('visitFilesPatientPage', (prescriptionId: string) => {
 });
 
 Cypress.Commands.add('visitPrescriptionEntityPage', (prescriptionId: string) => {
-  cy.visitAndIntercept('/prescription/entity/' + prescriptionId + '#details',
+  cy.visitAndIntercept(`/prescription/entity/${prescriptionId}#details`,
                        'POST',
                        '**/$graphql*',
                        3);
@@ -406,7 +417,7 @@ Cypress.Commands.add('visitPrescriptionsPage', () => {
 });
 
 Cypress.Commands.add('visitVariantEntityPage', (locusId: string, nbGraphqlCalls: number) => {
-  cy.visitAndIntercept('/variant/entity/' + locusId + '/summary',
+  cy.visitAndIntercept(`/variant/entity/${locusId}/summary`,
                        'POST',
                        '**/graphql',
                        nbGraphqlCalls);
@@ -423,7 +434,7 @@ Cypress.Commands.add('visitVariantsPage', (sharedFilterOption?: string) => {
 
 Cypress.Commands.add('visitVariantsPatientPage', (patientId: string, prescriptionId: string, nbGraphqlCalls: number, sharedFilterOption?: string) => {
   const strSharedFilterOption = sharedFilterOption !== undefined ? '?sharedFilterId='+sharedFilterOption+'&variantSection=snv' : '';
-  cy.visitAndIntercept('/prescription/entity/' + prescriptionId + strSharedFilterOption + '#variants',
+  cy.visitAndIntercept(`/prescription/entity/${prescriptionId}${strSharedFilterOption}#variants`,
                        'POST',
                        '**/graphql',
                        nbGraphqlCalls,);

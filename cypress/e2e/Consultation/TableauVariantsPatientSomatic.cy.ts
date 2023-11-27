@@ -176,6 +176,55 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
     cy.validateTableFirstRow('1.00e+0', 16);
   });
 
+  it('Valider les fonctionnalités du tableau - Tri QS', () => {
+    cy.sortTableAndIntercept('QS', 1);
+    cy.validateTableFirstRow(/^0$/, 17);
+    cy.sortTableAndIntercept('QS', 1);
+    cy.validateTableFirstRow('81.99', 17);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Zyg.', () => {
+    cy.sortTableAndIntercept('Zyg.', 1);
+    cy.validateTableFirstRow('Het', 18);
+    cy.sortTableAndIntercept('Zyg.', 1);
+    cy.validateTableFirstRow('Het', 18);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri QP', () => {
+    cy.sortTableAndIntercept('QP', 1);
+    cy.validateTableFirstRow('-', 19);
+    cy.sortTableAndIntercept('QP', 1);
+    cy.validateTableFirstRow('-', 19);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri A', () => {
+    cy.sortTableAndIntercept(/^A$/, 1);
+    cy.validateTableFirstRow(/^3$/, 20);
+    cy.sortTableAndIntercept(/^A$/, 1);
+    cy.validateTableFirstRow('1489', 20);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri A+R', () => {
+    cy.sortTableAndIntercept(/^A\+R$/, 1);
+    cy.validateTableFirstRow(/^3$/, 21);
+    cy.sortTableAndIntercept(/^A\+R$/, 1);
+    cy.validateTableFirstRow('2553', 21);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri A/(A+R)', () => {
+    cy.sortTableAndIntercept('A/(A+R)', 1);
+    cy.validateTableFirstRow('0.01', 22);
+    cy.sortTableAndIntercept('A/(A+R)', 1);
+    cy.validateTableFirstRow('1.00', 22);
+  });
+
+  it('Valider les fonctionnalités du tableau - Tri Filtre', () => {
+    cy.sortTableAndIntercept('Filtre', 1);
+    cy.validateTableFirstRow('PASS', 23);
+    cy.sortTableAndIntercept('Filtre', 1);
+    cy.validateTableFirstRow('Weak Evidence', 23);
+  });
+
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndIntercept('Gène', 1);
     cy.sortTableAndIntercept('Gène', 1);
@@ -188,4 +237,3 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
     cy.validatePaging('', 1);
   });
 });
-  
