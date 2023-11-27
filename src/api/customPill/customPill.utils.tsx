@@ -7,13 +7,13 @@ export const fetchFiltersByCustomPill = async (id: string) => {
   return { data, error };
 };
 
-export const fetchSavedFilterById = async (id: string) => {
+export const fetchSavedFilterById = async (id: string): Promise<ISavedFilter | undefined> => {
   const { data, error } = await CustomPillApi.fetchById(id);
 
   if (error) return undefined;
 
   if (data) {
-    const savedFilter: ISavedFilter = {
+    const savedFilter = {
       id: data.id,
       title: data.title,
       favorite: data.favorite,
@@ -22,6 +22,4 @@ export const fetchSavedFilterById = async (id: string) => {
     };
     return savedFilter;
   }
-
-  return undefined;
 };

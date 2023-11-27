@@ -12,6 +12,7 @@ import { INDEXES } from 'graphql/constants';
 import { ExtendedMapping, ExtendedMappingResults, IQueryResults } from 'graphql/models';
 import { IVariantResultTree, VariantEntity } from 'graphql/variants/models';
 import { GET_VARIANT_COUNT } from 'graphql/variants/queries';
+import { getMenuItemsEditionPill } from 'views/Snv/Exploration/Rqdm/facets';
 import { QUERY_EDITION_QB_ID } from 'views/Snv/utils/constant';
 
 import LineStyleIcon from 'components/icons/LineStyleIcon';
@@ -22,8 +23,6 @@ import useSavedFiltersActions from 'hooks/useSavedFiltersActions';
 import { useGlobals } from 'store/global';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 import { getQueryBuilderDictionary } from 'utils/translation';
-
-import { getMenuItemsEditionPill } from '../../Rqdm/facets';
 
 import styles from './index.module.scss';
 
