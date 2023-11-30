@@ -466,7 +466,7 @@
   "querybuilder.actions.saveCustomPill.modal.successNotification": "Requête créée avec succès",
   "querybuilder.actions.saveCustomPill.modal.title": "Sauvegarder cette requête",
   "querybuilder.actions.saveCustomPill.tooltip.disabled": "Les requêtes personnalisées ne peuvent pas comprendre d'autres requêtes personnalisées.",
-  "querybuilder.actions.saveCustomPill.tooltip.enabled": "Créer une requête personnalisées.",
+  "querybuilder.actions.saveCustomPill.tooltip.enabled": "Créer une requête personnalisée.",
   "querybuilder.filters.actions.all": "Tout",
   "querybuilder.filters.actions.apply": "Appliquer",
   "querybuilder.filters.actions.clear": "Effacer",
@@ -1088,20 +1088,20 @@
   "numbers": {
     "separator": " "
   },
-  "transmission":{
+  "transmission": {
     "abbrev": {
       "autosomal_dominant_de_novo": "AD DNV",
-      "autosomal_dominant":"AD",
+      "autosomal_dominant": "AD",
       "autosomal_recessive": "AR",
-      "x_linked_dominant_de_novo":"XLD DNV",
-      "x_linked_recessive_de_novo":"XLR DNV",
+      "x_linked_dominant_de_novo": "XLD DNV",
+      "x_linked_recessive_de_novo": "XLR DNV",
       "x_linked_dominant": "XLD",
-      "x_linked_recessive":"XLR",
-      "non_carrier_proband":"NCP",
-      "unknown_parents_genotype":"UPG",
-      "unknown_father_genotype":"UFG",
-      "unknown_mother_genotype":"UMG",
-      "unknown_proband_genotype":"UPBG"
+      "x_linked_recessive": "XLR",
+      "non_carrier_proband": "NCP",
+      "unknown_parents_genotype": "UPG",
+      "unknown_father_genotype": "UFG",
+      "unknown_mother_genotype": "UMG",
+      "unknown_proband_genotype": "UPBG"
     }
   }
 }

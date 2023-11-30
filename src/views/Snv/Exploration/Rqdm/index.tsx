@@ -60,7 +60,7 @@ const SnvExplorationRqdm = () => {
         duplicateCustomPill: handleOnDuplicateCustomPill,
         editCustomPill: handleOnUpdateCustomPill,
         validateName: CustomPillApi.validateName,
-        learnMoreLink: 'http://www.google.fr',
+        // learnMoreLink: 'http://www.google.fr', TODO CLIN-2144
         queryDictionary: getQueryBuilderDictionary(facetTransResolver, getAnalysisNameByCode),
       });
 

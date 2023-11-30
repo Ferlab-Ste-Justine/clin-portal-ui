@@ -199,7 +199,7 @@ export const makeRows = (consequences: ArrangerEdge<ConsequenceEntity>[]) =>
 
 const columns = [
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.AAColumn'),
+    title: intl.get('screen.variantDetails.summaryTab.consequencesTable.AAColumn'),
     dataIndex: 'aa',
     key: 'aa',
     render: (aa: string) => (
@@ -209,7 +209,7 @@ const columns = [
     width: '10%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.ConsequenceColumn'),
+    title: intl.get('screen.variantDetails.summaryTab.consequencesTable.ConsequenceColumn'),
     dataIndex: 'consequences',
     key: 'consequences',
     render: (consequences: string[]) => {
@@ -225,7 +225,7 @@ const columns = [
     width: '15%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.CDNAChangeColumn'),
+    title: intl.get('screen.variantDetails.summaryTab.consequencesTable.CDNAChangeColumn'),
     dataIndex: 'codingDna',
     key: 'codingDna',
     render: (codingDna: string) => (
@@ -234,14 +234,14 @@ const columns = [
     width: '12%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.VEP'),
+    title: intl.get('screen.variantDetails.summaryTab.consequencesTable.VEP'),
     dataIndex: 'vep',
     key: 'vep',
     render: (vep: Impact) => getVepImpactTag(vep.toLowerCase()),
     width: '10%',
   },
   {
-    title: () => intl.get('prediction'),
+    title: intl.get('prediction'),
     dataIndex: 'impact',
     key: 'impact',
     render: (impacts: string[][]) => {
@@ -283,7 +283,7 @@ const columns = [
     width: '15%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.ConservationColumn'),
+    title: intl.get('screen.variantDetails.summaryTab.consequencesTable.ConservationColumn'),
     dataIndex: 'conservation',
     key: 'conservation',
     render: ({ phylo_p17way_primate_score, phyloP100way_vertebrate }: any) => (
@@ -300,7 +300,7 @@ const columns = [
     ),
   },
   {
-    title: () => intl.get('ensemblID'),
+    title: intl.get('ensemblID'),
     dataIndex: 'transcript',
     key: 'transcript',
     render: (transcript: {
@@ -339,7 +339,7 @@ const columns = [
     width: '15%',
   },
   {
-    title: () => intl.get('refSeq'),
+    title: intl.get('refSeq'),
     dataIndex: 'transcript',
     key: 'transcript',
     render: (transcript: { ids: string[] }) => {
