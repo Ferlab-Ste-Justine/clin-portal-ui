@@ -291,6 +291,152 @@ export const getMenuItems = ({
   },
 ];
 
+const filterGroupsEditionPill: {
+  [type: string]: FilterInfo;
+} = {
+  [FilterTypes.Patient]: {
+    groups: [
+      {
+        facets: ['donors__analysis_code', 'donors__affected_status_code', 'donors__gender'],
+      },
+    ],
+  },
+  [FilterTypes.Variant_germline]: {
+    customSearches: () => [
+      <VariantGeneSearch
+        key="variants"
+        index={INDEXES.VARIANT}
+        fields={GeneSearchFieldsMapping}
+        type={SuggestionType.VARIANTS}
+        queryBuilderId={QUERY_EDITION_QB_ID}
+      />,
+    ],
+    groups: [
+      {
+        facets: [
+          'variant_class',
+          'consequences__consequences',
+          'variant_external_reference',
+          'chromosome',
+          'start',
+          'donors__zygosity',
+          'donors__transmission',
+          'donors__is_hc',
+        ],
+        intervalDecimal: {
+          start: 0,
+        },
+        tooltips: ['donors__transmission'],
+      },
+    ],
+  },
+  [FilterTypes.Gene]: {
+    customSearches: () => [
+      <VariantGeneSearch
+        key="genes"
+        index={INDEXES.GENE}
+        fields={GeneSearchFieldsMapping}
+        type={SuggestionType.GENES}
+        queryBuilderId={QUERY_EDITION_QB_ID}
+      />,
+      <GenesUploadIds
+        key="genes_upload_ids"
+        field="consequences.symbol_id_1"
+        queryBuilderId={QUERY_EDITION_QB_ID}
+      />,
+    ],
+    groups: [
+      {
+        facets: [
+          'consequences__biotype',
+          'gene_external_reference',
+          'genes__gnomad__pli',
+          'genes__gnomad__loeuf',
+          'genes__omim__inheritance_code',
+        ],
+      },
+      {
+        title: intl.get('screen.patientsnv.filter.grouptitle.genepanel'),
+        facets: [
+          'panels',
+          'genes__hpo__hpo_term_label',
+          'genes__orphanet__panel',
+          'genes__omim__name',
+          'genes__ddd__disease_name',
+          'genes__cosmic__tumour_types_germline',
+        ],
+      },
+    ],
+  },
+  [FilterTypes.Pathogenicity_germline]: {
+    groups: [
+      {
+        facets: ['clinvar__clin_sig', 'consequences__vep_impact'],
+      },
+      {
+        title: intl.get('predictions'),
+        facets: [
+          'consequences__predictions__cadd_phred',
+          'consequences__predictions__cadd_score',
+          'consequences__predictions__dann_score',
+          'consequences__predictions__fathmm_pred',
+          'consequences__predictions__lrt_pred',
+          'consequences__predictions__polyphen2_hvar_pred',
+          'consequences__predictions__sift_pred',
+          'genes__spliceai__ds',
+          'consequences__predictions__revel_score',
+        ],
+        tooltips: [
+          'consequences__predictions__cadd_phred',
+          'consequences__predictions__cadd_score',
+          'consequences__predictions__dann_score',
+        ],
+      },
+      {
+        title: intl.get('oncology'),
+        facets: ['cmc__sample_mutated', 'cmc__sample_ratio', 'cmc__tier', 'hotspot'],
+        tooltips: ['cmc__sample_mutated', 'cmc__sample_ratio', 'cmc__tier', 'hotspot'],
+      },
+    ],
+  },
+  [FilterTypes.Frequency_germline]: {
+    groups: [
+      {
+        title: intl.get('screen.patientsnv.filter.grouptitle.rqdmpatient'),
+        facets: [
+          'frequency_RQDM__total__af',
+          'frequency_RQDM__affected__af',
+          'frequency_RQDM__non_affected__af',
+        ],
+        tooltips: [
+          'frequency_RQDM__total__af',
+          'frequency_RQDM__affected__af',
+          'frequency_RQDM__non_affected__af',
+        ],
+      },
+      {
+        title: intl.get('screen.patientsnv.filter.grouptitle.publiccohorts'),
+        facets: [
+          'external_frequencies__gnomad_exomes_2_1_1__af',
+          'external_frequencies__gnomad_genomes_2_1_1__af',
+          'external_frequencies__gnomad_genomes_3_0__af',
+          'external_frequencies__gnomad_genomes_3_1_1__af',
+          'external_frequencies__gnomad_genomes_3_1_1__ac',
+          'external_frequencies__topmed_bravo__af',
+          'external_frequencies__thousand_genomes__af',
+        ],
+        tooltips: [
+          'external_frequencies__gnomad_genomes_2_1_1__af',
+          'external_frequencies__gnomad_genomes_3_0__af',
+          'external_frequencies__gnomad_genomes_3_1_1__af',
+          'external_frequencies__topmed_bravo__af',
+          'external_frequencies__thousand_genomes__af',
+        ],
+      },
+    ],
+  },
+};
+
 export const getMenuItemsEditionPill = (
   variantMappingResults: ExtendedMappingResults,
   filterMapper?: TCustomFilterMapper,
@@ -303,7 +449,7 @@ export const getMenuItemsEditionPill = (
       variantMappingResults,
       INDEXES.VARIANT,
       QUERY_EDITION_QB_ID,
-      filterGroups[FilterTypes.Patient],
+      filterGroupsEditionPill[FilterTypes.Patient],
       filterMapper,
     ),
   },
@@ -315,7 +461,7 @@ export const getMenuItemsEditionPill = (
       variantMappingResults,
       INDEXES.VARIANT,
       QUERY_EDITION_QB_ID,
-      filterGroups[FilterTypes.Variant_germline],
+      filterGroupsEditionPill[FilterTypes.Variant_germline],
       filterMapper,
     ),
   },
@@ -327,7 +473,7 @@ export const getMenuItemsEditionPill = (
       variantMappingResults,
       INDEXES.VARIANT,
       QUERY_EDITION_QB_ID,
-      filterGroups[FilterTypes.Gene],
+      filterGroupsEditionPill[FilterTypes.Gene],
       filterMapper,
     ),
   },
@@ -339,7 +485,7 @@ export const getMenuItemsEditionPill = (
       variantMappingResults,
       INDEXES.VARIANT,
       QUERY_EDITION_QB_ID,
-      filterGroups[FilterTypes.Frequency_germline],
+      filterGroupsEditionPill[FilterTypes.Frequency_germline],
       filterMapper,
     ),
   },
@@ -351,7 +497,7 @@ export const getMenuItemsEditionPill = (
       variantMappingResults,
       INDEXES.VARIANT,
       QUERY_EDITION_QB_ID,
-      filterGroups[FilterTypes.Pathogenicity_germline],
+      filterGroupsEditionPill[FilterTypes.Pathogenicity_germline],
       filterMapper,
     ),
   },
