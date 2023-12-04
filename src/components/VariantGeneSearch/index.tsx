@@ -1,6 +1,6 @@
 import intl from 'react-intl-universal';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { ISqonGroupFilter, IValueQuery } from '@ferlab/ui/core/data/sqon/types';
 import { ArrangerApi } from 'api/arranger';
 import { Suggestion, SuggestionType } from 'api/arranger/models';
 import { INDEXES } from 'graphql/constants';
@@ -21,6 +21,9 @@ export const getValue = (type: SuggestionType, option: Suggestion) =>
 
 const VariantGeneSearch = ({ queryBuilderId, index, type, fields }: OwnProps) => {
   const { activeQuery } = useQueryBuilderState(queryBuilderId);
+  activeQuery.content = activeQuery.content.filter(
+    (sqonContentValue) => !(sqonContentValue as IValueQuery).title,
+  );
 
   return (
     <GlobalSearch<Suggestion>
