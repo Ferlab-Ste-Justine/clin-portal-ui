@@ -102,11 +102,13 @@ const App = () => {
                 layout={PageLayout}
                 roles={[Roles.Practitioner]}
               >
-                {(
-                  props: RouteChildrenProps<{
-                    id: string;
-                  }>,
-                ) => <PrescriptionEntity prescriptionId={props.match?.params.id!} />}
+                <>
+                  {(
+                    props: RouteChildrenProps<{
+                      id: string;
+                    }>,
+                  ) => <PrescriptionEntity prescriptionId={props.match?.params.id!} />}
+                </>
               </ProtectedRoute>
               <ProtectedRoute
                 exact
@@ -114,11 +116,13 @@ const App = () => {
                 layout={PageLayout}
                 roles={[Roles.Download]}
               >
-                {(
-                  props: RouteChildrenProps<{
-                    id: string;
-                  }>,
-                ) => <BioInfoAnalysis id={props.match?.params.id!} />}
+                <>
+                  {(
+                    props: RouteChildrenProps<{
+                      id: string;
+                    }>,
+                  ) => <BioInfoAnalysis id={props.match?.params.id!} />}
+                </>
               </ProtectedRoute>
               <ProtectedRoute
                 exact
