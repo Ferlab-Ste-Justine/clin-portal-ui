@@ -10,9 +10,9 @@
     "@nivo/pie": "^0.84.0",
     "@react-keycloak/web": "^3.4.0",
     "@reduxjs/toolkit": "^1.8.4",
-    "@sentry/integrations": "^7.81.1",
     "@sentry/react": "^7.81.1",
-    "antd": "^4.22.0",
+    "@sentry/integrations": "^7.81.1",
+    "antd": "^4.24.15",
     "antd-mask-input": "^2.0.7",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
@@ -81,15 +81,15 @@
     "@craco/craco": "^7.0.0-alpha.6",
     "@ferlab/eslint-config": "^2.0.0",
     "@testing-library/cypress": "^8.0.3",
-    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.1",
+    "@types/jest": "^29.5.11",
     "@types/loadable__component": "^5.13.4",
     "@types/lodash": "^4.14.176",
     "@types/node": "^16.11.7",
-    "@types/react": "^17.0.34",
-    "@types/react-dom": "^17.0.11",
+    "@types/react": "^18.2.42",
+    "@types/react-dom": "^18.2.17",
     "@types/react-router": "^5.1.17",
     "@types/react-router-dom": "^5.3.2",
     "@types/redux-logger": "^3.0.9",
@@ -135,6 +135,9 @@
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "<rootDir>/.jest/identity-obj-proxy-esm.js"
     },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(simplebar|@nivo|@ferlab|d3-interpolate|d3-color|d3-scale-chromatic))"
+    ],
     "collectCoverageFrom": [
       "./src/**/*.{js,jsx,ts,tsx}"
     ],
