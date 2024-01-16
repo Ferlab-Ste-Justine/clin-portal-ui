@@ -1,4 +1,5 @@
 import intl from 'react-intl-universal';
+import { useParams } from 'react-router-dom';
 import { FileTextOutlined } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import { useTaskEntity } from 'graphql/prescriptions/actions';
@@ -18,11 +19,8 @@ import SamplesCard from './SamplesCard';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
-  id: string;
-}
-
-const BioInfoAnalysis = ({ id }: OwnProps) => {
+const BioInfoAnalysis = () => {
+  const { id } = useParams<{ id: string }>();
   const results = useTaskEntity(id);
 
   if (!results.task && !results.loading) {
@@ -66,9 +64,9 @@ const BioInfoAnalysis = ({ id }: OwnProps) => {
   );
 };
 
-const BioInfoAnalysisWrapper = (props: OwnProps) => (
+const BioInfoAnalysisWrapper = () => (
   <ApolloProvider backend={GraphqlBackend.FHIR}>
-    <BioInfoAnalysis {...props} />
+    <BioInfoAnalysis />
   </ApolloProvider>
 );
 

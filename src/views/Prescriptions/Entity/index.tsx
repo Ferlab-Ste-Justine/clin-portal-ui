@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import intl from 'react-intl-universal';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { MedicineBoxOutlined } from '@ant-design/icons';
 import { Space, Tabs } from 'antd';
 import { FhirApi } from 'api/fhir';
@@ -24,10 +24,6 @@ import PrescriptionEntityContext, {
 
 import styles from './index.module.scss';
 
-interface OwnProps {
-  prescriptionId: string;
-}
-
 export enum PrescriptionEntityTabs {
   DETAILS = '#details',
   QC = '#qc',
@@ -35,9 +31,10 @@ export enum PrescriptionEntityTabs {
   FILES = '#files',
 }
 
-const PrescriptionEntity = ({ prescriptionId }: OwnProps) => {
+const PrescriptionEntity = () => {
   const { hash } = useLocation();
   const { push } = useHistory();
+  const { id: prescriptionId } = useParams<{ id: string }>();
   const [requestLoading, setRequestLoading] = useState(true);
   const { prescription, loading } = useServiceRequestEntity(prescriptionId);
 
@@ -143,9 +140,9 @@ const PrescriptionEntity = ({ prescriptionId }: OwnProps) => {
   );
 };
 
-const PrescriptionEntityWrapper = (props: OwnProps) => (
+const PrescriptionEntityWrapper = () => (
   <ApolloProvider backend={GraphqlBackend.FHIR}>
-    <PrescriptionEntity {...props} />
+    <PrescriptionEntity />
   </ApolloProvider>
 );
 
