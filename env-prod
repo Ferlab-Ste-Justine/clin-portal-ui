@@ -21,5 +21,8 @@ REACT_APP_USERS_API_URL=https://users.cqgc.hsj.rtss.qc.ca
 REACT_APP_FORM_API_URL=https://forms.cqgc.hsj.rtss.qc.ca
 REACT_APP_PANELS_FILE=https://s3.cqgc.hsj.rtss.qc.ca/cqgc-prod-app-public/panels/panels.xlsx
 
+# SENTRY
+REACT_APP_SENTRY_API=https://28b0458e254a87f018579f3c31997f37@o4505959323860992.ingest.sentry.io/4506400661962752
+
 # Style
 SASS_PATH=/code/src/style/themes/clin

@@ -19,5 +19,8 @@ REACT_APP_WEB_ROOT=https://portail.qa.cqgc.hsj.rtss.qc.ca
 REACT_APP_USERS_API_URL=https://users.qa.cqgc.hsj.rtss.qc.ca
 REACT_APP_FORM_API_URL=https://forms.qa.cqgc.hsj.rtss.qc.ca
 
+# SENTRY
+REACT_APP_SENTRY_API=https://28b0458e254a87f018579f3c31997f37@o4505959323860992.ingest.sentry.io/4506400661962752
+
 # Style
 SASS_PATH=${PWD}/src/style/themes/clin
