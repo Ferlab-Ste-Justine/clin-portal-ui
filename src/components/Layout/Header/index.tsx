@@ -63,7 +63,12 @@ const Header = () => {
   return (
     <PageHeader
       title={
-        <img className={styles.logo} alt={'Clin Portal UI'} src="/assets/logos/cqgc-white.svg" />
+        <span>
+          <img className={styles.logo} alt={'Clin Portal UI'} src="/assets/logos/cqgc-white.svg" />
+          {EnvironmentVariables.configFor('SHOW_BETA_LABEL') === 'true' && (
+            <span className={styles.betaLabel}>{intl.get('layout.main.menu.beta')}</span>
+          )}
+        </span>
       }
       subTitle={
         <nav className={styles.headerList}>

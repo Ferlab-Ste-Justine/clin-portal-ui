@@ -36,6 +36,17 @@
     width: auto;
   }
 
+  .betaLabel {
+    background-color: $gray-4;
+    color: $blue-9;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 4px 8px;
+    margin-left: 14px;
+    border-radius: 10%;
+    opacity: 75%;
+  }
+
   .headerMenu {
     margin-left: 24px;
   }

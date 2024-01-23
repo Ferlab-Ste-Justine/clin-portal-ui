@@ -310,7 +310,7 @@
       "combined_score":{
         "title":"Fra.",
         "tooltip": "Franklin score based on variant properties and patient phenotypes"
-      } 
+      }
     },
     "acmg_classification": {
       "title":"ACMG F.",
@@ -371,6 +371,7 @@
   "lang.fr.short": "FR",
   "last.name": "Last name",
   "layout.main.menu.archives": "Archives",
+  "layout.main.menu.beta": "Beta",
   "layout.main.menu.home": "Home",
   "layout.main.menu.prescriptions": "Prescriptions",
   "layout.main.menu.variants": "Exploration",
