@@ -14,7 +14,7 @@ import {
 import FixedSizeTable from 'components/Layout/FixedSizeTable';
 import { useUser } from 'store/user';
 import { updateConfig } from 'store/user/thunks';
-import { formatQuerySortList } from 'utils/helper';
+import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
 
 import style from './index.module.scss';
@@ -29,12 +29,6 @@ type OwnProps = {
   setDownloadTriggered: any;
   setSelectedRows: any;
 };
-
-export const scrollToTop = (scrollContentId: string) =>
-  document
-    .getElementById(scrollContentId)
-    ?.querySelector('.simplebar-content-wrapper')
-    ?.scrollTo(0, 0);
 
 const VariantsTab = ({
   queryBuilderId,

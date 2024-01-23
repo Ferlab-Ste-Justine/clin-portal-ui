@@ -55,11 +55,11 @@ export const formatLocus = (start: number, chromosome: string, bound?: number, e
 export const isBoolTrue = (value: number | boolean | string | null) =>
   !!value || 'true' === value?.toString().toLowerCase();
 
-export const scrollToTop = (scrollContentId: string) =>
-  document
-    .getElementById(scrollContentId)
-    ?.querySelector('.simplebar-content-wrapper')
-    ?.scrollTo(0, 0);
+export const scrollToTop = (scrollContentId: string) => {
+  for (const el of document.getElementsByClassName(scrollContentId)) {
+    el.scrollTo(0, 0);
+  }
+};
 
 export const getOrderFromAntdValue = (order: string): SortDirection =>
   order === 'ascend' ? SortDirection.Asc : SortDirection.Desc;

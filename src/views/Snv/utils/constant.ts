@@ -13,7 +13,7 @@ export const DEFAULT_PAGE_SIZE = 20;
 
 export const DEFAULT_OFFSET = 0;
 
-export const SCROLL_WRAPPER_ID = 'snv-scroll-wrapper';
+export const SCROLL_WRAPPER_ID = 'ant-table-body';
 
 export const DEFAULT_PAGING_CONFIG = {
   index: DEFAULT_PAGE_INDEX,

@@ -11,7 +11,6 @@ import { getVariantColumns } from 'views/Cnv/Exploration/variantColumns';
 import {
   DEFAULT_PAGE_INDEX,
   DEFAULT_SORT_QUERY,
-  SCROLL_WRAPPER_ID,
 } from 'views/Cnv/utils/constant';
 import { getVariantTypeFromCNVVariantEntity } from 'views/Prescriptions/Entity/Tabs/Variants/utils';
 import { VARIANT_KEY } from 'views/Prescriptions/utils/export';
@@ -24,6 +23,7 @@ import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
 
 import style from './index.module.scss';
+import { SCROLL_WRAPPER_ID } from "views/Snv/utils/constant";
 
 type OwnProps = {
   results: IQueryResults<VariantEntity[]>;
