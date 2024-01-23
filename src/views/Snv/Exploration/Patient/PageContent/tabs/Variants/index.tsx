@@ -21,7 +21,7 @@ import FixedSizeTable from 'components/Layout/FixedSizeTable';
 import { useRpt } from 'hooks/useRpt';
 import { useUser } from 'store/user';
 import { updateConfig } from 'store/user/thunks';
-import { formatQuerySortList, scrollToTop } from "utils/helper";
+import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
 
 import style from './index.module.scss';
