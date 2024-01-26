@@ -1,17 +1,18 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 import intl from 'react-intl-universal';
-import { useDispatch } from 'react-redux';
+//import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
+import { downloadDocuments } from '@ferlab/core/src/utils';
 import { Button, Card, Col, Row } from 'antd';
-import { FhirApi } from 'api/fhir';
-import { extractServiceRequestId } from 'api/fhir/helper';
 
+//import { FhirApi } from 'api/fhir';
+//import { extractServiceRequestId } from 'api/fhir/helper';
 import ContentHeader from 'components/Layout/ContentWithHeader/Header';
 import Footer from 'components/Layout/Footer';
-import { globalActions, useLang } from 'store/global';
-import { HTTP_HEADERS, MIME_TYPES } from 'utils/constants';
-import { downloadFile, extractFilename } from 'utils/helper';
 
+//import { globalActions, useLang } from 'store/global';
+//import { HTTP_HEADERS, MIME_TYPES } from 'utils/constants';
+//import { downloadFile, extractFilename } from 'utils/helper';
 import AnalysisCard from '../../AnalysisCard';
 import ClinicalInformation from '../../ClinicalInformationCard';
 import { usePrescriptionEntityContext } from '../../context';
@@ -22,11 +23,11 @@ import styles from './index.module.scss';
 
 const PrescriptionDetails = () => {
   const { prescription, loading } = usePrescriptionEntityContext();
-  const [downloadingDocuments, setDownloadingDocuments] = useState(false);
-  const dispatch = useDispatch();
-  const lang = useLang();
+  //const [downloadingDocuments, setDownloadingDocuments] = useState(false);
+  //const dispatch = useDispatch();
+  //const lang = useLang();
 
-  const downloadDocuments = () => {
+  /*   const downloadDocuments = () => {
     const id = extractServiceRequestId(prescription?.id!);
     FhirApi.downloadDocuments(id, lang)
       .then(({ data, error, response }) => {
@@ -53,7 +54,7 @@ const PrescriptionDetails = () => {
         setDownloadingDocuments(false);
       });
     setDownloadingDocuments(true);
-  };
+  }; */
 
   return (
     <>
@@ -64,8 +65,8 @@ const PrescriptionDetails = () => {
             key="downloadDocumentsBt"
             type="primary"
             disabled={!!loading}
-            loading={downloadingDocuments}
-            onClick={downloadDocuments}
+            //loading={downloadingDocuments}
+            onClick={() => downloadDocuments('123')}
             icon={<DownloadOutlined width={'16'} height={'16'} />}
           >
             {intl.get('download.documents')}
