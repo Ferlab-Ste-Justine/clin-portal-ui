@@ -25,6 +25,7 @@ import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
+import { useHistory } from "react-router-dom";
 
 interface OwnProps {
   queryBuilderId: string;
@@ -72,13 +73,14 @@ const VariantContentLayout = ({
       : variantMapping?.data?.find((mapping: ExtendedMapping) => key === mapping.field)
           ?.displayName || key;
   };
+  const history = useHistory();
 
   return (
     <Space direction="vertical" size={24} className={styles.variantPageContent}>
       <QueryBuilder
         id={queryBuilderId}
         className="variant-patient-repo__query-builder"
-        customPillConfig={{
+        customPillConfig={history.location.pathname.includes('prescription') ? undefined : {
           createCustomPill: handleOnCreateCustomPill,
           tag: VARIANT_RQDM_QB_ID_FILTER_TAG,
           editPill: handleOnUpdateCustomPill,
