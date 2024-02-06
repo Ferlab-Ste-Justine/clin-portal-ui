@@ -85,7 +85,7 @@ const VariantsTab = ({
     openDrawer,
     openIgvModal,
     undefined,
-    results?.data.length === 0 ? true : false,
+    results?.data.length === 0,
   );
   return (
     <>
