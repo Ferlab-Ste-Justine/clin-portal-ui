@@ -8,12 +8,10 @@ import { IQueryResults } from 'graphql/models';
 import GenesModal from 'views/Cnv/Exploration/components/GenesModal';
 import IGVModal from 'views/Cnv/Exploration/components/IGVModal';
 import { getVariantColumns } from 'views/Cnv/Exploration/variantColumns';
-import {
-  DEFAULT_PAGE_INDEX,
-  DEFAULT_SORT_QUERY,
-} from 'views/Cnv/utils/constant';
+import { DEFAULT_PAGE_INDEX, DEFAULT_SORT_QUERY } from 'views/Cnv/utils/constant';
 import { getVariantTypeFromCNVVariantEntity } from 'views/Prescriptions/Entity/Tabs/Variants/utils';
 import { VARIANT_KEY } from 'views/Prescriptions/utils/export';
+import { SCROLL_WRAPPER_ID } from 'views/Snv/utils/constant';
 
 import FixedSizeTable from 'components/Layout/FixedSizeTable';
 import { useRpt } from 'hooks/useRpt';
@@ -23,7 +21,6 @@ import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
 
 import style from './index.module.scss';
-import { SCROLL_WRAPPER_ID } from "views/Snv/utils/constant";
 
 type OwnProps = {
   results: IQueryResults<VariantEntity[]>;
@@ -64,7 +61,7 @@ const VariantsTable = ({
 
   const initialColumnState = user.config.data_exploration?.tables?.patientCnv?.columns;
 
-  const variantType = getVariantTypeFromCNVVariantEntity(results.data?.[0]);
+  const variantType = getVariantTypeFromCNVVariantEntity(results?.data?.[0]);
   setVariantType(variantType);
 
   return (
@@ -92,11 +89,11 @@ const VariantsTable = ({
               variantType,
               openGenesModal,
               openIgvModal,
-              results.data.length === 0 ? true : false,
+              results?.data.length === 0,
             )}
             initialColumnState={initialColumnState}
-            dataSource={results.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
-            loading={results.loading}
+            dataSource={results?.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
+            loading={results?.loading}
             dictionary={getProTableDictionary()}
             showSorterTooltip={false}
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -113,10 +110,11 @@ const VariantsTable = ({
             enableRowSelection
             headerConfig={{
               enableTableExport: true,
+              tableExportDisabled: (results?.total || 0) === 0,
               itemCount: {
                 pageIndex: pageIndex,
                 pageSize: queryConfig.size,
-                total: results.total || 0,
+                total: results?.total || 0,
               },
               enableColumnSort: true,
 
@@ -165,7 +163,7 @@ const VariantsTable = ({
                   }),
                 );
               },
-              searchAfter: results.searchAfter,
+              searchAfter: results?.searchAfter,
               defaultViewPerQuery: queryConfig.size,
             }}
           />

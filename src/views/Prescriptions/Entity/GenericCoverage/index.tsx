@@ -14,7 +14,11 @@ import { GeneCoverage } from 'graphql/prescriptions/models/Prescription';
 import { COVERAGES_QUERY } from 'graphql/prescriptions/queries';
 import IGVModal from 'views/Cnv/Exploration/components/IGVModal';
 import { VARIANT_KEY } from 'views/Prescriptions/utils/export';
-import { DEFAULT_PAGE_INDEX, DEFAULT_QUERY_CONFIG, SCROLL_WRAPPER_ID } from "views/Snv/utils/constant";
+import {
+  DEFAULT_PAGE_INDEX,
+  DEFAULT_QUERY_CONFIG,
+  SCROLL_WRAPPER_ID,
+} from 'views/Snv/utils/constant';
 
 import DownloadTSVWrapper from 'components/Download';
 import FixedSizeTable from 'components/Layout/FixedSizeTable';
@@ -22,7 +26,7 @@ import { useRpt } from 'hooks/useRpt';
 import { useGlobals } from 'store/global';
 import { useUser } from 'store/user';
 import { updateConfig } from 'store/user/thunks';
-import { formatQuerySortList, scrollToTop } from "utils/helper";
+import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
 
 import { usePrescriptionEntityContext } from '../context';
@@ -261,6 +265,7 @@ const Index = ({ downloadFile }: any) => {
               }}
               headerConfig={{
                 enableColumnSort: true,
+                tableExportDisabled: data.length === 0,
                 onColumnSortChange: (columns) => {
                   dispatch(
                     updateConfig({
@@ -290,6 +295,7 @@ const Index = ({ downloadFile }: any) => {
                 extra: [
                   <Button
                     key={'downloadFile'}
+                    disabled={data.length === 0}
                     onClick={() => downloadFile('CSV', 'COVGENE')}
                     size="small"
                     icon={<DownloadOutlined width={'16'} height={'16'} />}

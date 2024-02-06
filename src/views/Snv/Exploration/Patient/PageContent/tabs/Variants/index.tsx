@@ -21,7 +21,7 @@ import FixedSizeTable from 'components/Layout/FixedSizeTable';
 import { useRpt } from 'hooks/useRpt';
 import { useUser } from 'store/user';
 import { updateConfig } from 'store/user/thunks';
-import { formatQuerySortList, scrollToTop } from "utils/helper";
+import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
 
 import style from './index.module.scss';
@@ -70,7 +70,7 @@ const VariantsTab = ({
 
   const donor = findDonorById(selectedVariant?.donors, patientId);
 
-  const variantType = getVariantTypeFromSNVVariantEntity(results.data?.[0]);
+  const variantType = getVariantTypeFromSNVVariantEntity(results?.data?.[0]);
 
   const initialColumnState =
     variantType === VariantType.GERMLINE
@@ -85,7 +85,7 @@ const VariantsTab = ({
     openDrawer,
     openIgvModal,
     undefined,
-    results.data.length === 0 ? true : false,
+    results?.data.length === 0 ? true : false,
   );
   return (
     <>
@@ -107,8 +107,8 @@ const VariantsTab = ({
             wrapperClassName={style.variantTabWrapper}
             columns={columns}
             initialColumnState={initialColumnState}
-            dataSource={results.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
-            loading={results.loading}
+            dataSource={results?.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
+            loading={results?.loading}
             dictionary={getProTableDictionary()}
             showSorterTooltip={false}
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -125,10 +125,11 @@ const VariantsTab = ({
             enableRowSelection
             headerConfig={{
               enableTableExport: true,
+              tableExportDisabled: (results?.total || 0) === 0,
               itemCount: {
                 pageIndex: pageIndex,
                 pageSize: queryConfig.size,
-                total: results.total || 0,
+                total: results?.total || 0,
               },
               enableColumnSort: true,
               onSelectedRowsChange: (key, row) => {
@@ -195,13 +196,13 @@ const VariantsTab = ({
                       }),
                 );
               },
-              searchAfter: results.searchAfter,
+              searchAfter: results?.searchAfter,
               defaultViewPerQuery: queryConfig.size,
             }}
           />
         )}
       />
-      {results.data.length > 0 && selectedVariant && (
+      {results?.data.length > 0 && selectedVariant && (
         <OccurrenceDrawer
           patientId={patientId}
           opened={drawerOpened}

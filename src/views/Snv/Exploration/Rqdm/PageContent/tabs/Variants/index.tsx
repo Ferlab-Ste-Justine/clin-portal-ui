@@ -49,7 +49,7 @@ const VariantsTab = ({
       numberOfColumn={initialColumnState || []}
       fixedProTable={(dimension) => (
         <ProTable<ITableVariantEntity>
-          tableId="varirant_table"
+          tableId="variant_table"
           className={style.variantSearchTable}
           wrapperClassName={style.variantTabWrapper}
           columns={getVariantColumns(
@@ -59,11 +59,11 @@ const VariantsTab = ({
             undefined,
             undefined,
             undefined,
-            results.data.length === 0 ? true : false,
+            results?.data.length === 0,
           )}
           initialColumnState={initialColumnState}
-          dataSource={results.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
-          loading={results.loading}
+          dataSource={results?.data.map((i) => ({ ...i, key: `${i[VARIANT_KEY]}` }))}
+          loading={results?.loading}
           showSorterTooltip={false}
           dictionary={getProTableDictionary()}
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -80,10 +80,11 @@ const VariantsTab = ({
           enableRowSelection
           headerConfig={{
             enableTableExport: true,
+            tableExportDisabled: (results?.total || 0) === 0,
             itemCount: {
               pageIndex: pageIndex,
               pageSize: queryConfig.size,
-              total: results.total,
+              total: results?.total,
             },
             enableColumnSort: true,
             onSelectedRowsChange: (key, row) => {
@@ -117,7 +118,7 @@ const VariantsTab = ({
               scrollToTop(SCROLL_WRAPPER_ID);
               setPageIndex(page);
             },
-            searchAfter: results.searchAfter,
+            searchAfter: results?.searchAfter,
             defaultViewPerQuery: queryConfig.size,
           }}
         />
