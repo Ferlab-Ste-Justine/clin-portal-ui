@@ -49,4 +49,17 @@ describe('Page des variants - Filtrer avec les facettes', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'Score Franklin (max)', '0.01', /^1 298 772$/);
     cy.validateFacetRank(6, 'Score Franklin (max)');
   });
+
+  it('Requêtes - Pilule personnalisée', () => {
+    cy.get(`[data-cy="SidebarMenuItem_Requêtes"]`).click({force: true});
+
+    cy.intercept('POST', '**/graphql').as('getRouteMatcher');
+    cy.get('[class*="QueriesSidebar_queryPill"]').contains('Cypress').click({force: true});
+    cy.wait('@getRouteMatcher', {timeout: 20*1000});
+
+    cy.get('[class*="QueryPill_selected"]').should('have.css', 'background-color', 'rgb(35, 164, 215)');
+
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_title"]').contains('Cypress').should('exist');
+    cy.get('body').contains('1 082 073').should('exist');
+  });
 });
