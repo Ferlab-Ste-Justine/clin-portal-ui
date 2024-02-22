@@ -8,11 +8,6 @@ beforeEach(() => {
 });
 
 describe('Page des CNVs d\'un patient - Dictionnaire', () => {
-
-  beforeEach(() => {
-    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=92e4e5c0-5b1e-4521-a140-f4e28b2bf420');
-  });
-
   it('Panel RQDM - RQDM', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM)',
                          'Congenital Myopathies (MYOC)',
@@ -31,7 +26,11 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'Severe Combined Immune Deficiency (SCID)',
                          'No Data'];
 
-    cy.validateDictionnary('Panel RQDM', 'Panel RQDM', dictionnary);
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=92e4e5c0-5b1e-4521-a140-f4e28b2bf420');
+    cy.validateDictionnaryPresetValues('Panel RQDM', 'Panel RQDM', dictionnary);
+
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=f5d9e3d5-6970-49c3-860c-d3ab00a06cdb');
+    cy.validateDictionnaryNewValues('Panel RQDM', 'Panel RQDM', dictionnary);
   });
 
   it('Variant - Type de variant', () => {
@@ -39,7 +38,11 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                           'LOSS',
                           'No Data'];
 
-    cy.validateDictionnary('Variant', 'Type de variant', dictionnary);
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=92e4e5c0-5b1e-4521-a140-f4e28b2bf420');
+    cy.validateDictionnaryPresetValues('Variant', 'Type de variant', dictionnary);
+
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=f5d9e3d5-6970-49c3-860c-d3ab00a06cdb');
+    cy.validateDictionnaryNewValues('Variant', 'Type de variant', dictionnary);
   });
 
   it('Variant - Chromosome', () => {
@@ -69,7 +72,11 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'Y',
                          'No Data'];
 
-    cy.validateDictionnary('Variant', 'Chromosome', dictionnary);
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=92e4e5c0-5b1e-4521-a140-f4e28b2bf420');
+    cy.validateDictionnaryPresetValues('Variant', 'Chromosome', dictionnary);
+
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=f5d9e3d5-6970-49c3-860c-d3ab00a06cdb');
+    cy.validateDictionnaryNewValues('Variant', 'Chromosome', dictionnary);
   });
 
   it('Gène - Panel RQDM', () => {
@@ -90,7 +97,11 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'Severe Combined Immune Deficiency (SCID)',
                          'No Data'];
 
-    cy.validateDictionnary('Gène', 'Panel RQDM', dictionnary);
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=92e4e5c0-5b1e-4521-a140-f4e28b2bf420');
+    cy.validateDictionnaryPresetValues('Gène', 'Panel RQDM', dictionnary);
+
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=f5d9e3d5-6970-49c3-860c-d3ab00a06cdb');
+    cy.validateDictionnaryNewValues('Gène', 'Panel RQDM', dictionnary);
   });
 
   it('Occurrence - Filtre (Dragen)', () => {
@@ -100,6 +111,10 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
                          'LoDFail',
                          'No Data'];
 
-    cy.validateDictionnary('Occurrence', 'Filtre \(Dragen\)', dictionnary);
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=92e4e5c0-5b1e-4521-a140-f4e28b2bf420');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Filtre \(Dragen\)', dictionnary);
+
+    cy.visitCNVsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=f5d9e3d5-6970-49c3-860c-d3ab00a06cdb');
+    cy.validateDictionnaryNewValues('Occurrence', 'Filtre \(Dragen\)', dictionnary);
   });
 });

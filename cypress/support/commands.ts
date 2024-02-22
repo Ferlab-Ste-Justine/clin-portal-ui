@@ -100,7 +100,7 @@ Cypress.Commands.add('logout', () => {
 });
 
 Cypress.Commands.add('removeFilesFromFolder', (folder: string) => {
-  cy.exec(`rm ${folder}/*`, {failOnNonZeroExit: false});
+  cy.exec(`/bin/rm ${folder}/*`, {failOnNonZeroExit: false});
 });
 
 Cypress.Commands.add('resetColumns', (eq: number) => {
@@ -126,6 +126,7 @@ Cypress.Commands.add('showColumn', (column: string|RegExp, eq: number) => {
     .find('div[class="ant-space-item"]').contains(column)
     .find('[type="checkbox"]').check({force: true});
   cy.wait('@getPOSTuser', {timeout: 20*1000});
+  cy.get('div[class*="Header_ProTableHeader"]').click({force: true, multiple: true});
 });
 
 Cypress.Commands.add('sortTableAndIntercept', (column: string|RegExp, nbCalls: number, eq: number = 0) => {
@@ -160,7 +161,29 @@ Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
   cy.get('[id="query-builder-header-tools"]').contains('Tout effacer').should(strExist);
 });
 
-Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: string, dictionnary: (string|RegExp)[], moreButton: boolean = false) => {
+Cypress.Commands.add('validateDictionnaryNewValues', (section: string, facetTitle: string, dictionnary: (string|RegExp)[], moreButton: boolean = false) => {
+  cy.get(`[data-cy="SidebarMenuItem_${section}"]`).click({force: true});
+
+  if (section !== 'Panel RQDM') {
+    cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).click({force: true});
+  }
+  
+  cy.get(`[data-cy="Button_Dict_${facetTitle}"]`).click({force: true});
+  cy.wait(1000);
+
+  if (moreButton) {
+    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
+      .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
+    cy.wait(1000);
+  }
+    
+  // Aucune nouvelle valeur n'est présente dans la facette
+  cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+  cy.waitWhileSpin(2000);
+  cy.get(`[data-cy*="Checkbox_${facetTitle}_"]`).its('length').should('eq', dictionnary.length);
+});
+
+Cypress.Commands.add('validateDictionnaryPresetValues', (section: string, facetTitle: string, dictionnary: (string|RegExp)[], moreButton: boolean = false) => {
   cy.get(`[data-cy="SidebarMenuItem_${section}"]`).click({force: true});
 
   if (section !== 'Panel RQDM') {
@@ -180,9 +203,6 @@ Cypress.Commands.add('validateDictionnary', (section: string, facetTitle: string
   for (let i = 0; i < dictionnary.length; i++) {
     cy.get(`[data-cy*="Checkbox_${facetTitle}_"]`).parents('label').contains(dictionnary[i]).should('exist');
     }
-    
-  // Aucune nouvelle valeur n'est présente dans la facette
-  cy.get(`[data-cy*="Checkbox_${facetTitle}_"]`).its('length').should('eq', dictionnary.length);
 });
 
 Cypress.Commands.add('validateExpandCollapse', (section: string, isRqdmExpand: boolean = false) => {
@@ -230,7 +250,7 @@ Cypress.Commands.add('validateFacetRank', (facetRank: number, facetTitle: string
 Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Replacement[]) => {
   const arrReplacements = replacements !== undefined ? replacements : [];
   cy.fixture(fixture).then((expectedData) => {
-    cy.exec(`ls ${Cypress.config('downloadsFolder')}/*`).then((result) => {
+    cy.exec(`/bin/ls ${Cypress.config('downloadsFolder')}/*`).then((result) => {
       const filename = result.stdout.trim();
       cy.readFile(`${filename}`).then((file) => {
         let fileWithData = file;
@@ -251,7 +271,7 @@ Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Rep
 
 Cypress.Commands.add('validateFileHeaders', (fixture: string) => {
   cy.fixture(fixture).then((expectedData) => {
-    cy.exec(`ls ${Cypress.config('downloadsFolder')}/*`).then((result) => {
+    cy.exec(`/bin/ls ${Cypress.config('downloadsFolder')}/*`).then((result) => {
       const filename = result.stdout.trim();
       cy.readFile(`${filename}`).then((file) => {
         expectedData.headers.forEach((header: any) => {
@@ -263,7 +283,7 @@ Cypress.Commands.add('validateFileHeaders', (fixture: string) => {
 });
 
 Cypress.Commands.add('validateFileName', (namePattern: string) => {
-  cy.exec(`ls ${Cypress.config('downloadsFolder')}/`+namePattern).then((result) => {
+  cy.exec(`/bin/ls ${Cypress.config('downloadsFolder')}/`+namePattern).then((result) => {
     const filename = result.stdout.trim();
     cy.readFile(`${filename}`).should('exist');
   });

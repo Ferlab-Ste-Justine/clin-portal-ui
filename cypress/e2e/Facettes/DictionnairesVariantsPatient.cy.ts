@@ -8,11 +8,6 @@ beforeEach(() => {
 });
 
 describe('Page des variants d\'un patient - Dictionnaire', () => {
-
-  beforeEach(() => {
-    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
-  });
-
   it('Panel RQDM - RQDM', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM)',
                          'Congenital Myopathies (MYOC)',
@@ -31,7 +26,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Severe Combined Immune Deficiency (SCID)',
                          'No Data'];
 
-    cy.validateDictionnary('Panel RQDM', 'RQDM', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Panel RQDM', 'RQDM', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Panel RQDM', 'RQDM', dictionnary);
   });
 
   it('Variant - Type de variant', () => {
@@ -43,7 +42,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Séquence Altération',
                          'No Data'];
 
-    cy.validateDictionnary('Variant', 'Type de variant', dictionnary, true);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Variant', 'Type de variant', dictionnary, true);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Variant', 'Type de variant', dictionnary, true);
   });
 
   it('Variant - Conséquences', () => {
@@ -87,7 +90,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Feature Truncation',
                           'Intergenic'];
 
-    cy.validateDictionnary('Variant', 'Conséquences', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Variant', 'Conséquences', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Variant', 'Conséquences', dictionnary);
   });
 
   it('Variant - Référence externe', () => {
@@ -98,7 +105,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Franklin',
                          'No Data'];
 
-    cy.validateDictionnary('Variant', 'Référence externe', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Variant', 'Référence externe', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Variant', 'Référence externe', dictionnary);
   });
 
   it('Variant - Chromosome', () => {
@@ -128,7 +139,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Y',
                          'No Data'];
 
-    cy.validateDictionnary('Variant', 'Chromosome', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Variant', 'Chromosome', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Variant', 'Chromosome', dictionnary);
   });
 
   it('Gène - Type de gène', () => {
@@ -202,7 +217,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Bidirectional Promoter LncRNA',
                           'No Data'];
 
-    cy.validateDictionnary('Gène', 'Type de gène', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Gène', 'Type de gène', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Gène', 'Type de gène', dictionnary);
   });
 
   it('Gène - Référence externe', () => {
@@ -215,7 +234,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'DDD',
                          'No Data'];
 
-    cy.validateDictionnary('Gène', 'Référence externe', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Gène', 'Référence externe', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Gène', 'Référence externe', dictionnary);
   });
 
   it('Gène - RQDM', () => {
@@ -236,7 +259,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Severe Combined Immune Deficiency (SCID)',
                          'No Data'];
 
-    cy.validateDictionnary('Gène', 'RQDM', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Gène', 'RQDM', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Gène', 'RQDM', dictionnary);
   });
 
   it('Gène - OMIM (transmission)', () => {
@@ -269,7 +296,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          '?YL',
                          'No Data'];
 
-    cy.validateDictionnary('Gène', 'OMIM (transmission)', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Gène', 'OMIM (transmission)', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Gène', 'OMIM (transmission)', dictionnary);
   });
 
   it('Pathogénicité - ClinVar', () => {
@@ -293,7 +324,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Low Penetrance',
                          'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'ClinVar', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'ClinVar', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'ClinVar', dictionnary);
   });
 
   it('Pathogénicité - VEP', () => {
@@ -303,7 +338,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'MODIFIER',
                           'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'VEP', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'VEP', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'VEP', dictionnary);
   });
 
   it('Pathogénicité - ACMG de Exomiser', () => {
@@ -314,7 +353,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Benign',
                          'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'ACMG de Exomiser', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'ACMG de Exomiser', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'ACMG de Exomiser', dictionnary);
   });
 
   it('Pathogénicité - ACMG de Franklin', () => {
@@ -327,7 +370,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Possibly Pathogenic Benign',
                          'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'ACMG de Franklin', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'ACMG de Franklin', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'ACMG de Franklin', dictionnary);
   });
 
   it('Pathogénicité - Critères ACMG de Franklin', () => {
@@ -347,7 +394,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'BP6',
                          'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'Critères ACMG de Franklin', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'Critères ACMG de Franklin', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'Critères ACMG de Franklin', dictionnary);
   });
 
   it('Pathogénicité - FATHMM', () => {
@@ -355,7 +406,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Tolerated',
                           'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'FATHMM', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'FATHMM', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'FATHMM', dictionnary);
   });
 
   it('Pathogénicité - LRT', () => {
@@ -364,7 +419,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Unknown',
                           'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'LRT', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'LRT', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'LRT', dictionnary);
   });
 
   it('Pathogénicité - Polyphen 2 HVAR', () => {
@@ -373,7 +432,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Possibily Damaging',
                           'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'Polyphen 2 HVAR', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'Polyphen 2 HVAR', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'Polyphen 2 HVAR', dictionnary);
   });
 
   it('Pathogénicité - SIFT', () => {
@@ -381,7 +444,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Tolerated',
                           'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'SIFT', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'SIFT', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'SIFT', dictionnary);
   });
 
   it('Pathogénicité - CMC tier', () => {
@@ -391,7 +458,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Other',
                          'No Data'];
 
-    cy.validateDictionnary('Pathogénicité', 'CMC tier', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Pathogénicité', 'CMC tier', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Pathogénicité', 'CMC tier', dictionnary);
   });
 
   it('Occurrence - Zygosité', () => {
@@ -399,7 +470,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'HEM',
                           'HET'];
 
-    cy.validateDictionnary('Occurrence', 'Zygosité', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Zygosité', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Zygosité', dictionnary);
   });
 
   it('Occurrence - Zygosité maternelle', () => {
@@ -409,7 +484,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'WT',
                           'UNK'];
 
-    cy.validateDictionnary('Occurrence', 'Zygosité maternelle', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Zygosité maternelle', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Zygosité maternelle', dictionnary);
   });
 
   it('Occurrence - Zygosité paternelle', () => {
@@ -419,7 +498,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'WT',
                           'UNK'];
 
-    cy.validateDictionnary('Occurrence', 'Zygosité paternelle', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Zygosité paternelle', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Zygosité paternelle', dictionnary);
   });
 
   it('Occurrence - Origine parentale', () => {
@@ -434,7 +517,11 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Unknown',
                           'No Data'];
 
-    cy.validateDictionnary('Occurrence', 'Origine parentale', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Origine parentale', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Origine parentale', dictionnary);
   });
 
   it('Occurrence - Transmission', () => {
@@ -452,21 +539,33 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                           'Unknown Proband Genotype',
                           'No Data'];
 
-    cy.validateDictionnary('Occurrence', 'Transmission', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Transmission', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Transmission', dictionnary);
   });
 
   it('Occurrence - Hét. composé', () => {
     const dictionnary = ['False',
                          'True'];
 
-    cy.validateDictionnary('Occurrence', 'Hét. composé', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Hét. composé', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Hét. composé', dictionnary);
   });
 
   it('Occurrence - Hét. composé potentiel', () => {
     const dictionnary = ['False',
                          'True'];
 
-    cy.validateDictionnary('Occurrence', 'Hét. composé potentiel', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Hét. composé potentiel', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Hét. composé potentiel', dictionnary);
   });
 
   it('Occurrence - Filtre (Dragen)', () => {
@@ -490,6 +589,10 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Long Indel',
                          'No Data'];
 
-    cy.validateDictionnary('Occurrence', 'Filtre \(Dragen\)', dictionnary);
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
+    cy.validateDictionnaryPresetValues('Occurrence', 'Filtre \(Dragen\)', dictionnary);
+
+    cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, '?sharedFilterId=4ef31b53-6497-462b-ab09-414218bb057f');
+    cy.validateDictionnaryNewValues('Occurrence', 'Filtre \(Dragen\)', dictionnary);
   });
 });

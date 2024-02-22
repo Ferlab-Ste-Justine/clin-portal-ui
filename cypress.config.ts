@@ -5,7 +5,7 @@ import { getDateTime } from './cypress/support/utils';
 const { strDate, strTime } = getDateTime();
 
 const getName = (url = '', parallel = '') => {
-    if (url.includes('clin-')) {
+  if (url.includes('clin-') || url.includes('presc-') || url.includes('clice-')) {
       return url.replace('https://', '').split('.')[0].split('-').splice(2, 4).join('-')+'/'+parallel;
     } else {
       return 'QA/'+parallel;
