@@ -81,7 +81,6 @@
     "@commitlint/config-conventional": "^16.2.4",
     "@craco/craco": "^7.0.0-alpha.6",
     "@ferlab/eslint-config": "^2.0.0",
-    "@testing-library/cypress": "^8.0.3",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^13.5.0",
