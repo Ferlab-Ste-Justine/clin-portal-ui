@@ -14,12 +14,12 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Fréquence - Fréq. all. tous les patients', () => {
-    cy.validateFacetNumFilter('Fréquence', 'Fréq. all. tous les patients', '0.01', /^8 70\d{1}$/);
+    cy.validateFacetNumFilter('Fréquence', 'Fréq. all. tous les patients', '0.01', /^(8 70\d{1}|11 569)$/);
     cy.validateFacetRank(0, 'Fréq. all. tous les patients');
   });
 
   it('Fréquence - Fréq. all. patients atteints', () => {
-    cy.validateFacetNumFilter('Fréquence', 'Fréq. all. patients atteints', '0.01', /^9 0\d{2}$/);
+    cy.validateFacetNumFilter('Fréquence', 'Fréq. all. patients atteints', '0.01', /^(9 0\d{2}|13 366)$/);
     cy.validateFacetRank(1, 'Fréq. all. patients atteints');
   });
 

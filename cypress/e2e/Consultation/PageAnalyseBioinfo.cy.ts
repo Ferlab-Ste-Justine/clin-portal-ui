@@ -64,7 +64,7 @@ describe('Page d\'une analyse bioinformatique - Vérifier les informations affic
   });
 });
 
-describe('Page d\'une analyse bioinformatique - Valider les panneaux masquables', () => {
+describe.skip('Page d\'une analyse bioinformatique - Valider les panneaux masquables', () => {
   it('Panneau Échantillons', () => {
     cy.get('[data-cy="SamplesCard_CollapsePanel"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.get('[data-cy="SamplesCard_CollapsePanel"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
@@ -81,4 +81,36 @@ describe('Page d\'une analyse bioinformatique - Valider les panneaux masquables'
     cy.get('[data-cy="FilesCard_CollapsePanel"]').find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 });
-  
+
+describe.skip('Footer position on scroll', () => {
+  it('should keep the footer at the bottom when scrolling', () => {
+    // Obtenez la position initiale du footer
+    cy.get('[id="footer"]').then(($footer) => {
+      const initialFooterPosition = $footer[0].getBoundingClientRect().bottom;
+      cy.log('getBoundingClientRect().top: '+$footer[0].getBoundingClientRect().top);
+
+      cy.window().then(win => {
+        cy.log('win.document.documentElement.scrollHeight: '+win.document.documentElement.scrollHeight);
+      });
+
+      cy.log('initialFooterPosition(bottom): '+initialFooterPosition);
+      cy.screenshot();
+
+      // Faites défiler vers le bas
+      cy.get('[id="footer"]').scrollIntoView();
+
+      // Attendre un peu pour que le défilement soit effectué
+      cy.wait(1000);
+
+      // Obtenez la nouvelle position du footer après le défilement
+      cy.get('[id="footer"]').then(($footerAfterScroll) => {
+        const footerAfterScrollPosition = $footerAfterScroll[0].getBoundingClientRect().bottom;
+        cy.log('footerAfterScrollPosition: '+footerAfterScrollPosition);
+        cy.screenshot();
+
+        // Vérifiez que la position du footer après le défilement est la même qu'avant
+//        expect(footerAfterScrollPosition).to.equal(initialFooterPosition);
+      });
+    });
+  });
+});

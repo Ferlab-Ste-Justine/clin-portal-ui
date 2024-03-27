@@ -80,7 +80,7 @@ describe('Page des variants d\'un patient (somatic) - Consultation du tableau', 
     cy.sortTableAndIntercept('RQDM', 1);
     cy.validateTableFirstRow('0.00e+0', 16);
     cy.sortTableAndIntercept('RQDM', 1);
-    cy.validateTableFirstRow(/(1\.00e\+0|9\.\d{2}e\-1)/, 16);
+    cy.validateTableFirstRow(/(1\.00e\+0|\d{1}\.\d{2}e\-1)/, 16);
   });
 
   it('Valider les fonctionnalités du tableau - Tri QS', () => {

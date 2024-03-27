@@ -18,13 +18,11 @@ Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: st
     cy.wait(1000);
   }
 
-  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
-    .find('button').then(($button) => {
-      if ($button.hasClass('ant-btn-link')) {
-        cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
-          .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
-        cy.waitWhileSpin(1000);
-      };
+  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O').find('button').then(($button) => {
+    if ($button.hasClass('ant-btn-link')) {
+      cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O').find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
+      cy.waitWhileSpin(1000);
+    };
   });
 
   cy.get(`[data-cy="Checkbox_${facetTitle}_${value}"]`).check({force: true});
@@ -34,13 +32,11 @@ Cypress.Commands.add('checkAndClickApplyFacet', (section: string, facetTitle: st
 Cypress.Commands.add('checkValueFacet', (facetTitle: string, valueBack: string) => {
   cy.get(`[aria-expanded="true"] [data-cy="FilterContainer_${facetTitle}"]`).should('exist');
   cy.waitWhileSpin(1000);
-  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
-    .find('button').then(($button) => {
-      if ($button.hasClass('ant-btn-link')) {
-        cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
-          .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
-        cy.waitWhileSpin(1000);
-      };
+  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O').find('button').then(($button) => {
+    if ($button.hasClass('ant-btn-link')) {
+      cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O').find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
+      cy.waitWhileSpin(1000);
+    };
   });
 
   cy.clickAndIntercept(`[data-cy="Checkbox_${facetTitle}_${valueBack}"]`, 'POST', '**/graphql', 2);
@@ -58,14 +54,43 @@ Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string,
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 20*1000});
   };
+
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('closePopup', () => {
-  cy.get('body')
-    .find('button').then(($button) => {
-      if ($button.hasClass('close')) {
-          cy.get('body').find('button[class="close"]').click({force: true});
-      };
+  cy.get('body').find('button').then(($button) => {
+    if ($button.hasClass('close')) {
+      cy.get('body').find('button[class="close"]').click({force: true});
+    };
+  });
+});
+
+Cypress.Commands.add('createFilterIfNotExists', (filterName: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-root"]').invoke('text').then((invokeText) => {
+    if (!invokeText.includes(filterName)) {
+      cy.saveFilterAs(filterName);
+    };
+  });
+});
+
+Cypress.Commands.add('deleteFilter', (filterName: string) => {
+  cy.get('[class*="ant-dropdown-menu-title-content"]').contains(filterName).click({force: true});
+  cy.get('[id="query-builder-header-tools"] [class*="Header_togglerTitle"]').contains(filterName).should('exist');
+  cy.get('[id="query-builder-header-tools"] [class*="anticon-delete"]').click({force: true});
+  cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-dangerous"]', 'POST', '**/graphql', 1);
+
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-root"]').contains(filterName).should('not.exist');
+});
+
+Cypress.Commands.add('deleteFilterIfExists', (filterName: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-root"]').invoke('text').then((invokeText) => {
+    if (invokeText.includes(filterName)) {
+      cy.deleteFilter(filterName);
+    };
   });
 });
 
@@ -106,8 +131,7 @@ Cypress.Commands.add('removeFilesFromFolder', (folder: string) => {
 Cypress.Commands.add('resetColumns', (eq: number) => {
   cy.get('svg[data-icon="setting"]').eq(eq).click({force: true});
   cy.wait(1000);
-  cy.get('button[class*="ProTablePopoverColumnResetBtn"]').eq(eq)
-  .then(($button) => {
+  cy.get('button[class*="ProTablePopoverColumnResetBtn"]').eq(eq).then(($button) => {
     cy.wrap($button).click({force: true});
     cy.wait(1000);
     cy.wrap($button).click({force: true});
@@ -119,14 +143,22 @@ Cypress.Commands.add('resetColumns', (eq: number) => {
   cy.get('div[class*="Header_ProTableHeader"]').click({force: true, multiple: true});
 });
 
+Cypress.Commands.add('saveFilterAs', (filterName: string) => {
+  cy.get('button[class*="Header_iconBtnAction"]').click({force: true});
+  cy.get('[class="ant-modal-content"] input').clear().type(filterName);
+  cy.get(`[class="ant-modal-content"] input[value="`+filterName+`"]`).should('exist');
+  cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'POST', '**/saved-filters', 1);
+
+  cy.get('[id="query-builder-header-tools"] [class*="Header_togglerTitle"]').contains(filterName).should('exist');
+});
+
 Cypress.Commands.add('showColumn', (column: string|RegExp, eq: number) => {
   cy.intercept('PUT', '**/user').as('getPOSTuser');
 
-  cy.get('div[class="ant-popover-inner"]').eq(eq)
-    .find('div[class="ant-space-item"]').contains(column)
-    .find('[type="checkbox"]').check({force: true});
+  cy.get('div[class="ant-popover-inner"]').eq(eq).find('div[class="ant-space-item"]').contains(column).find('[type="checkbox"]').check({force: true});
   cy.wait('@getPOSTuser', {timeout: 20*1000});
   cy.get('div[class*="Header_ProTableHeader"]').click({force: true, multiple: true});
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('sortTableAndIntercept', (column: string|RegExp, nbCalls: number, eq: number = 0) => {
@@ -138,7 +170,8 @@ Cypress.Commands.add('sortTableAndIntercept', (column: string|RegExp, nbCalls: n
     cy.wait('@getPOSTgraphql', {timeout: 60*1000});
   };
 
-  cy.waitWhileSpin(1000);
+  cy.waitWhileSpin(5000);
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('sortTableAndWait', (column: string, eq: number = 0) => {
@@ -154,6 +187,8 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 60*1000});
   };
+
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
@@ -172,13 +207,12 @@ Cypress.Commands.add('validateDictionnaryNewValues', (section: string, facetTitl
   cy.wait(1000);
 
   if (moreButton) {
-    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
-      .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
+    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O').find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
     cy.wait(1000);
   }
     
   // Aucune nouvelle valeur n'est présente dans la facette
-  cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+  cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
   cy.waitWhileSpin(2000);
   cy.get(`[data-cy*="Checkbox_${facetTitle}_"]`).its('length').should('eq', dictionnary.length);
 });
@@ -194,8 +228,7 @@ Cypress.Commands.add('validateDictionnaryPresetValues', (section: string, facetT
   cy.wait(1000);
 
   if (moreButton) {
-    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
-      .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
+    cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O').find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
     cy.wait(1000);
   }
 
@@ -234,9 +267,13 @@ Cypress.Commands.add('validateFacetFilter', (section: string, facetTitle: string
 Cypress.Commands.add('validateFacetNumFilter', (section: string, facetTitle: string, value: string, expectedCount: string|RegExp) => {
   cy.get(`[data-cy="SidebarMenuItem_${section}"]`).click({force: true});
   cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).click({force: true});
+  cy.wait(1000);
   cy.get(`[data-cy="InputNumber_Max_${facetTitle}"]`).type(value, {force: true});
+  cy.wait(1000);
   cy.get(`[data-cy="Checkbox_NoData_${facetTitle}"]`).check({force: true});
+  cy.wait(1000);
   cy.get(`[data-cy="Button_Apply_${facetTitle}"]`).click({force: true});
+  cy.wait(1000);
 
   cy.validatePillSelectedQuery(facetTitle, [value, 'No Data']);
   cy.get('body').contains(expectedCount).should('exist');
@@ -289,8 +326,22 @@ Cypress.Commands.add('validateFileName', (namePattern: string) => {
   });
 });
 
+Cypress.Commands.add('validateFilterInManager', (filterName: string, expect: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[data-menu-id*="manage-my-filters"]').click({force: true});
+  cy.get('[class="ant-modal-content"]').contains(filterName).should(expect);
+  cy.get('button[class="ant-modal-close"]').invoke('click');
+});
+
+Cypress.Commands.add('validateIconStates', (iconName: string, isDisable: boolean, isDirty: boolean) => {
+  const strShouldDisable = isDisable ? 'be.disabled' : 'not.be.disabled';
+  const strShouldDirty = isDirty ? 'have.class' : 'not.have.class';
+  cy.get(`[id="query-builder-header-tools"] [data-icon="`+iconName+`"]`).parentsUntil('button').parent().should(strShouldDisable)
+  cy.get(`[id="query-builder-header-tools"] [data-icon="`+iconName+`"]`).parentsUntil('button').parent().should(strShouldDirty, 'dirty');
+});
+
 Cypress.Commands.add('validateOperatorSelectedQuery', (expectedOperator: string) => {
-  cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').contains(expectedOperator).should('exist');
+  cy.get('[class*="QueryBar_selected"] [class*="Combiner_operator"]').contains(expectedOperator).should('exist');
 });
 
 Cypress.Commands.add('validatePaging', (total: string|RegExp, eqSelect: number, eqTab: number = 0) => {
@@ -345,12 +396,17 @@ Cypress.Commands.add('validatePillSelectedQuery', (facetTitle: string, values: (
     cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').should('not.exist');
   }
   else {
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').eq(eq).contains(facetTitle).should('exist');
+    cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').eq(eq).contains(facetTitle).should('exist');
   }
 
   for (let i = 0; i < values.length; i++) {
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_queryValuesContainer"]').eq(eq).contains(values[i]).should('exist');
+    cy.get('[class*="QueryBar_selected"] [class*="QueryValues_queryValuesContainer"]').eq(eq).contains(values[i]).should('exist');
     }
+});
+
+Cypress.Commands.add('validateSelectedFilterInDropdown', (filterName: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-item-selected"]').contains(filterName).should('exist');
 });
 
 Cypress.Commands.add('validateTableDataRowKeyAttr', (dataRowKey: string, eq: number, expectedAttr: string, expectedValue: string) => {
@@ -367,8 +423,7 @@ Cypress.Commands.add('validateTableDataRowKeyContent', (dataRowKey: string, eq: 
 
 Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number, selector: string = '') => {
   cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: 5*1000});
-  cy.get(selector+' tr[class*="ant-table-row"]').eq(0)
-  .then(($firstRow) => {
+  cy.get(selector+' tr[class*="ant-table-row"]').eq(0).then(($firstRow) => {
     cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
   });
 });
@@ -379,7 +434,7 @@ Cypress.Commands.add('validateTableResultsCount', (expectedCount: string|RegExp,
 });
 
 Cypress.Commands.add('validateTotalSelectedQuery', (expectedCount: string|RegExp) => {
-  cy.get('[class*="QueryBar_selected"]').find('[class*="QueryBar_total"]').contains(expectedCount).should('exist');
+  cy.get('[class*="QueryBar_selected"] [class*="QueryBar_total"]').contains(expectedCount).should('exist');
 });
 
 Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {
@@ -390,6 +445,8 @@ Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, rout
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 20*1000});
   };
+
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('visitArchivesPatientPage', (patientId: string) => {

@@ -16,20 +16,20 @@ beforeEach(() => {
 
 describe('Page des CNVs d\'un patient (somatic) - Consultation du tableau', () => {
   it('Vérifier les informations affichées', () => {
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 2, /^[^,]+,[^,]+,[^,]+...$/);
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 3, 'LOSS:chr1:450731-7249626');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 4, /^1$/);
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 5, '450 730');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 6, '7 249 625');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 7, /^LOSS$/);
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 8, '6.8 Mb');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 9, '1.04404');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 10, /^191$/);
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 11, '0/1');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 12, 'CnvCopyRatio, LoDFail');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 13, /^128$/);
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 14, '1979');
-    cy.validateTableDataRowKeyContent('e216d4e7a7164b39f0fba518c47d24da7097660d', 15, '25, 7');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 2, /^[^,]+,[^,]+,[^,]+...$/);
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 3, 'LOSS:chr1:450731-7249626');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 4, /^1$/);
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 5, '450 730');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 6, '7 249 625');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 7, /^LOSS$/);
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 8, '6.8 Mb');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 9, '1.04404');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 10, /^191$/);
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 11, '0/1');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 12, 'CnvCopyRatio, LoDFail');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 13, /^128$/);
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 14, '1979');
+    cy.validateTableDataRowKeyContent('10d77ed5670191a6f0e0f0ef999cda88910a4d7c', 15, '25, 7');
   });
  
   it('Valider l\'icône de sauvegarde des requêtes personnalisées', () => {
@@ -38,15 +38,15 @@ describe('Page des CNVs d\'un patient (somatic) - Consultation du tableau', () =
   });
  
   it('Valider les liens disponibles', () => {
-    cy.get('tr[data-row-key="e216d4e7a7164b39f0fba518c47d24da7097660d"]').contains(/^191$/).click({force: true});
+    cy.get('tr[data-row-key="10d77ed5670191a6f0e0f0ef999cda88910a4d7c"]').contains(/^191$/).click({force: true});
     cy.contains('LOSS:chr1:450731-7249626').should('exist');
     cy.get('body').find('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('tr[data-row-key="e216d4e7a7164b39f0fba518c47d24da7097660d"]').contains(/^[^,]+,[^,]+,[^,]+...$/).click({force: true});
+    cy.get('tr[data-row-key="10d77ed5670191a6f0e0f0ef999cda88910a4d7c"]').contains(/^[^,]+,[^,]+,[^,]+...$/).click({force: true});
     cy.contains('LOSS:chr1:450731-7249626').should('exist');
     cy.get('body').find('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('tr[data-row-key="e216d4e7a7164b39f0fba518c47d24da7097660d"]').find('svg[class="anticon"]').click({force: true});
+    cy.get('tr[data-row-key="10d77ed5670191a6f0e0f0ef999cda88910a4d7c"]').find('svg[class="anticon"]').click({force: true});
     cy.contains('Alignement et variant').should('exist');
     cy.contains('Zoom in to see features').should('exist');
     cy.contains('ERROR').should('not.exist');

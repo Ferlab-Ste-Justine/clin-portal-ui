@@ -14,13 +14,13 @@ describe('Page des variants - Requêtes', () => {
   it('Construire une première requête', () => {
     cy.get('body').contains('Utiliser les filtres pour créer une requête').should('exist');
     cy.validateTotalSelectedQuery('1.3M');
-    cy.validateTableResultsCount(/1 298 \d{3}/);
+    cy.validateTableResultsCount(/1 3\d{2} \d{3}/);
 
     cy.checkAndClickApplyFacet('Variant', 'Type de variant', 'SNV');
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 08\d{1} \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(false);
   });
 });

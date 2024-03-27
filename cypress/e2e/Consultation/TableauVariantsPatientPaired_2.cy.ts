@@ -17,7 +17,7 @@ beforeEach(() => {
   cy.showColumn('REVEL', 0);
 });
 
-describe('Page des variants d\'un patient (somatic) - Consultation du tableau', () => { 
+describe('Page des variants d\'un patient (paired) - Consultation du tableau', () => { 
   it('Valider les liens disponibles Lien UCSC', () => {
     cy.get('tr[data-row-key="2f53f2ed574a720853172ff224c608efc5e3b623"]').find('button[class*="ant-dropdown-trigger"]').click({force: true});
     cy.get('[data-menu-id*="UCSC"]').find('a[href]')

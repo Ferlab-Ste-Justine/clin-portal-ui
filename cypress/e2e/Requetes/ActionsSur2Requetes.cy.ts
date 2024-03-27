@@ -12,13 +12,14 @@ describe('Page des variants - Requêtes', () => {
   });
 
   it('Sélectionner une requête', () => {
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
 
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validateTableResultsCount(/1 3\d{2}/);
+    cy.validateTableResultsCount(/1 4\d{2}/);
   });
 
   it('Afficher/Masquer les champs', () => {
@@ -26,22 +27,24 @@ describe('Page des variants - Requêtes', () => {
 
     cy.validatePillSelectedQuery('', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).click();
     cy.validatePillSelectedQuery('Position', ['100000']);
-    cy.validateTotalSelectedQuery(/1,3\d{2}/);
-    cy.validateTableResultsCount(/1 3\d{2}/);
+    cy.validateTotalSelectedQuery(/1,4\d{2}/);
+    cy.validateTableResultsCount(/1 4\d{2}/);
     cy.validateClearAllButton(true);
 
     cy.get('button[role="switch"]').click({force: true});
 
     cy.validatePillSelectedQuery('Position', ['100000']);
-    cy.validateTotalSelectedQuery(/1,3\d{2}/);
-    cy.validateTableResultsCount(/1 3\d{2}/);
+    cy.validateTotalSelectedQuery(/1,4\d{2}/);
+    cy.validateTableResultsCount(/1 4\d{2}/);
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(0).click();
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(true);
   });
 
@@ -49,14 +52,14 @@ describe('Page des variants - Requêtes', () => {
     cy.get('span[class*="ant-collapse-arrow"]').click({force: true});
 
     cy.get('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
 
     cy.get('span[class*="ant-collapse-arrow"]').click({force: true});
 
     cy.get('div[class*="ant-collapse-content-active"]').should('exist');
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(true);
   });
 
@@ -90,7 +93,7 @@ describe('Page des variants - Requêtes', () => {
     cy.validatePillSelectedQuery('', ['Q2'], 1);
     cy.validateOperatorSelectedQuery('Ou');
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(true);
   });
 
@@ -119,7 +122,7 @@ describe('Page des variants - Requêtes', () => {
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 2);
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(true);
   });
 
@@ -131,20 +134,21 @@ describe('Page des variants - Requêtes', () => {
     cy.get('[class*="ant-popconfirm"]').should('not.exist');
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 1);
     cy.validatePillSelectedQuery('Position', ['100000']);
-    cy.validateTotalSelectedQuery(/1,3\d{2}/);
-    cy.validateTableResultsCount(/1 3\d{2}/);
+    cy.validateTotalSelectedQuery(/1,4\d{2}/);
+    cy.validateTableResultsCount(/1 4\d{2}/);
     cy.validateClearAllButton(false);
   });
 
   it('Supprimer l\'unique pilule d\'une requête avec le X', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_selected"]').find('button[class*="QueryPill_close"]').click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 1);
     cy.validatePillSelectedQuery('Position', ['100000']);
-    cy.validateTotalSelectedQuery(/1,3\d{2}/);
-    cy.validateTableResultsCount(/1 3\d{2}/);
+    cy.validateTotalSelectedQuery(/1,4\d{2}/);
+    cy.validateTableResultsCount(/1 4\d{2}/);
     cy.validateClearAllButton(false);
   });
 
@@ -157,7 +161,7 @@ describe('Page des variants - Requêtes', () => {
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 2);
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(true);
   });
 
@@ -169,7 +173,7 @@ describe('Page des variants - Requêtes', () => {
     cy.get('[class*="ant-modal-confirm"]').should('not.exist');
     cy.get('body').contains('Utiliser les filtres pour créer une requête').should('exist');
     cy.validateTotalSelectedQuery('1.3M');
-    cy.validateTableResultsCount(/1 298 \d{3}/);
+    cy.validateTableResultsCount(/1 3\d{2} \d{3}/);
     cy.validateClearAllButton(false);
   });
 });

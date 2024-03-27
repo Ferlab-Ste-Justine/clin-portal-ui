@@ -366,8 +366,10 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'Uncertain Significance',
                          'Likely Benign',
                          'Benign',
-                         'Possibly Pathogenic',
+                         'Possibly Pathogenic Moderate',
                          'Possibly Pathogenic Benign',
+                         'Possibly Pathogenic Low',
+                         'Possibly Benign',
                          'No Data'];
 
     cy.visitVariantsPatientPage(epCHUSJ_ldmCHUSJ.patientProbId, epCHUSJ_ldmCHUSJ.prescriptionId, 3, 'd3eefb82-edcc-42f1-a4e6-28808bd06f34');
@@ -382,6 +384,7 @@ describe('Page des variants d\'un patient - Dictionnaire', () => {
                          'PS1',
                          'PM1',
                          'PM2',
+                         'PM4',
                          'PM5',
                          'PP2',
                          'PP3',

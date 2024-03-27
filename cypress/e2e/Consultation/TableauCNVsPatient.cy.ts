@@ -17,22 +17,22 @@ beforeEach(() => {
 
 describe('Page des CNVs d\'un patient - Consultation du tableau', () => {
   it('Vérifier les informations affichées', () => {
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 2, 'CFHR1');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 2, 'CFHR3');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 3, 'GAIN:chr1:196774873-196832007');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 4, /^1$/);
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 5, '196 774 872');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 6, '196 832 006');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 7, /^GAIN$/);
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 8, '57.1 kb');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 9, '1.38788');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 10, /^3$/);
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 11, /^2$/);
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 12, './1');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 13, 'PASS');
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 14, /^75$/);
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 15, /^22$/);
-    cy.validateTableDataRowKeyContent('c6c851354ecc5c10473d596260d5bfff84bbc9db', 16, '3, 0');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 2, 'CFHR1');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 2, 'CFHR3');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 3, 'GAIN:chr1:196774873-196832007');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 4, /^1$/);
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 5, '196 774 872');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 6, '196 832 006');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 7, /^GAIN$/);
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 8, '57.1 kb');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 9, '1.38788');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 10, /^3$/);
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 11, /^2$/);
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 12, './1');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 13, 'PASS');
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 14, /^75$/);
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 15, /^22$/);
+    cy.validateTableDataRowKeyContent('c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c', 16, '3, 0');
   });
  
   it('Valider l\'icône de sauvegarde des requêtes personnalisées', () => {
@@ -41,15 +41,15 @@ describe('Page des CNVs d\'un patient - Consultation du tableau', () => {
   });
  
   it('Valider les liens disponibles', () => {
-    cy.get('tr[data-row-key="c6c851354ecc5c10473d596260d5bfff84bbc9db"]').contains(/^2$/).click({force: true});
+    cy.get('tr[data-row-key="c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c"]').contains(/^2$/).click({force: true});
     cy.contains('GAIN:chr1:196774873-196832007').should('exist');
     cy.get('body').find('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('tr[data-row-key="c6c851354ecc5c10473d596260d5bfff84bbc9db"]').contains('CFHR1').click({force: true});
+    cy.get('tr[data-row-key="c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c"]').contains('CFHR1').click({force: true});
     cy.contains('GAIN:chr1:196774873-196832007').should('exist');
     cy.get('body').find('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('tr[data-row-key="c6c851354ecc5c10473d596260d5bfff84bbc9db"]').find('svg[class="anticon"]').click({force: true});
+    cy.get('tr[data-row-key="c2dab14eafa15ebf65ead73a8a8e729fd3b11a9c"]').find('svg[class="anticon"]').click({force: true});
     cy.contains('Alignement et variant').should('exist');
     cy.contains('Zoom in to see features').should('exist');
     cy.contains('ERROR').should('not.exist');

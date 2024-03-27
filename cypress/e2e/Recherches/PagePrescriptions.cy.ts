@@ -15,91 +15,104 @@ describe('Page des prescriptions et requêtes - Rechercher des prescriptions', (
   });
 
   it('Par numéro de prescription', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.prescriptionId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.prescriptionId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.prescriptionId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de requête du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.requestProbId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.requestProbId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.requestProbId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de dossier du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.mrnProb, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnProb, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnProb.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de patient du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.patientProbId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.patientProbId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.patientProbId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro d\'échantillon du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.sampleProbId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.sampleProbId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.sampleProbId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de requête de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.requestMthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.requestMthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.requestMthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de dossier de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.mrnMth, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnMth, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnMth.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de patient de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.patientMthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.patientMthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.patientMthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro d\'échantillon de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.sampleMthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.sampleMthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.sampleMthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de requête du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.requestFthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.requestFthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.requestFthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de dossier du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.mrnFth, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnFth, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnFth.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro de patient du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.patientFthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.patientFthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.patientFthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
   });
 
   it('Par numéro d\'échantillon du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.sampleFthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.sampleFthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.sampleFthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.prescriptionId).should('exist');
@@ -117,7 +130,8 @@ describe('Page des prescriptions et requêtes - Rechercher des requêtes', () =>
   });
 
   it('Par numéro de prescription', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.prescriptionId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.prescriptionId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.prescriptionId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (3)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestProbId).should('exist');
@@ -126,84 +140,96 @@ describe('Page des prescriptions et requêtes - Rechercher des requêtes', () =>
   });
 
   it('Par numéro de requête du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.requestProbId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.requestProbId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.requestProbId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestProbId).should('exist');
   });
 
   it('Par numéro de dossier du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.mrnProb, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnProb, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnProb.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestProbId).should('exist');
   });
 
   it('Par numéro de patient du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.patientProbId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.patientProbId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.patientProbId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestProbId).should('exist');
   });
 
   it('Par numéro d\'échantillon du cas-index', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.sampleProbId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.sampleProbId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.sampleProbId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestProbId).should('exist');
   });
 
   it('Par numéro de requête de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.requestMthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.requestMthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.requestMthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestMthId).should('exist');
   });
 
   it('Par numéro de dossier de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.mrnMth, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnMth, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnMth.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestMthId).should('exist');
   });
 
   it('Par numéro de patient de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.patientMthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.patientMthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.patientMthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestMthId).should('exist');
   });
 
   it('Par numéro d\'échantillon de la mère', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.sampleMthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.sampleMthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.sampleMthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestMthId).should('exist');
   });
 
   it('Par numéro de requête du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.requestFthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.requestFthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.requestFthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestFthId).should('exist');
   });
 
   it('Par numéro de dossier du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.mrnFth, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnFth, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnFth.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestFthId).should('exist');
   });
 
   it('Par numéro de patient du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.patientFthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.patientFthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.patientFthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestFthId).should('exist');
   });
 
   it('Par numéro d\'échantillon du père', () => {
-    cy.get('[data-cy="PrescriptionsSearch"]').type(epCHUSJ_ldmCHUSJ.sampleFthId, {force: true});
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.sampleFthId, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.sampleFthId.length);
+    cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.requestFthId).should('exist');

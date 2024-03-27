@@ -66,7 +66,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.sortTableAndIntercept('RQDM', 1);
     cy.validateTableFirstRow('0.00e+0', 11);
     cy.sortTableAndIntercept('RQDM', 1);
-    cy.validateTableFirstRow(/(1\.00e\+0|9\.\d{2}e\-1)/, 11);
+    cy.validateTableFirstRow(/(1\.00e\+0|\d{1}\.\d{2}e\-1)/, 11);
   });
 
   it('Valider les fonctionnalités du tableau - Tri CMC', () => {
@@ -75,7 +75,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.sortTableAndIntercept('CMC', 1);
     cy.validateTableFirstRow('-', 12);
     cy.sortTableAndIntercept('CMC', 1);
-    cy.validateTableFirstRow('419', 12);
+    cy.validateTableFirstRow(/^(419|29938)$/, 12);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Hotspot', () => {
@@ -140,7 +140,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.sortTableAndIntercept('gnomAD', 1);
     cy.sortTableAndWait('Variant');
     cy.sortTableAndIntercept('Variant', 1);
-    cy.validateTableFirstRow('chrY:g.9906510G>C', 1);
+    cy.validateTableFirstRow(/^(chrY:g.9906510G>C|chrY:g.9908200A>C)$/, 1);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

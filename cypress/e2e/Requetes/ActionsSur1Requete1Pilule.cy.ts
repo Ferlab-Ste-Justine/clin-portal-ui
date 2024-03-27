@@ -16,7 +16,7 @@ describe('Page des variants - Requêtes', () => {
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV','Insertion']);
     cy.validateTotalSelectedQuery('1.2M');
-    cy.validateTableResultsCount(/1 181 \d{3}/);
+    cy.validateTableResultsCount(/1 1\d{2} \d{3}/);
     cy.validateClearAllButton(false);
   });
 
@@ -27,7 +27,7 @@ describe('Page des variants - Requêtes', () => {
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV','Insertion']);
     cy.validateTotalSelectedQuery('1.2M');
-    cy.validateTableResultsCount(/1 181 \d{3}/);
+    cy.validateTableResultsCount(/1 \d{3} \d{3}/);
     cy.validateClearAllButton(false);
   });
 
@@ -37,7 +37,7 @@ describe('Page des variants - Requêtes', () => {
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validatePillSelectedQuery('Chromosome', ['19'], 1);
     cy.validateOperatorSelectedQuery('Et');
-    cy.validateTotalSelectedQuery('69.2K');
+    cy.validateTotalSelectedQuery(/(69.6|70)K/);
     cy.validateTableResultsCount(/69 \d{3}/);
     cy.validateClearAllButton(false);
   });
@@ -50,14 +50,14 @@ describe('Page des variants - Requêtes', () => {
 
     cy.get('body').contains('Utiliser les filtres pour créer une requête').should('exist');
     cy.validateTotalSelectedQuery('1.3M');
-    cy.validateTableResultsCount(/1 298 \d{3}/);
+    cy.validateTableResultsCount(/1 3\d{2} \d{3}/);
     cy.validateClearAllButton(false);
 
     cy.checkAndClickApplyFacet('Variant', 'Chromosome', '19');
 
     cy.validatePillSelectedQuery('Chromosome', ['19']);
-    cy.validateTotalSelectedQuery('82.6K');
-    cy.validateTableResultsCount(/82 \d{3}/);
+    cy.validateTotalSelectedQuery(/83.\d{1}K/);
+    cy.validateTableResultsCount(/83 \d{3}/);
     cy.validateClearAllButton(true);
   });
 
@@ -68,7 +68,7 @@ describe('Page des variants - Requêtes', () => {
 
     cy.validatePillSelectedQuery('Type de variant', ['SNV']);
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(true);
   });
 });

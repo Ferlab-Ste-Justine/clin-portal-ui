@@ -6,10 +6,14 @@ declare namespace Cypress {
     checkValueFacet(facetTitle: string, valueBack: string): cy & CyEventEmitter;
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
+    createFilterIfNotExists(filterName: string): cy & CyEventEmitter;
+    deleteFilter(filterName: string): cy & CyEventEmitter;
+    deleteFilterIfExists(filterName: string): cy & CyEventEmitter;
     login(user: string, password: string, restoreSession: boolean = true): cy & CyEventEmitter;
     logout(): cy & CyEventEmitter;
     removeFilesFromFolder(folder: string): cy & CyEventEmitter;
     resetColumns(eq: number): cy & CyEventEmitter;
+    saveFilterAs(filterName: string): cy & CyEventEmitter;
     showColumn(column: string|RegExp, eq: number): cy & CyEventEmitter;
     sortTableAndIntercept(column: string|RegExp, nbCalls: number, eq: number = 0): cy & CyEventEmitter;
     sortTableAndWait(column: string, eq: number = 0): cy & CyEventEmitter;
@@ -24,9 +28,12 @@ declare namespace Cypress {
     validateFileContent(fixture: string, replacements?: Replacement[]): cy & CyEventEmitter;
     validateFileHeaders(fixture: string): cy & CyEventEmitter;
     validateFileName(namePattern: string): cy & CyEventEmitter;
+    validateFilterInManager(filterName: string, expect: string): cy & CyEventEmitter;
+    validateIconStates(iconName: string, isDisable: boolean, isDirty: boolean): cy & CyEventEmitter;
     validateOperatorSelectedQuery(expectedOperator: string): cy & CyEventEmitter;
     validatePillSelectedQuery(facetTitle: string, values: (string|RegExp)[], eq: number = 0): cy & CyEventEmitter;
     validatePaging(total: string|RegExp, eqSelect: number, eqTab: number = 0): cy & CyEventEmitter;
+    validateSelectedFilterInDropdown(filterName: string): cy & CyEventEmitter;
     validateTableDataRowKeyAttr(dataRowKey: string, eq: number, expectedAttr: string, expectedValue: string): cy & CyEventEmitter;
     validateTableDataRowKeyClass(dataRowKey: string, eq: number, expectedClass: string): cy & CyEventEmitter;
     validateTableDataRowKeyContent(dataRowKey: string, eq: number, expectedContent: string|RegExp): cy & CyEventEmitter;

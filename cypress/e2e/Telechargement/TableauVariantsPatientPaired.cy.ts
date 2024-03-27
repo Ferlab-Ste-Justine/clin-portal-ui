@@ -15,7 +15,7 @@ beforeEach(() => {
   cy.wait(2000);
 });
 
-describe('Page des variants d\'un patient (somatic) - Exporter un variant en TSV', () => {
+describe('Page des variants d\'un patient (paired) - Exporter un variant en TSV', () => {
   it('Valider le nom du fichier', () => {
     cy.validateFileName('SNV_'+strDate+'T*.tsv');
   });

@@ -20,6 +20,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Facette numérique OU Facette standard', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -29,6 +30,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Facette numérique ou No Data ET Facette standard', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(2).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -38,6 +40,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Facette standard (Any of)', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(3).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -47,6 +50,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Facette standard (All of)', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(4).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -56,6 +60,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Facette standard (None of)', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(5).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -65,6 +70,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Facette standard (None of) ET Facette numérique', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(6).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -86,6 +92,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q2 - Facette standard OU Facette standard', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -95,6 +102,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q3 - Q1 OU Q2', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(2).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -104,6 +112,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q4 - Facette numérique ou No Data ET Facette standard', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(3).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -113,6 +122,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q5 - Facette numérique ou No Data ET Facette numérique ou No Data', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(4).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -122,6 +132,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q6 - Q4 ET Q5', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(5).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -131,6 +142,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q7 - Q3 OU Q6 OU Facette numérique ou No Data', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(6).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -140,6 +152,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q8 - Facette numérique ou No Data', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(7).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
@@ -149,6 +162,7 @@ describe('Page des variants d\'un patient - Requêtes', () => {
 
   it('Validation Q9 - Q7 OU Q8', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(8).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 

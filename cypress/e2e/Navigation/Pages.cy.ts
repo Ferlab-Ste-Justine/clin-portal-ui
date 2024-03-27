@@ -194,6 +194,13 @@ describe('Affichage de toutes les pages et modals', () => {
     cy.contains('Sauvegarder').should('exist', {timeout: 20*1000});
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
+    // Gérer les filtres
+    cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+    cy.get('[data-menu-id*="manage-my-filters"]').click({force: true});
+    cy.contains('Gérer les filtres').should('exist', {timeout: 20*1000});
+    cy.contains('Fermer').should('exist', {timeout: 20*1000});
+    cy.get('button[class="ant-modal-close"]').invoke('click');
+
     // Tiroir d'occurrence
     cy.get('[data-cy="drawerCb_chr10:g.1096268T>C"]').click({force: true});
     cy.contains('Occurrence').should('exist', {timeout: 20*1000});

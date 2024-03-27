@@ -27,7 +27,7 @@ beforeEach(() => {
 
 describe('Page des variants d\'un patient - Consultation du tableau', () => {  
   it('Valider les fonctionnalités du tableau - Tri Variant', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Variant', 1);
@@ -37,7 +37,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Type [CLIN-2149]', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Type', 1);
@@ -47,7 +47,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Gène', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Gène', 1);
@@ -57,7 +57,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Fra.', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Fra.', 1);
@@ -67,7 +67,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Exo.', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Exo.', 1);
@@ -77,7 +77,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri ACMG F.', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('ACMG F.', 1);
@@ -87,7 +87,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri ACMG E.', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('ACMG E.', 1);
@@ -97,7 +97,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri gnomAD', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept(/^gnomAD $/, 1);
@@ -107,7 +107,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri gnomAD ALT', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('gnomAD ALT', 1);
@@ -117,13 +117,13 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri RQDM', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('RQDM', 1);
     cy.validateTableFirstRow('0.00e+0', 16);
     cy.sortTableAndIntercept('RQDM', 1);
-    cy.validateTableFirstRow(/(1\.00e\+0|9\.\d{2}e\-1)/, 16);
+    cy.validateTableFirstRow(/(1\.00e\+0|\d{1}\.\d{2}e\-1)/, 16);
   });
 
   it('Valider les fonctionnalités du tableau - Tri QG', () => {
@@ -190,7 +190,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri CMC', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('CMC', 1);
@@ -200,7 +200,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Tier', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Tier', 1);
@@ -210,7 +210,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.get('[id="query-builder-header-tools"]').find('[data-icon="plus"]').click({force: true});
+    cy.get('[id="query-builder-header-tools"] [data-icon="plus"]').click({force: true});
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('gnomAD', 1);

@@ -442,8 +442,10 @@ describe('Page des variants - Dictionnaire', () => {
                          'Uncertain Significance',
                          'Likely Benign',
                          'Benign',
-                         'Possibly Pathogenic',
+                         'Possibly Pathogenic Moderate',
                          'Possibly Pathogenic Benign',
+                         'Possibly Pathogenic Low',
+                         'Possibly Benign',
                          'No Data'];
 
     cy.visitVariantsPage('?sharedFilterId=b790f57a-cd2d-478b-875b-a19a9c77eb77');
@@ -458,6 +460,7 @@ describe('Page des variants - Dictionnaire', () => {
                          'PS1',
                          'PM1',
                          'PM2',
+                         'PM4',
                          'PM5',
                          'PP2',
                          'PP3',

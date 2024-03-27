@@ -17,7 +17,7 @@ beforeEach(() => {
   cy.showColumn('REVEL', 0);
 });
 
-describe('Page des variants d\'un patient (somatic) - Consultation du tableau', () => {  
+describe('Page des variants d\'un patient (paired) - Consultation du tableau', () => {  
   it('Valider les fonctionnalités du tableau - Tri Variant', () => {
     cy.sortTableAndIntercept('Variant', 1);
     cy.validateTableFirstRow('chr10:g.100298459del', 2);

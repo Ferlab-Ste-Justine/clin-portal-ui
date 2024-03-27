@@ -48,7 +48,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
   });
 
   it('Pathogénicité - ACMG de Franklin', () => {
-    cy.validateFacetFilter('Pathogénicité', 'ACMG de Franklin', 'Possibly Pathogenic Benign', 'POSSIBLY_BENIGN', /^1$/);
+    cy.validateFacetFilter('Pathogénicité', 'ACMG de Franklin', 'Possibly Benign', 'POSSIBLY_BENIGN', /^1$/);
     cy.validateFacetRank(6, 'ACMG de Franklin');
   });
 

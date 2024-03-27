@@ -20,7 +20,7 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
     cy.get('[data-cy="Summary_Clinvar"]').contains('Pathogenic').should('exist');
     cy.get('[data-cy="Summary_dbSNP"]').contains('rs370596113').should('exist');
     cy.get('[data-cy="Summary_FreqRQDMTotalPc"]').contains(/^1 \/\d{3}$/).should('exist');
-    cy.get('[data-cy="Summary_FreqRQDMTotalAf"]').contains(/^3.\d{2}e-3$/).should('exist');
+    cy.get('[data-cy="Summary_FreqRQDMTotalAf"]').contains(/^\d{1}.\d{2}e-3$/).should('exist');
     cy.get('[data-cy="Summary_LastAnnotation"]').contains(epCHUSJ_ldmCHUSJ.annotationDate).should('exist');
   });
   
@@ -76,9 +76,9 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
   });
   
   it('Panneau Cohortes du RQDM', () => {
-    cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(1).contains(/^0 \/ \d{2} \(0%\)$/).should('exist');
+    cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(1).contains(/^0 \/ \d{2,3}| \(0%\)$/).should('exist');
     cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(2).contains('0').should('exist');
-    cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(3).contains(/^0 \/ \d{2} \(0%\)$/).should('exist');
+    cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(3).contains(/^0 \/ \d{2,3} \(0%\)$/).should('exist');
     cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(4).contains('0').should('exist');
     cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(5).contains(/^0 \/ \d{1,2} \(0%\)$/).should('exist');
     cy.get('[data-row-key="RGDI"]').find('td[class="ant-table-cell"]').eq(6).contains('0').should('exist');

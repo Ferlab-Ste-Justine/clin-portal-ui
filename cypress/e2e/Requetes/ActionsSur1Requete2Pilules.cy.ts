@@ -21,7 +21,7 @@ describe('Page des variants - Requêtes', () => {
     cy.validatePillSelectedQuery('Position', ['100000'], 1);
     cy.validateOperatorSelectedQuery('Ou');
     cy.validateTotalSelectedQuery('1.1M');
-    cy.validateTableResultsCount(/1 082 \d{3}/);
+    cy.validateTableResultsCount(/1 0\d{2} \d{3}/);
     cy.validateClearAllButton(false);
 
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql2');
@@ -39,13 +39,14 @@ describe('Page des variants - Requêtes', () => {
 
   it('Supprimer une des pilules d\'une requête avec le X', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+    cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
     cy.get('[class*="QueryBar_selected"]').find('button[class*="QueryPill_close"]').eq(0).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
     cy.validatePillSelectedQuery('Position', ['100000']);
-    cy.validateTotalSelectedQuery(/1,3\d{2}/);
-    cy.validateTableResultsCount(/1 3\d{2}/);
+    cy.validateTotalSelectedQuery(/1,4\d{2}/);
+    cy.validateTableResultsCount(/1 4\d{2}/);
     cy.validateClearAllButton(false);
   });
 });
