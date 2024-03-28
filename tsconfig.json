@@ -23,8 +23,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": [
-      "cypress",
-      "@testing-library/cypress"
+      "cypress"
     ]
   },
   "include": [

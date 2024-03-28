@@ -1,5 +1,4 @@
 /// <reference types="Cypress" />
-import '@testing-library/cypress/add-commands';
 
 export interface Replacement {
   placeholder: string;
