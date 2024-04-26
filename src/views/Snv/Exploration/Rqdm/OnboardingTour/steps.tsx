@@ -124,7 +124,7 @@ export const steps: Step.StepOptions[] = [
         classes: 'shepherd-button-primary',
         text: 'Next',
         action() {
-          const apply = document.querySelector('span[data-cy="Apply_Variant Type"]');
+          const apply = document.querySelector('span[data-cy="Apply_Type de variant"]');
           const applyBtn = apply?.closest('button');
           if (applyBtn instanceof HTMLElement) {
             console.log('click');
@@ -148,6 +148,56 @@ export const steps: Step.StepOptions[] = [
     },
     title: 'Application de critère',
     text: `<span>Ouvrez le critère “Type de variant” et sélectionnez la valeur “Deletion”.</span>`,
+    when: {
+      show() {
+        const activeTour = this.getTour();
+        const currentStep = activeTour?.getCurrentStep();
+        const currentStepElement = currentStep?.getElement();
+        const footer = currentStepElement?.querySelector('.shepherd-footer');
+        const progress = document.createElement('span');
+        progress.className = 'shepherd-progress';
+        progress.innerText = `${activeTour?.steps.indexOf(this) + 1} of ${
+          activeTour?.steps.length
+        }`;
+        footer?.insertBefore(
+          progress,
+          currentStepElement!.querySelector('.shepherd-button:last-child'),
+        );
+      },
+    },
+  },
+
+  {
+    id: 'QB',
+    modalOverlayOpeningPadding: 12,
+    attachTo: { element: '#query-builder-header-tools', on: 'bottom' },
+    buttons: [
+      {
+        classes: 'shepherd-button-secondary',
+        text: 'Back',
+        action() {
+          return this.back();
+        },
+      },
+      {
+        classes: 'shepherd-button-primary',
+        text: 'Next',
+        action() {
+          return this.next();
+        },
+      },
+    ],
+    classes: 'custom-class-name-1 custom-class-name-2',
+    highlightClass: 'highlight',
+    scrollTo: false,
+    cancelIcon: {
+      enabled: true,
+    },
+    floatingUIOptions: {
+      middleware: [offset({ mainAxis: 24, crossAxis: -20 })],
+    },
+    title: 'Création d’une query',
+    text: `<span>Vous venez de créer votre premier filtre et les données dans le tableau ci-dessous sont raffinées en conséquence. Un filtre contient une ou plusieurs requêtes.</span>`,
     when: {
       show() {
         const activeTour = this.getTour();
