@@ -41,6 +41,7 @@ type OwnProps = {
 const PageContent = ({ variantMapping }: OwnProps) => {
   const { queryList, activeQuery } = useQueryBuilderState(VARIANT_RQDM_QB_ID);
   const [variantQueryConfig, setVariantQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
+  const [tourStep, setTourStepg] = useState<string | undefined>(undefined);
   const [pageIndex, setPageIndex] = useState(DEFAULT_PAGE_INDEX);
   const getVariantResolvedSqon = (query: ISyntheticSqon) =>
     resolveSyntheticSqonWithReferences(queryList, query, variantMapping);
@@ -57,12 +58,19 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   });
 
   const { search } = useLocation();
+
   useEffect(() => {
-    if (search === '?tour1') {
+    setTourStepg(search);
+    // add other active var in dep []
+  }, [search]);
+
+  useEffect(() => {
+    console.log('test');
+    if (tourStep) {
       tour.start();
     }
     // add other active var in dep []
-  }, []);
+  }, [tourStep]);
 
   const queryVariables = {
     first: variantQueryConfig.size,
