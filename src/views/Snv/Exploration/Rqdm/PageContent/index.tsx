@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
+import { useLocation } from 'react-router';
+import { useShepherdTour } from 'react-shepherd';
 import { tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import { resetSearchAfterQueryConfig } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
-import { Button, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import { ExtendedMappingResults } from 'graphql/models';
 import { useVariants } from 'graphql/variants/actions';
 import { VariantType } from 'graphql/variants/models';
@@ -26,12 +28,10 @@ import DownloadTSVWrapper from 'components/Download';
 import { resolveSyntheticSqonWithReferences } from 'utils/query';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 
+import { steps } from '../OnboardingTour/steps';
+
 import VariantsTab from './tabs/Variants';
 
-import { useShepherdTour } from 'react-shepherd';
-
-import style from './index.module.scss';
-import { steps } from '../OnboardingTour/steps';
 import 'shepherd.js/dist/css/shepherd.css';
 
 type OwnProps = {
@@ -55,6 +55,14 @@ const PageContent = ({ variantMapping }: OwnProps) => {
     tourOptions: options,
     steps: steps,
   });
+
+  const { search } = useLocation();
+  useEffect(() => {
+    if (search === '?tour1') {
+      tour.start();
+    }
+    // add other active var in dep []
+  }, []);
 
   const queryVariables = {
     first: variantQueryConfig.size,
@@ -163,14 +171,6 @@ const PageContent = ({ variantMapping }: OwnProps) => {
         triggered={downloadTriggered}
         queryKey={'Variants'}
       />
-      <Button
-        className={style.buttonTour}
-        shape="circle"
-        type="primary"
-        onClick={() => tour.start()}
-      >
-        !
-      </Button>
     </>
   );
 };

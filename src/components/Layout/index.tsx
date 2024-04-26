@@ -19,7 +19,17 @@ const items: MenuProps['items'] = [
     children: [
       {
         key: '1',
-        label: <Link to={STATIC_ROUTES.SNV_EXPLORATION_RQDM}>Query Builder</Link>,
+
+        label: (
+          <Link
+            to={{
+              pathname: STATIC_ROUTES.SNV_EXPLORATION_RQDM,
+              search: 'tour1',
+            }}
+          >
+            Query Builder
+          </Link>
+        ),
       },
     ],
     key: '1',
