@@ -14,6 +14,37 @@
   /* } */
 }
 
-.custom-class-name-intro{
+.custom-class-name-intro {
   max-width: 820px !important;
+}
+
+.custom-class-name-save {
+  max-width: 520px !important;
+}
+
+.shepherd-has-title .shepherd-content .shepherd-header {
+  padding: 8px 12px;
+  background-color: #fff;
+  border-bottom: 1px solid #e1e8ef;
+}
+
+.shepherd-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0a5085 !important;
+}
+
+.shepherd-text {
+  font-size: 14px;
+  img {
+    margin-top: 10px;
+  }
+}
+
+.shepherd-button-primary {
+  background-color: #006aa3;
+}
+
+.shepherd-cancel-icon {
+  color: #63768f;
 }

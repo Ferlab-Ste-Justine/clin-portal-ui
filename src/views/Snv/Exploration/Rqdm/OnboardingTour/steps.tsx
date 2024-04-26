@@ -3,6 +3,7 @@ import { Step } from 'react-shepherd';
 import { offset } from '@floating-ui/dom';
 
 import image from './asset/Qlin-QB-SaveFilter.webp';
+import png from './asset/Qlin-QB-saveFilter.png';
 
 export const steps: Step.StepOptions[] = [
   {
@@ -248,7 +249,7 @@ export const steps: Step.StepOptions[] = [
         },
       },
     ],
-    classes: 'custom-class-name-1 custom-class-name-2',
+    classes: 'custom-class-name-save custom-class-name-2',
     highlightClass: 'highlight',
     scrollTo: false,
     cancelIcon: {
@@ -258,7 +259,18 @@ export const steps: Step.StepOptions[] = [
       middleware: [offset({ mainAxis: 24, crossAxis: -20 })],
     },
     title: 'Sauvegarder une query',
-    text: `<span>Nommons cette query et sauvegardons la en cliquant le bouton "Sauvegarder le filtre" en haut à droite!</span>`,
+
+    text: `<div>
+    <span>Nommons cette query et sauvegardons la en cliquant le bouton "Sauvegarder le filtre" en haut à droite!</span>
+    <br/>
+    <img 
+                            src=${png}
+                            frameBorder="0" 
+                            allowFullScreen
+                            style="width:500px;"
+                        >
+                        </img>
+    </div>`,
     when: {
       show() {
         const activeTour = this.getTour();
