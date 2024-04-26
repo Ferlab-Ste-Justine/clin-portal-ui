@@ -8,13 +8,6 @@ export const steps: Step.StepOptions[] = [
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: 'Exit',
-        action() {
-          return this.cancel();
-        },
-      },
-      {
-        classes: 'shepherd-button-primary',
         text: 'Back',
         action() {
           return this.back();
@@ -36,6 +29,23 @@ export const steps: Step.StepOptions[] = [
     },
     title: 'Créer un filtre',
     text: `<span>Un filtre permet aux utilisateurs de raffiner le résultats du tableau avec des requêtes des plus simples au plus complèxes. Par exemple, vous pouvez créer un filtre pour trouver des variantes de type <b>délétion</b>.</span>`,
+    when: {
+      show() {
+        const activeTour = this.getTour();
+        const currentStep = activeTour?.getCurrentStep();
+        const currentStepElement = currentStep?.getElement();
+        const footer = currentStepElement?.querySelector('.shepherd-footer');
+        const progress = document.createElement('span');
+        progress.className = 'shepherd-progress';
+        progress.innerText = `${activeTour?.steps.indexOf(this) + 1} of ${
+          activeTour?.steps.length
+        }`;
+        footer?.insertBefore(
+          progress,
+          currentStepElement!.querySelector('.shepherd-button:last-child'),
+        );
+      },
+    },
   },
   {
     id: 'sideMenu',
@@ -43,13 +53,6 @@ export const steps: Step.StepOptions[] = [
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: 'Exit',
-        action() {
-          return this.cancel();
-        },
-      },
-      {
-        classes: 'shepherd-button-primary',
         text: 'Back',
         action() {
           return this.back();
@@ -65,6 +68,12 @@ export const steps: Step.StepOptions[] = [
           }
 
           setTimeout(() => {
+            const element = document.querySelector('#FilterContainer_collapseFacet');
+            const collapseButton = element?.querySelector('.ant-collapse-header');
+
+            if (collapseButton instanceof HTMLElement) {
+              collapseButton.click();
+            }
             this.next();
           }, 400);
         },
@@ -81,6 +90,23 @@ export const steps: Step.StepOptions[] = [
     },
     title: 'Catégorie de critère',
     text: `<span>Sélectionnez la catégorie "Variant" de la colonne de filtres à gauche.</span>`,
+    when: {
+      show() {
+        const activeTour = this.getTour();
+        const currentStep = activeTour?.getCurrentStep();
+        const currentStepElement = currentStep?.getElement();
+        const footer = currentStepElement?.querySelector('.shepherd-footer');
+        const progress = document.createElement('span');
+        progress.className = 'shepherd-progress';
+        progress.innerText = `${activeTour?.steps.indexOf(this) + 1} of ${
+          activeTour?.steps.length
+        }`;
+        footer?.insertBefore(
+          progress,
+          currentStepElement!.querySelector('.shepherd-button:last-child'),
+        );
+      },
+    },
   },
   {
     id: 'facet',
@@ -89,13 +115,6 @@ export const steps: Step.StepOptions[] = [
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: 'Exit',
-        action() {
-          return this.cancel();
-        },
-      },
-      {
-        classes: 'shepherd-button-primary',
         text: 'Back',
         action() {
           return this.back();
@@ -105,32 +124,11 @@ export const steps: Step.StepOptions[] = [
         classes: 'shepherd-button-primary',
         text: 'Next',
         action() {
-          const element = document.querySelector('#FilterContainer_collapseFacet');
-          const collapseButton = element?.querySelector('.ant-collapse-header');
-
-          if (collapseButton instanceof HTMLElement) {
-            collapseButton.click();
-
-            setTimeout(() => {
-              const checkBox = document.querySelector('#input-deletion');
-              console.log('checkBox1', checkBox);
-              if (checkBox instanceof HTMLElement) {
-                console.log('checkBox2', checkBox);
-                // checkBox.click();
-                checkBox.setAttribute('checked', 'true');
-                const parent = checkBox.closest('span');
-                if (parent instanceof HTMLElement) {
-                  parent.setAttribute('class', 'ant-checkbox ant-checkbox-checked');
-                }
-                setTimeout(() => {
-                  const apply = document.querySelector('span[data-cy="Apply_Variant Type"]');
-                  const applyBtn = apply?.closest('button');
-                  if (applyBtn instanceof HTMLElement) {
-                    applyBtn.click();
-                  }
-                }, 400);
-              }
-            }, 400);
+          const apply = document.querySelector('span[data-cy="Apply_Variant Type"]');
+          const applyBtn = apply?.closest('button');
+          if (applyBtn instanceof HTMLElement) {
+            console.log('click');
+            applyBtn.click();
           }
 
           setTimeout(() => {
@@ -150,44 +148,22 @@ export const steps: Step.StepOptions[] = [
     },
     title: 'Application de critère',
     text: `<span>Ouvrez le critère “Type de variant” et sélectionnez la valeur “Deletion”.</span>`,
+    when: {
+      show() {
+        const activeTour = this.getTour();
+        const currentStep = activeTour?.getCurrentStep();
+        const currentStepElement = currentStep?.getElement();
+        const footer = currentStepElement?.querySelector('.shepherd-footer');
+        const progress = document.createElement('span');
+        progress.className = 'shepherd-progress';
+        progress.innerText = `${activeTour?.steps.indexOf(this) + 1} of ${
+          activeTour?.steps.length
+        }`;
+        footer?.insertBefore(
+          progress,
+          currentStepElement!.querySelector('.shepherd-button:last-child'),
+        );
+      },
+    },
   },
-  // {
-  //   id: 'facetSearch',
-  //   modalOverlayOpeningPadding: 12,
-  //   attachTo: { element: '.Filters_filterWrapper__z9Mbc', on: 'right-end' },
-  //   buttons: [
-  //     {
-  //       classes: 'shepherd-button-secondary',
-  //       text: 'Exit',
-  //       action() {
-  //         return this.cancel();
-  //       },
-  //     },
-  //     {
-  //       classes: 'shepherd-button-primary',
-  //       text: 'Back',
-  //       action() {
-  //         return this.back();
-  //       },
-  //     },
-  //     {
-  //       classes: 'shepherd-button-primary',
-  //       text: 'Next',
-  //       action() {
-  //         return this.next();
-  //       },
-  //     },
-  //   ],
-  //   classes: 'custom-class-name-1 custom-class-name-2',
-  //   highlightClass: 'highlight',
-  //   scrollTo: false,
-  //   cancelIcon: {
-  //     enabled: true,
-  //   },
-  //   floatingUIOptions: {
-  //     middleware: [offset({ mainAxis: 24, crossAxis: -20 })],
-  //   },
-  //   title: 'Facet search',
-  //   text: ['Here you can filter by using our facets'],
-  // },
 ];

@@ -21,6 +21,8 @@ import VariantSearchLayout from '../components/VariantSearchLayout';
 import { getMenuItems, getMenuItemsEditionPill } from './facets';
 import PageContent from './PageContent';
 
+import './OnboardingTour/steps.css';
+
 const SnvExplorationRqdm = () => {
   const dispatch = useDispatch();
   const [menuItems, setMenuItems] = useState<ISidebarMenuItem[]>([]);
