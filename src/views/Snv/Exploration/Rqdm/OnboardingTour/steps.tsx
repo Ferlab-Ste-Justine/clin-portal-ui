@@ -1,6 +1,8 @@
 import { Step } from 'react-shepherd';
 import { offset } from '@floating-ui/dom';
 
+import image from './asset/Qlin-QB-SaveFilter.webp';
+
 export const steps: Step.StepOptions[] = [
   {
     id: 'intro',
@@ -21,14 +23,24 @@ export const steps: Step.StepOptions[] = [
         },
       },
     ],
-    classes: 'custom-class-name-1 custom-class-name-2',
+    classes: 'custom-class-name-intro custom-class-name-2',
     highlightClass: 'highlight',
     scrollTo: false,
     cancelIcon: {
       enabled: true,
     },
     title: 'Créer un filtre',
-    text: `<span>Un filtre permet aux utilisateurs de raffiner le résultats du tableau avec des requêtes des plus simples au plus complèxes. Par exemple, vous pouvez créer un filtre pour trouver des variantes de type <b>délétion</b>.</span>`,
+    text: `<div class="tour-text-container">
+    <span>Un filtre permet aux utilisateurs de raffiner le résultats du tableau avec des requêtes des plus simples au plus complèxes. Par exemple, vous pouvez créer un filtre pour trouver des variantes de type <b>délétion</b>.</span>
+    <br/>
+    <img 
+                            src=${image}
+                            class="imageStyle"
+                            frameBorder="0" 
+                            allowFullScreen
+                        >
+                        </img>
+    </div>`,
     when: {
       show() {
         const activeTour = this.getTour();

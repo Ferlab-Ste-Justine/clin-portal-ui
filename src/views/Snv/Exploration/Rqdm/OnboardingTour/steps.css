@@ -13,3 +13,7 @@
     padding: 0.5rem 1.5rem; */
   /* } */
 }
+
+.custom-class-name-intro {
+  max-width: fit-content !important;
+}
