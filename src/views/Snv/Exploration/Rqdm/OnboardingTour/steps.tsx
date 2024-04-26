@@ -11,14 +11,14 @@ export const steps: Step.StepOptions[] = [
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: 'Back',
+        text: 'Préc.',
         action() {
           return this.back();
         },
       },
       {
         classes: 'shepherd-button-primary',
-        text: 'Next',
+        text: 'Suiv.',
         action() {
           return this.next();
         },
@@ -66,14 +66,14 @@ export const steps: Step.StepOptions[] = [
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: 'Back',
+        text: 'Préc.',
         action() {
           return this.back();
         },
       },
       {
         classes: 'shepherd-button-primary',
-        text: 'Next',
+        text: 'Suiv.',
         action() {
           const element = document.querySelector('li[data-cy="SidebarMenuItem_Variant"]');
           if (element instanceof HTMLElement) {
@@ -128,14 +128,14 @@ export const steps: Step.StepOptions[] = [
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: 'Back',
+        text: 'Préc.',
         action() {
           return this.back();
         },
       },
       {
         classes: 'shepherd-button-primary',
-        text: 'Next',
+        text: 'Suiv.',
         action() {
           const apply = document.querySelector('span[data-cy="Apply_Type de variant"]');
           const applyBtn = apply?.closest('button');
@@ -179,7 +179,6 @@ export const steps: Step.StepOptions[] = [
       },
     },
   },
-
   {
     id: 'QB',
     modalOverlayOpeningPadding: 12,
@@ -187,14 +186,14 @@ export const steps: Step.StepOptions[] = [
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: 'Back',
+        text: 'Préc.',
         action() {
           return this.back();
         },
       },
       {
         classes: 'shepherd-button-primary',
-        text: 'Next',
+        text: 'Suiv.',
         action() {
           return this.next();
         },
@@ -211,6 +210,104 @@ export const steps: Step.StepOptions[] = [
     },
     title: 'Création d’une query',
     text: `<span>Vous venez de créer votre premier filtre et les données dans le tableau ci-dessous sont raffinées en conséquence. Un filtre contient une ou plusieurs requêtes.</span>`,
+    when: {
+      show() {
+        const activeTour = this.getTour();
+        const currentStep = activeTour?.getCurrentStep();
+        const currentStepElement = currentStep?.getElement();
+        const footer = currentStepElement?.querySelector('.shepherd-footer');
+        const progress = document.createElement('span');
+        progress.className = 'shepherd-progress';
+        progress.innerText = `${activeTour?.steps.indexOf(this) + 1} of ${
+          activeTour?.steps.length
+        }`;
+        footer?.insertBefore(
+          progress,
+          currentStepElement!.querySelector('.shepherd-button:last-child'),
+        );
+      },
+    },
+  },
+  {
+    id: 'SaveFilter',
+    modalOverlayOpeningPadding: 12,
+    attachTo: { element: '#QBH_editName', on: 'bottom' },
+    buttons: [
+      {
+        classes: 'shepherd-button-secondary',
+        text: 'Préc.',
+        action() {
+          return this.back();
+        },
+      },
+      {
+        classes: 'shepherd-button-primary',
+        text: 'Suiv.',
+        action() {
+          return this.next();
+        },
+      },
+    ],
+    classes: 'custom-class-name-1 custom-class-name-2',
+    highlightClass: 'highlight',
+    scrollTo: false,
+    cancelIcon: {
+      enabled: true,
+    },
+    floatingUIOptions: {
+      middleware: [offset({ mainAxis: 24, crossAxis: -20 })],
+    },
+    title: 'Sauvegarder une query',
+    text: `<span>Nommons cette query et sauvegardons la en cliquant le bouton "Sauvegarder le filtre" en haut à droite!</span>`,
+    when: {
+      show() {
+        const activeTour = this.getTour();
+        const currentStep = activeTour?.getCurrentStep();
+        const currentStepElement = currentStep?.getElement();
+        const footer = currentStepElement?.querySelector('.shepherd-footer');
+        const progress = document.createElement('span');
+        progress.className = 'shepherd-progress';
+        progress.innerText = `${activeTour?.steps.indexOf(this) + 1} of ${
+          activeTour?.steps.length
+        }`;
+        footer?.insertBefore(
+          progress,
+          currentStepElement!.querySelector('.shepherd-button:last-child'),
+        );
+      },
+    },
+  },
+  {
+    id: 'ShareFilter',
+    modalOverlayOpeningPadding: 12,
+    attachTo: { element: '#QBH_shareFilter', on: 'bottom' },
+    buttons: [
+      {
+        classes: 'shepherd-button-secondary',
+        text: 'Préc.',
+        action() {
+          return this.back();
+        },
+      },
+      {
+        classes: 'shepherd-button-primary',
+        text: 'Fermer',
+        action() {
+          return this.next();
+        },
+      },
+    ],
+    classes: 'custom-class-name-1 custom-class-name-2',
+    highlightClass: 'highlight',
+    scrollTo: false,
+    cancelIcon: {
+      enabled: true,
+    },
+    floatingUIOptions: {
+      middleware: [offset({ mainAxis: 24, crossAxis: -20 })],
+    },
+    title: 'Partager une query',
+    text: `<span>Maintenant que ce filtre est sauvegardé, vous pouvez l’envoyer à vos collègues pour qu’ils puissent travailler avec les mêmes résultats.</span>`,
     when: {
       show() {
         const activeTour = this.getTour();
