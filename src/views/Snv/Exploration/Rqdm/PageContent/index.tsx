@@ -5,7 +5,7 @@ import { resetSearchAfterQueryConfig } from '@ferlab/ui/core/components/ProTable
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
-import { Tabs } from 'antd';
+import { Button, Tabs } from 'antd';
 import { ExtendedMappingResults } from 'graphql/models';
 import { useVariants } from 'graphql/variants/actions';
 import { VariantType } from 'graphql/variants/models';
@@ -28,6 +28,12 @@ import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 
 import VariantsTab from './tabs/Variants';
 
+import { useShepherdTour } from 'react-shepherd';
+
+import style from './index.module.scss';
+import { steps } from '../OnboardingTour/steps';
+import 'shepherd.js/dist/css/shepherd.css';
+
 type OwnProps = {
   variantMapping: ExtendedMappingResults;
 };
@@ -38,6 +44,17 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   const [pageIndex, setPageIndex] = useState(DEFAULT_PAGE_INDEX);
   const getVariantResolvedSqon = (query: ISyntheticSqon) =>
     resolveSyntheticSqonWithReferences(queryList, query, variantMapping);
+  const options = {
+    defaultStepOptions: {
+      classes: 'shadow-md bg-purple-dark',
+      scrollTo: true,
+    },
+    useModalOverlay: true,
+  };
+  const tour = useShepherdTour({
+    tourOptions: options,
+    steps: steps,
+  });
 
   const queryVariables = {
     first: variantQueryConfig.size,
@@ -146,6 +163,14 @@ const PageContent = ({ variantMapping }: OwnProps) => {
         triggered={downloadTriggered}
         queryKey={'Variants'}
       />
+      <Button
+        className={style.buttonTour}
+        shape="circle"
+        type="primary"
+        onClick={() => tour.start()}
+      >
+        !
+      </Button>
     </>
   );
 };

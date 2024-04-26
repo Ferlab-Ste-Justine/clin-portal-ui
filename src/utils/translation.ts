@@ -60,6 +60,8 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     selectedPlural: intl.get('protable.selectedPlural'),
     selectAllResults: intl.get('protable.selectAllResults'),
     clear: intl.get('protable.clear'),
+    clearFilters: '',
+    result: '',
   },
   columnSelector: {
     reset: intl.get('protable.reset'),
