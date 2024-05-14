@@ -37,7 +37,7 @@ declare namespace Cypress {
     validateTableDataRowKeyAttr(dataRowKey: string, eq: number, expectedAttr: string, expectedValue: string): cy & CyEventEmitter;
     validateTableDataRowKeyClass(dataRowKey: string, eq: number, expectedClass: string): cy & CyEventEmitter;
     validateTableDataRowKeyContent(dataRowKey: string, eq: number, expectedContent: string|RegExp): cy & CyEventEmitter;
-    validateTableFirstRow(expectedValue: string|RegExp, eq: number, selector: string = ''): cy & CyEventEmitter;
+    validateTableFirstRow(expectedValue: string|RegExp, eq: number, hasCheckbox: boolean = false, selector: string = ''): cy & CyEventEmitter;
     validateTableResultsCount(expectedCount: string|RegExp, shouldExist: boolean = true): cy & CyEventEmitter;
     validateTotalSelectedQuery(expectedCount: string|RegExp): cy & CyEventEmitter;
     visitAndIntercept(url: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;

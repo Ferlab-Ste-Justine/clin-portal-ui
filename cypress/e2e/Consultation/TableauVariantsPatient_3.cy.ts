@@ -31,9 +31,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Variant', 1);
-    cy.validateTableFirstRow('chr10:g.100049106G>A', 2);
+    cy.validateTableFirstRow('chr10:g.100049106G>A', 2, true);
     cy.sortTableAndIntercept('Variant', 1);
-    cy.validateTableFirstRow('chrY:g.9951709_9951710del', 2);
+    cy.validateTableFirstRow('chrY:g.9951709_9951710del', 2, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Type [CLIN-2149]', () => {
@@ -41,9 +41,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Type', 1);
-    cy.validateTableFirstRow('Ins', 3);
+    cy.validateTableFirstRow('Ins', 3, true);
     cy.sortTableAndIntercept('Type', 1);
-    cy.validateTableFirstRow('SNV', 3);
+    cy.validateTableFirstRow('SNV', 3, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Gène', () => {
@@ -51,9 +51,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Gène', 1);
-    cy.validateTableFirstRow('-', 5);
+    cy.validateTableFirstRow('-', 5, true);
     cy.sortTableAndIntercept('Gène', 1);
-    cy.validateTableFirstRow('ZZZ3', 5);
+    cy.validateTableFirstRow('ZZZ3', 5, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Fra.', () => {
@@ -61,9 +61,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Fra.', 1);
-    cy.validateTableFirstRow('-', 10);
+    cy.validateTableFirstRow('-', 10, true);
     cy.sortTableAndIntercept('Fra.', 1);
-    cy.validateTableFirstRow('-', 10);
+    cy.validateTableFirstRow('-', 10, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Exo.', () => {
@@ -71,9 +71,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Exo.', 1);
-    cy.validateTableFirstRow('-', 11);
+    cy.validateTableFirstRow('-', 11, true);
     cy.sortTableAndIntercept('Exo.', 1);
-    cy.validateTableFirstRow('0.964', 11);
+    cy.validateTableFirstRow('0.964', 11, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri ACMG F.', () => {
@@ -81,9 +81,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('ACMG F.', 1);
-    cy.validateTableFirstRow('ND', 12);
+    cy.validateTableFirstRow('ND', 12, true);
     cy.sortTableAndIntercept('ACMG F.', 1);
-    cy.validateTableFirstRow('VUS', 12);
+    cy.validateTableFirstRow('VUS', 12, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri ACMG E.', () => {
@@ -91,9 +91,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('ACMG E.', 1);
-    cy.validateTableFirstRow('ND', 13);
+    cy.validateTableFirstRow('ND', 13, true);
     cy.sortTableAndIntercept('ACMG E.', 1);
-    cy.validateTableFirstRow('VUS', 13);
+    cy.validateTableFirstRow('VUS', 13, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri gnomAD', () => {
@@ -101,9 +101,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept(/^gnomAD $/, 1);
-    cy.validateTableFirstRow('-', 14);
+    cy.validateTableFirstRow('-', 14, true);
     cy.sortTableAndIntercept(/^gnomAD $/, 1);
-    cy.validateTableFirstRow('1.00e+0', 14);
+    cy.validateTableFirstRow('1.00e+0', 14, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri gnomAD ALT', () => {
@@ -111,9 +111,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('gnomAD ALT', 1);
-    cy.validateTableFirstRow('-', 15);
+    cy.validateTableFirstRow('-', 15, true);
     cy.sortTableAndIntercept('gnomAD ALT', 1);
-    cy.validateTableFirstRow('152 312', 15);
+    cy.validateTableFirstRow('152 312', 15, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri RQDM', () => {
@@ -121,72 +121,72 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('RQDM', 1);
-    cy.validateTableFirstRow('0.00e+0', 16);
+    cy.validateTableFirstRow('0.00e+0', 16, true);
     cy.sortTableAndIntercept('RQDM', 1);
-    cy.validateTableFirstRow(/(1\.00e\+0|\d{1}\.\d{2}e\-1)/, 16);
+    cy.validateTableFirstRow(/(1\.00e\+0|\d{1}\.\d{2}e\-1)/, 16, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri QG', () => {
     cy.sortTableAndIntercept('QG', 1);
-    cy.validateTableFirstRow(/^1$/, 17);
+    cy.validateTableFirstRow(/^1$/, 17, true);
     cy.sortTableAndIntercept('QG', 1);
-    cy.validateTableFirstRow('447', 17);
+    cy.validateTableFirstRow('447', 17, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Zyg.', () => {
     cy.sortTableAndIntercept('Zyg.', 1);
-    cy.validateTableFirstRow(/^1$/, 18);
+    cy.validateTableFirstRow(/^1$/, 18, true);
     cy.sortTableAndIntercept('Zyg.', 1);
-    cy.validateTableFirstRow('1/1', 18);
+    cy.validateTableFirstRow('1/1', 18, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Trans.', () => {
     cy.sortTableAndIntercept('Trans.', 1);
-    cy.validateTableFirstRow('-', 22);
+    cy.validateTableFirstRow('-', 22, true);
     cy.sortTableAndIntercept('Trans.', 1);
-    cy.validateTableFirstRow('XLR DNV', 22);
+    cy.validateTableFirstRow('XLR DNV', 22, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri QP', () => {
     cy.sortTableAndIntercept('QP', 1);
-    cy.validateTableFirstRow(/^0$/, 23);
+    cy.validateTableFirstRow(/^0$/, 23, true);
     cy.sortTableAndIntercept('QP', 1);
-    cy.validateTableFirstRow('34.99', 23);
+    cy.validateTableFirstRow('34.99', 23, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri OP', () => {
     cy.sortTableAndIntercept('OP', 1);
-    cy.validateTableFirstRow('-', 24);
+    cy.validateTableFirstRow('-', 24, true);
     cy.sortTableAndIntercept('OP', 1);
-    cy.validateTableFirstRow('UNK', 24);
+    cy.validateTableFirstRow('UNK', 24, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri A', () => {
     cy.sortTableAndIntercept(/^A$/, 1);
-    cy.validateTableFirstRow(/^3$/, 25);
+    cy.validateTableFirstRow(/^3$/, 25, true);
     cy.sortTableAndIntercept(/^A$/, 1);
-    cy.validateTableFirstRow('458', 25);
+    cy.validateTableFirstRow('458', 25, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri A+R', () => {
     cy.sortTableAndIntercept(/^A\+R$/, 1);
-    cy.validateTableFirstRow(/^3$/, 26);
+    cy.validateTableFirstRow(/^3$/, 26, true);
     cy.sortTableAndIntercept(/^A\+R$/, 1);
-    cy.validateTableFirstRow('631', 26);
+    cy.validateTableFirstRow('631', 26, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri A/(A+R)', () => {
     cy.sortTableAndIntercept('A/(A+R)', 1);
-    cy.validateTableFirstRow('0.05', 27);
+    cy.validateTableFirstRow('0.05', 27, true);
     cy.sortTableAndIntercept('A/(A+R)', 1);
-    cy.validateTableFirstRow('1.00', 27);
+    cy.validateTableFirstRow('1.00', 27, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Filtre', () => {
     cy.sortTableAndIntercept('Filtre', 1);
-    cy.validateTableFirstRow('DRAGENIndelHardQUAL', 28);
+    cy.validateTableFirstRow('DRAGENIndelHardQUAL', 28, true);
     cy.sortTableAndIntercept('Filtre', 1);
-    cy.validateTableFirstRow('PASS', 28);
+    cy.validateTableFirstRow('PASS', 28, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri CMC', () => {
@@ -194,9 +194,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('CMC', 1);
-    cy.validateTableFirstRow('-', 30);
+    cy.validateTableFirstRow('-', 30, true);
     cy.sortTableAndIntercept('CMC', 1);
-    cy.validateTableFirstRow('419', 30);
+    cy.validateTableFirstRow('419', 30, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Tier', () => {
@@ -204,9 +204,9 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Tier', 1);
-    cy.validateTableFirstRow('-', 31);
+    cy.validateTableFirstRow('-', 31, true);
     cy.sortTableAndIntercept('Tier', 1);
-    cy.validateTableFirstRow('Other', 31);
+    cy.validateTableFirstRow('Other', 31, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
@@ -217,7 +217,7 @@ describe('Page des variants d\'un patient - Consultation du tableau', () => {
     cy.sortTableAndIntercept('gnomAD', 1);
     cy.sortTableAndIntercept('Gène', 1);
     cy.sortTableAndIntercept('Gène', 1);
-    cy.validateTableFirstRow(/(ZNHIT1|ZNF875)/, 5);
+    cy.validateTableFirstRow(/(ZNHIT1|ZNF875)/, 5, true);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

@@ -58,86 +58,86 @@ describe('Page des CNVs d\'un patient - Consultation du tableau', () => {
   
   it('Valider les fonctionnalités du tableau - Tri Variant', () => {
     cy.sortTableAndIntercept('Variant', 1);
-    cy.validateTableFirstRow('GAIN:chr10:126388041-126388160', 3);
+    cy.validateTableFirstRow('GAIN:chr10:126388041-126388160', 3, true);
     cy.sortTableAndIntercept('Variant', 1);
-    cy.validateTableFirstRow('LOSS:chrY:22406016-22406135', 3);
+    cy.validateTableFirstRow('LOSS:chrY:22406016-22406135', 3, true);
   });
   
   it('Valider les fonctionnalités du tableau - Tri Chr.', () => {
     cy.sortTableAndIntercept('Chr.', 1);
-    cy.validateTableFirstRow(/^1$/, 4);
+    cy.validateTableFirstRow(/^1$/, 4, true);
     cy.sortTableAndIntercept('Chr.', 1);
-    cy.validateTableFirstRow(/^Y$/, 4);
+    cy.validateTableFirstRow(/^Y$/, 4, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Début', () => {
     cy.sortTableAndIntercept('Début', 1);
-    cy.validateTableFirstRow('14 806', 5);
+    cy.validateTableFirstRow('14 806', 5, true);
     cy.sortTableAndIntercept('Début', 1);
-    cy.validateTableFirstRow('238 158 998', 5);
+    cy.validateTableFirstRow('238 158 998', 5, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Fin', () => {
     cy.sortTableAndIntercept('Fin', 1);
-    cy.validateTableFirstRow('14 939', 6);
+    cy.validateTableFirstRow('14 939', 6, true);
     cy.sortTableAndIntercept('Fin', 1);
-    cy.validateTableFirstRow('238 159 213', 6);
+    cy.validateTableFirstRow('238 159 213', 6, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Événement', () => {
     cy.sortTableAndIntercept('Événement', 1);
-    cy.validateTableFirstRow('GAIN', 7);
+    cy.validateTableFirstRow('GAIN', 7, true);
     cy.sortTableAndIntercept('Événement', 1);
-    cy.validateTableFirstRow('LOSS', 7);
+    cy.validateTableFirstRow('LOSS', 7, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Longueur', () => {
     cy.sortTableAndIntercept('Longueur', 1);
-    cy.validateTableFirstRow('2 bp', 8);
+    cy.validateTableFirstRow('2 bp', 8, true);
     cy.sortTableAndIntercept('Longueur', 1);
-    cy.validateTableFirstRow('1.5 Mb', 8);
+    cy.validateTableFirstRow('1.5 Mb', 8, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri MS', () => {
     cy.sortTableAndIntercept('MS', 1);
-    cy.validateTableFirstRow('0.00831442', 9);
+    cy.validateTableFirstRow('0.00831442', 9, true);
     cy.sortTableAndIntercept('MS', 1);
-    cy.validateTableFirstRow('2.7587', 9);
+    cy.validateTableFirstRow('2.7587', 9, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri CN', () => {
     cy.sortTableAndIntercept('CN', 1);
-    cy.validateTableFirstRow(/^0$/, 10);
+    cy.validateTableFirstRow(/^0$/, 10, true);
     cy.sortTableAndIntercept('CN', 1)
-    cy.validateTableFirstRow(/^6$/, 10);
+    cy.validateTableFirstRow(/^6$/, 10, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri # Gènes', () => {
     cy.sortTableAndIntercept('# Gènes', 1);
-    cy.validateTableFirstRow(/^0$/, 11);
+    cy.validateTableFirstRow(/^0$/, 11, true);
     cy.sortTableAndIntercept('# Gènes', 1);
-    cy.validateTableFirstRow('38', 11);
+    cy.validateTableFirstRow('38', 11, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Qual.', () => {
     cy.sortTableAndIntercept('Qual.', 1);
-    cy.validateTableFirstRow(/^3$/, 14);
+    cy.validateTableFirstRow(/^3$/, 14, true);
     cy.sortTableAndIntercept('Qual.', 1);
-    cy.validateTableFirstRow('150', 14);
+    cy.validateTableFirstRow('150', 14, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri BC', () => {
     cy.sortTableAndIntercept('BC', 1);
-    cy.validateTableFirstRow(/^1$/, 15);
+    cy.validateTableFirstRow(/^1$/, 15, true);
     cy.sortTableAndIntercept('BC', 1);
-    cy.validateTableFirstRow('119', 15);
+    cy.validateTableFirstRow('119', 15, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndIntercept('Chr.', 1);
     cy.sortTableAndIntercept('Début', 0);
     cy.sortTableAndIntercept('Début', 1);
-    cy.validateTableFirstRow('207 526 712', 5);
+    cy.validateTableFirstRow('207 526 712', 5, true);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

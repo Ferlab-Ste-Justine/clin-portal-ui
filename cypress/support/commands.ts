@@ -421,11 +421,17 @@ Cypress.Commands.add('validateTableDataRowKeyContent', (dataRowKey: string, eq: 
   cy.get('tr[data-row-key="'+dataRowKey+'"]').find('td').eq(eq).contains(expectedContent).should('exist');
 });
 
-Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number, selector: string = '') => {
+Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number, hasCheckbox: boolean = false, selector: string = '') => {
   cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: 5*1000});
-  cy.get(selector+' tr[class*="ant-table-row"]').eq(0).then(($firstRow) => {
-    cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
-  });
+  cy.get(selector+' tr[class*="ant-table-row"]').eq(0)
+    .then(($firstRow) => {
+      cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
+      if (hasCheckbox) {
+        cy.wrap($firstRow).find('[type="checkbox"]').check({force: true});
+        cy.wrap($firstRow).find('[type="checkbox"]').should('be.checked');
+        cy.wrap($firstRow).find('[type="checkbox"]').uncheck({force: true});
+      };
+    });
 });
 
 Cypress.Commands.add('validateTableResultsCount', (expectedCount: string|RegExp, shouldExist: boolean = true) => {
