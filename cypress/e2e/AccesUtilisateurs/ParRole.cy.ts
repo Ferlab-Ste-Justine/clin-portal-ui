@@ -113,8 +113,8 @@ describe('Accès des utilisateurs', () => {
     cy.contains('Résultats').should('exist', { timeout: 20 * 1000 });
 
     // Les liens de la footer sont visibles
-    cy.contains('Zeppelin').should('exist', { timeout: 20 * 1000 });
-    cy.contains('Fhir').should('exist', { timeout: 20 * 1000 });
+    cy.contains('Zeppelin').should('not.exist', { timeout: 20 * 1000 });
+    cy.contains('Fhir').should('not.exist', { timeout: 20 * 1000 });
   });
 
   it('Docteur et généticien (CHUSJ)', () => {

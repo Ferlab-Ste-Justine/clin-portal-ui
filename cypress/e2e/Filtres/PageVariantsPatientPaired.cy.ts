@@ -10,7 +10,7 @@ beforeEach(() => {
   cy.waitWhileSpin(2000);
 });
 
-describe('Page des variants d\'un patient (somatic) - Filtres', () => {
+describe('Page des variants d\'un patient (paired) - Filtres', () => {
   beforeEach(() => {
     cy.deleteFilterIfExists('Cypress_F0');
   });
@@ -29,7 +29,7 @@ describe('Page des variants d\'un patient (somatic) - Filtres', () => {
   });
 });
 
-describe('Page des variants d\'un patient (somatic) - Filtres', () => {
+describe('Page des variants d\'un patient (paired) - Filtres', () => {
   beforeEach(() => {
     cy.deleteFilterIfExists('Cypress_FA');
     cy.deleteFilterIfExists('Cypress_F1 COPIÉ');
@@ -121,7 +121,7 @@ describe('Page des variants d\'un patient (somatic) - Filtres', () => {
   });
 });
 
-describe('Page des variants d\'un patient (somatic) - Filtres', () => {
+describe('Page des variants d\'un patient (paired) - Filtres', () => {
   beforeEach(() => {
     cy.createFilterIfNotExists('Cypress_F2');
   });

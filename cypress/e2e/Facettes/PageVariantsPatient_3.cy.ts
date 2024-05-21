@@ -17,7 +17,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateExpandCollapse('Gène');
   });
 
-  it('Recherche par gène - PRDX1', () => {
+  it('Recherche par symbole - PRDX1', () => {
     cy.get(`[data-cy="SidebarMenuItem_Gène"]`).click({force: true});
     cy.get('[class*="SearchLabel_title"]').contains('Recherche par gène').should('exist'); //data-cy="SearchLabel_Title"
 
@@ -25,11 +25,11 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.get('body').contains('Recherche par symbole, alias et Ensembl ID').should('exist');
 
     cy.intercept('GET', '**/PRDX1').as('getRouteMatcher');
-    cy.get('[class*="SearchAutocomplete_search"]').eq(0).find('input').type('PRDX1', {force: true}); //data-cy="SearchAutocomplete_Select"
+    cy.get('[class*="SearchAutocomplete_search"]').eq(0).find('input').type('prdx1', {force: true}); //data-cy="SearchAutocomplete_Select"
     cy.wait('@getRouteMatcher', {timeout: 60*1000});
 
-    cy.get('[class*="ant-select-dropdown"]').contains('PRDX1').should('exist'); //data-cy="Search_Dropdown"
-    cy.get('[class*="ant-select-dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true}); //data-cy="Search_Dropdown"
+    cy.get('[class*="ant-select-dropdown"] [class*="ant-select-item"]').contains('PRDX1').should('exist'); //data-cy="Search_Dropdown"
+    cy.get('[class*="ant-select-dropdown"] [class*="ant-select-item"]').eq(0).click({force: true}); //data-cy="Search_Dropdown"
 
     cy.get('[class*="ant-tag"]').contains('PRDX1').should('exist'); //data-cy="Tag_PRDX1"
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gène').should('exist');
@@ -40,15 +40,15 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.get('[class*="ant-select-show-search"] [class="ant-tag"]').should('not.exist'); //data-cy="Tag_PRDX1"
   });
 
-  it('Recherche par gène - NKEFA', () => {
+  it('Recherche par alias - NKEFA', () => {
     cy.get(`[data-cy="SidebarMenuItem_Gène"]`).click({force: true});
 
     cy.intercept('GET', '**/NKEFA').as('getRouteMatcher');
-    cy.get('[class*="SearchAutocomplete_search"]').eq(0).find('input').type('NKEFA', {force: true}); //data-cy="SearchAutocomplete_Select"
+    cy.get('[class*="SearchAutocomplete_search"]').eq(0).find('input').type('nkefa', {force: true}); //data-cy="SearchAutocomplete_Select"
     cy.wait('@getRouteMatcher', {timeout: 60*1000});
 
-    cy.get('[class*="ant-select-dropdown"]').contains('PRDX1').should('exist'); //data-cy="Search_Dropdown"
-    cy.get('[class*="ant-select-dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true}); //data-cy="Search_Dropdown"
+    cy.get('[class*="ant-select-dropdown"] [class*="ant-select-item"]').contains('PRDX1').should('exist'); //data-cy="Search_Dropdown"
+    cy.get('[class*="ant-select-dropdown"] [class*="ant-select-item"]').eq(0).click({force: true}); //data-cy="Search_Dropdown"
 
     cy.get('[class*="ant-tag"]').contains('PRDX1').should('exist'); //data-cy="Tag_PRDX1"
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gène').should('exist');
@@ -56,15 +56,15 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateTableResultsCount(/^13$/);
   });
 
-  it('Recherche par gène - ENSG00000117450', () => {
+  it('Recherche par Ensembl ID - ENSG00000117450', () => {
     cy.get(`[data-cy="SidebarMenuItem_Gène"]`).click({force: true});
 
     cy.intercept('GET', '**/ENSG00000117450').as('getRouteMatcher');
-    cy.get('[class*="SearchAutocomplete_search"]').eq(0).find('input').type('ENSG00000117450', {force: true}); //data-cy="SearchAutocomplete_Select"
+    cy.get('[class*="SearchAutocomplete_search"]').eq(0).find('input').type('ensg00000117450', {force: true}); //data-cy="SearchAutocomplete_Select"
     cy.wait('@getRouteMatcher', {timeout: 60*1000});
 
-    cy.get('[class*="ant-select-dropdown"]').contains('PRDX1').should('exist'); //data-cy="Search_Dropdown"
-    cy.get('[class*="ant-select-dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true}); //data-cy="Search_Dropdown"
+    cy.get('[class*="ant-select-dropdown"] [class*="ant-select-item"]').contains('PRDX1').should('exist'); //data-cy="Search_Dropdown"
+    cy.get('[class*="ant-select-dropdown"] [class*="ant-select-item"]').eq(0).click({force: true}); //data-cy="Search_Dropdown"
 
     cy.get('[class*="ant-tag"]').contains('PRDX1').should('exist'); //data-cy="Tag_PRDX1"
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gène').should('exist');
