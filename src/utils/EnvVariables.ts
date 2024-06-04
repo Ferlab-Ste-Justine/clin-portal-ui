@@ -17,6 +17,9 @@ export default class EnvironmentVariables {
     FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS:
       process.env.REACT_APP_FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS,
     SENTRY_API: process.env.REACT_APP_SENTRY_API,
+
+    // Google Analytics
+    MEASUREMENT_ID: process.env.REACT_APP_MEASUREMENT_ID,
   };
 
   static configFor(key: string): string {
