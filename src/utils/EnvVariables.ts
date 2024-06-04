@@ -16,6 +16,9 @@ export default class EnvironmentVariables {
     FORCE_FILTER_BOOLEAN_TO_DICTIONARY: process.env.REACT_APP_FORCE_FILTER_BOOLEAN_TO_DICTIONARY,
     FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS:
       process.env.REACT_APP_FILTER_BOOLEAN_TO_DICTIONARY_EXCEPTIONS,
+
+    // Google Analytics
+    MEASUREMENT_ID: process.env.REACT_APP_MEASUREMENT_ID,
   };
 
   static configFor(key: string): string {

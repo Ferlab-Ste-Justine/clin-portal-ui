@@ -26,6 +26,7 @@ import { Roles } from 'components/Roles/Rules';
 import Spinner from 'components/uiKit/Spinner';
 import NotificationContextHolder from 'components/utils/NotificationContextHolder';
 import useQueryParams from 'hooks/useQueryParams';
+import { initGa } from 'services/analytics';
 import { useLang } from 'store/global';
 import { fetchFhirServiceRequestCodes } from 'store/global/thunks';
 import { fetchSavedFilters, fetchSharedSavedFilter } from 'store/savedFilter/thunks';
@@ -49,6 +50,8 @@ const CnvExplorationPatient = loadable(
 const SnvExplorationRqdm = loadable(() => import('views/Snv/Exploration/Rqdm'), loadableProps);
 const HomePage = loadable(() => import('views/Home'), loadableProps);
 const Archives = loadable(() => import('views/Archives'), loadableProps);
+
+initGa();
 
 const App = () => {
   const lang = useLang();

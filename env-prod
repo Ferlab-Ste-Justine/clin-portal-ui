@@ -21,5 +21,10 @@ REACT_APP_USERS_API_URL=https://users.cqgc.hsj.rtss.qc.ca
 REACT_APP_FORM_API_URL=https://forms.cqgc.hsj.rtss.qc.ca
 REACT_APP_PANELS_FILE=https://s3.cqgc.hsj.rtss.qc.ca/cqgc-prod-app-public/panels/panels.xlsx
 
+
+# Google Analytics
+REACT_APP_MEASUREMENT_ID=G-PCL540N8BE
+
 # Style
 SASS_PATH=/code/src/style/themes/clin
+
