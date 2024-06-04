@@ -255,7 +255,7 @@ jobs:
                 npm install
                 cp env-qa .env
                 sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-3/results-[hash].xml" --spec "cypress/e2e/Consultation/[A-P]*Variant*,cypress/e2e/AccesUtilisateurs/*,cypress/e2e/Navigation/*,cypress/e2e/Telechargement/*,cypress/e2e/Colonnes/*,cypress/e2e/Recherches/*"
+                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-3/results-[hash].xml" --spec "cypress/e2e/Consultation/[A-P]*Variant*,cypress/e2e/AccesUtilisateurs/*,cypress/e2e/Navigation/*,cypress/e2e/Telechargement/*,cypress/e2e/Colonnes/*,cypress/e2e/UploadList/*,cypress/e2e/Recherches/*"
 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
