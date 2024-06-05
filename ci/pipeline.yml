@@ -188,7 +188,7 @@ jobs:
                 npm install
                 cp env-qa .env
                 sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-1/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauVariantsPatient_3.cy.ts,cypress/e2e/Recherches/PagePrescriptions.cy.ts,cypress/e2e/Consultation/TableauVariantsPatient_2.cy.ts,cypress/e2e/Requetes/ValidationVariantsPatient.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_4.cy.ts"
+                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-1/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauVariantsPatient_3.cy.ts,cypress/e2e/Filtres/PageCNVsPatientSomatic.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientSomatic_2.cy.ts,cypress/e2e/Consultation/TableauFichiers.cy.ts,cypress/e2e/Telechargement/TableauVariantsPatient.cy.ts,cypress/e2e/Colonnes/TableauVariantsPatientPaired.cy.ts,cypress/e2e/Colonnes/TableauCNVsPatientSomatic.cy.ts,cypress/e2e/Consultation/PageAnalyseBioinfoPaired.cy.ts,cypress/e2e/Consultation/TableauCouvertureGeniqueSomatic.cy.ts,cypress/e2e/Consultation/TiroirOccurrencePaired.cy.ts"
                 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
@@ -222,7 +222,7 @@ jobs:
                 npm install
                 cp env-qa .env
                 sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-2/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauVariantsPatientPaired_3.cy.ts,cypress/e2e/Consultation/TableauCouvertureGenique.cy.ts,cypress/e2e/Consultation/TableauCNVsPatientSomatic.cy.ts,cypress/e2e/UploadList/PageVariantsPatientPaired.cy.ts,cypress/e2e/Facettes/PagePrescriptions.cy.ts"
+                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-2/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauGenesChevauchantsCNV.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientPaired_3.cy.ts,cypress/e2e/Filtres/PageVariantsPatientSomatic.cy.ts,cypress/e2e/Filtres/PageVariants.cy.ts,cypress/e2e/Facettes/PageCNVsPatient.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientPaired_2.cy.ts,cypress/e2e/Consultation/TableauArchives.cy.ts,cypress/e2e/Consultation/TableauVariants_2.cy.ts,cypress/e2e/Consultation/PagePrescription.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientSomatic_1.cy.ts,cypress/e2e/Telechargement/TableauCNVsPatientSomatic.cy.ts,cypress/e2e/Consultation/PageAnalyseBioinfoSomatic.cy.ts,cypress/e2e/Telechargement/TableauCouvertureGenique.cy.ts,cypress/e2e/Telechargement/TableauVariants.cy.ts,cypress/e2e/Requetes/ActionsSur1Requete2Pilules.cy.ts,cypress/e2e/Requetes/ActionsSur0Requete.cy.ts"
                 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
@@ -256,7 +256,7 @@ jobs:
                 npm install
                 cp env-qa .env
                 sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-3/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauVariantsPatientSomatic_3.cy.ts,cypress/e2e/Filtres/PageVariants.cy.ts,cypress/e2e/AccesUtilisateurs/ParRole.cy.ts,cypress/e2e/UploadList/PageVariantsPatientSomatic.cy.ts,cypress/e2e/Consultation/TableauArchives.cy.ts,cypress/e2e/Consultation/PageVariantPatients.cy.ts"
+                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-3/results-[hash].xml" --spec "cypress/e2e/Recherches/PageAccueil.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientSomatic_3.cy.ts,cypress/e2e/Filtres/PageVariantsPatientPaired.cy.ts,cypress/e2e/Consultation/TableauCouvertureGenique.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_3.cy.ts,cypress/e2e/UploadList/PageVariantsPatient.cy.ts,cypress/e2e/Facettes/PagePrescriptions.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_2.cy.ts,cypress/e2e/Consultation/PageVariantPatients.cy.ts,cypress/e2e/Consultation/TableauxRapportGeneralSomatic.cy.ts,cypress/e2e/Colonnes/TableauVariantsPatient.cy.ts,cypress/e2e/Consultation/TableauVariants_1.cy.ts,cypress/e2e/Colonnes/TableauVariantsPatientSomatic.cy.ts,cypress/e2e/Colonnes/TableauCouvertureGenique.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_1.cy.ts,cypress/e2e/Consultation/TiroirOccurrenceSomatic.cy.ts,cypress/e2e/Facettes/DictionnairesCNVsPatient.cy.ts"
 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
@@ -290,7 +290,7 @@ jobs:
                 npm install
                 cp env-qa .env
                 sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-4/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauVariants_3.cy.ts,cypress/e2e/Filtres/PageCNVsPatient.cy.ts,cypress/e2e/Consultation/TableauCNVsPatient.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_6.cy.ts,cypress/e2e/Consultation/TableauGenesChevauchantsCNV.cy.ts,cypress/e2e/Consultation/TableauxRapportGeneral.cy.ts,cypress/e2e/Requetes/ActionsSur1Requete1Pilule.cy.ts,cypress/e2e/Colonnes/TableauVariantsPatientPaired.cy.ts,cypress/e2e/Consultation/TiroirOccurrence.cy.ts"
+                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-4/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauVariantsPatientPaired_1.cy.ts,cypress/e2e/Consultation/TableauVariants_3.cy.ts,cypress/e2e/Filtres/PageVariantsPatient.cy.ts,cypress/e2e/Consultation/TableauVariantsPatient_2.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_5.cy.ts,cypress/e2e/UploadList/PageVariants.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_4.cy.ts,cypress/e2e/Facettes/PageVariants.cy.ts,cypress/e2e/Consultation/TableauxRapportGeneral.cy.ts,cypress/e2e/Requetes/ActionsSur1Requete1Pilule.cy.ts,cypress/e2e/Colonnes/TableauRequetes.cy.ts,cypress/e2e/Telechargement/TableauVariantsPatientPaired.cy.ts,cypress/e2e/Colonnes/TableauVariants.cy.ts,cypress/e2e/Telechargement/TableauRequetes.cy.ts,cypress/e2e/Recherches/PageArchives.cy.ts,cypress/e2e/Telechargement/Panels.cy.ts,cypress/e2e/Navigation/Variants.cy.ts,cypress/e2e/Facettes/PageVariantsPatientPaired.cy.ts"
 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
@@ -324,7 +324,7 @@ jobs:
                 npm install
                 cp env-qa .env
                 sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-5/results-[hash].xml" --spec "cypress/e2e/Telechargement/TableauPrescriptions.cy.ts,cypress/e2e/Consultation/TableauCouvertureGeniqueSomatic.cy.ts,cypress/e2e/Navigation/Variants.cy.ts,cypress/e2e/Facettes/DictionnairesVariants.cy.ts,cypress/e2e/Filtres/PageCNVsPatientSomatic.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_5.cy.ts,cypress/e2e/UploadList/PageVariants.cy.ts,cypress/e2e/Recherches/TableauCouvertureGenique.cy.ts,cypress/e2e/Requetes/ActionsSur2Requetes.cy.ts,cypress/e2e/Navigation/Pages.cy.ts,cypress/e2e/Telechargement/TableauVariantsPatient.cy.ts,cypress/e2e/Colonnes/TableauVariants.cy.ts,cypress/e2e/Telechargement/TableauRequetes.cy.ts,cypress/e2e/Consultation/TiroirOccurrencePaired.cy.ts,cypress/e2e/Navigation/Login.cy.ts"
+                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-5/results-[hash].xml" --spec "cypress/e2e/Facettes/DictionnairesVariants.cy.ts,cypress/e2e/Consultation/TableauRequetes.cy.ts,cypress/e2e/Recherches/PagePrescriptions.cy.ts,cypress/e2e/Consultation/TableauCNVsPatient.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_6.cy.ts,cypress/e2e/Requetes/ValidationVariantsPatient.cy.ts,cypress/e2e/Consultation/PageVariantResume.cy.ts,cypress/e2e/Requetes/ActionsSur2Requetes.cy.ts,cypress/e2e/Navigation/Pages.cy.ts,cypress/e2e/Consultation/PageAnalyseBioinfo.cy.ts,cypress/e2e/Telechargement/TableauVariantsPatientSomatic.cy.ts,cypress/e2e/Consultation/TiroirOccurrence.cy.ts,cypress/e2e/Telechargement/TableauPrescriptions.cy.ts,cypress/e2e/Colonnes/TableauArchives.cy.ts,cypress/e2e/Navigation/Logout.cy.ts,cypress/e2e/Navigation/Login.cy.ts,cypress/e2e/Facettes/PageVariantsPatientSomatic.cy.ts"
 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
@@ -358,79 +358,11 @@ jobs:
                 npm install
                 cp env-qa .env
                 sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-6/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauxRapportGeneralSomatic.cy.ts,cypress/e2e/Consultation/PageAnalyseBioinfoSomatic.cy.ts,cypress/e2e/Telechargement/TableauCNVsPatient.cy.ts,cypress/e2e/Colonnes/TableauFichiers.cy.ts,cypress/e2e/Requetes/ActionsSur1Requete2Pilules.cy.ts,cypress/e2e/Facettes/DictionnairesVariantsPatient.cy.ts,cypress/e2e/Filtres/PageVariantsPatientSomatic.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_3.cy.ts,cypress/e2e/UploadList/PageVariantsPatient.cy.ts,cypress/e2e/Consultation/TableauVariants_2.cy.ts,cypress/e2e/Facettes/DictionnairesCNVsPatient.cy.ts,cypress/e2e/Facettes/PageVariantsPatientPaired.cy.ts,cypress/e2e/Telechargement/TableauCNVsPatientSomatic.cy.ts,cypress/e2e/Colonnes/TableauVariantsPatientSomatic.cy.ts,cypress/e2e/Colonnes/TableauCouvertureGenique.cy.ts,cypress/e2e/Requetes/ActionsSur0Requete.cy.ts,cypress/e2e/Navigation/Landing.cy.ts"
+                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-6/results-[hash].xml" --spec "cypress/e2e/Filtres/PageCNVsPatient.cy.ts,cypress/e2e/Recherches/TableauCouvertureGenique.cy.ts,cypress/e2e/Facettes/DictionnairesVariantsPatient.cy.ts,cypress/e2e/Consultation/TableauPrescriptions.cy.ts,cypress/e2e/Consultation/TableauCNVsPatientSomatic.cy.ts,cypress/e2e/AccesUtilisateurs/ParRole.cy.ts,cypress/e2e/UploadList/PageVariantsPatientSomatic.cy.ts,cypress/e2e/UploadList/PageVariantsPatientPaired.cy.ts,cypress/e2e/Consultation/TableauVariantsPatient_1.cy.ts,cypress/e2e/Colonnes/TableauCNVsPatient.cy.ts,cypress/e2e/Telechargement/TableauCNVsPatient.cy.ts,cypress/e2e/Colonnes/TableauFichiers.cy.ts,cypress/e2e/Colonnes/TableauPrescriptions.cy.ts,cypress/e2e/Requetes/ActionsSurCombinaison.cy.ts,cypress/e2e/Navigation/Landing.cy.ts"
 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
                 # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-6/results-[hash].xml" --spec "$FIRST_TEST"
-             
-                popd
-                exit 0
-
-      - task: cypress-parallel-7
-        attempts: 6
-        config:
-          platform: linux
-          image_resource:
-            type: registry-image
-            source:
-              repository: ferlabcrsj/cypress-included-custom
-              tag: latest
-          inputs:
-            - name: git-portal-ui
-          outputs:
-            - name: test-results-7
-          params:
-            CYPRESS_PASSWORD: ((cypress.password))
-          run:
-            path: bash
-            args:
-              - -c
-              - |
-                set +e
-                pushd git-portal-ui
-                npm install
-                cp env-qa .env
-                sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-7/results-[hash].xml" --spec "cypress/e2e/Consultation/PagePrescription.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientSomatic_1.cy.ts,cypress/e2e/Consultation/TableauVariants_1.cy.ts,cypress/e2e/Colonnes/TableauCNVsPatient.cy.ts,cypress/e2e/Colonnes/TableauPrescriptions.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_1.cy.ts,cypress/e2e/Consultation/TableauPrescriptions.cy.ts,cypress/e2e/Filtres/PageVariantsPatientPaired.cy.ts,cypress/e2e/Facettes/PageCNVsPatient.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientPaired_2.cy.ts,cypress/e2e/Facettes/PageVariantsPatient_2.cy.ts,cypress/e2e/Consultation/TableauVariantsPatient_1.cy.ts,cypress/e2e/Facettes/PageVariantsPatientSomatic.cy.ts,cypress/e2e/Colonnes/TableauVariantsPatient.cy.ts,cypress/e2e/Telechargement/TableauCouvertureGenique.cy.ts,cypress/e2e/Colonnes/TableauCNVsPatientSomatic.cy.ts,cypress/e2e/Consultation/TiroirOccurrenceSomatic.cy.ts,cypress/e2e/Requetes/ActionsSurCombinaison.cy.ts"
-
-                # Run only the first Cypress test
-                # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
-                # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-7/results-[hash].xml" --spec "$FIRST_TEST"
-             
-                popd
-                exit 0
-
-      - task: cypress-parallel-8
-        attempts: 6
-        config:
-          platform: linux
-          image_resource:
-            type: registry-image
-            source:
-              repository: ferlabcrsj/cypress-included-custom
-              tag: latest
-          inputs:
-            - name: git-portal-ui
-          outputs:
-            - name: test-results-8
-          params:
-            CYPRESS_PASSWORD: ((cypress.password))
-          run:
-            path: bash
-            args:
-              - -c
-              - |
-                set +e
-                pushd git-portal-ui
-                npm install
-                cp env-qa .env
-                sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-8/results-[hash].xml" --spec "cypress/e2e/Consultation/TableauVariantsPatientPaired_1.cy.ts,cypress/e2e/Recherches/PageAccueil.cy.ts,cypress/e2e/Telechargement/TableauVariantsPatientPaired.cy.ts,cypress/e2e/Telechargement/TableauVariantsPatientSomatic.cy.ts,cypress/e2e/Recherches/PageArchives.cy.ts,cypress/e2e/Colonnes/TableauArchives.cy.ts,cypress/e2e/Consultation/TableauRequetes.cy.ts,cypress/e2e/Filtres/PageVariantsPatient.cy.ts,cypress/e2e/Consultation/TableauVariantsPatientSomatic_2.cy.ts,cypress/e2e/Consultation/TableauFichiers.cy.ts,cypress/e2e/Facettes/PageVariants.cy.ts,cypress/e2e/Consultation/PageVariantResume.cy.ts,cypress/e2e/Consultation/PageAnalyseBioinfo.cy.ts,cypress/e2e/Colonnes/TableauRequetes.cy.ts,cypress/e2e/Consultation/PageAnalyseBioinfoPaired.cy.ts,cypress/e2e/Telechargement/TableauVariants.cy.ts,cypress/e2e/Telechargement/Panels.cy.ts,cypress/e2e/Navigation/Logout.cy.ts"
-
-                # Run only the first Cypress test
-                # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
-                # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-8/results-[hash].xml" --spec "$FIRST_TEST"
              
                 popd
                 exit 0
@@ -451,8 +383,6 @@ jobs:
         - name: test-results-4
         - name: test-results-5
         - name: test-results-6
-        - name: test-results-7
-        - name: test-results-8
       outputs:
         - name: merged-results
         - name: timestamp
@@ -465,7 +395,7 @@ jobs:
             mkdir -p merged-results
             TIMESTAMP=$(date +%Y%m%d%H%M%S)
             echo $TIMESTAMP > timestamp/timestamp.txt
-            npx junit-merge test-results-1/*.xml test-results-2/*.xml test-results-3/*.xml test-results-4/*.xml test-results-5/*.xml test-results-6/*.xml test-results-7/*.xml test-results-8/*.xml -o merged-results/merged-results-${TIMESTAMP}.xml
+            npx junit-merge test-results-1/*.xml test-results-2/*.xml test-results-3/*.xml test-results-4/*.xml test-results-5/*.xml test-results-6/*.xml -o merged-results/merged-results-${TIMESTAMP}.xml
 
   - put: minio-storage
     attempts: 3
