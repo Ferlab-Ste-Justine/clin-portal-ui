@@ -35,7 +35,7 @@ Before going further, make sure that ```docker``` and ```docker-compose``` are i
 **Note:** If the repository was not clone with submodule, please run
 
   git submodule update --init
-  git submodule update –remote
+  git submodule update -–remote
 
 ### Resolve submodule error or out of sync
 
