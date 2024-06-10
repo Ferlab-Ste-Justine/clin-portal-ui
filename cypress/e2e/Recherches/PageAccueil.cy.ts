@@ -1,9 +1,10 @@
 /// <reference types="Cypress" />
 import '../../support/commands';
 
-const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
+let epCHUSJ_ldmCHUSJ: any;
 
 beforeEach(() => {
+  epCHUSJ_ldmCHUSJ = Cypress.env('globalData').presc_EP_CHUSJ_LDM_CHUSJ;
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
   cy.visit('/');
 });
@@ -52,7 +53,7 @@ describe('Page d\'accueil - Rechercher des prescriptions', () => {
   });
 
   it('Par numéro de dossier de la mère', () => {
-    cy.get('[data-cy="PrescriptionAutoComplete"]').type(epCHUSJ_ldmCHUSJ.mrnMth, {force: true});
+    cy.get('[data-cy="PrescriptionAutoComplete"]').type(epCHUSJ_ldmCHUSJ.mrnMth.toLowerCase(), {force: true});
     cy.clickAndIntercept('[data-cy="'+epCHUSJ_ldmCHUSJ.prescriptionId+'"]', 'POST', '**/$graphql*', 1);
 
     cy.get('body').contains(epCHUSJ_ldmCHUSJ.lastNameProb+' '+epCHUSJ_ldmCHUSJ.firstNameProb).should('exist');

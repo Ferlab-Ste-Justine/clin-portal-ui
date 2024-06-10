@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 /// <reference types="Cypress" />
+import { rmdir } from 'fs';
 
 require('dotenv').config();
-
-const { rmdir } = require('fs');
 
 module.exports = (on: Cypress.PluginEvents, config: Cypress.ConfigOptions) => {
   on('task', {
@@ -43,14 +42,6 @@ module.exports = (on: Cypress.PluginEvents, config: Cypress.ConfigOptions) => {
   config.env.username_D_CUSM             = process.env.CYPRESS_USERNAME_D_CUSM;
   config.env.username_R_CHUSJ            = process.env.CYPRESS_USERNAME_R_CHUSJ;
   config.env.password                    = process.env.CYPRESS_PASSWORD;
-
-  config.env.presc_EP_CHUSJ_LDM_CHUSJ = process.env.CYPRESS_PRESC_EP_CHUSJ_LDM_CHUSJ;
-  config.env.presc_EP_CUSM_LDM_CHUSJ  = process.env.CYPRESS_PRESC_EP_CUSM_LDM_CHUSJ;
-  config.env.presc_EP_CUSM_LDM_CUSM   = process.env.CYPRESS_PRESC_EP_CUSM_LDM_CUSM;
-  config.env.presc_EP_CHUS_LDM_CHUS   = process.env.CYPRESS_PRESC_EP_CHUS_LDM_CHUS;
-  config.env.prescs_CUSM_RGDI         = process.env.CYPRESS_PRESCS_CUSM_RGDI;
-  config.env.presc_SOMATIC            = process.env.CYPRESS_PRESC_SOMATIC;
-  config.env.presc_PAIRED             = process.env.CYPRESS_PRESC_PAIRED;
   config.env.shared_filter_id         = process.env.CYPRESS_SHAREDFILTERID;
 
   config.env.google_Username = process.env.CYPRESS_GOOGLE_USERNAME;

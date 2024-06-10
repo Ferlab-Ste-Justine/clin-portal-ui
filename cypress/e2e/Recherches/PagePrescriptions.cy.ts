@@ -1,9 +1,10 @@
 /// <reference types="Cypress" />
 import '../../support/commands';
 
-const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
+let epCHUSJ_ldmCHUSJ: any;
 
 beforeEach(() => {
+  epCHUSJ_ldmCHUSJ = Cypress.env('globalData').presc_EP_CHUSJ_LDM_CHUSJ;
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
 });
 
@@ -63,7 +64,7 @@ describe('Page des prescriptions et requêtes - Rechercher des prescriptions', (
   });
 
   it('Par numéro de dossier de la mère', () => {
-    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnMth, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnMth.length);
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnMth.toLowerCase(), 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnMth.length);
     cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Prescriptions (1)', {timeout: 60*1000}).should('exist');
@@ -180,7 +181,7 @@ describe('Page des prescriptions et requêtes - Rechercher des requêtes', () =>
   });
 
   it('Par numéro de dossier de la mère', () => {
-    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnMth, 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnMth.length);
+    cy.typeAndIntercept('[data-cy="PrescriptionsSearch"]', epCHUSJ_ldmCHUSJ.mrnMth.toLowerCase(), 'POST', '**/graphql', 4*epCHUSJ_ldmCHUSJ.mrnMth.length);
     cy.waitWhileSpin(60*1000);
 
     cy.get('body').contains('Requêtes (1)', {timeout: 60*1000}).should('exist');

@@ -1,9 +1,10 @@
 /// <reference types="Cypress" />
 import '../../support/commands';
 
-const presc_PAIRED = JSON.parse(Cypress.env('presc_PAIRED'));
+let presc_PAIRED: any;
 
 beforeEach(() => {
+  presc_PAIRED = Cypress.env('globalData').presc_PAIRED;
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
   cy.visitBioinformaticsAnalysisPage(presc_PAIRED.bioAnalProbId.TNEBA);
 });

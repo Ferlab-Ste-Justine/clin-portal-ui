@@ -2,9 +2,10 @@
 import { getDateTime } from '../../support/utils';
 
 const { strDate } = getDateTime();
-const presc_SOMATIC = JSON.parse(Cypress.env('presc_SOMATIC'));
+let presc_SOMATIC: any;
 
 beforeEach(() => {
+  presc_SOMATIC = Cypress.env('globalData').presc_SOMATIC;
   cy.removeFilesFromFolder(Cypress.config('downloadsFolder'));
 
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));

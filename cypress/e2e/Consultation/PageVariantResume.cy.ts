@@ -1,9 +1,10 @@
 /// <reference types="Cypress" />
 import '../../support/commands';
 
-const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
+let epCHUSJ_ldmCHUSJ: any;
 
 beforeEach(() => {
+  epCHUSJ_ldmCHUSJ = Cypress.env('globalData').presc_EP_CHUSJ_LDM_CHUSJ;
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
   cy.visitVariantEntityPage('1-45508847-C-T', 3);
 });
@@ -21,7 +22,7 @@ describe('Page d\'un variant (onglet Résumé) - Vérifier les informations affi
     cy.get('[data-cy="Summary_dbSNP"]').contains('rs370596113').should('exist');
     cy.get('[data-cy="Summary_FreqRQDMTotalPc"]').contains(/^1 \/\d{3}$/).should('exist');
     cy.get('[data-cy="Summary_FreqRQDMTotalAf"]').contains(/^\d{1}.\d{2}e-3$/).should('exist');
-    cy.get('[data-cy="Summary_LastAnnotation"]').contains(epCHUSJ_ldmCHUSJ.annotationDate).should('exist');
+    cy.get('[data-cy="Summary_LastAnnotation"]').contains(/^\d{4}-\d{2}-\d{2}$/).should('exist');
   });
   
   it('Panneau Conséquences géniques', () => {

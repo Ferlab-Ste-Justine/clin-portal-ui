@@ -3,9 +3,10 @@ import { Replacement } from '../../support/commands';
 import { getDateTime } from '../../support/utils';
 
 const { strDate } = getDateTime();
-const epCHUSJ_ldmCHUSJ = JSON.parse(Cypress.env('presc_EP_CHUSJ_LDM_CHUSJ'));
+let epCHUSJ_ldmCHUSJ: any;
 
 beforeEach(() => {
+  epCHUSJ_ldmCHUSJ = Cypress.env('globalData').presc_EP_CHUSJ_LDM_CHUSJ;
   cy.removeFilesFromFolder(Cypress.config('downloadsFolder'));
 
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));

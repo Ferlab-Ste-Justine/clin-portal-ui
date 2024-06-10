@@ -2,9 +2,10 @@
 import { getDateTime } from '../../support/utils';
 
 const { strDate } = getDateTime();
-const presc_PAIRED = JSON.parse(Cypress.env('presc_PAIRED'));
+let presc_PAIRED: any;
 
 beforeEach(() => {
+  presc_PAIRED = Cypress.env('globalData').presc_PAIRED;
   cy.removeFilesFromFolder(Cypress.config('downloadsFolder'));
 
   cy.login(Cypress.env('username_DG_CHUSJ_CUSM_CHUS'), Cypress.env('password'));
