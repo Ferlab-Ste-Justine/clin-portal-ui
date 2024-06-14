@@ -15,17 +15,17 @@ describe('Page des variants - Filtrer avec les facettes', () => {
     cy.validateExpandCollapse('Patient');
   });
 
-  it('Patient - Analyse', () => {
+  it('Patient - Analyse [CLIN-2954]', () => {
     cy.validateFacetFilter('Patient', 'Analyse', 'MYOC', 'MYOC', /^870 60\d{1}$/);
     cy.validateFacetRank(0, 'Analyse');
   });
 
-  it('Patient - Statut clinique', () => {
+  it('Patient - Statut clinique [CLIN-2954]', () => {
     cy.validateFacetFilter('Patient', 'Statut clinique', 'Non atteint', 'not_affected', /^423 \d{3}$/);
     cy.validateFacetRank(1, 'Statut clinique');
   });
 
-  it('Patient - Sexe', () => {
+  it('Patient - Sexe [CLIN-2954]', () => {
     cy.validateFacetFilter('Patient', 'Sexe', 'Indéterminé', 'unknown', /^192 10\d{1}$/);
     cy.validateFacetRank(2, 'Sexe');
   });

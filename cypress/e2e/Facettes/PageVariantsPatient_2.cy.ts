@@ -72,12 +72,12 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateTableResultsCount(/^1$/);
   });
 
-  it('Variant - Type de variant', () => {
+  it('Variant - Type de variant [CLIN-2954]', () => {
     cy.validateFacetFilter('Variant', 'Type de variant', 'SNV', 'SNV', /^157 594$/);
     cy.validateFacetRank(0, 'Type de variant');
   });
 
-  it('Variant - Conséquences', () => {
+  it('Variant - Conséquences [CLIN-2954]', () => {
     cy.validateFacetFilter('Variant', 'Conséquences', 'Downstream Gene', 'downstream_gene_variant', /^38 150$/);
     cy.validateFacetRank(1, 'Conséquences');
   });

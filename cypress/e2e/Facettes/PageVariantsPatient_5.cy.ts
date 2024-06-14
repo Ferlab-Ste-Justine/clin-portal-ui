@@ -17,7 +17,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateExpandCollapse('Pathogénicité');
   });
 
-  it('Pathogénicité - ClinVar', () => {
+  it('Pathogénicité - ClinVar [CLIN-2954]', () => {
     cy.validateFacetFilter('Pathogénicité', 'ClinVar', 'Likely Benign', 'Likely_benign', /^1 162$/);
     cy.validateFacetRank(0, 'ClinVar');
   });
@@ -27,7 +27,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateFacetRank(1, 'VEP');
   });
 
-  it('Pathogénicité - Score Exomiser', () => {
+  it('Pathogénicité - Score Exomiser [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'Score Exomiser', '0.6', /^184 065$/);
     cy.validateFacetRank(2, 'Score Exomiser');
   });
@@ -42,7 +42,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateFacetRank(4, 'Critères ACMG de Exomiser');
   });
 
-  it('Pathogénicité - Score Franklin', () => {
+  it('Pathogénicité - Score Franklin [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'Score Franklin', '0.05', /^184 077$/);
     cy.validateFacetRank(5, 'Score Franklin');
   });
@@ -57,27 +57,27 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateFacetRank(7, 'Critères ACMG de Franklin');
   });
 
-  it('Pathogénicité - CADD (Phred)', () => {
+  it('Pathogénicité - CADD (Phred) [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'CADD (Phred)', '0.01', /^179 165$/);
     cy.validateFacetRank(8, 'CADD (Phred)');
   });
 
-  it('Pathogénicité - CADD (raw)', () => {
+  it('Pathogénicité - CADD (raw) [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'CADD (raw)', '0.01', /^180 151$/);
     cy.validateFacetRank(9, 'CADD (raw)');
   });
 
-  it('Pathogénicité - DANN', () => {
+  it('Pathogénicité - DANN [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'DANN', '0.05', /^179 067$/);
     cy.validateFacetRank(10, 'DANN');
   });
 
-  it('Pathogénicité - FATHMM', () => {
+  it('Pathogénicité - FATHMM [CLIN-2954]', () => {
     cy.validateFacetFilter('Pathogénicité', 'FATHMM', 'Tolerated', 'T', /^9 183$/);
     cy.validateFacetRank(11, 'FATHMM');
   });
 
-  it('Pathogénicité - LRT', () => {
+  it('Pathogénicité - LRT [CLIN-2954]', () => {
     cy.validateFacetFilter('Pathogénicité', 'LRT', 'Neutral', 'N', /^6 653$/);
     cy.validateFacetRank(12, 'LRT');
   });
@@ -92,22 +92,22 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateFacetRank(14, 'SIFT');
   });
 
-  it('Pathogénicité - SpliceAI', () => {
+  it('Pathogénicité - SpliceAI [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'SpliceAI', '0.01', /^154 143$/);
     cy.validateFacetRank(15, 'SpliceAI');
   });
 
-  it('Pathogénicité - REVEL', () => {
+  it('Pathogénicité - REVEL [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'REVEL', '0.01', /^180 624$/);
     cy.validateFacetRank(16, 'REVEL');
   });
 
-  it('Pathogénicité - CMC', () => {
+  it('Pathogénicité - CMC [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'CMC', '5', /^177 160$/);
     cy.validateFacetRank(17, 'CMC');
   });
 
-  it('Pathogénicité - CMC (ratio)', () => {
+  it('Pathogénicité - CMC (ratio) [CLIN-2954]', () => {
     cy.validateFacetNumFilter('Pathogénicité', 'CMC (ratio)', '0.01', /184 06\d{1}$/);
     cy.validateFacetRank(18, 'CMC (ratio)');
   });

@@ -17,7 +17,7 @@ describe('Page des variants d\'un patient - Filtrer avec les facettes', () => {
     cy.validateExpandCollapse('Panel RQDM');
   });
 
-  it('Panel RQDM - RQDM', () => {
+  it('Panel RQDM - RQDM [CLIN-2954]', () => {
     cy.validateFacetFilter('Panel RQDM', 'RQDM', 'Polymalformation (POLYM v1)', 'POLYM', /^24 975$/);
     cy.validateFacetRank(0, 'RQDM');
   });
