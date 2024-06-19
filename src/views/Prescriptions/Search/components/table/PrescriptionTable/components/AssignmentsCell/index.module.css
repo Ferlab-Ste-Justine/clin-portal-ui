@@ -1,0 +1,114 @@
+.assigmentCell {
+  display: flex;
+}
+.assigmentCell div {
+  height: 24px;
+}
+.assigmentCell :not(:first-child) {
+  margin-left: -8px;
+}
+
+.assignmentsPopOver {
+  width: 450px;
+  padding: 0;
+}
+.assignmentsPopOver :global(.ant-popover-arrow) {
+  display: none;
+}
+.assignmentsPopOver :global(.ant-popover-inner-content) {
+  padding: 8px 12px;
+  width: 100%;
+}
+
+.assignementAvatar :not(:first-child) {
+  margin-left: -8px;
+}
+
+.userAvatar span {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.outlineAvatar {
+  outline: 1px solid white;
+}
+
+.userPopOverContent {
+  width: fit-content;
+}
+.userPopOverContent :global(.ant-popover-inner-content) {
+  display: flex;
+  flex-direction: column;
+}
+.userPopOverContent :global(.ant-tag) :global(.ant-space-item):nth-child(2) span {
+  font-size: 14px;
+  line-height: 22px;
+}
+.userPopOverContent :global(.ant-typography-copy) {
+  font-size: 12px;
+}
+
+.userInfo {
+  background-color: red;
+}
+
+.moreAssignment {
+  background-color: var(--blue-2);
+  color: var(--blue-8);
+  border: none;
+  outline: 1px solid white;
+}
+.moreAssignment span {
+  font-size: 12px;
+}
+
+.emailLink {
+  padding: 0;
+  margin-left: 32px;
+  height: 20px;
+  display: flex;
+  width: fit-content;
+}
+.emailLink .emailTextGroup {
+  text-decoration: none !important;
+  line-height: 20px;
+  height: 20px;
+}
+.emailLink .emailTextGroup .emailText {
+  text-decoration: none !important;
+  font-size: 12px;
+}
+.emailLink .emailTextGroup .emailText:hover {
+  text-decoration: underline !important;
+  color: var(--blue-8);
+}
+.emailLink .emailTextGroup:hover {
+  height: 20px;
+  line-height: 22px;
+}
+.emailLink .emailTextGroup:hover .emailText {
+  width: calc(100% - 12px) !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+.emailLink .emailTextGroup:hover :global(.ant-typography-copy) {
+  display: inline !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 12px;
+  height: 12px;
+}
+.emailLink .emailTextGroup :global(.ant-typography-copy) {
+  color: var(--gray-7);
+  display: none !important;
+}
+.emailLink .emailTextGroup :global(.ant-typography-copy):hover {
+  color: var(--blue-8);
+}
+
+.unAssignAvatar {
+  height: 24px;
+}

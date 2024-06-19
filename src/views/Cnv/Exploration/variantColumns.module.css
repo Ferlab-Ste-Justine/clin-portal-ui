@@ -1,0 +1,25 @@
+.variantTableCellElipsis {
+  max-width: 240px;
+  width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: unset;
+  white-space: nowrap;
+}
+
+th.userAffectedBtnCell {
+  text-align: left !important;
+}
+
+.variantTableCellElipsis::after {
+  content: "";
+  display: block;
+}
+
+.variantTableCell {
+  min-width: 160px;
+}
+
+.fixedVariantTableCellNoData {
+  left: 0 !important;
+}

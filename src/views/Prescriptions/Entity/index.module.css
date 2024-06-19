@@ -1,0 +1,14 @@
+.prescriptionEntityContainer > div[role=tablist] {
+  background: white;
+  padding: 0px 24px;
+  height: 48px;
+}
+.prescriptionEntityContainer .headerIcon {
+  color: var(--blue-9);
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 32px;
+}
+.prescriptionEntityContainer .headerIcon > svg {
+  display: flex;
+}

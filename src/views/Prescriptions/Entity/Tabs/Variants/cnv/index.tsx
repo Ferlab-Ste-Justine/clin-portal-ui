@@ -12,7 +12,7 @@ import { usePrescriptionEntityContext } from 'views/Prescriptions/Entity/context
 import ScrollContentWithFooter from 'components/Layout/ScrollContentWithFooter';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const CnvPatient = () => {
   const { prescriptionId, variantInfo } = usePrescriptionEntityContext();

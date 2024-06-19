@@ -3,7 +3,7 @@ import ProLabel from '@ferlab/ui/core/components/ProLabel';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { AutoComplete, AutoCompleteProps, Input, Space, Typography } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   icon: React.ReactNode;

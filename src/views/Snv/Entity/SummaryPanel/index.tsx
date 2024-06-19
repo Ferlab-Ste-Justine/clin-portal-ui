@@ -8,7 +8,7 @@ import ClinicalCard from './Clinical';
 import Consequecenses from './Consequences';
 import FrequencyCard from './Frequency';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   className?: string;

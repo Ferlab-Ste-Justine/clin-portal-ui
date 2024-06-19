@@ -14,7 +14,7 @@ import { commonPrescriptionFilterFields } from 'views/Prescriptions/utils/consta
 
 import OptionItem from 'components/uiKit/search/PrescriptionAutoComplete/OptionItem';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const generateSearchFilter = (search: string) =>
   generateQuery({

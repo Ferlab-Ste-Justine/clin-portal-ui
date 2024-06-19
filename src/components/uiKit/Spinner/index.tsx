@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin } from 'antd';
 import { SpinProps } from 'antd/lib/spin';
 
-import style from 'components/uiKit/Spinner/index.module.scss';
+import style from 'components/uiKit/Spinner/index.module.css';
 
 type SpinnerProps = SpinProps & {
   className?: string;

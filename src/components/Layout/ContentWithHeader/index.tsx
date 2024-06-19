@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import ContentHeader, { ContentHeaderProps } from './Header';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   children: React.ReactNode;

@@ -9,7 +9,7 @@ import CollapsePanel from 'components/containers/collapse';
 import { columnsClinVar, columnsPhenotypes } from './columns';
 import { makeClinVarRows, makeGenesOrderedRow } from './utils';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   locus: string;

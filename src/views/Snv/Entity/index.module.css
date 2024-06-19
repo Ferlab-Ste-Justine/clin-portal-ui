@@ -1,0 +1,15 @@
+.variantEntity .entitySections {
+  width: 100%;
+}
+.variantEntity .entitySections :global(.ant-tabs-content) {
+  height: 100%;
+}
+.variantEntity .entitySections div[class$=-nav] {
+  background-color: white;
+}
+.variantEntity .entitySections div[class$=-nav] div[class$=-nav-list] {
+  padding: 0 24px;
+}
+.variantEntity .entitySections :global(.ant-tabs-content-holder) {
+  overflow: auto;
+}

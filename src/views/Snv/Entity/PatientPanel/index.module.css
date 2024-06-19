@@ -1,0 +1,9 @@
+.patientPanel .patientPagination {
+  margin-bottom: 0;
+  margin-top: 16px;
+  justify-content: flex-end;
+  display: flex;
+}
+.patientPanel .space {
+  width: 100%;
+}

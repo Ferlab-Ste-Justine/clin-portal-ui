@@ -1,0 +1,25 @@
+.prescriptionEntityQCWrapper .content {
+  padding: 24px;
+}
+.prescriptionEntityQCWrapper :global(.ant-card) {
+  height: 100%;
+}
+.prescriptionEntityQCWrapper :global(.ant-tabs-large > .ant-tabs-nav .ant-tabs-tab) {
+  font-size: 14px;
+  padding: 7px 0 9px 0;
+  letter-spacing: 0.25px;
+  font-weight: 400;
+}
+.prescriptionEntityQCWrapper :global(.ant-tabs-tab-active) {
+  font-weight: 500;
+}
+.prescriptionEntityQCWrapper :global(.ant-tabs-nav::before) {
+  border: none;
+}
+.prescriptionEntityQCWrapper :global(.ant-card-head) {
+  padding: 16px 24px 0 24px;
+  height: 54px;
+}
+.prescriptionEntityQCWrapper :global(.ant-card-body) {
+  height: calc(100vh - var(--main-header-height) - var(--page-header-height) - var(--main-footer-height) - var(--page-header-height) - 48px);
+}

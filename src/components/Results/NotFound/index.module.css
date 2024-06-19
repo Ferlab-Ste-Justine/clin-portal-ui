@@ -1,0 +1,9 @@
+.notFoundWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.notFoundWrapper .notFoundResult {
+  margin-top: -20%;
+}

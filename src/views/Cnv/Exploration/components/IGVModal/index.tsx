@@ -18,7 +18,7 @@ import { GENDER, PARENT_TYPE, PATIENT_POSITION } from 'utils/constants';
 import { formatLocus } from 'utils/helper';
 import { generateTracks, getHyperXenomeTrack } from 'utils/IGV';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 
 interface OwnProps {
   variantEntity: VariantEntity;

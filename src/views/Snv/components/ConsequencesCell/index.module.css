@@ -1,0 +1,41 @@
+.consequenceUl {
+  list-style: none;
+  padding: 0;
+}
+
+.highImpact {
+  fill: var(--red-5);
+}
+
+.lowImpact {
+  fill: var(--green-6);
+}
+
+.moderateImpact {
+  fill: var(--orange-5);
+}
+
+.modifierImpact {
+  fill: var(--body-3);
+}
+
+.detail {
+  padding-right: 4px;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.detail::after {
+  content: "";
+  display: block;
+}
+
+.bullet {
+  margin-right: 8px;
+}
+
+.symbol {
+  padding-right: 8px;
+}

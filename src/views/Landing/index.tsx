@@ -23,7 +23,7 @@ import { LANG, REDIRECT_URI_KEY } from 'utils/constants';
 import EnvironmentVariables from 'utils/EnvVariables';
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const Landing = (): React.ReactElement => {
   const { keycloak } = useKeycloak();

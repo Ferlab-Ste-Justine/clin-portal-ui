@@ -41,7 +41,7 @@ import { downloadAsTSV } from '../utils/export';
 import { prescriptionsColumns } from './components/table/PrescriptionTable/columns';
 import { sequencingsColumns } from './components/table/SequencingTable/columns';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const adjustSqon = (sqon: ISyntheticSqon) =>
   JSON.parse(JSON.stringify(sqon).replace('sequencing_requests.status', 'status'));

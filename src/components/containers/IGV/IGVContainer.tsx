@@ -4,7 +4,7 @@ import cx from 'classnames';
 import Igv from 'components/Igv';
 import { IAnnotationTrack, IIGVTrack } from 'components/Igv/type';
 
-import style from 'views/Cnv/Exploration/components/IGVModal/index.module.scss';
+import style from 'views/Cnv/Exploration/components/IGVModal/index.module.css';
 
 interface OwnProps {
   locus: string;

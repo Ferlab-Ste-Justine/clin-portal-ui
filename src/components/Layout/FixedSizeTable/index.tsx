@@ -4,7 +4,7 @@ import { ITableDimension } from 'components/Table/StaticTableHeightXY';
 import useElementSize from 'hooks/useElementSize';
 import useWindowSize from 'hooks/useWindowSize';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   numberOfColumn: any[];

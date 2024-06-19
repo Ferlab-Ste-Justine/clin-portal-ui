@@ -4,7 +4,7 @@ import { AnalysisResult } from 'graphql/prescriptions/models/Prescription';
 import { useGlobals } from 'store/global';
 import { formatDate } from 'utils/date';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   data: AnalysisResult;

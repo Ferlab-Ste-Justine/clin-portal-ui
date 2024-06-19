@@ -17,7 +17,7 @@ import { PrescriptionEntityTabs } from '..';
 
 import { ITableGeneCoverage } from './index';
 
-import style from 'views/Snv/Exploration/variantColumns.module.scss';
+import style from 'views/Snv/Exploration/variantColumns.module.css';
 
 const handleRedirection = (
   record: ITableGeneCoverage,

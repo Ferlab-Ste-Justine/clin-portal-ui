@@ -18,7 +18,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 import { formatNumber } from 'utils/formatNumber';
 import { toExponentialNotation } from 'utils/helper';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   locus: string;

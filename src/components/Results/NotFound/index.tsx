@@ -2,7 +2,7 @@ import React from 'react';
 import intl from 'react-intl-universal';
 import { Result } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   title?: string;

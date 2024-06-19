@@ -1,0 +1,26 @@
+.searchTitle {
+  color: var(--body-1);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.searchIconsDisabled {
+  color: var(--body-3);
+}
+
+.searchDropdownCode {
+  font-size: 1.4rem;
+  color: var(--body-1);
+}
+
+.searchDropdownName {
+  font-size: 1.2rem;
+  color: var(--body-2);
+}
+
+.facetCollapse:not(:first-child) {
+  margin-top: 8px;
+}
+.facetCollapse:last-child {
+  padding-bottom: 14px;
+}

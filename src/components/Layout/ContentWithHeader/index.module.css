@@ -1,0 +1,8 @@
+.contentWithHeader {
+  display: flex;
+}
+.contentWithHeader .pageWrapper {
+  height: calc(100vh - var(--main-header-height) - var(--page-header-height));
+  display: flex;
+  width: 100%;
+}

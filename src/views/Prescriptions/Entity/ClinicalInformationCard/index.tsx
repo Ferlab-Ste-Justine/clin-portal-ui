@@ -17,7 +17,7 @@ import { FamilyHistory } from './components/FMH';
 import { Indication } from './components/Indication';
 import { Paraclinique } from './components/Paraclinique';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 type OwnProps = {
   prescription?: ServiceRequestEntity;

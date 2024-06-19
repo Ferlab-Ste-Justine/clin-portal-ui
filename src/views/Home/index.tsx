@@ -10,7 +10,7 @@ import { LimitTo, Roles } from 'components/Roles/Rules';
 import PrescriptionSearchBox from './components/PrescriptionSearchBox';
 import VariantSearchBox from './components/VariantSearchBox';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const Home = () => (
   <ContentWithHeader

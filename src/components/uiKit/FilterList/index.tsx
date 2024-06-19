@@ -8,7 +8,7 @@ import { ExtendedMappingResults } from 'graphql/models';
 import CustomFilterContainer from './CustomFilterContainer';
 import { FilterGroup, FilterInfo } from './types';
 
-import styles from './Filters.module.scss';
+import styles from './Filters.module.css';
 
 export type TCustomFilterMapper = (filters: ISqonGroupFilter) => ISqonGroupFilter;
 

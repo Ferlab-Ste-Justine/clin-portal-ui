@@ -1,0 +1,18 @@
+.containerWrapper {
+  flex-grow: 1;
+  align-items: start;
+  padding: var(--default-page-content-padding);
+  min-height: calc(100vh - var(--main-header-height) - var(--page-header-height) - var(--main-footer-height));
+}
+.containerWrapper .container {
+  height: 100%;
+}
+
+.dynamicContainerWrapper {
+  flex-grow: 1;
+  align-items: start;
+  padding: var(--default-page-content-padding);
+}
+.dynamicContainerWrapper .container {
+  height: 100%;
+}

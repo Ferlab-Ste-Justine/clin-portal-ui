@@ -1,0 +1,6 @@
+.loadingContainer {
+  height: calc(100vh - var(--main-header-height) - 2 * var(--page-header-height));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

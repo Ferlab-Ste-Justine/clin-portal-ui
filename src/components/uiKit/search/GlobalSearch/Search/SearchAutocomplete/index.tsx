@@ -6,7 +6,7 @@ import take from 'lodash/take';
 
 import SearchLabel from 'components/uiKit/search/SearchLabel';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export type OptionsType = {
   value: string;

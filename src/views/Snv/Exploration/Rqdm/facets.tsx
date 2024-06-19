@@ -28,7 +28,7 @@ import VariantGeneSearch from 'components/VariantGeneSearch';
 import { getQueriesSidebarDictionary } from 'utils/customPill';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 
-import styles from '../facets.module.scss';
+import styles from '../facets.module.css';
 
 const filterGroups: {
   [type: string]: FilterInfo;

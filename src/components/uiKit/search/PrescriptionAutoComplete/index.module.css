@@ -1,0 +1,11 @@
+.prescriptionAutoComplete {
+  width: 100%;
+}
+
+.prescriptionOptionLink {
+  color: unset;
+  text-decoration: none;
+}
+.prescriptionOptionLink:hover {
+  color: unset;
+}

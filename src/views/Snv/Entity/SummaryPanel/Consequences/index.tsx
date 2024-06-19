@@ -20,7 +20,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 
 import { getVepImpactTag } from '../..';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 interface OwnProps {
   className?: string;

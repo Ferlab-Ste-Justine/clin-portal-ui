@@ -17,7 +17,7 @@ import { Roles, validate } from 'components/Roles/Rules';
 import { useRpt } from 'hooks/useRpt';
 import { getAssignmentDictionary } from 'utils/translation';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export type TAssignmentsCell = {
   results: AnalysisResult;

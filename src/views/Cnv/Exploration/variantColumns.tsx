@@ -12,7 +12,7 @@ import { formatFilters } from 'utils/formatFilters';
 import { formatGenotype } from 'utils/formatGenotype';
 import { formatDnaLength, formatNumber } from 'utils/formatNumber';
 
-import style from './variantColumns.module.scss';
+import style from './variantColumns.module.css';
 
 export const getVariantColumns = (
   variantType: VariantType,

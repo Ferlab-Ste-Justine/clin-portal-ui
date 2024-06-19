@@ -1,0 +1,42 @@
+.searchBox {
+  width: 100%;
+}
+.searchBox .searchCard:global(.ant-card) {
+  padding: 32px 40px;
+}
+.searchBox .searchCard :global(.ant-card-body) {
+  overflow: unset !important;
+}
+.searchBox .searchHeader {
+  gap: 8px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.searchBox .searchBoxIcon {
+  font-size: 48px;
+  color: var(--blue-8);
+  display: flex;
+  align-items: center;
+}
+.searchBox .searchBoxIcon svg {
+  height: 48px;
+  width: 48px;
+}
+.searchBox .searchBoxTitle {
+  font-size: 16px;
+  min-width: 220px;
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  color: var(--blue-8);
+}
+.searchBox .searchInputWrapper,
+.searchBox .searchInput {
+  width: 100%;
+}
+.searchBox .searchWrapper {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}

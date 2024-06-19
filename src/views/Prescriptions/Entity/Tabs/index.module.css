@@ -1,0 +1,11 @@
+.prescriptionEntityWrapper, .prescriptionEntityFileWrapper {
+  height: calc(100vh - var(--main-header-height) - var(--page-header-height));
+  overflow: scroll;
+}
+.prescriptionEntityWrapper .content, .prescriptionEntityFileWrapper .content {
+  padding: var(--default-page-content-padding);
+  min-height: calc(100vh - var(--main-header-height) - var(--page-header-height) - var(--main-footer-height));
+}
+.prescriptionEntityWrapper :global(.ant-card), .prescriptionEntityFileWrapper :global(.ant-card) {
+  height: 100%;
+}

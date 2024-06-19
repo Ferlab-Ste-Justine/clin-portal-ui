@@ -1,0 +1,25 @@
+.container .titleWrapper {
+  color: var(--gray-9);
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.container .titleWrapper .title {
+  font-size: 12px;
+}
+.container .titleWrapper .tooltipIcon {
+  margin-left: 0.5rem;
+  color: var(--gray-6);
+}
+.container .tag {
+  display: flex;
+  align-items: center;
+  background-color: var(--blue-8);
+  color: var(--gray-1);
+}
+.container .tag > * {
+  color: var(--gray-1);
+}
+.container .search {
+  width: 100%;
+}

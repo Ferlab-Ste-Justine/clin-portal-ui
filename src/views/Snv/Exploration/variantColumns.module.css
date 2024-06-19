@@ -1,0 +1,95 @@
+.variantTableCellElipsis div {
+  max-width: 160px;
+  width: 140px;
+}
+.variantTableCellElipsis div div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: unset;
+  white-space: nowrap;
+}
+.variantTableCellElipsis div div::after {
+  content: "";
+  display: block;
+}
+
+.variantTableCellElipsis::after {
+  content: "";
+  display: block;
+}
+
+.variantTableCell {
+  min-width: 160px;
+}
+
+.variantTableHeaderCellNowrap {
+  white-space: nowrap;
+}
+
+.dbSnpTableCell {
+  min-width: 60px;
+  text-align: center;
+}
+
+.variantSnvOmimCellItem {
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.addGene .addGeneButton {
+  padding: 0 4px;
+  border-radius: 2px;
+  color: var(--blue-8);
+}
+.addGene .addGeneButton:hover {
+  cursor: pointer;
+  background-color: var(--gray-4);
+}
+
+th.userAffectedBtnCell {
+  text-align: left !important;
+}
+
+.userAffectedBtnCell {
+  min-width: 60px;
+}
+.userAffectedBtnCell .affectedIcon {
+  display: flex;
+  margin: auto;
+  fill: var(--blue-8);
+}
+.userAffectedBtnCell .affectedIcon:hover {
+  cursor: pointer;
+}
+
+.rqdmCell {
+  min-width: 100px;
+}
+
+.fixedVariantTableCellElipsis {
+  min-width: 100px;
+  max-width: 100px;
+  width: 100px;
+}
+.fixedVariantTableCellElipsis div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: unset;
+  white-space: nowrap;
+}
+.fixedVariantTableCellElipsis div::after {
+  content: "";
+  display: block;
+}
+
+.hotspotFilled {
+  color: var(--red-7);
+}
+
+.hotspotOutlined {
+  color: var(--gray-6);
+}
+
+.fixedVariantTableCellNoData {
+  left: 0 !important;
+}

@@ -45,7 +45,7 @@ import GnomadCell from './components/Gnomad/GnomadCell';
 import ManeCell from './components/ManeCell';
 import { OtherActions } from './components/OtherActions';
 
-import style from './variantColumns.module.scss';
+import style from './variantColumns.module.css';
 
 const ClinvarColorMap: Record<any, string> = {
   affects: 'default',

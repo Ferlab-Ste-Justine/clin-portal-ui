@@ -12,7 +12,7 @@ import { CHECK_GENE_MATCH_QUERY } from 'graphql/genes/queries';
 import { hydrateResults } from 'graphql/models';
 import { GeneEntity } from 'graphql/variants/models';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   queryBuilderId: string;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Modal } from 'antd';
 import cx from 'classnames';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 type OwnProps = {
   type: string;

@@ -1,0 +1,12 @@
+.occurenceDrawer .description span[class$=-item-label] {
+  width: 50%;
+}
+.occurenceDrawer .parentStatusTitle,
+.occurenceDrawer .parentStatusIconWrapper {
+  display: flex;
+  align-items: center;
+}
+.occurenceDrawer .parentStatusTitle .parentStatusIcon,
+.occurenceDrawer .parentStatusIconWrapper .parentStatusIcon {
+  margin-left: 4px;
+}

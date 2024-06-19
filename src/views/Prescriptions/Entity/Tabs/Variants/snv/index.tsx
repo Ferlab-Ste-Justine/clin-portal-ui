@@ -14,7 +14,7 @@ import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
 
 import { VariantSection } from '../components/VariantSectionNav';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   variantSection?: VariantSection;

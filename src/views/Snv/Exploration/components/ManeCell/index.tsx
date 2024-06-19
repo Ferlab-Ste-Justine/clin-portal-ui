@@ -7,7 +7,7 @@ import ManePlusIcon from 'components/icons/ManePlusIcon';
 import ManeSelectIcon from 'components/icons/ManeSelectIcon';
 import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 interface OwnProps {
   consequence: Consequence;
 }
