@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Skeleton, Space, Typography } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Title } = Typography;
 

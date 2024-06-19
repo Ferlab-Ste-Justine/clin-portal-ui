@@ -1,0 +1,17 @@
+.homePageWrapper {
+  height: calc(100vh - var(--main-header-height) - var(--page-header-height));
+}
+.homePageWrapper .contentWrapper {
+  height: 100%;
+}
+.homePageWrapper .contentWrapper .contentCardWrapper {
+  height: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+.homePageWrapper .contentWrapper .contentCardWrapper .contentCard:global(.ant-card) {
+  padding: 48px;
+}
+.homePageWrapper .contentWrapper .contentCol {
+  width: 100%;
+}

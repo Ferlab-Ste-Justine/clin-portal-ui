@@ -1,0 +1,6 @@
+.prescriptionTableWrapper :global(.ant-pagination) {
+  margin-bottom: 0;
+}
+.prescriptionTableWrapper :global(.ant-table-body) {
+  overflow: auto !important;
+}

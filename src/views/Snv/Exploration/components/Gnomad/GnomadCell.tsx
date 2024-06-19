@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-import styles from './GnomadCell.module.scss';
+import styles from './GnomadCell.module.css';
 
 interface OwnProps {
   underOnePercent: boolean;

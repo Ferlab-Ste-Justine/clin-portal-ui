@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Tooltip } from 'antd';
 import cx from 'classnames';
 
-import style from './index.module.scss';
+import styles from './index.module.css';
 
 type TOnClick = () => void;
 
@@ -31,7 +31,7 @@ const HeaderButton = ({
   <Tooltip title={tooltip}>
     <Button
       loading={loading}
-      className={cx(className, style.headerBtn)}
+      className={cx(className, styles.headerBtn)}
       icon={icon}
       onClick={(e) => doOnClick(e, onClick)}
       onMouseDown={(e) => e.preventDefault()} // remove focus after click

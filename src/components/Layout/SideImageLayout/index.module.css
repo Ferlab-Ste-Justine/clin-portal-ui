@@ -1,0 +1,48 @@
+.sideImagePageContainer {
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+  min-width: 1024px;
+  background-color: var(--gray-4);
+}
+.sideImagePageContainer .contentWrapper {
+  height: 100%;
+  width: 100%;
+}
+.sideImagePageContainer .sideImageContainer {
+  background: var(--gray-4);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 100%;
+  transition: width 0.2s ease;
+}
+.sideImagePageContainer .pageContent {
+  overflow: auto;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 1351px) {
+  .sideImageContainer {
+    width: 575px;
+  }
+}
+@media (max-width: 1350px) {
+  .sideImageContainer {
+    width: 435px;
+  }
+}
+@media (max-width: 1180px) {
+  .sideImageContainer {
+    flex: 0;
+  }
+  .pageContent {
+    display: flex;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background: linear-gradient(0deg, --gray-4-transparent-1, --gray-4-transparent-1), url(../../../components/assets/side-img-svg.svg) bottom;
+    background-size: cover;
+  }
+}

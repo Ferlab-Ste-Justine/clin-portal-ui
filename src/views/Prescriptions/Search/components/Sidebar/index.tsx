@@ -9,7 +9,7 @@ import { ExtendedMappingResults } from 'graphql/models';
 
 import SidebarFilters from './Filter';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export type SidebarData = {
   queryBuilderId: string;

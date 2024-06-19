@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import { IIGVBrowser, IIGVBrowserOptions } from './type';
 
-import style from './index.module.scss';
+import styles from './index.module.css';
 
 declare global {
   interface Window {
@@ -48,7 +48,7 @@ const IGV = ({ id = 'igvContainer', className = '', options }: OwnProps) => {
     // eslint-disable-next-line
   }, [options, previousOptions]);
 
-  return <div id={id} ref={igvContainerRef} className={cx(className, style.igvContainer)}></div>;
+  return <div id={id} ref={igvContainerRef} className={cx(className, styles.igvContainer)}></div>;
 };
 
 export default IGV;

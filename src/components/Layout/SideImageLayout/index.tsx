@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { Row } from 'antd';
 import cx from 'classnames';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   sideImgSrc?: string;

@@ -1,0 +1,49 @@
+.homeActionCardWrapper {
+  height: 175px;
+  position: relative;
+}
+
+.homeActionContent {
+  display: flex;
+  align-items: center;
+}
+
+.homeActionCard {
+  width: 100%;
+  align-items: center;
+}
+.homeActionCard .description {
+  display: block;
+  transition: transform 0.1s ease;
+}
+.homeActionCard .plusIcon {
+  display: none;
+}
+.homeActionCard:hover {
+  cursor: pointer;
+}
+.homeActionCard:hover .plusIcon {
+  display: initial;
+}
+.homeActionCard:hover .description {
+  transform: translateY(50px);
+}
+.homeActionCard:hover .homeActionButton {
+  transform: translateY(10px);
+}
+.homeActionCard .homeActionButton {
+  width: 100%;
+  text-align: center;
+  transition: transform 0.1s ease;
+}
+.homeActionCard .homeActionButton .homeActionIcon {
+  font-size: 48px;
+  color: var(--blue-8);
+}
+.homeActionCard .homeActionButton .homeActionIcon svg {
+  height: 48px;
+  width: 48px;
+}
+.homeActionCard .homeActionButton .text {
+  color: var(--blue-8);
+}

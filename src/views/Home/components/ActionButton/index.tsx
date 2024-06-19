@@ -3,7 +3,7 @@ import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { Space, Typography } from 'antd';
 import cx from 'classnames';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   icon: React.ReactNode;

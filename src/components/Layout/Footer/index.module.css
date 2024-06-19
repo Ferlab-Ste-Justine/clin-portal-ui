@@ -1,0 +1,22 @@
+.footer {
+  padding: 8px 24px;
+  font-size: 12px;
+  background: var(--gray-4);
+  border-top: 1px solid var(--gray-5);
+  height: var(--main-footer-height);
+}
+.footer ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.footer ul li {
+  margin-right: 24px;
+}
+.footer ul li a {
+  color: var(--gray-8);
+}
+.footer img {
+  height: 32px;
+}

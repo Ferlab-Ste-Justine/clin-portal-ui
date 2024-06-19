@@ -7,6 +7,7 @@ RUN npm install
 
 COPY public /code/public
 COPY src /code/src
+COPY scripts /code/scripts
 COPY .env tsconfig.json tsconfig.paths.json craco.config.js /code/
 RUN npm run theme
 RUN npm run build

@@ -12,7 +12,7 @@ import {
 } from 'graphql/variants/models';
 import { SNV_VARIANT_PATIENT_QB_ID } from 'views/Snv/utils/constant';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 
 type Props = {
   hcComplements: HcComplementHits | PossiblyHcComplementHits | undefined;

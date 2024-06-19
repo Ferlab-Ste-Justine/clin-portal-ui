@@ -10,7 +10,7 @@ import ModifierBadgeIcon from 'components/icons/variantBadgeIcons/ModifierBadgeI
 
 import { generateConsequencesDataLines } from './consequences';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 
 type OwnProps = {
   consequences: Consequence[];

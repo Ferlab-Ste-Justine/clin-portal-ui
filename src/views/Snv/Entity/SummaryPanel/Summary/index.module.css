@@ -1,0 +1,43 @@
+.summaryCard .divider {
+  height: auto;
+  margin-right: 0;
+}
+.summaryCard .infoCard {
+  min-width: 150px;
+  background-color: var(--gray-2);
+}
+.summaryCard .infoCard .row:not(:last-child) {
+  margin-bottom: 8px;
+}
+.summaryCard .infoCard .row .noWrap {
+  flex-flow: unset;
+  overflow-wrap: anywhere;
+}
+@media only screen and (min-width: 850px) {
+  .summaryCard .infoCard .row {
+    flex-flow: unset;
+  }
+}
+.summaryCard .infoCard .row .infoTitle {
+  min-width: 100px;
+}
+.summaryCard .infoCard .row .infoValue {
+  font-weight: 500;
+}
+.summaryCard .resumeContent {
+  margin-left: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.summaryCard .resumeContent .row {
+  display: flex;
+  flex-direction: column;
+}
+.summaryCard .resumeContent .row .contentTitle {
+  color: var(--gray-7);
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 500;
+}

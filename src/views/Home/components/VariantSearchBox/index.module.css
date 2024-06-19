@@ -1,0 +1,7 @@
+.variantSearchBoxLink {
+  color: unset;
+  text-decoration: none;
+}
+.variantSearchBoxLink:hover {
+  color: unset;
+}

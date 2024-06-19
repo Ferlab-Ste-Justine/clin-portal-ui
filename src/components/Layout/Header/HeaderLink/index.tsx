@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import cx from 'classnames';
 
-import style from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   className?: string;
@@ -17,9 +17,13 @@ const isActive = (current: string, to: string | string[]) =>
   to instanceof Array ? to.includes(current) : current === to;
 
 const HeaderLink = ({ className = '', to, currentPathName, icon, title, ...props }: OwnProps) => (
-  <Link className={style.headerLink} to={to instanceof Array ? to[0] : to} {...props}>
+  <Link className={styles.headerLink} to={to instanceof Array ? to[0] : to} {...props}>
     <Button
-      className={cx(className, style.headerBtn, isActive(currentPathName, to) ? style.active : '')}
+      className={cx(
+        className,
+        styles.headerBtn,
+        isActive(currentPathName, to) ? styles.active : '',
+      )}
       icon={icon}
     >
       {title}

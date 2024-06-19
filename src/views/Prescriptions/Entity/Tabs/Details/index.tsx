@@ -20,7 +20,7 @@ import Footer from 'components/Layout/Footer';
 import { globalActions, useLang } from 'store/global';
 import { MIME_TYPES } from 'utils/constants';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const getRtp = async () => (await RptManager.readRpt()).access_token;
 

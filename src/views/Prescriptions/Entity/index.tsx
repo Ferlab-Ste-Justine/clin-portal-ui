@@ -22,7 +22,7 @@ import PrescriptionEntityContext, {
   PrescriptionEntityVariantInfo,
 } from './context';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export enum PrescriptionEntityTabs {
   DETAILS = '#details',

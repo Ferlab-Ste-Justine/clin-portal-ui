@@ -8,7 +8,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 
 import GqLine from '../../GQLine';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 
 type Props = {
   donor: DonorsEntity | undefined;

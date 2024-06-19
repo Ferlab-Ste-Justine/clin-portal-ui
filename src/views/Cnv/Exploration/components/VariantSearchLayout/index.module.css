@@ -1,0 +1,15 @@
+.variantLayout .filterLoader {
+  padding: 24px;
+  width: 100%;
+}
+.variantLayout .sideMenu li[role=menuitem] {
+  color: white;
+}
+.variantLayout .sideMenu li[role=menuitem] span[class$=-title-content] {
+  margin-left: 0 !important;
+}
+.variantLayout span[role=img].sideMenuIcon {
+  font-size: 20px !important;
+  display: flex;
+  justify-content: center;
+}

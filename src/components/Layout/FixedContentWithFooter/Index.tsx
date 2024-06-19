@@ -5,8 +5,8 @@ import ConditionalWrapper from 'components/utils/ConditionalWrapper';
 import Container from '../Container';
 import Footer from '../Footer';
 
-import sharedStyles from '../shared.module.scss';
-import styles from './index.module.scss';
+import sharedStyles from '../shared.module.css';
+import styles from './index.module.css';
 
 interface OwnProps {
   children: React.ReactElement;

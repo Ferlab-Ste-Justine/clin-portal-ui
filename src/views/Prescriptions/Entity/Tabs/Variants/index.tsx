@@ -18,7 +18,7 @@ import SnvPatient from './snv';
 import SnvTNPatient from './snvTN';
 import { extractOptionValue, formatOptionValue, getRequestOptions, hasVariantInfo } from './utils';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const PrescriptionVariants = () => {
   const queryParams = useQueryParams();

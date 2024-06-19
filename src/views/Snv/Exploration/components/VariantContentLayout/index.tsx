@@ -26,7 +26,7 @@ import { useGlobals } from 'store/global';
 import { VARIANT_RQDM_QB_ID_FILTER_TAG } from 'utils/queryBuilder';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   queryBuilderId: string;

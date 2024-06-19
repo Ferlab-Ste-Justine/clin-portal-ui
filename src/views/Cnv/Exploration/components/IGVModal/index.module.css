@@ -1,0 +1,28 @@
+.igvModal {
+  --modal-padding: 40px;
+  --modal-body-padding: 24px;
+  --modal-header-height: 55px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100vw !important;
+  max-width: 100vw;
+  height: 100vh;
+  padding-bottom: 0;
+  padding: var(--modal-padding);
+}
+.igvModal div[class$=-content] div[class$=-body] {
+  padding: var(--modal-body-padding);
+}
+.igvModal div[class$=-content] div[class$=-body] .igvContainer {
+  max-height: calc(
+          100vh - var(--modal-padding) * 2 - var(--modal-header-height) - var(--modal-body-padding) * 2
+        );
+  overflow: auto;
+}
+
+.igvModalWrapper {
+  max-height: 100vh;
+}

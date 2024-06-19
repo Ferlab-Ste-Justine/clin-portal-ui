@@ -1,0 +1,22 @@
+.fixedSizeTable {
+  min-height: 100%;
+  max-height: 100%;
+  display: flex;
+}
+.fixedSizeTable > :global(.ant-space-item):not(:first-child) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+.fixedSizeTable :global(.ant-tabs-content-holder) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+.fixedSizeTable :global(.ant-tabs-card) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}

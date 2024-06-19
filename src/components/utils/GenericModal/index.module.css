@@ -1,0 +1,15 @@
+.antModal span[class$=-modal-confirm-title] {
+  color: var(--blue-9);
+}
+.antModal.info span[class$=-exclamation-circle] {
+  color: var(--blue-7);
+}
+.antModal.error span[class$=-exclamation-circle] {
+  color: var(--red-8);
+}
+.antModal.success span[class$=-exclamation-circle] {
+  color: var(--green-7);
+}
+.antModal.warning span[class$=-exclamation-circle] {
+  color: var(--orange-7);
+}

@@ -1,0 +1,16 @@
+.variantTabWrapper {
+  display: flex;
+}
+.variantTabWrapper :global(.ant-pagination) {
+  margin-bottom: 0;
+}
+
+.variantSearchTable {
+  min-height: 0;
+}
+.variantSearchTable div[class$=-card-bordered] {
+  border-top: none;
+}
+.variantSearchTable div[class$=-card-bordered] > div {
+  padding: 8px 24px 8px 24px !important;
+}

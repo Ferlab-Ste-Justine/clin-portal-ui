@@ -1,0 +1,9 @@
+.prescriptionOptionItem :global(.ant-descriptions-item) {
+  padding: 0 !important;
+}
+.prescriptionOptionItem :global(.ant-descriptions-item) * {
+  font-size: 12px;
+}
+.prescriptionOptionItem span[class$=-item-label] {
+  width: 80px;
+}

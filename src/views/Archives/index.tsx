@@ -20,7 +20,7 @@ import { getProTableDictionary } from 'utils/translation';
 
 import { extractDocsFromTask } from './helper';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const DEFAULT_PAGE_SIZE = 20;
 const DEFAULT_PAGE = 1;
