@@ -581,6 +581,7 @@
   "protable.reset": "Reset",
   "protable.columns": "Columns",
   "protable.results": "Results",
+  "protable.result": "result",
   "protable.selectAllResults": "Select all results",
   "protable.selected": "item selected",
   "protable.selectedPlural": "items selected",

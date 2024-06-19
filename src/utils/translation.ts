@@ -54,6 +54,7 @@ export const getProTableDictionary = (): IProTableDictionary => ({
   },
   itemCount: {
     results: intl.get('protable.results'),
+    result: intl.get('protable.result'),
     noResults: intl.get('protable.noResults'),
     of: intl.get('protable.of'),
     selected: intl.get('protable.selected'),
@@ -61,7 +62,6 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     selectAllResults: intl.get('protable.selectAllResults'),
     clear: intl.get('protable.clear'),
     clearFilters: '',
-    result: '',
   },
   columnSelector: {
     reset: intl.get('protable.reset'),
