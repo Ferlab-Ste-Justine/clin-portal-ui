@@ -8,7 +8,7 @@ beforeEach(() => {
 });
 
 describe('Page des CNVs d\'un patient - Dictionnaire', () => {
-  it('Panel RQDM - RQDM', () => {
+  it('Panel RQDM - RQDM [CLIN-2971]', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM v1)',
                          'Congenital Myopathies (MYOC v1)',
                          'Global Developmental Delay / Intellectual Disability (Trio) (RGDI v3)',
@@ -82,7 +82,7 @@ describe('Page des CNVs d\'un patient - Dictionnaire', () => {
     cy.validateDictionnaryNewValues('Variant', 'Chromosome', dictionnary);
   });
 
-  it('Gène - Panel RQDM', () => {
+  it('Gène - Panel RQDM [CLIN-2971]', () => {
     const dictionnary = ['Malignant Hyperthermia (HYPM v1)',
                          'Congenital Myopathies (MYOC v1)',
                          'Global Developmental Delay / Intellectual Disability (Trio) (RGDI v3)',
