@@ -115,6 +115,7 @@ export const SEARCH_REQUEST_TASK_QUERY = (searchValue: string) => gql`
       _filter: "(focus eq ${searchValue})"
     ) {
       id
+      authoredOn
       code @flatten {
               coding @first @flatten {
                 type: code
@@ -130,6 +131,11 @@ export const SEARCH_REQUEST_TASK_QUERY = (searchValue: string) => gql`
               value
             }
           }
+        }
+      }
+      focus @flatten{
+        request: resource {
+          id
         }
       }
     }

@@ -11,6 +11,7 @@ import ParagraphLoader from 'components/uiKit/ParagraphLoader';
 
 import PatientContent from '../PatientCard/PatientContent';
 import RequestTable from '../RequestTable';
+import TaskTable from '../TaskTable';
 
 const { Title } = Typography;
 
@@ -96,6 +97,9 @@ const ParentCard = ({ extension, loading, prescription }: OwnProps) => {
               }
             />
             <RequestTable data={extension?.extension[1].valueReference?.resource?.requests ?? []} />
+            <TaskTable
+              requestId={extension?.extension[1].valueReference?.resource?.requests[0].id}
+            />
           </Space>
         </CollapsePanel>
       )}
