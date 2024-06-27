@@ -44,8 +44,11 @@
 .mainHeader .icon path {
   fill: var(--gray-8);
 }
-.mainHeader .langBtn {
+.mainHeader .langBtn:global(.ant-btn-text) {
   color: var(--gray-1);
+}
+.mainHeader .langBtn:global(.ant-btn-text):focus, .mainHeader .langBtn:global(.ant-btn-text):focus-visible{
+  background-color: var(--blue-8);
 }
 .mainHeader .extras {
   display: flex;

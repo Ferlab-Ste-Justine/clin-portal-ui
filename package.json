@@ -6,7 +6,7 @@
     "@ant-design/icons": "^4.8.1",
     "@apollo/client": "^3.4.17",
     "@ferlab/core": "^1.0.0",
-    "@ferlab/ui": "10.0.0-rc4",
+    "@ferlab/ui": "10.0.0-rc14.5",
     "@loadable/component": "^5.15.2",
     "@nivo/pie": "^0.84.0",
     "@react-keycloak/web": "^3.4.0",

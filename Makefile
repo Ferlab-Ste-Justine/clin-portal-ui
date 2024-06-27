@@ -26,7 +26,6 @@ js_install:
 js_clean:
 	rm -f package-lock.json
 	rm -rf node_modules/${m}
-	npm i
 
 js_clean_install: js_clean js_install
 
