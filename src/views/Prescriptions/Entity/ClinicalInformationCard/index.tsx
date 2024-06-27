@@ -10,6 +10,8 @@ const { Title } = Typography;
 import { ServiceRequestEntity, TFormConfig } from 'api/fhir/models';
 import { EMPTY_FIELD } from 'views/Prescriptions/Entity/constants';
 
+import TaskTable from '../TaskTable';
+
 import { ClinicalSign } from './components/ClinicalSign';
 import { Consanguinity } from './components/Consanguinity';
 import { Ethnicity } from './components/Ethnicity';
@@ -123,6 +125,7 @@ const ClinicalInformation = ({ prescription, prescriptionFormConfig, loading }: 
             </Card.Grid>
           </div>
           <RequestTable data={prescription?.subject?.resource?.requests} />
+          <TaskTable requestId={prescription?.subject?.resource?.requests[0].id} />
         </Space>
       ) : (
         <></>
