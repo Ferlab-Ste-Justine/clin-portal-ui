@@ -4,7 +4,7 @@ import { Aggregations } from 'graphql/models';
 import { ExtendedMappingResults } from 'graphql/models';
 import { generateFilters } from 'graphql/utils/Filters';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 
 export type SidebarFilterProps = {
   queryBuilderId: string;

@@ -17,7 +17,7 @@ import { updateConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 
 type OwnProps = {
   results: IQueryResults<VariantEntity[]>;

@@ -24,7 +24,7 @@ import ReportButton from '../Report/DownloadButton';
 import { HcComplementDescription } from './HcDescription';
 import SequencingMetricModal from './SequencingMetricModal';
 
-import style from './index.module.scss';
+import style from './index.module.css';
 
 interface OwnProps {
   patientId: string;

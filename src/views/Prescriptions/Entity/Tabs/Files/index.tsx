@@ -17,7 +17,7 @@ import { getPatientAndRequestId } from '../Variants/utils';
 
 import { getFileTableColumns } from './columns';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const PrescriptionFiles = () => {
   const { user } = useUser();

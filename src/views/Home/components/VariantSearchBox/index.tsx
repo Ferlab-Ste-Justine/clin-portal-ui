@@ -11,7 +11,7 @@ import { filterByTypeAndWeight } from 'utils/suggestions';
 
 import SearchBox from '../SearchBox';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const VariantSearchBox = () => {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);

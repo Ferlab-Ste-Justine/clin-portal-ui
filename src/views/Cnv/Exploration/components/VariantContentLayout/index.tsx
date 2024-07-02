@@ -18,7 +18,7 @@ import useSavedFiltersActions from 'hooks/useSavedFiltersActions';
 import { useGlobals } from 'store/global';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   queryBuilderId: string;

@@ -1,0 +1,41 @@
+.variantTableWrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+.variantTableWrapper :global(.ant-pagination) {
+  margin-bottom: 0;
+}
+.variantTableWrapper > :global(.ant-space-item) {
+  display: flex;
+  flex-direction: column;
+}
+.variantTableWrapper > :global(.ant-space-item:first-child) {
+  flex: 0 0 auto;
+}
+.variantTableWrapper > :global(.ant-space-item):not(:first-child) {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+.variantTableWrapper > :global(.ant-space-item:last-child) {
+  flex: 0 0 auto;
+}
+.variantTableWrapper :global(.ant-card-body) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+.variantTableWrapper :global(.ant-card) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+.variantTableWrapper > :global(.ant-table-cell) {
+  text-overflow: ellipsis;
+}

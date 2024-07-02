@@ -15,7 +15,7 @@ import VariantGeneSearch from 'components/VariantGeneSearch';
 
 import { filtersContainer } from '../components/filtersContainer';
 
-import styles from '../facets.module.scss';
+import styles from '../facets.module.css';
 
 const filterGroups: {
   [type: string]: FilterInfo;

@@ -18,7 +18,7 @@ import FilesCard from './FilesCard';
 import RelatedAnalysesCard from './RelatedAnalysesCard';
 import SamplesCard from './SamplesCard';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const BioInfoAnalysis = () => {
   const { id } = useParams<{ id: string }>();

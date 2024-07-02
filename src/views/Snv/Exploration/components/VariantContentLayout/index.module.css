@@ -1,0 +1,30 @@
+.variantPageContent {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  max-height: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: var(--default-page-content-padding);
+}
+.variantPageContent > :global(.ant-space-item):not(:first-child) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden;
+}
+.variantPageContent :global(.ant-tabs-content-holder) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+.variantPageContent :global(.ant-tabs-card) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+.variantPageContent > :global(.ant-table-cell) {
+  text-overflow: ellipsis;
+}

@@ -8,7 +8,7 @@ import { map } from 'lodash';
 import { isChecked } from './helper';
 import { TreeNode } from './types';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   checkedKeys?: string[];

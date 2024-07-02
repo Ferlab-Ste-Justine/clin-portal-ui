@@ -53,8 +53,8 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     tableExport: intl.get('protable.tooltips.export'),
   },
   itemCount: {
+    result: intl.get('protable.results'),
     results: intl.get('protable.results'),
-    result: intl.get('protable.result'),
     noResults: intl.get('protable.noResults'),
     of: intl.get('protable.of'),
     selected: intl.get('protable.selected'),

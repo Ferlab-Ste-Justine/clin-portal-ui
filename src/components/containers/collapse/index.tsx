@@ -2,7 +2,7 @@ import React from 'react';
 import Collapse, { CollapsePanel as FUICollapsePanel } from '@ferlab/ui/core/components/Collapse';
 import { Spin } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 type Props = {
   header: React.ReactNode | string;

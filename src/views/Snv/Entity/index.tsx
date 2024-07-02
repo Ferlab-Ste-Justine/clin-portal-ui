@@ -16,7 +16,7 @@ import ServerError from 'components/Results/ServerError';
 
 import ResumePanel from './SummaryPanel';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export const getVepImpactTag = (score: number | string) => {
   switch (score) {

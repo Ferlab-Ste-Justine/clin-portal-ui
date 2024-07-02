@@ -1,0 +1,10 @@
+.snvVariant {
+  height: calc(100vh - var(--main-header-height) - 2 * var(--page-header-height));
+  display: flex;
+}
+.snvVariant .sideMenu li[role=menuitem] {
+  color: white;
+}
+.snvVariant .sideMenu li[role=menuitem] span[class$=-title-content] {
+  margin-left: 0 !important;
+}

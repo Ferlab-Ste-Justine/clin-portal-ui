@@ -1,0 +1,31 @@
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 24px;
+  background-color: var(--gray-1);
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+.contentHeader .header .headerIcon {
+  color: var(--blue-9);
+  font-size: 18px;
+}
+.contentHeader .header .headerIcon > svg {
+  display: flex;
+}
+.contentHeader .header .backArrow {
+  display: flex;
+  font-size: 18px;
+  margin-right: 12px;
+  color: var(--blue-9);
+}
+.contentHeader .header .backArrow:hover {
+  color: var(--blue-8);
+  cursor: pointer;
+}
+.contentHeader .header .titleSkeleton *[class$=-title] {
+  margin: 0;
+  height: 24px;
+}

@@ -1,0 +1,78 @@
+.mainHeader {
+  height: var(--main-header-height);
+  background-color: var(--blue-9);
+  padding: 8px 24px;
+  box-shadow: 0 0 8px 0 rgba(38, 67, 111, 0.25);
+  z-index: 1000;
+}
+.mainHeader * {
+  overflow: unset;
+}
+.mainHeader div[class$=-header-heading],
+.mainHeader span[class$=-header-heading-title],
+.mainHeader div[class$=-header-heading-left] {
+  height: 100%;
+}
+.mainHeader span[class$=-header-heading-title] {
+  margin-right: 28px;
+}
+.mainHeader div[class$=-header-heading-left] {
+  margin: 0;
+}
+.mainHeader span[class$=-header-heading-extra] {
+  display: flex;
+  align-items: center;
+}
+.mainHeader .logo {
+  height: 31px;
+  width: auto;
+}
+.mainHeader .headerMenu {
+  margin-left: 24px;
+}
+.mainHeader .headerBtn {
+  border: none;
+  color: var(--gray-8);
+  padding: 4px 8px;
+  margin: 0 5px;
+}
+.mainHeader .headerBtn:hover, .mainHeader .headerBtn:focus {
+  background-color: var(--gray-4);
+  border: none;
+  color: var(--gray-8);
+}
+.mainHeader .icon path {
+  fill: var(--gray-8);
+}
+.mainHeader .langBtn:global(.ant-btn-text) {
+  color: var(--gray-1);
+}
+.mainHeader .langBtn:global(.ant-btn-text):focus, .mainHeader .langBtn:global(.ant-btn-text):focus-visible{
+  background-color: var(--blue-8);
+}
+.mainHeader .extras {
+  display: flex;
+}
+.mainHeader .userMenuTrigger {
+  color: var(--gray-1);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.mainHeader .userMenuTrigger .userGravatar {
+  height: 24px;
+  width: 24px;
+  background-color: #ffffff;
+  margin: 5px 8px;
+}
+.mainHeader .userMenuTrigger .userName {
+  margin-right: 5px;
+}
+
+.siteWideBanner {
+  z-index: 1001;
+}
+
+.userAvatar span {
+  font-size: 12px;
+}

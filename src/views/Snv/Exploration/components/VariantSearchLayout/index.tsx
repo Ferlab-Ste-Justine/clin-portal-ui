@@ -5,7 +5,7 @@ import ContentWithHeader from 'components/Layout/ContentWithHeader';
 import { ContentHeaderProps } from 'components/Layout/ContentWithHeader/Header';
 import FixedContentWithFooter from 'components/Layout/FixedContentWithFooter/Index';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   contentHeaderProps: Omit<ContentHeaderProps, 'icon'>;

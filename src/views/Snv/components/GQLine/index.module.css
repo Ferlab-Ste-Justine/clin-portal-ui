@@ -1,0 +1,9 @@
+.low {
+  fill: var(--orange-5);
+  stroke: var(--orange-5);
+}
+
+.high {
+  fill: var(--gray-1);
+  stroke: var(--gray-5);
+}

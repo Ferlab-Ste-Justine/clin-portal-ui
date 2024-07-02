@@ -11,7 +11,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'utils/constants';
 import { formatNumber } from 'utils/formatNumber';
 import { formatTimestampToISODate } from 'utils/helper';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   loading: boolean;

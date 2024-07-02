@@ -4,7 +4,7 @@ import { TitleProps } from 'antd/lib/typography/Title';
 
 import { getCommonColors } from 'utils/charts';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 type OwnProps = Omit<PieSvgProps<DefaultRawDatum>, 'width' | 'height'> & {
   title?: string;

@@ -1,0 +1,38 @@
+.resumePanelWrapper {
+  height: 100%;
+}
+.resumePanelWrapper .resumePanel {
+  width: 100%;
+}
+.resumePanelWrapper .resumePanel .consequenceCards {
+  width: 100%;
+}
+.resumePanelWrapper .resumePanel .consequenceCards .card:not(:last-child) {
+  margin-bottom: 12px;
+}
+.resumePanelWrapper .resumePanel .consequenceCards .consequenceTableWrapper {
+  width: 100%;
+}
+.resumePanelWrapper .resumePanel .longValue {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: initial;
+}
+.resumePanelWrapper .resumePanel a {
+  text-decoration: underline;
+}
+.resumePanelWrapper .resumePanel a:hover {
+  text-decoration: none;
+}
+.resumePanelWrapper .resumePanel .transcriptLink {
+  display: flex;
+  align-items: center;
+}
+.resumePanelWrapper .resumePanel .canonicalIcon {
+  fill: var(--blue-8);
+  margin-left: 4px;
+}
+.resumePanelWrapper .resumePanel .cellList :not(:last-child) {
+  margin-right: 5px;
+}

@@ -1,0 +1,48 @@
+.variantTabWrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+.variantTabWrapper :global(.ant-pagination) {
+  margin-bottom: 0;
+}
+.variantTabWrapper > :global(.ant-space-item) {
+  display: flex;
+  flex-direction: column;
+}
+.variantTabWrapper > :global(.ant-space-item:first-child) {
+  flex: 0 0 auto;
+}
+.variantTabWrapper > :global(.ant-space-item):not(:first-child) {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+.variantTabWrapper > :global(.ant-space-item:last-child) {
+  flex: 0 0 auto;
+}
+.variantTabWrapper :global(.ant-tabs-content-holder) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+.variantTabWrapper :global(.ant-tabs-card) {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+}
+.variantTabWrapper > :global(.ant-table-cell) {
+  text-overflow: ellipsis;
+}
+
+.variantSearchTable div[class$=-card-bordered] {
+  border-top: none;
+}
+.variantSearchTable div[class$=-card-bordered] > div {
+  padding: 8px 24px 8px 24px !important;
+}

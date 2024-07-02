@@ -1,0 +1,15 @@
+.headerBtn {
+  border: none;
+  padding: 4px 8px;
+  margin: 0 5px;
+  background-color: transparent;
+  color: var(--gray-1);
+}
+.headerBtn:hover, .headerBtn:focus {
+  background-color: var(--blue-8);
+  border: none;
+  color: var(--gray-1);
+}
+.headerBtn:focus-visible {
+  border: 1px solid var(--gray-1);
+}

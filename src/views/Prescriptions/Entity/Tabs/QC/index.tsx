@@ -27,7 +27,7 @@ import Footer from 'components/Layout/Footer';
 import useQueryParams from 'hooks/useQueryParams';
 import { globalActions } from 'store/global';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 enum QCTabs {
   DRAGEN_CAPTURE_COVERAGE_METRICS = 'DRAGEN_capture_coverage_metrics',
   DRAGEN_MAPPING_METRICS = 'DRAGEN_mapping_metrics',

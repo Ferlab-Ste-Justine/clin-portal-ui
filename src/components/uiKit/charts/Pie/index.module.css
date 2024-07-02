@@ -1,0 +1,10 @@
+.pieChartWrapper {
+  height: 100%;
+  text-align: center;
+}
+.pieChartWrapper *[class$=-typography] {
+  margin: 0;
+}
+.pieChartWrapper .chartWrapper {
+  width: 100%;
+}

@@ -5,7 +5,7 @@ import get from 'lodash/get';
 
 import { LimitTo, Roles } from 'components/Roles/Rules';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const ZEPLIN_URL = get(window, 'CLIN.zeplinUrl', process.env.REACT_APP_ZEPLIN_URL);
 const FHIR_CONSOLE_URL = get(window, 'CLIN.fhirConsoleUrl', process.env.REACT_APP_FHIR_CONSOLE_URL);

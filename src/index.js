@@ -2,9 +2,7 @@
 // required for the theme to be correctly applied
 /// <reference types="@welldone-software/why-did-you-render" />
 // import 'utils/wdyr';
-import 'style/themes/clin/dist/antd.css';
-import 'style/themes/clin/main.scss';
-import './index.css';
+import 'style/themes/clin/main.css';
 
 import React from 'react';
 import './prototypes/number';

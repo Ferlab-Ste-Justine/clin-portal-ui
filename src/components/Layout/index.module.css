@@ -1,0 +1,12 @@
+.mainLayout {
+  height: 100vh;
+}
+.mainLayout .mainContent {
+  flex: 1;
+  min-height: unset;
+  height: 100%;
+  overflow: auto;
+}
+.mainLayout :global(#content) {
+  height: 100%;
+}

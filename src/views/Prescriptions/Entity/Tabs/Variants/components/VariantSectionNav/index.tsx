@@ -7,7 +7,7 @@ import { PatientTaskResults } from 'graphql/patients/models/Patient';
 import { VariantType } from 'components/Variant/TypeNav';
 import useQueryParams from 'hooks/useQueryParams';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export enum VariantSection {
   SNV = 'snv',
