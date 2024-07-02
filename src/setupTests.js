@@ -7,7 +7,6 @@ import '@testing-library/jest-dom';
 import intl from 'react-intl-universal';
 import locales from 'locales';
 
-require('intl/locale-data/jsonp/fr.js');
 intl.init({ locales, currentLocale: 'fr' });
 process.env.REACT_APP_KEYCLOAK_CONFIG = '{}';
 

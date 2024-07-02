@@ -23,6 +23,13 @@ git_submodules_update:
 js_install:
 	npm i
 
+js_clean:
+	rm -f package-lock.json
+	rm -rf node_modules/${m}
+	npm i
+
+js_clean_install: js_clean js_install
+
 # Docker
 start:
 	docker-compose up -d

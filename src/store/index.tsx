@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Middleware } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -10,7 +10,6 @@ import CustomPillReducer from 'store/customPill';
 import GlobalReducer from 'store/global';
 import ReportReducer from 'store/reports';
 import SavedFilterReducer from 'store/savedFilter';
-import { RootState } from 'store/types';
 import UserReducer from 'store/user';
 
 const devMode = process.env.NODE_ENV === 'development';
@@ -24,7 +23,7 @@ const persistConfig = {
   ],
 };
 
-const rootReducer = combineReducers<RootState>({
+const rootReducer = combineReducers({
   global: GlobalReducer,
   report: ReportReducer,
   user: UserReducer,
@@ -39,7 +38,7 @@ const store = configureStore({
     const defaultMid = getDefaultMiddleware({
       serializableCheck: false,
     });
-    return devMode ? defaultMid.concat(logger) : defaultMid;
+    return devMode ? defaultMid.concat(logger as Middleware) : defaultMid;
   },
 });
 
